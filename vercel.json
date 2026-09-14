@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "(.*)",
+      "use": "@vercel/static"
+    }
+  ],
+  "functions": {
+    "api/index.py": {
+      "excludeFiles": "{tests/**,__pycache__/**,archive/**,logs/**,results/**,docs/**,simulink/**,data/**,web/**}"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}

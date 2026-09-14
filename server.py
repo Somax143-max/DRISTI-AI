@@ -40,6 +40,17 @@ class DrishtiAIHandler(SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps(drift_report).encode('utf-8'))
             return
+        elif self.path == '/api/sample-images':
+            manifest_path = os.path.join(os.path.dirname(__file__), 'sample_images', 'manifest.json')
+            images_data = []
+            if os.path.exists(manifest_path):
+                with open(manifest_path, 'r', encoding='utf-8') as f:
+                    images_data = json.load(f)
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps(images_data).encode('utf-8'))
+            return
         super().do_GET()
 
     def do_POST(self):

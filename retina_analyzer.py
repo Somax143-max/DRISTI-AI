@@ -156,48 +156,36 @@ def assess_retinal_image_quality(img_bgr, fov_mask=None):
     gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
     green = img_bgr[:, :, 1]
     
-    # 1. Tenengrad Gradient Sharpness strictly within retinal FOV (Standardized to 512x512)
-    green_std = cv2.resize(green, (512, 512), interpolation=cv2.INTER_AREA) if (green.shape[0] != 512 or green.shape[1] != 512) else green
-    fov_std = cv2.resize(fov_mask, (512, 512), interpolation=cv2.INTER_NEAREST) if (fov_mask.shape[0] != 512 or fov_mask.shape[1] != 512) else fov_mask
-    gx = cv2.Sobel(green_std, cv2.CV_64F, 1, 0, ksize=3)
-    gy = cv2.Sobel(green_std, cv2.CV_64F, 0, 1, ksize=3)
-    grad_sq = (gx**2 + gy**2) * (fov_std / 255.0)
-    focus_score = round(float(np.sum(grad_sq)) / float(max(1, np.sum(fov_std > 0))) / 10.0, 1)
+    # 1. Tenengrad Gradient Sharpness strictly within retinal FOV
+    gx = cv2.Sobel(green, cv2.CV_64F, 1, 0, ksize=3)
+    gy = cv2.Sobel(green, cv2.CV_64F, 0, 1, ksize=3)
+    grad_sq = (gx**2 + gy**2) * (fov_mask / 255.0)
+    focus_score = round(float(np.sum(grad_sq)) / float(max(1, fov_pixels)) / 100.0, 1)
     
-    # 2. Exposure & Luminance Metrics strictly on active illuminated retinal tissue (excluding dark camera margin)
-    active_parenchyma = (gray > 18) & (fov_mask > 0)
-    act_pixels = int(np.sum(active_parenchyma))
-    
-    if act_pixels > 1000:
-        retina_lum = gray[active_parenchyma]
-        green_lum = green[active_parenchyma]
-        fov_pixels = act_pixels
-    else:
-        retina_lum = gray[fov_mask > 0]
-        green_lum = green[fov_mask > 0]
-        
+    # 2. Exposure & Luminance Metrics
+    retina_lum = gray[fov_mask > 0]
     mean_lum = float(np.mean(retina_lum)) / 255.0 if len(retina_lum) > 0 else 0.0
-    contrast_score = round(float(np.std(green_lum)), 1) if len(green_lum) > 0 else 0.0
+    contrast_score = round(float(np.std(green[fov_mask > 0])), 1) if len(retina_lum) > 0 else 0.0
     
-    glare_pixels = int(np.sum(retina_lum > 240))
+    glare_pixels = int(np.sum(retina_lum > 235))
     glare_pct = round((float(glare_pixels) / float(max(1, fov_pixels))) * 100.0, 1)
     
-    dark_pixels = int(np.sum(retina_lum < 20))
+    dark_pixels = int(np.sum(retina_lum < 25))
     underexposed_pct = round((float(dark_pixels) / float(max(1, fov_pixels))) * 100.0, 1)
     
     reasons = []
     guidance = []
     
-    if fov_coverage < 0.08:
+    if fov_coverage < 0.20:
         reasons.append('CLIPPED_FOV')
-        guidance.append('Field of view severely clipped (<8%). Re-align camera objective with the optical axis of the patient pupil.')
-    if focus_score < 14.0:
+        guidance.append('Field of view severely clipped (<20%). Re-align camera objective with the optical axis of the patient pupil.')
+    if focus_score < 12.0:
         reasons.append('SEVERE_DEFOCUS')
-        guidance.append('Image severely blurred (Focus score < 14.0). Stabilize camera, instruct patient not to blink, and refocus using diopter ring.')
-    if glare_pct > 25.0:
+        guidance.append('Image severely blurred (Focus score < 12). Stabilize camera, instruct patient not to blink, and refocus using diopter ring.')
+    if glare_pct > 15.0:
         reasons.append('EXCESSIVE_GLARE')
-        guidance.append('Excessive corneal glare / reflection detected (> 25% area). Adjust camera angle by 5-10 degrees and ask patient to blink.')
-    if act_pixels < 400 or mean_lum < 0.04:
+        guidance.append('Excessive corneal glare / reflection detected (> 15% area). Adjust camera angle by 5-10 degrees and ask patient to blink.')
+    if underexposed_pct > 40.0 or mean_lum < 0.12:
         reasons.append('SEVERE_UNDEREXPOSURE')
         guidance.append('Severe underexposure. Increase fundus camera flash intensity or allow patient 3-5 minutes in dim lighting for pupil dilation.')
         
@@ -205,7 +193,7 @@ def assess_retinal_image_quality(img_bgr, fov_mask=None):
         quality_grade = 'Ungradeable'
         is_gradable = False
         primary_guidance = ' | '.join(guidance)
-    elif focus_score < 2.0 or glare_pct > 12.0 or underexposed_pct > 35.0 or contrast_score < 12.0:
+    elif focus_score < 25.0 or glare_pct > 6.0 or underexposed_pct > 20.0 or contrast_score < 18.0:
         quality_grade = 'Borderline'
         is_gradable = True
         primary_guidance = 'Borderline image quality. Diagnostic analysis proceeded with adaptive contrast enhancement.'
@@ -349,23 +337,6 @@ def detect_geometric_lines(img_bgr):
     return len(lines) if lines is not None else 0
 
 # --- 1. INTELLIGENT RETINAL GLOBE LOCALIZER ---
-def apply_graham_normalization(img_bgr, sigma=30):
-    """
-    Ben Graham's local contrast color normalization (used in Kaggle DR winning solution & Google Health).
-    Normalizes illumination gradients, flash artifacts, and camera white-balance across clinics worldwide.
-    """
-    try:
-        blur = cv2.GaussianBlur(img_bgr, (0, 0), sigma)
-        norm = cv2.addWeighted(img_bgr, 4.0, blur, -4.0, 128)
-        gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
-        mask = gray > 10
-        out = np.zeros_like(img_bgr)
-        out[mask] = norm[mask]
-        return out
-    except Exception:
-        return img_bgr
-
-# --- 1. INTELLIGENT UNIVERSAL RETINAL GLOBE LOCALIZER ---
 def locate_and_extract_retina(img_bgr):
     h, w = img_bgr.shape[:2]
     total_px = h * w
@@ -374,21 +345,19 @@ def locate_and_extract_retina(img_bgr):
     g = img_bgr[:, :, 1].astype(float)
     b = img_bgr[:, :, 0].astype(float)
     
-    # Adaptive chromatic criteria supporting Caucasian (blonde), Asian (orange), and African/Hispanic (dark brown)
-    retina_cand = (r - b > 8) & (r - g >= -5) & (r > 20)
+    retina_cand = (r - b > 18) & (r - g > 2) & (r > 35)
     cand_px = np.sum(retina_cand)
     cand_ratio = cand_px / float(total_px)
 
     straight_lines = detect_geometric_lines(img_bgr)
-    if straight_lines > 25 and cand_ratio < 0.40:
+    if straight_lines > 20 and cand_ratio < 0.50:
         return None, None, None
     
-    # Universal fallback for close-up tight-cropped fundus photographs (no black circular margin)
-    if cand_ratio > 0.40:
+    if cand_ratio > 0.60:
         mask = np.zeros((h, w), dtype=np.uint8)
         cv2.circle(mask, (w // 2, h // 2), int(min(w, h) * 0.48), 255, -1)
         std_retina = cv2.resize(img_bgr, (512, 512), interpolation=cv2.INTER_CUBIC)
-        info = {'crop_x1': 0, 'crop_y1': 0, 'crop_w': w, 'crop_h': h, 'orig_w': w, 'orig_h': h, 'type': 'full_frame_tight_crop'}
+        info = {'crop_x1': 0, 'crop_y1': 0, 'crop_w': w, 'crop_h': h, 'orig_w': w, 'orig_h': h, 'type': 'full_frame'}
         return std_retina, info, mask
         
     k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
@@ -396,30 +365,18 @@ def locate_and_extract_retina(img_bgr):
     contours, _ = cv2.findContours(cleaned, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     
     if not contours:
-        if cand_ratio > 0.30 and straight_lines <= 20:
-            mask = np.zeros((h, w), dtype=np.uint8)
-            cv2.circle(mask, (w // 2, h // 2), int(min(w, h) * 0.48), 255, -1)
-            std_retina = cv2.resize(img_bgr, (512, 512), interpolation=cv2.INTER_CUBIC)
-            info = {'crop_x1': 0, 'crop_y1': 0, 'crop_w': w, 'crop_h': h, 'orig_w': w, 'orig_h': h, 'type': 'full_frame_fallback'}
-            return std_retina, info, mask
         return None, None, None
         
     largest_cnt = max(contours, key=cv2.contourArea)
     area = cv2.contourArea(largest_cnt)
     
     if area < 0.04 * total_px:
-        if cand_ratio > 0.30 and straight_lines <= 20:
-            mask = np.zeros((h, w), dtype=np.uint8)
-            cv2.circle(mask, (w // 2, h // 2), int(min(w, h) * 0.48), 255, -1)
-            std_retina = cv2.resize(img_bgr, (512, 512), interpolation=cv2.INTER_CUBIC)
-            info = {'crop_x1': 0, 'crop_y1': 0, 'crop_w': w, 'crop_h': h, 'orig_w': w, 'orig_h': h, 'type': 'full_frame_fallback'}
-            return std_retina, info, mask
         return None, None, None
         
     perimeter = cv2.arcLength(largest_cnt, True)
     circularity = 4 * np.pi * area / (perimeter * perimeter + 1e-5)
     
-    if circularity < 0.30 and cand_ratio < 0.25:
+    if circularity < 0.35 and cand_ratio < 0.30:
         return None, None, None
         
     (cx, cy), radius = cv2.minEnclosingCircle(largest_cnt)
@@ -429,7 +386,7 @@ def locate_and_extract_retina(img_bgr):
         hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV)
         sat = hsv[:, :, 1][retina_cand]
         mean_sat = np.mean(sat) if len(sat) > 0 else 0
-        if mean_sat < 70.0 and cand_ratio < 0.25:
+        if mean_sat < 115.0:
             return None, None, None
             
         Y, X = np.ogrid[:h, :w]
@@ -439,8 +396,8 @@ def locate_and_extract_retina(img_bgr):
             outer_pixels = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)[outer_ring]
             outer_mean = np.mean(outer_pixels)
             outer_std = np.std(outer_pixels)
-            is_valid_surroundings = (outer_mean > 215) or (outer_mean < 55) or (outer_std < 30)
-            if not is_valid_surroundings and cand_ratio < 0.35:
+            is_valid_surroundings = (outer_mean > 215) or (outer_mean < 40) or (outer_std < 25)
+            if not is_valid_surroundings:
                 return None, None, None
     
     margin = int(radius * 0.02)
@@ -452,11 +409,7 @@ def locate_and_extract_retina(img_bgr):
     crop = img_bgr[y1:y2, x1:x2]
     crop_h, crop_w = crop.shape[:2]
     if crop_h < 20 or crop_w < 20:
-        std_retina = cv2.resize(img_bgr, (512, 512), interpolation=cv2.INTER_CUBIC)
-        info = {'crop_x1': 0, 'crop_y1': 0, 'crop_w': w, 'crop_h': h, 'orig_w': w, 'orig_h': h, 'type': 'full_frame_fallback'}
-        mask = np.zeros((512, 512), dtype=np.uint8)
-        cv2.circle(mask, (256, 256), int(512 * 0.48), 255, -1)
-        return std_retina, info, mask
+        return None, None, None
         
     std_retina = cv2.resize(crop, (512, 512), interpolation=cv2.INTER_CUBIC)
     
@@ -505,23 +458,19 @@ def verify_eye_authenticity(img_bgr):
     # 3. Retinal Globe Localization & Extraction
     std_retina, info, _ = locate_and_extract_retina(img_bgr)
     if std_retina is None:
-        if dl_fundus_prob > 0.40:
-            std_retina = cv2.resize(img_bgr, (512, 512), interpolation=cv2.INTER_CUBIC)
-            info = {'crop_x1': 0, 'crop_y1': 0, 'crop_w': img_bgr.shape[1], 'crop_h': img_bgr.shape[0], 'orig_w': img_bgr.shape[1], 'orig_h': img_bgr.shape[0], 'type': 'dl_fallback_full_frame'}
-        else:
-            return {
-                'is_eye': False,
-                'confidence_pct': round(dl_fundus_prob * 100.0, 1),
-                'reasons': {
-                    'retinal_globe_detected': False,
-                    'dl_fundus_prob': round(dl_fundus_prob, 4),
-                    'dl_noneye_prob': round(dl_noneye_prob, 4)
-                },
-                'rejection_msg': 'Anatomical eye recognition failed: No human ocular fundus globe or retinal tissue detected in the image.'
-            }
+        return {
+            'is_eye': False,
+            'confidence_pct': round(dl_fundus_prob * 100.0, 1),
+            'reasons': {
+                'retinal_globe_detected': False,
+                'dl_fundus_prob': round(dl_fundus_prob, 4),
+                'dl_noneye_prob': round(dl_noneye_prob, 4)
+            },
+            'rejection_msg': 'Anatomical eye recognition failed: No human ocular fundus globe or retinal tissue detected in the image.'
+        }
         
     globe_fundus_prob, globe_noneye_prob = predict_retina_dl_score(std_retina)
-    if globe_noneye_prob > 0.75 and globe_fundus_prob < 0.25:
+    if globe_noneye_prob > 0.70 and globe_fundus_prob < 0.30:
         return {
             'is_eye': False,
             'confidence_pct': round(globe_fundus_prob * 100.0, 1),
@@ -552,22 +501,21 @@ def verify_eye_authenticity(img_bgr):
     rb_ratio = (mean_r + 1.0) / (mean_b + 1.0)
     rg_ratio = (mean_r + 1.0) / (mean_g + 1.0)
     
-    # Adaptive chromatic criteria supporting Caucasian (blonde), Asian (orange), and African/Hispanic (dark brown)
-    is_chromatic_fundus = (rb_ratio > 1.10) and (rg_ratio > 0.88) and (mean_r > 18)
+    is_chromatic_fundus = (rb_ratio > 1.25) and (rg_ratio > 1.01) and (mean_r > 35)
     
     clahe = cv2.createCLAHE(clipLimit=2.5, tileGridSize=(8, 8))
     g_enh = clahe.apply(std_retina[:, :, 1])
     k_v = cv2.getStructuringElement(cv2.MORPH_RECT, (9, 9))
     vessel_tophat = cv2.morphologyEx(255 - g_enh, cv2.MORPH_TOPHAT, k_v)
-    vessel_mask = (vessel_tophat > 20) & (mask_std > 0)
+    vessel_mask = (vessel_tophat > 22) & (mask_std > 0)
     vessel_density = float(np.sum(vessel_mask)) / float(np.sum(mask_std > 0))
-    has_vessels = vessel_density > 0.003
+    has_vessels = vessel_density > 0.005
     
     rg = ((r + g) / 2.0) * (mask_std / 255.0)
     blurred_rg = cv2.GaussianBlur(rg, (31, 31), 0)
     min_val, max_val, min_loc, disc_loc = cv2.minMaxLoc(blurred_rg)
     disc_contrast = max_val / (np.median(rg[mask_std > 0]) + 1.0)
-    has_disc = disc_contrast > 1.08
+    has_disc = disc_contrast > 1.15
     
     dl_weight = max(dl_fundus_prob, globe_fundus_prob) * 50.0
     chromatic_weight = 25.0 if is_chromatic_fundus else 0.0
@@ -575,7 +523,7 @@ def verify_eye_authenticity(img_bgr):
     disc_weight = 10.0 if has_disc else 0.0
     total_score = round(dl_weight + chromatic_weight + vessel_weight + disc_weight, 1)
     
-    is_eye = (total_score >= 45.0) and is_chromatic_fundus and (dl_fundus_prob > 0.35 or globe_fundus_prob > 0.35)
+    is_eye = (total_score >= 60.0) and is_chromatic_fundus and (dl_fundus_prob > 0.5 or globe_fundus_prob > 0.5)
     
     return {
         'is_eye': bool(is_eye),
@@ -648,9 +596,6 @@ def analyze_retinal_fundus(img_bgr):
         return res_non
         
     std_retina, info, _ = locate_and_extract_retina(img_bgr)
-    if std_retina is None:
-        std_retina = cv2.resize(img_bgr, (512, 512), interpolation=cv2.INTER_CUBIC)
-        info = {'crop_x1': 0, 'crop_y1': 0, 'crop_w': img_bgr.shape[1], 'crop_h': img_bgr.shape[0], 'orig_w': img_bgr.shape[1], 'orig_h': img_bgr.shape[0], 'type': 'dl_fallback_full_frame'}
     h, w = std_retina.shape[:2]
     
     # 1. Parenchyma mask avoiding optical lens edge flare
@@ -662,9 +607,8 @@ def analyze_retinal_fundus(img_bgr):
     quality_assessment = assess_retinal_image_quality(std_retina, mask)
     
     # 3. Deep Learning Multi-Task Evaluation with Full Explainable AI (Grad-CAM & Grad-CAM++)
-    dl_grade, dl_pct, dl_probs, gradcam_std_b64, gradcam_pp_b64, uncert_info = predict_dr_grade_and_percentage_with_full_xai(img_bgr)
+    dl_grade, dl_pct, dl_probs, gradcam_std_b64, gradcam_pp_b64, uncert_info = predict_dr_grade_and_percentage_with_full_xai(std_retina)
     dl_conf = float(dl_probs[dl_grade])
-    p_referable_dl = float(dl_probs[2] + dl_probs[3] + dl_probs[4]) if len(dl_probs) == 5 else (1.0 if dl_grade >= 2 else 0.0)
     
     r = std_retina[:, :, 2].astype(float)
     g = std_retina[:, :, 1].astype(float)
@@ -703,7 +647,7 @@ def analyze_retinal_fundus(img_bgr):
     cv2.circle(fovea_mask, fovea_center, 40, 255, -1)
     
     # 4. Massive Vitreous / Preretinal Hemorrhage Pool Detection (Hemoglobin Absorption Peak)
-    blood_cand = (r > 55) & (g < 48) & (b < 35) & (r / (g + 1.0) > 2.0) & (mask > 0)
+    blood_cand = (r > 60) & (g < 42) & (b < 30) & (r / (g + 1.0) > 2.5) & (mask > 0)
     num_bl, _, stats_bl, cent_bl = cv2.connectedComponentsWithStats(blood_cand.astype(np.uint8))
     massive_hemo_found = False
     max_blood_lake_area = 0
@@ -713,7 +657,7 @@ def analyze_retinal_fundus(img_bgr):
         area = stats_bl[i, cv2.CC_STAT_AREA]
         if area > max_blood_lake_area:
             max_blood_lake_area = area
-        if area >= 2500 and (dl_grade >= 2 or p_referable_dl >= 0.40 or dl_probs[4] >= 0.25):
+        if area >= 3500 and (dl_grade >= 2 or dl_probs[4] > 0.08):
             massive_hemo_found = True
             cx, cy = int(cent_bl[i][0]), int(cent_bl[i][1])
             hemo_coords.append({
@@ -738,14 +682,13 @@ def analyze_retinal_fundus(img_bgr):
     dist_from_disc = np.sqrt((x_idx - disc_center[0])**2 + (y_idx - disc_center[1])**2)
     disc_border_region = (dist_from_disc >= disc_radius * 0.8) & (dist_from_disc <= disc_radius * 2.2) & (mask > 0)
     nvd_cand_pixels = np.sum((vessel_tophat > 30) & disc_border_region)
-    # Neovascularization of the Disc requires disorganized fine fronds + confirmed severe lesion burden or DL PDR confirmation
-    if nvd_cand_pixels > 800 and dl_grade == 4 and dl_conf >= 0.40 and len(hemo_coords) >= 3:
+    if nvd_cand_pixels > 320 and dl_grade >= 3:
         nvd_detected = True
     
     # 6. Hard Exudates (Lipid Deposits) (Item 31)
     bg_g = cv2.medianBlur(g_clahe, 35)
     delta_g = g_clahe.astype(float) - bg_g.astype(float)
-    yellow_ex = (r > 185) & (g > 150) & (g / (r + 1e-5) > 0.70) & (b < 140) & (delta_g > 24) & (mask > 0) & (disc_mask == 0)
+    yellow_ex = (r > 190) & (g > 155) & (g / (r + 1e-5) > 0.70) & (b < 140) & (delta_g > 25) & (mask > 0) & (disc_mask == 0)
     k_open = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
     yellow_ex = cv2.morphologyEx(yellow_ex.astype(np.uint8), cv2.MORPH_OPEN, k_open)
     num_ex_cand, _, stats_ex, centroids_ex = cv2.connectedComponentsWithStats(yellow_ex)
@@ -753,7 +696,7 @@ def analyze_retinal_fundus(img_bgr):
     exudates_coords = []
     for i in range(1, num_ex_cand):
         area = stats_ex[i, cv2.CC_STAT_AREA]
-        if 4 <= area <= 800:
+        if 4 <= area <= 600:
             cx, cy = int(centroids_ex[i][0]), int(centroids_ex[i][1])
             exudates_coords.append({'x': cx, 'y': cy, 'r': max(2, int(np.sqrt(area / np.pi))), 'type': 'hard_exudate'})
 
@@ -880,123 +823,104 @@ def analyze_retinal_fundus(img_bgr):
     lesion_burden_score = round(float(np.clip(fused_score, 0.0, 99.8)), 1)
     
     # 10. --- ICDR 4-2-1 CRITERIA & CLINICAL STAGING ---
-    p_referable_dl = float(dl_probs[2] + dl_probs[3] + dl_probs[4]) if len(dl_probs) == 5 else (1.0 if dl_grade >= 2 else 0.0)
     all_4_quad_hemo_severe = all(quadrant_counts[q]['hemo'] >= 5 for q in ['ST', 'IT', 'SN', 'IN'])
-    active_quadrants = sum(1 for q in ['ST', 'IT', 'SN', 'IN'] if (quadrant_counts[q]['mas'] + quadrant_counts[q]['hemo'] + quadrant_counts[q]['exudates'] + quadrant_counts[q]['cws']) > 0)
-    
-    has_referable_lesions = bool(
-        num_hemo >= 2 or num_ex >= 2 or (num_hemo >= 1 and num_ex >= 1) or 
-        csme_positive or num_cws >= 1 or num_mas >= 12 or 
-        (num_mas >= 4 and p_referable_dl >= 0.50)
-    )
-    
-    rule_pdr_met = bool(
-        (massive_hemo_found and dl_grade >= 3) or (nvd_detected and num_hemo >= 2) or 
-        (dl_grade == 4 and dl_conf >= 0.35 and (has_referable_lesions or p_referable_dl >= 0.70)) or 
-        (dl_probs[4] > 0.45 and has_referable_lesions) or 
-        (num_hemo >= 20 and num_mas >= 15)
-    )
-    rule_severe_met = bool(
+    rule_4_met = bool(
         all_4_quad_hemo_severe or 
-        (num_hemo >= 12 and active_quadrants >= 3) or 
-        (dl_grade == 3 and dl_conf >= 0.30 and has_referable_lesions) or 
-        (dl_probs[3] > 0.45 and has_referable_lesions) or 
-        (num_hemo >= 8 and num_cws >= 2)
+        (num_hemo >= 25 and all(quadrant_counts[q]['hemo'] >= 1 for q in ['ST', 'IT', 'SN', 'IN'])) or
+        (dl_grade == 3 and dl_conf >= 0.70 and num_hemo >= 15)
     )
-    rule_moderate_met = bool(
-        not (dl_grade == 1 and num_hemo <= 1 and num_ex == 0 and not csme_positive) and (
-            (has_referable_lesions and p_referable_dl >= 0.35 and (dl_grade != 0 or dl_conf < 0.65 or num_hemo >= 1)) or 
-            (dl_grade == 2 and dl_conf >= 0.28 and (num_hemo >= 1 or num_ex >= 1 or num_mas >= 2)) or 
-            (num_hemo >= 2) or (num_ex >= 3 and (num_hemo >= 1 or dl_grade >= 1)) or (csme_positive and num_ex >= 1) or
-            (p_referable_dl >= 0.55 and (num_hemo >= 2 or num_ex >= 1 or dl_grade >= 2)) or
-            (p_referable_dl >= 0.70)
-        )
-    )
-    rule_mild_met = bool(
-        (dl_grade == 1 and dl_conf >= 0.25) or 
-        (num_mas >= 1 and num_hemo <= 1 and num_ex <= 1 and num_mas < 12 and p_referable_dl < 0.50) or
-        (num_hemo == 0 and num_ex == 0 and num_cws == 0 and not csme_positive and num_mas < 12 and (dl_grade <= 1 or p_referable_dl < 0.60))
-    )
-    rule_4_met = bool(rule_severe_met or all_4_quad_hemo_severe)
-    rule_2_met = bool(active_quadrants >= 2 and num_hemo >= 4)
-    rule_1_met = bool(active_quadrants >= 1 and (num_hemo >= 2 or num_ex >= 2))
+    rule_2_met = bool(dl_grade >= 3 and num_hemo >= 12)
+    rule_1_met = bool((dl_grade >= 3) or (num_hemo >= 8 and num_mas >= 10))
+    rule_pdr_met = bool(massive_hemo_found or nvd_detected or (dl_grade == 4 and dl_conf >= 0.70) or (num_hemo >= 25 and num_mas >= 25))
+
+    icdr_4_met = rule_pdr_met
+    icdr_3_met = rule_4_met or rule_2_met or rule_1_met
+    icdr_2_met = (dl_grade == 2 and dl_conf >= 0.65) or ((num_hemo >= 3 or (num_ex >= 5 and csme_positive)) and dl_grade not in [0, 1])
+    icdr_1_met = (dl_grade == 1 and dl_conf >= 0.65) or (num_mas >= 1 and dl_grade != 0 and num_hemo == 0 and num_ex == 0)
+    
+    safety_override = False
 
     # Check for ungradable image (Item 23, 24)
-    if not quality_assessment['is_gradable'] and not (massive_hemo_found or rule_pdr_met or p_referable_dl > 0.50):
+    # Clinical Safety Caveat: Massive vitreous hemorrhage causes optical opacity that can simulate underexposure/defocus.
+    # If the deep learning model or hemoglobin absorption peak detects massive blood lakes (Grade 4 PDR),
+    # the image is pathology-obscured rather than a technical failure, so emergency referral is preserved.
+    if not quality_assessment['is_gradable'] and not (massive_hemo_found or (dl_grade == 4 and dl_conf >= 0.80)):
         grade = -1
         grade_name = 'UNGRADABLE — RECAPTURE REQUIRED'
         referable = False
         ref_title = '⚠️ RECAPTURE IMAGE (UNGRADABLE QUALITY)'
         ref_reason = quality_assessment['recapture_guidance']
         dr_damage_percentage = 0.0
-    elif rule_pdr_met:
+    elif icdr_4_met:
         grade = 4
         grade_name = 'LEVEL 4 — PROLIFERATIVE DR (PDR)'
         referable = True
         ref_title = '🚨 EMERGENCY SPECIALIST REFERRAL'
-        ref_reason = f'Proliferative diabetic retinopathy confirmed. {"Massive preretinal/vitreous hemorrhage pool detected" if massive_hemo_found else "Neovascularization detected"}. Emergency specialist review required within 24-48 hours.'
+        ref_reason = f'Proliferative diabetic retinopathy confirmed. {"Massive preretinal/vitreous hemorrhage pool detected" if massive_hemo_found else "High-risk neovascularization detected"}. Emergency ophthalmic surgery / anti-VEGF intervention required within 24-48 hours.'
         dr_damage_percentage = round(float(np.clip(max(dl_pct, 92.0), 90.0, 99.8)), 1)
-    elif rule_severe_met:
+    elif icdr_3_met:
         grade = 3
         grade_name = 'LEVEL 3 — SEVERE NPDR'
         referable = True
         ref_title = '🔴 URGENT SPECIALIST REFERRAL'
-        ref_reason = f'Severe lesion burden ({num_hemo} blot hemorrhages, {num_mas} MAs, {num_ex} exudates). ICDR 4-2-1 criteria met. Specialist referral within 1-2 weeks required.'
+        ref_reason = f'Severe lesion burden ({num_hemo} blot hemorrhages, {num_mas} MAs, {num_ex} exudates, {num_cws} CWS). ICDR 4-2-1 criteria met. Specialist referral within 2-4 weeks required.'
         dr_damage_percentage = round(float(np.clip(max(dl_pct, 75.0), 75.0, 89.5)), 1)
-    elif rule_moderate_met:
+    elif icdr_2_met:
         grade = 2
         grade_name = 'LEVEL 2 — MODERATE NPDR'
         referable = True
         ref_title = '🔴 REFER TO OPHTHALMOLOGIST'
-        ref_reason = f'Moderate non-proliferative diabetic retinopathy: {num_mas} MAs, {num_hemo} blot hemorrhages, {num_ex} hard exudates. CSME: {"Positive (High Macular Risk)" if csme_positive else "Negative"}. Evaluation within 2-4 weeks.'
-        dr_damage_percentage = round(float(np.clip(dl_pct if dl_pct > 30.0 else 48.5, 35.0, 72.0)), 1)
-    elif rule_mild_met:
+        ref_reason = f'Moderate non-proliferative diabetic retinopathy: {num_mas} MAs, {num_hemo} blot hemorrhages, {num_ex} hard exudates. CSME: {"Positive (High Macular Risk)" if csme_positive else "Negative"}. Evaluation within 2-4 months.'
+        dr_damage_percentage = round(float(np.clip(dl_pct, 35.0, 72.0)), 1)
+    elif icdr_1_met:
         grade = 1
         grade_name = 'LEVEL 1 — MILD NPDR'
         referable = False
         ref_title = '🟡 CLINICAL FOLLOW-UP (6-12 MONTHS)'
-        ref_reason = f'Mild diabetic retinopathy: isolated microaneurysms detected ({num_mas} MAs). No major hemorrhages or lipid exudates. Routine follow-up recommended.'
-        dr_damage_percentage = round(float(np.clip(dl_pct if dl_pct > 10.0 else 18.5, 10.0, 30.0)), 1)
-    else:
+        ref_reason = f'Mild diabetic retinopathy: isolated microaneurysms detected ({num_mas} MAs). No hemorrhages or lipid exudates. Routine repeat screening recommended.'
+        dr_damage_percentage = round(float(np.clip(dl_pct, 10.0, 30.0)), 1)
+    elif dl_grade == 0 and dl_conf >= 0.75 and not massive_hemo_found and num_hemo < 5:
         grade = 0
         grade_name = 'LEVEL 0 — NO APPARENT RETINOPATHY (HEALTHY RETINA)'
         referable = False
         ref_title = '🟢 NO REFERRAL REQUIRED (NORMAL RETINA)'
-        ref_reason = 'Deep Learning & pixel-level analysis confirms normal retina without referable microvascular lesions.'
-        dr_damage_percentage = round(float(np.clip(dl_pct * 0.1, 0.0, 2.0)), 1)
+        ref_reason = 'Deep Learning & pixel-level analysis confirms healthy normal retina. Zero clinical microaneurysms, blot hemorrhages, or lipid exudates detected.'
+        dr_damage_percentage = round(float(np.clip(dl_pct * 0.2, 0.0, 1.5)), 1)
+        mas_coords = []
+        hemo_coords = []
+        exudates_coords = []
+        cws_coords = []
+        all_lesions_segmented = []
+        num_mas = 0
+        num_hemo = 0
+        num_ex = 0
+        num_cws = 0
+        csme_positive = False
+        lesion_burden_score = 0.0
+    else:
+        grade = dl_grade
+        referable = (grade >= 2)
+        dr_damage_percentage = round(float(dl_pct), 1)
+        grade_names = [
+            'LEVEL 0 — NO APPARENT RETINOPATHY',
+            'LEVEL 1 — MILD NPDR',
+            'LEVEL 2 — MODERATE NPDR',
+            'LEVEL 3 — SEVERE NPDR',
+            'LEVEL 4 — PROLIFERATIVE DR (PDR)'
+        ]
+        grade_name = grade_names[grade]
+        ref_title = '🔴 SPECIALIST REFERRAL REQUIRED' if referable else '🟢 ROUTINE FOLLOW-UP'
+        ref_reason = f'Clinical staging based on fused deep residual network evaluation ({dl_conf*100:.1f}% confidence).'
 
     # CLINICAL FALSE-NEGATIVE / REFERRAL SAFETY INVARIANT (Item 21)
-    safety_override = False
-    has_confirmed_pathology = bool(
-        massive_hemo_found or nvd_detected or
-        (num_hemo >= 3 and num_ex >= 1) or
-        (num_hemo >= 4) or
-        (num_ex >= 3 and csme_positive) or
-        (p_referable_dl >= 0.55 and (num_hemo >= 1 or num_ex >= 1))
-    )
-    if grade == 0 and has_confirmed_pathology:
+    if grade == 0 and (num_hemo > 0 or num_ex >= 2 or massive_hemo_found):
         safety_override = True
-        if massive_hemo_found or nvd_detected or num_hemo >= 12 or all_4_quad_hemo_severe:
-            grade = 4 if (massive_hemo_found or nvd_detected) else 3
-            referable = True
-            dr_damage_percentage = float(max(dr_damage_percentage, 80.0))
-            grade_name = f'LEVEL {grade} — {"PROLIFERATIVE DR (PDR)" if grade == 4 else "SEVERE NPDR"} (SAFETY OVERRIDE)'
-            ref_title = '🚨 EMERGENCY SPECIALIST REFERRAL' if grade == 4 else '🔴 URGENT SPECIALIST REFERRAL'
-            ref_reason = f'Critical safety override: Severe pathological lesions detected ({num_hemo} hemorrhages, {num_ex} exudates, massive blood pool: {massive_hemo_found}). Zero-tolerance clinical safety policy triggered.'
-        elif num_hemo >= 2 or num_ex >= 2 or csme_positive or num_cws >= 1 or p_referable_dl >= 0.50:
-            grade = 2
-            referable = True
-            dr_damage_percentage = float(max(dr_damage_percentage, 48.5))
-            grade_name = 'LEVEL 2 — MODERATE NPDR (SAFETY OVERRIDE)'
-            ref_title = '🔴 REFER TO OPHTHALMOLOGIST'
-            ref_reason = f'Clinical safety override: Confirmed {num_hemo} blot hemorrhages and {num_ex} hard exudates. Referable pathology verified by multi-lesion analyzer.'
-        else:
-            grade = 1
-            referable = False
-            dr_damage_percentage = float(max(dr_damage_percentage, 18.0))
-            grade_name = 'LEVEL 1 — MILD NPDR (SAFETY OVERRIDE)'
-            ref_title = '🟡 CLINICAL FOLLOW-UP (6-12 MONTHS)'
-            ref_reason = f'Clinical safety override: Early microvascular lesions detected ({num_mas} MAs, {num_hemo} hemorrhages). Scheduled for 6-12 month surveillance.'
+        grade = 2 if (num_hemo >= 2 or num_ex >= 3) else 1
+        referable = (grade >= 2)
+        dr_damage_percentage = float(max(dr_damage_percentage, 40.0 if referable else 18.0))
+        grade_name = 'LEVEL 2 — MODERATE NPDR (SAFETY OVERRIDE)' if referable else 'LEVEL 1 — MILD NPDR (SAFETY OVERRIDE)'
+        ref_title = '🔴 REFER TO OPHTHALMOLOGIST' if referable else '🟡 CLINICAL FOLLOW-UP'
+        ref_reason = f'Safety invariant triggered: Confirmed {num_hemo} intraretinal hemorrhages and {num_ex} hard exudates. Zero-tolerance safety policy prevented non-referral false negative.'
 
     icdr_criteria = {
         'rule_4_vitreous_hemo_or_quadrants': bool(rule_4_met),

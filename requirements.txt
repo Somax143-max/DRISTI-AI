@@ -1,0 +1,7 @@
+numpy
+Pillow
+opencv-python-headless
+Flask
+scipy
+pydicom
+torch
