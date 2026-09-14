@@ -1,0 +1,47 @@
+[
+  {
+    "case_id": "IDRiD_01",
+    "grade": 3,
+    "mas_count": 28,
+    "hemo_count": 34,
+    "exudates_count": 18,
+    "cws_count": 4,
+    "csme": true
+  },
+  {
+    "case_id": "IDRiD_02",
+    "grade": 2,
+    "mas_count": 14,
+    "hemo_count": 12,
+    "exudates_count": 8,
+    "cws_count": 1,
+    "csme": true
+  },
+  {
+    "case_id": "IDRiD_03",
+    "grade": 1,
+    "mas_count": 4,
+    "hemo_count": 0,
+    "exudates_count": 0,
+    "cws_count": 0,
+    "csme": false
+  },
+  {
+    "case_id": "IDRiD_04",
+    "grade": 4,
+    "mas_count": 52,
+    "hemo_count": 48,
+    "exudates_count": 32,
+    "cws_count": 6,
+    "csme": true
+  },
+  {
+    "case_id": "IDRiD_05",
+    "grade": 0,
+    "mas_count": 0,
+    "hemo_count": 0,
+    "exudates_count": 0,
+    "cws_count": 0,
+    "csme": false
+  }
+]

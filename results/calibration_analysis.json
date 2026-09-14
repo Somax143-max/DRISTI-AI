@@ -1,0 +1,119 @@
+{
+  "expected_calibration_error": 0.0071,
+  "maximum_calibration_error": 0.0071,
+  "temperature_scaling_factor": 1.12,
+  "n_bins": 10,
+  "calibration_bins": [
+    {
+      "bin_range": [
+        0.0,
+        0.1
+      ],
+      "sample_count": 0,
+      "prop_samples": 0.0,
+      "avg_confidence": 0.05,
+      "accuracy": 0.0,
+      "calibration_gap": 0.0
+    },
+    {
+      "bin_range": [
+        0.1,
+        0.2
+      ],
+      "sample_count": 0,
+      "prop_samples": 0.0,
+      "avg_confidence": 0.15,
+      "accuracy": 0.0,
+      "calibration_gap": 0.0
+    },
+    {
+      "bin_range": [
+        0.2,
+        0.3
+      ],
+      "sample_count": 0,
+      "prop_samples": 0.0,
+      "avg_confidence": 0.25,
+      "accuracy": 0.0,
+      "calibration_gap": 0.0
+    },
+    {
+      "bin_range": [
+        0.3,
+        0.4
+      ],
+      "sample_count": 0,
+      "prop_samples": 0.0,
+      "avg_confidence": 0.35,
+      "accuracy": 0.0,
+      "calibration_gap": 0.0
+    },
+    {
+      "bin_range": [
+        0.4,
+        0.5
+      ],
+      "sample_count": 0,
+      "prop_samples": 0.0,
+      "avg_confidence": 0.45,
+      "accuracy": 0.0,
+      "calibration_gap": 0.0
+    },
+    {
+      "bin_range": [
+        0.5,
+        0.6
+      ],
+      "sample_count": 0,
+      "prop_samples": 0.0,
+      "avg_confidence": 0.55,
+      "accuracy": 0.0,
+      "calibration_gap": 0.0
+    },
+    {
+      "bin_range": [
+        0.6,
+        0.7
+      ],
+      "sample_count": 0,
+      "prop_samples": 0.0,
+      "avg_confidence": 0.65,
+      "accuracy": 0.0,
+      "calibration_gap": 0.0
+    },
+    {
+      "bin_range": [
+        0.7,
+        0.8
+      ],
+      "sample_count": 0,
+      "prop_samples": 0.0,
+      "avg_confidence": 0.75,
+      "accuracy": 0.0,
+      "calibration_gap": 0.0
+    },
+    {
+      "bin_range": [
+        0.8,
+        0.9
+      ],
+      "sample_count": 0,
+      "prop_samples": 0.0,
+      "avg_confidence": 0.85,
+      "accuracy": 0.0,
+      "calibration_gap": 0.0
+    },
+    {
+      "bin_range": [
+        0.9,
+        1.0
+      ],
+      "sample_count": 6,
+      "prop_samples": 1.0,
+      "avg_confidence": 0.9929,
+      "accuracy": 1.0,
+      "calibration_gap": 0.0071
+    }
+  ],
+  "cases_analyzed": 6
+}

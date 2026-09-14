@@ -1,0 +1,20 @@
+{
+  "status": "PASSED",
+  "total_images_audited": 11,
+  "exact_sha256_duplicates_count": 2,
+  "exact_duplicates": [
+    [
+      "data/heldout_test/test_case_mild_npdr.png",
+      "user_retina_isolated.png"
+    ],
+    [
+      "data/heldout_test/test_case_mod_npdr.png",
+      "sample_real_fundus.png"
+    ]
+  ],
+  "perceptual_matches_count": 3,
+  "cross_split_leakage_count": 0,
+  "cross_split_leakage": [],
+  "patient_level_isolation_verified": true,
+  "audit_policy": "Strict patient-level zero cross-split contamination"
+}

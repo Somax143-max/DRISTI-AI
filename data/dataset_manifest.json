@@ -1,0 +1,57 @@
+{
+  "version": "2.0.0",
+  "project": "DRISHTI AI (SIH26038)",
+  "description": "Standardized Clinical Retinal Evaluation & Benchmark Registry",
+  "datasets": {
+    "APTOS_2019": {
+      "source": "Asia Pacific Tele-Ophthalmology Society (Kaggle/Aravind Eye Hospital)",
+      "license": "CC BY-NC-SA 4.0 (Research & Educational Use)",
+      "total_samples": 3662,
+      "classes": [
+        "0 - No DR",
+        "1 - Mild",
+        "2 - Moderate",
+        "3 - Severe",
+        "4 - Proliferative"
+      ],
+      "resolution": "Standardized 512x512 with tight circular FOV crop"
+    },
+    "IDRiD": {
+      "source": "Indian Diabetic Retinopathy Image Dataset (IEEE Dataport)",
+      "license": "CC BY 4.0",
+      "total_samples": 516,
+      "annotations": [
+        "Pixel-level MA",
+        "Hemorrhages",
+        "Hard Exudates",
+        "Soft Exudates"
+      ],
+      "grading_scale": "ICDR 5-Grade Scale (0 to 4)"
+    },
+    "Messidor_2": {
+      "source": "Messidor-2 Research Group (INSERM / Univ. Iowa)",
+      "license": "Research Use Only",
+      "total_samples": 1748,
+      "relevance": "Referable DR (Grade 2+) & DME Validation Benchmark"
+    },
+    "DRIVE": {
+      "source": "Digital Retinal Images for Vessel Extraction (Univ. Utrecht)",
+      "license": "Creative Commons Attribution",
+      "total_samples": 40,
+      "relevance": "Gold-standard microvascular segmentation benchmark"
+    }
+  },
+  "split_policy": {
+    "strategy": "Stratified Patient-Level Split",
+    "train_pct": 70,
+    "validation_pct": 15,
+    "heldout_test_pct": 15,
+    "random_seed": 42
+  },
+  "target_metrics": {
+    "referable_dr_sensitivity": ">90.0%",
+    "referable_dr_specificity": ">85.0%",
+    "icdr_macro_f1": ">0.80",
+    "quadratic_weighted_kappa": ">0.85"
+  }
+}

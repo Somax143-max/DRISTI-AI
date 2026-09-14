@@ -1,0 +1,107 @@
+[
+  {
+    "patient_id": "MESSIDOR_2_001",
+    "filename": "MESSIDOR_2_001.png",
+    "grade": 1,
+    "referable": false,
+    "csme_risk": false
+  },
+  {
+    "patient_id": "MESSIDOR_2_002",
+    "filename": "MESSIDOR_2_002.png",
+    "grade": 2,
+    "referable": true,
+    "csme_risk": true
+  },
+  {
+    "patient_id": "MESSIDOR_2_003",
+    "filename": "MESSIDOR_2_003.png",
+    "grade": 3,
+    "referable": true,
+    "csme_risk": false
+  },
+  {
+    "patient_id": "MESSIDOR_2_004",
+    "filename": "MESSIDOR_2_004.png",
+    "grade": 0,
+    "referable": false,
+    "csme_risk": false
+  },
+  {
+    "patient_id": "MESSIDOR_2_005",
+    "filename": "MESSIDOR_2_005.png",
+    "grade": 1,
+    "referable": false,
+    "csme_risk": false
+  },
+  {
+    "patient_id": "MESSIDOR_2_006",
+    "filename": "MESSIDOR_2_006.png",
+    "grade": 2,
+    "referable": true,
+    "csme_risk": true
+  },
+  {
+    "patient_id": "MESSIDOR_2_007",
+    "filename": "MESSIDOR_2_007.png",
+    "grade": 3,
+    "referable": true,
+    "csme_risk": false
+  },
+  {
+    "patient_id": "MESSIDOR_2_008",
+    "filename": "MESSIDOR_2_008.png",
+    "grade": 0,
+    "referable": false,
+    "csme_risk": false
+  },
+  {
+    "patient_id": "MESSIDOR_2_009",
+    "filename": "MESSIDOR_2_009.png",
+    "grade": 1,
+    "referable": false,
+    "csme_risk": false
+  },
+  {
+    "patient_id": "MESSIDOR_2_010",
+    "filename": "MESSIDOR_2_010.png",
+    "grade": 2,
+    "referable": true,
+    "csme_risk": true
+  },
+  {
+    "patient_id": "MESSIDOR_2_011",
+    "filename": "MESSIDOR_2_011.png",
+    "grade": 3,
+    "referable": true,
+    "csme_risk": false
+  },
+  {
+    "patient_id": "MESSIDOR_2_012",
+    "filename": "MESSIDOR_2_012.png",
+    "grade": 0,
+    "referable": false,
+    "csme_risk": false
+  },
+  {
+    "patient_id": "MESSIDOR_2_013",
+    "filename": "MESSIDOR_2_013.png",
+    "grade": 1,
+    "referable": false,
+    "csme_risk": false
+  },
+  {
+    "patient_id": "MESSIDOR_2_014",
+    "filename": "MESSIDOR_2_014.png",
+    "grade": 2,
+    "referable": true,
+    "csme_risk": true
+  },
+  {
+    "patient_id": "MESSIDOR_2_015",
+    "filename": "MESSIDOR_2_015.png",
+    "grade": 3,
+    "referable": true,
+    "csme_risk": false
+  }
+]

@@ -1,0 +1,1622 @@
+{
+  "heldout_8b76c3c5cb3e_g3.png": {
+    "id": "8b76c3c5cb3e",
+    "filename": "heldout_8b76c3c5cb3e_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_8b76c3c5cb3e_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "1ff96d0154d7436a5c1abcbfbd695916487817c6c4d8946b2c97a915609aac80",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_d0ffa0425ef1_g3.png": {
+    "id": "d0ffa0425ef1",
+    "filename": "heldout_d0ffa0425ef1_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_d0ffa0425ef1_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "3b74339310b24707fb42b226dcf3e6e8324e35cc00d35ab82d6c9a8cd8f831ee",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_f0f89314e860_g4.png": {
+    "id": "f0f89314e860",
+    "filename": "heldout_f0f89314e860_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_f0f89314e860_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "55f01bb8620499bec2f7bc36429df427249d4681d3487771ac2178463f5bc66c",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_11242a67122d_g4.png": {
+    "id": "11242a67122d",
+    "filename": "heldout_11242a67122d_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_11242a67122d_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "bedd2f3e19fee0d9b079248a383f7a0ca6245591cfc6752d7d844e0ce2e9e45c",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_3f73c91b7e32_g1.png": {
+    "id": "3f73c91b7e32",
+    "filename": "heldout_3f73c91b7e32_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_3f73c91b7e32_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "731b88d6a3131d8a401cf2a1933b7287cfe83c3b44b0905885a9fefdc6c3570c",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_72606afaf3da_g0.png": {
+    "id": "72606afaf3da",
+    "filename": "heldout_72606afaf3da_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_72606afaf3da_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "322197af0fd8a4752d2e2ecc6f2d7a2d1a2e77ec2cce299d7d3c141c78e52453",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_43823561c3f0_g0.png": {
+    "id": "43823561c3f0",
+    "filename": "heldout_43823561c3f0_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_43823561c3f0_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "44515a70ba2fd7f4839af5205ea3b9d466d97364415103e72a126e186acd77d3",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_64ac539f58cb_g0.png": {
+    "id": "64ac539f58cb",
+    "filename": "heldout_64ac539f58cb_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_64ac539f58cb_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "fd3f98fc9d138deb4a6343bb16807f5036a04ffbd4a5eb8776817b27d1925be6",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_0e0fc1d9810c_g4.png": {
+    "id": "0e0fc1d9810c",
+    "filename": "heldout_0e0fc1d9810c_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_0e0fc1d9810c_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "eb0e06a9c261cb11eed29ea7ae19f9d796a54906d4e39203e8ef532932e76d58",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_97bf61736b86_g2.png": {
+    "id": "97bf61736b86",
+    "filename": "heldout_97bf61736b86_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_97bf61736b86_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "5e899c822c9f4b07ea55523f0b629fa68b320ac7079b5f08c9bdb83e1f6a37c0",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_571bbdbf585e_g0.png": {
+    "id": "571bbdbf585e",
+    "filename": "heldout_571bbdbf585e_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_571bbdbf585e_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "90148309a073572b83c1403efa33207cc458aa8ecdffba7f83e9d4bf2b54556a",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_d16398c971e9_g3.png": {
+    "id": "d16398c971e9",
+    "filename": "heldout_d16398c971e9_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_d16398c971e9_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "f0bd3cc6e7ffe1ef4990f599d2bdaec95d7cc24ecd2a93cb60e5aa3d8b639413",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_166068a24416_g3.png": {
+    "id": "166068a24416",
+    "filename": "heldout_166068a24416_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_166068a24416_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "c099ce25e5d6e311a93d98068e252a139ab8811bcb7e18908ef35e65344361f5",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_08752092140d_g2.png": {
+    "id": "08752092140d",
+    "filename": "heldout_08752092140d_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_08752092140d_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "d7339d97f531336201e47575481a96108337ec87e7c466288a943bbe870708d8",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_bfaa0080ab61_g2.png": {
+    "id": "bfaa0080ab61",
+    "filename": "heldout_bfaa0080ab61_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_bfaa0080ab61_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "a8e4c0821dc44942fc2703e18eead2ca26138e27cbf3228995fdc2b9383e0957",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_dbfd238b3468_g3.png": {
+    "id": "dbfd238b3468",
+    "filename": "heldout_dbfd238b3468_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_dbfd238b3468_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "78cfe06e0a89e9e9a85c00e84e16ad91f063329ad0f5bb644a249fd51e14f136",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_bf8092e4001d_g3.png": {
+    "id": "bf8092e4001d",
+    "filename": "heldout_bf8092e4001d_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_bf8092e4001d_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "cf3523b2f7fa9fee686ec9a2ad499d0a1af574bab645ccf248d566b6ef237e26",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_17eff993386f_g1.png": {
+    "id": "17eff993386f",
+    "filename": "heldout_17eff993386f_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_17eff993386f_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "34ed1f7f393774f1e1c0c2126b225482edad4969e77fc6e47e651b262252972a",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_6bf2a81a5d91_g0.png": {
+    "id": "6bf2a81a5d91",
+    "filename": "heldout_6bf2a81a5d91_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_6bf2a81a5d91_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "6c3362dad8bd6dfa55137d87d6549d713a71a271c39af2810d2a3f7481d48c6c",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_4294a14c656a_g3.png": {
+    "id": "4294a14c656a",
+    "filename": "heldout_4294a14c656a_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_4294a14c656a_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "c63a70612112697b344bc019ac744fb3dc4e33deb4389f4d51b143aa8da4beaa",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_6d259b5b4c76_g4.png": {
+    "id": "6d259b5b4c76",
+    "filename": "heldout_6d259b5b4c76_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_6d259b5b4c76_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "b6f2c1796ffbd38deceabf1a0d503c0f952d3605867a62bf2a732f9b8bf98496",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_530d78467615_g2.png": {
+    "id": "530d78467615",
+    "filename": "heldout_530d78467615_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_530d78467615_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "8f6e50b06a41fe4cad8842e6f51a84500c815742bc91e051501bb928fb2bd7f9",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_37c4dfe03aba_g4.png": {
+    "id": "37c4dfe03aba",
+    "filename": "heldout_37c4dfe03aba_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_37c4dfe03aba_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "a2e7d3c8cb62ca57953b8a3981257942e6cda1b0f826d2731a004e0411e16622",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_09eeafa9656a_g2.png": {
+    "id": "09eeafa9656a",
+    "filename": "heldout_09eeafa9656a_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_09eeafa9656a_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "0013e0b669737db7caf22437db9d72f657d106c27ef421c5aa2852b85ce656b4",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_187f6ccda87a_g4.png": {
+    "id": "187f6ccda87a",
+    "filename": "heldout_187f6ccda87a_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_187f6ccda87a_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "becfe458d3bbae339bd5bcd01f6d92479890f3e74570adda19ef6ac39c64ee15",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_6e68e742f5bc_g2.png": {
+    "id": "6e68e742f5bc",
+    "filename": "heldout_6e68e742f5bc_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_6e68e742f5bc_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "11944053107ee9d3735e485254304e68fa9318485e7176ade07f3248d45237c4",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_eeb231c3ef1f_g1.png": {
+    "id": "eeb231c3ef1f",
+    "filename": "heldout_eeb231c3ef1f_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_eeb231c3ef1f_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "e0c59ea48be505f32e10c51704f6c99a719f32839ce139210953ca6630a1967a",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_8688f3d0fcaf_g3.png": {
+    "id": "8688f3d0fcaf",
+    "filename": "heldout_8688f3d0fcaf_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_8688f3d0fcaf_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "c394e2a24d1c4a5fa6fa2c2bf19b65eb183ac11c1ebb7a27a82e6cffcd9cd104",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_07122e268a1d_g4.png": {
+    "id": "07122e268a1d",
+    "filename": "heldout_07122e268a1d_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_07122e268a1d_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "b0eb0aa849c07978feb06f806f30ddd309694a7eb0ea49e87239513cfbbd560b",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_ed2c06fcc573_g2.png": {
+    "id": "ed2c06fcc573",
+    "filename": "heldout_ed2c06fcc573_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_ed2c06fcc573_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "8a4d25e28878eb6313789e0e033177b552fe9430c343d560715d86b3f0a6f3da",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_0ceb222f6629_g4.png": {
+    "id": "0ceb222f6629",
+    "filename": "heldout_0ceb222f6629_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_0ceb222f6629_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "ebb8e53799bd14e9b5c7590d9e90887f100b418eb29e19c4216a58d79dc2f8c0",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_d85a842d20bd_g2.png": {
+    "id": "d85a842d20bd",
+    "filename": "heldout_d85a842d20bd_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_d85a842d20bd_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "78ee6f424be410dc1a8263c29e823b29342311613ab7e74f040077104062f95c",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_c5a9ebef1517_g3.png": {
+    "id": "c5a9ebef1517",
+    "filename": "heldout_c5a9ebef1517_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_c5a9ebef1517_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "b55e64a443525c9af0f0e11a450bb46cdb7f112b583564a41ca8a6ba7a2bc06b",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_753b14c27c83_g4.png": {
+    "id": "753b14c27c83",
+    "filename": "heldout_753b14c27c83_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_753b14c27c83_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "61caa636d07792e7d69196f0721a0bc37f2d3ff5f55fe0078525864402afb58f",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_687759336b0d_g3.png": {
+    "id": "687759336b0d",
+    "filename": "heldout_687759336b0d_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_687759336b0d_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "872426afdbb32abe5803eb4fe786ac14d47fbb4350fc5e4200d1c27fd1599176",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_c7b622ec8104_g1.png": {
+    "id": "c7b622ec8104",
+    "filename": "heldout_c7b622ec8104_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_c7b622ec8104_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "2c17fdd7453b49b5b4dbb87d27dcd794c55a0a04e22a1965bfa5db728245d5a4",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_fecf4c5ae84b_g1.png": {
+    "id": "fecf4c5ae84b",
+    "filename": "heldout_fecf4c5ae84b_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_fecf4c5ae84b_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "9680e88e435a99d2894e4b15d6752f3d7b8ec76dc2e418cd62daa421eb10f107",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_731b19a460ad_g2.png": {
+    "id": "731b19a460ad",
+    "filename": "heldout_731b19a460ad_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_731b19a460ad_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "8166e517603223d60d395c1f1e9c147725c0f1ebea17c505027065b4e6800511",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_ca30a97e9d13_g1.png": {
+    "id": "ca30a97e9d13",
+    "filename": "heldout_ca30a97e9d13_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_ca30a97e9d13_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "7939ea03a0fa132e92ff4a00b0266cb6e7ba384788211093e060eda46f742000",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_f5a8c6426a71_g3.png": {
+    "id": "f5a8c6426a71",
+    "filename": "heldout_f5a8c6426a71_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_f5a8c6426a71_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "ee1c2612129380258c694795856b65e703702ae464fec27903773f802bcd9c36",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_7e160c8b611e_g3.png": {
+    "id": "7e160c8b611e",
+    "filename": "heldout_7e160c8b611e_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_7e160c8b611e_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "f0f638cf35634eee4f152266938c0dc7fba14950074e33ef021f27ca3108a7c3",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_9bf060db8376_g3.png": {
+    "id": "9bf060db8376",
+    "filename": "heldout_9bf060db8376_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_9bf060db8376_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "ba16df353ec0b30a5e6e3219a94e66de18606a8489c3816c368b8242a8ddfacd",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_daeaa5d8cf70_g2.png": {
+    "id": "daeaa5d8cf70",
+    "filename": "heldout_daeaa5d8cf70_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_daeaa5d8cf70_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "51d05653a8ea31ea88b0576d84e6d6af00f51588a9e606c200560bedaa0b3aa1",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_8543a801dce0_g2.png": {
+    "id": "8543a801dce0",
+    "filename": "heldout_8543a801dce0_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_8543a801dce0_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "5c0729bf818ea26a3e91548efaf9a3a8eed1828afc6f2c67688f8849e847e454",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_4d9fc85a8259_g3.png": {
+    "id": "4d9fc85a8259",
+    "filename": "heldout_4d9fc85a8259_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_4d9fc85a8259_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "f7aaf48fcd2d7b93843d9833f9d64868b0524e6b70ab51a16fbd79de89fa4720",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_2a8a9e957a6c_g1.png": {
+    "id": "2a8a9e957a6c",
+    "filename": "heldout_2a8a9e957a6c_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_2a8a9e957a6c_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "2bdf3a7eb346dd1020945381b50730faaf301c0661d45bf9533ed467261c0c63",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_da44f80b422b_g2.png": {
+    "id": "da44f80b422b",
+    "filename": "heldout_da44f80b422b_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_da44f80b422b_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "b2377b95f3112a8b332d988d0609cc85df15f83d3b31695bc035d1cda94b3c70",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_29bc0e721cfe_g4.png": {
+    "id": "29bc0e721cfe",
+    "filename": "heldout_29bc0e721cfe_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_29bc0e721cfe_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "891e4a3380247d690d88d3fe9aba0ea3dd00a73bd7917a5db27e24b876e3f656",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_15bed5adde74_g3.png": {
+    "id": "15bed5adde74",
+    "filename": "heldout_15bed5adde74_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_15bed5adde74_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "feabed0a1ee97360a130e69f8a0fa7e4624b7ed6486fb334ef54f8f05d9783c5",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_b4f41b5bf0ef_g1.png": {
+    "id": "b4f41b5bf0ef",
+    "filename": "heldout_b4f41b5bf0ef_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_b4f41b5bf0ef_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "b920cfa69a44440f9fb7cbdf2da6884d8268a1ed141ebb604d02d2a1f1bf1be8",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_8c2f0f04e1ed_g1.png": {
+    "id": "8c2f0f04e1ed",
+    "filename": "heldout_8c2f0f04e1ed_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_8c2f0f04e1ed_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "2865a1f9e3bd22cb57d51a251847d3a0367e15b37d10aab551b35e42ca2e2ca4",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_4b618537d52f_g3.png": {
+    "id": "4b618537d52f",
+    "filename": "heldout_4b618537d52f_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_4b618537d52f_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "ba601dc045d4432b8b7515e71698e59aa8135f1f947348894d6649353aef25da",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_d7bc62d60e8c_g0.png": {
+    "id": "d7bc62d60e8c",
+    "filename": "heldout_d7bc62d60e8c_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_d7bc62d60e8c_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "517bd69cf1bbbe77c5dce7182647dc8add56fd61b8ed3b3eaf357317b030f6e9",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_681c3c115684_g2.png": {
+    "id": "681c3c115684",
+    "filename": "heldout_681c3c115684_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_681c3c115684_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "5b60e96151888c7b0c15412a9ee3b4993a1ccc7e23f5c7c601d97e9b1bd6610f",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_bebfbd907cac_g0.png": {
+    "id": "bebfbd907cac",
+    "filename": "heldout_bebfbd907cac_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_bebfbd907cac_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "74d61556dadd0c71a83a942162fe5fff5aa3a3a6a4f206ba653899164d94463f",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_992b9a07b25f_g0.png": {
+    "id": "992b9a07b25f",
+    "filename": "heldout_992b9a07b25f_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_992b9a07b25f_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "b70343c628fc330b7e5f5ad7521466549776c911c6d924bf32a708faa8ca3950",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_2fde69f20585_g4.png": {
+    "id": "2fde69f20585",
+    "filename": "heldout_2fde69f20585_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_2fde69f20585_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "7f8dba1e9d233763bd9c71235ebb21b9a6aa4a2b9ffe6864b9739a5c3bdde037",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_5e7630f8438e_g2.png": {
+    "id": "5e7630f8438e",
+    "filename": "heldout_5e7630f8438e_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_5e7630f8438e_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "987a22e5abcbdd0743ca56bb1c4c71a31e5d48b2b3b5e31da4f6db3e0e29ab7a",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_d9311f7497cb_g2.png": {
+    "id": "d9311f7497cb",
+    "filename": "heldout_d9311f7497cb_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_d9311f7497cb_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "ab6a97d38b31630919ff06a37643336276ed5cc2abd18e527456c3946b6c0220",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_99ecdb41d5e7_g1.png": {
+    "id": "99ecdb41d5e7",
+    "filename": "heldout_99ecdb41d5e7_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_99ecdb41d5e7_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "1a2ca9f34ae2a712bf7c09e3f932bb26866fbf1ba6ec6c37bf6432733c8c0ae3",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_3a1ecf5e2839_g4.png": {
+    "id": "3a1ecf5e2839",
+    "filename": "heldout_3a1ecf5e2839_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_3a1ecf5e2839_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "8473f1c38d6ed3458bb9a3761d737ac6cf194f0fb90c6849394a249fff4dc133",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_d5c63a8d9e94_g0.png": {
+    "id": "d5c63a8d9e94",
+    "filename": "heldout_d5c63a8d9e94_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_d5c63a8d9e94_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "9d8088e15d83328b9334864298a0d9a7e7cc72123925c92af4542ec064226748",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_d035c2bd9104_g3.png": {
+    "id": "d035c2bd9104",
+    "filename": "heldout_d035c2bd9104_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_d035c2bd9104_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "70c1ba96d0d56bd6836261e6609b5842c45a48d384440e71f96153d0b81a6653",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_25b0e72705a8_g3.png": {
+    "id": "25b0e72705a8",
+    "filename": "heldout_25b0e72705a8_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_25b0e72705a8_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "dc443ea94fe3c6681d4cda623734781af6db23b772b78e1da3459a220f4f71ce",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_bb5083fae98f_g3.png": {
+    "id": "bb5083fae98f",
+    "filename": "heldout_bb5083fae98f_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_bb5083fae98f_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "87d5564d3ec212a04525357b621c14c4396dd6d4ff253d4e1dfdcb417bc849f5",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_cd972e5639e0_g4.png": {
+    "id": "cd972e5639e0",
+    "filename": "heldout_cd972e5639e0_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_cd972e5639e0_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "fdb21fe38f1f7200d6a1c88833cce58a594b96ce6d166344d9f1c25a061657d8",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_e13412678eff_g3.png": {
+    "id": "e13412678eff",
+    "filename": "heldout_e13412678eff_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_e13412678eff_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "0f03d060be3e73f3e20e10c4a6bc4306440e24478c1ddb0f5eabab64f4b6b6a3",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_ee3f5cf52188_g0.png": {
+    "id": "ee3f5cf52188",
+    "filename": "heldout_ee3f5cf52188_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_ee3f5cf52188_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "48a5c5d46f360f126bcc231b928e9ee40ccaa27aaac6fb0d98b4512f67ca9a5a",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_75238d945315_g0.png": {
+    "id": "75238d945315",
+    "filename": "heldout_75238d945315_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_75238d945315_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "6e0150d1a5d04dbdeea8a76b7ce317b9ea5c229b0f06fc77321b7cd793b85b87",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_8eeac97f02f0_g4.png": {
+    "id": "8eeac97f02f0",
+    "filename": "heldout_8eeac97f02f0_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_8eeac97f02f0_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "603f33bc1b80c219a481fd2e187873d1d972fd43170c4263f93169cb41b1dfb7",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_d10ef306996b_g4.png": {
+    "id": "d10ef306996b",
+    "filename": "heldout_d10ef306996b_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_d10ef306996b_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "29b730258dada13eaf850e52acf9e71547456fce08b62feb12b2013381f2c769",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_8a9bef2fbd4e_g3.png": {
+    "id": "8a9bef2fbd4e",
+    "filename": "heldout_8a9bef2fbd4e_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_8a9bef2fbd4e_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "d039be7534f5ebbac04df2d8ff0823bd6910d60aba52d72eb6f545b8e86f8474",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_663a923d5398_g2.png": {
+    "id": "663a923d5398",
+    "filename": "heldout_663a923d5398_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_663a923d5398_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "fbe91cd6a2552d005a0a84a590e9496fe7794bf0a08336c096199946a5f3c252",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_7ae69d22075a_g1.png": {
+    "id": "7ae69d22075a",
+    "filename": "heldout_7ae69d22075a_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_7ae69d22075a_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "29e74c19f28544efebcc112f02f7a939dc095e3132e133d437f87ba048a2d09c",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_cd54d022e37d_g4.png": {
+    "id": "cd54d022e37d",
+    "filename": "heldout_cd54d022e37d_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_cd54d022e37d_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "15e1c715fdc6ff6e96768346e9bc550043083f90bcb46a737a21b8acacba89c8",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_1df3e03a8f5f_g1.png": {
+    "id": "1df3e03a8f5f",
+    "filename": "heldout_1df3e03a8f5f_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_1df3e03a8f5f_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "235d5df955be1e668d64a01b72ab9c1fa8d8973349865d2d2ba81cb7349ca6ba",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_28503940d10b_g0.png": {
+    "id": "28503940d10b",
+    "filename": "heldout_28503940d10b_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_28503940d10b_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "e6ff158e5ea50d97aeb3426f9bb3bd12edb06450a5dab7a5ec6386d9d2268b9b",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_b6a0e348a01e_g1.png": {
+    "id": "b6a0e348a01e",
+    "filename": "heldout_b6a0e348a01e_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_b6a0e348a01e_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "b6063a28718216c5e90cf0bd9434b7868f2e2175d6dcbb0f4d2c31dd3df0ada5",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_3f3de2a6b0f5_g2.png": {
+    "id": "3f3de2a6b0f5",
+    "filename": "heldout_3f3de2a6b0f5_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_3f3de2a6b0f5_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "fca87c720f1aea558a46608569832bfeede6231a7455c4a1060a01cf4c8ad4ed",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_523b3f0fc646_g1.png": {
+    "id": "523b3f0fc646",
+    "filename": "heldout_523b3f0fc646_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_523b3f0fc646_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "285a736e25f4f56162679869f24ec30c660dfdc0c7047ee184c2961771e22fc5",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_53f6c1c65c04_g1.png": {
+    "id": "53f6c1c65c04",
+    "filename": "heldout_53f6c1c65c04_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_53f6c1c65c04_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "7ac810c06883e0e7ebce00a086d0f479ef5c9aca9e29574ed927ed30b04ca1c6",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_d1a24527a15d_g4.png": {
+    "id": "d1a24527a15d",
+    "filename": "heldout_d1a24527a15d_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_d1a24527a15d_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "19f50c9cf96c74d05895564acf6ed0b7a73baf2aa3838c865f1e69560087a7c2",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_12b57dac703e_g0.png": {
+    "id": "12b57dac703e",
+    "filename": "heldout_12b57dac703e_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_12b57dac703e_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "69afbab23a22773c0c059bffa84536a1bb98a848f8ff6803f31b82e37b8cfb13",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_c67117c6ab3b_g3.png": {
+    "id": "c67117c6ab3b",
+    "filename": "heldout_c67117c6ab3b_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_c67117c6ab3b_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "5b44672baeaceb6c0554370bc54a7448ce1133d15fa41fc121b1efc8630dad7d",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_e03a74e7d74f_g0.png": {
+    "id": "e03a74e7d74f",
+    "filename": "heldout_e03a74e7d74f_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_e03a74e7d74f_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "a24b035b3594cb83259c4dc33c4e97daaaa3514ff5990742168bca512caed979",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_91e2c2890c9f_g2.png": {
+    "id": "91e2c2890c9f",
+    "filename": "heldout_91e2c2890c9f_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_91e2c2890c9f_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "2a3181ff1e0fc856e96f5bc4137a868098f83ad6f37a98fce40ea591a701899a",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_ce754234d760_g0.png": {
+    "id": "ce754234d760",
+    "filename": "heldout_ce754234d760_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_ce754234d760_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "e1306aae34e7b1fe08b5aaaa85532e0c75caccd6752290312d9e35304544ab72",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_499c8df39222_g4.png": {
+    "id": "499c8df39222",
+    "filename": "heldout_499c8df39222_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_499c8df39222_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "ed508a1f22a07c435e120728f5d6c11f1634c5393d44be8148eb53ccf7f4bd73",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_f0c13be90519_g1.png": {
+    "id": "f0c13be90519",
+    "filename": "heldout_f0c13be90519_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_f0c13be90519_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "d65a8daefe68ef1e0853b833a18b9681df687ec970f2c360c4a97e1d6a153801",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_8fd7ad26e691_g4.png": {
+    "id": "8fd7ad26e691",
+    "filename": "heldout_8fd7ad26e691_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_8fd7ad26e691_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "3019517d536826d5efd7d1b5322c19a48352deb86d5bf4a9555d4514c8ffec68",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_4dd5d5ccddcf_g1.png": {
+    "id": "4dd5d5ccddcf",
+    "filename": "heldout_4dd5d5ccddcf_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_4dd5d5ccddcf_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "ee940bce508b3165b3276abace838e9ba089d52f3133ab49624cafe6b1b0fcaf",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_46923eea9a4e_g2.png": {
+    "id": "46923eea9a4e",
+    "filename": "heldout_46923eea9a4e_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_46923eea9a4e_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "fd8837ff9fde620522accdb8e5451d3613b6f0dcaae6e69a7d05614c09adc6fa",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_4ec7796df40e_g0.png": {
+    "id": "4ec7796df40e",
+    "filename": "heldout_4ec7796df40e_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_4ec7796df40e_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "4b85f64cea0b105ad82bb4a7402fc6e3720c4b254c2f69eab6c5883e905512c8",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_6294b378d09f_g0.png": {
+    "id": "6294b378d09f",
+    "filename": "heldout_6294b378d09f_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_6294b378d09f_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "635d044e9c370c89eb954ed0df129e0a5c02f1c67df6a8c6386955ddd2c61ba8",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_4fef9ed8a4c5_g3.png": {
+    "id": "4fef9ed8a4c5",
+    "filename": "heldout_4fef9ed8a4c5_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_4fef9ed8a4c5_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "581d63f62677310de39a4de9772fb5c0edebbf428a11f95b10ce15bf4ea1e8b3",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_a82a12ad3fb1_g0.png": {
+    "id": "a82a12ad3fb1",
+    "filename": "heldout_a82a12ad3fb1_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_a82a12ad3fb1_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "a5a52de08ce28fc2d92651aa9211874ca90023c53ed4977e528ad2a55fad44c6",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_ca6842bfcbc9_g1.png": {
+    "id": "ca6842bfcbc9",
+    "filename": "heldout_ca6842bfcbc9_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_ca6842bfcbc9_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "0d209ac3cde45cfb7c2e252af57058388e6543612881505021e6b7165df823cf",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_33105f9b3a04_g1.png": {
+    "id": "33105f9b3a04",
+    "filename": "heldout_33105f9b3a04_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_33105f9b3a04_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "3d4df4b756a4a7f79f67aec81626aba919826bae1d99e96d85fe1353a1a934fc",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_3218a6d8eb2c_g3.png": {
+    "id": "3218a6d8eb2c",
+    "filename": "heldout_3218a6d8eb2c_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_3218a6d8eb2c_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "70f7ee2382edceb9075f51b786b69d8f916a163434b1f72159eedd473ffe2e02",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_e2856afe62c5_g2.png": {
+    "id": "e2856afe62c5",
+    "filename": "heldout_e2856afe62c5_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_e2856afe62c5_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "f70f672e53859b7e644b337f9e86e8a6c75ceba0493d1da4ed5956d91f050196",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_61bbe8db6f3a_g1.png": {
+    "id": "61bbe8db6f3a",
+    "filename": "heldout_61bbe8db6f3a_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_61bbe8db6f3a_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "f329bcd713f508e3fd24f7984823fc211ba17816f06fdb153c5df236667d5d6f",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_05cd0178ccfe_g3.png": {
+    "id": "05cd0178ccfe",
+    "filename": "heldout_05cd0178ccfe_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_05cd0178ccfe_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "ed67aced1bd8d6ceaed484e4c0329cb495f15c7b7985b746c1487d6f8df615d3",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_ff631653374e_g0.png": {
+    "id": "ff631653374e",
+    "filename": "heldout_ff631653374e_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_ff631653374e_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "cc4ac5697622eff731c12bd9038a419c06121f8088679bb053c81414cfabef0d",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_5173d54fc214_g2.png": {
+    "id": "5173d54fc214",
+    "filename": "heldout_5173d54fc214_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_5173d54fc214_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "ef82aa6606e8f3c14eab68cbd1a3f8d1b41c6a5314cfc88f0541a93c1bd41f00",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_2ecbc2e3f239_g1.png": {
+    "id": "2ecbc2e3f239",
+    "filename": "heldout_2ecbc2e3f239_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_2ecbc2e3f239_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "f0c6c130d8516d0842960061bf8af1e38709dc77e7d68ffbaa0ff35a3f92a678",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_8fc09fecd22f_g1.png": {
+    "id": "8fc09fecd22f",
+    "filename": "heldout_8fc09fecd22f_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_8fc09fecd22f_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "a40533198de51d30198e88eb8529e5aae1d50cad1b85d60ba2c280f6ee06b305",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_2bb063318cf1_g3.png": {
+    "id": "2bb063318cf1",
+    "filename": "heldout_2bb063318cf1_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_2bb063318cf1_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "3011286c036e5230badde7895caef8b1f900caa8618b9a8a9913538fbb0c7a41",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_628b581aa905_g0.png": {
+    "id": "628b581aa905",
+    "filename": "heldout_628b581aa905_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_628b581aa905_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "dc5ebc9cfd7e01de2db012a85a6a36b80ce71b69a2aa7f580db957002d8f5330",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_a1b12fdce6c3_g2.png": {
+    "id": "a1b12fdce6c3",
+    "filename": "heldout_a1b12fdce6c3_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_a1b12fdce6c3_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "c5c57a0cf6c13bc448713077424bb1fddb116f4336f5f8f97900752971a1c86d",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_5b5b80a3edee_g4.png": {
+    "id": "5b5b80a3edee",
+    "filename": "heldout_5b5b80a3edee_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_5b5b80a3edee_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "6f0cd077105528eb3692cf70ed80d395cb26a61c9077ac242669a3064f8b46f1",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_9878db94d9f3_g3.png": {
+    "id": "9878db94d9f3",
+    "filename": "heldout_9878db94d9f3_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_9878db94d9f3_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "9ede624ba3ca96c34b7b6b17a8097dbcc22920206b0d850d1909ff8ba69f85ae",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_e8d1c6c07cf2_g3.png": {
+    "id": "e8d1c6c07cf2",
+    "filename": "heldout_e8d1c6c07cf2_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_e8d1c6c07cf2_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "8920a868a5d8bb4a143cc335ffa5eac0e84d5895a2fe39c46ff57d765ebf37c8",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_274f5029189b_g1.png": {
+    "id": "274f5029189b",
+    "filename": "heldout_274f5029189b_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_274f5029189b_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "d919fa0a7dc7ec6757c542a4ba4ffed18d3971735cd16ccb753c6855849a25ac",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_d0b132d2c7ec_g4.png": {
+    "id": "d0b132d2c7ec",
+    "filename": "heldout_d0b132d2c7ec_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_d0b132d2c7ec_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "bb05d53abd70b87e5bb5d11c4f5b3959b5b629c2c89ec17e4389a3e6db270249",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_d9ba044671e1_g4.png": {
+    "id": "d9ba044671e1",
+    "filename": "heldout_d9ba044671e1_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_d9ba044671e1_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "a7a76ea27a3cb8fa7773970bb5c7b910a70ba2cc2e3bd8268d4f7a939366ade6",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_07a0e34c8d20_g3.png": {
+    "id": "07a0e34c8d20",
+    "filename": "heldout_07a0e34c8d20_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_07a0e34c8d20_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "4ea903cc5a8f4a2e55cdb5c21fb986bf2f6e96ec2cf1388ced1f678b1962f3ff",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_c6e1e9fbf39b_g2.png": {
+    "id": "c6e1e9fbf39b",
+    "filename": "heldout_c6e1e9fbf39b_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_c6e1e9fbf39b_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "186d625cb71d09a0bfad463bf7411286153b5257cf151ccfbd19e4d1b2514cb8",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_af8aa32beee4_g2.png": {
+    "id": "af8aa32beee4",
+    "filename": "heldout_af8aa32beee4_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_af8aa32beee4_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "d02f77370b93ab001c379e4b577882a37d6772f899d4ed535a81f75fa80c6ad0",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_04ac765f91a1_g1.png": {
+    "id": "04ac765f91a1",
+    "filename": "heldout_04ac765f91a1_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_04ac765f91a1_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "45e9465ae4324125e2188825fa1dda777f4f768a571fd82d986fc5ccdec8ed1e",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_655cafb4c932_g1.png": {
+    "id": "655cafb4c932",
+    "filename": "heldout_655cafb4c932_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_655cafb4c932_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "d5f8ca854d78e8d0bd32a934874413172ec820de3ac7ef985c759735534c2e41",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_b191ba0a2b12_g3.png": {
+    "id": "b191ba0a2b12",
+    "filename": "heldout_b191ba0a2b12_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_b191ba0a2b12_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "6cd63e2ffd696a547e7cc583ea95082beff843db52c02ab02d94cb42486c7df4",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_ffa47f6a7bf4_g2.png": {
+    "id": "ffa47f6a7bf4",
+    "filename": "heldout_ffa47f6a7bf4_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_ffa47f6a7bf4_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "1ba56a6fbe4c737a2c50af37ba14c19c62253aea367a4fdfbc9bbf26ce965412",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_936299166bea_g0.png": {
+    "id": "936299166bea",
+    "filename": "heldout_936299166bea_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_936299166bea_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "b20b65c9dc498d43fc8f1d9ccc1d9d7b5b6cd395d0765eb538bb216487e3c6ee",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_1d46f1326394_g0.png": {
+    "id": "1d46f1326394",
+    "filename": "heldout_1d46f1326394_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_1d46f1326394_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "c5eae41c3b3e20b1da4b95ea93951aa560761a19610828379bde9bdfb306b77a",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_e540d2e35d15_g2.png": {
+    "id": "e540d2e35d15",
+    "filename": "heldout_e540d2e35d15_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_e540d2e35d15_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "29e514d1b471c9c7af71d7884dc113e36815373f965e217516c5452e4a3c8138",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_c3d12a23f451_g4.png": {
+    "id": "c3d12a23f451",
+    "filename": "heldout_c3d12a23f451_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_c3d12a23f451_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "88b0d4fe1fee8946b271286d60f9360b7b81913b1ea2ad581a6b05eaedb2cf38",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_bc73ce76ec43_g1.png": {
+    "id": "bc73ce76ec43",
+    "filename": "heldout_bc73ce76ec43_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_bc73ce76ec43_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "39128cbbe36f8f851db561f4b9fba766f40fe8f5d2c6e2e190caad98e8ff839d",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_f1dc26c4bfa3_g4.png": {
+    "id": "f1dc26c4bfa3",
+    "filename": "heldout_f1dc26c4bfa3_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_f1dc26c4bfa3_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "fc69ed484d60ffe01e7d5411309909f87a6cb2e336dc1f43dbd98a2224a048a9",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_962c0fc85e13_g0.png": {
+    "id": "962c0fc85e13",
+    "filename": "heldout_962c0fc85e13_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_962c0fc85e13_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "7bd3c3607c0c179d5ac2997f697a0ed85e5ce3ddd5b21245bb5371c57a251b24",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_0dce95217626_g1.png": {
+    "id": "0dce95217626",
+    "filename": "heldout_0dce95217626_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_0dce95217626_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "5a1ae15a61f516712e87fe0cd59b974e53b20bbd297c98d542d782555889c0ba",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_9a496b1e20f9_g4.png": {
+    "id": "9a496b1e20f9",
+    "filename": "heldout_9a496b1e20f9_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_9a496b1e20f9_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "be15b07a5c410ee1a67f8fc18b75d1f9ae5c1b68709da10cb447bb2195b501e3",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_c6a145742708_g4.png": {
+    "id": "c6a145742708",
+    "filename": "heldout_c6a145742708_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_c6a145742708_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "d4a521a11d15ec63ef3d320d50577f320f956e9fdb12e0121fafe71e0f91cbd6",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_aeed1f251ceb_g4.png": {
+    "id": "aeed1f251ceb",
+    "filename": "heldout_aeed1f251ceb_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_aeed1f251ceb_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "c91d4e3ed209eedf581bd8a4bb4b005c1773cb3fc3f650a30dda1388c070c201",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_7c2f820a6425_g2.png": {
+    "id": "7c2f820a6425",
+    "filename": "heldout_7c2f820a6425_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_7c2f820a6425_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "fe414e68c7aeb03bbd57e366f3fb8c52a3e7ee86404609b3451d9170980ed1bb",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_785777558f05_g4.png": {
+    "id": "785777558f05",
+    "filename": "heldout_785777558f05_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_785777558f05_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "3208f854c9e0f7d18a06bab807f107739a8b866001bc03d3f0621ae5d8cd352b",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_b64e1eef3d63_g0.png": {
+    "id": "b64e1eef3d63",
+    "filename": "heldout_b64e1eef3d63_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_b64e1eef3d63_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "e126451a6b008829a0ecf74f51c5945ea9dad1d01e371e1bca0be599156e8da0",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_86b3a7929bec_g2.png": {
+    "id": "86b3a7929bec",
+    "filename": "heldout_86b3a7929bec_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_86b3a7929bec_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "4059b57fa56600c10fea269c6515720570744584e9f20e2828c9614acab8b84b",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_90a786abe58e_g0.png": {
+    "id": "90a786abe58e",
+    "filename": "heldout_90a786abe58e_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_90a786abe58e_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "ae312ae00947276b8546469f9c8c567f79c6afc38b9545f13f9ab3c392948df2",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_bf811911acf9_g0.png": {
+    "id": "bf811911acf9",
+    "filename": "heldout_bf811911acf9_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_bf811911acf9_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "8ace32e5db13470d9fc481412b8bf88229f3683fd3613a462e6bba8223ec5b88",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_6735931000ec_g3.png": {
+    "id": "6735931000ec",
+    "filename": "heldout_6735931000ec_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_6735931000ec_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "f618f0317fd83807835641111f45b2285cfcae36f9690cf4705d46d8b6b98f83",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_17d997fe1090_g0.png": {
+    "id": "17d997fe1090",
+    "filename": "heldout_17d997fe1090_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_17d997fe1090_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "daa6a74a68d2a29ad07c305792399670fad0df56bf097445df9c258049c47e0e",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_c05b7b4c22fe_g2.png": {
+    "id": "c05b7b4c22fe",
+    "filename": "heldout_c05b7b4c22fe_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_c05b7b4c22fe_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "1f3927716339cce0c909ee4720ea490ccb7c18789c5172329734104f6ab0587b",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_6c250a30593b_g4.png": {
+    "id": "6c250a30593b",
+    "filename": "heldout_6c250a30593b_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_6c250a30593b_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "29cd5d464d72e9766c7810a0414ccc67392328f13f20279e147368829388b4f6",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_4df6a81b476e_g3.png": {
+    "id": "4df6a81b476e",
+    "filename": "heldout_4df6a81b476e_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_4df6a81b476e_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "9d1a2b59ea840c21fd419ed5a9b3d85dc6a61b56471c4f4d8dc03886370cbd67",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_650104ede84c_g0.png": {
+    "id": "650104ede84c",
+    "filename": "heldout_650104ede84c_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_650104ede84c_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "fd11dfb8adb9fc5bdf396e4fb8849cc9ccac1def89ac49bae5c69240836ff1e1",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_f69835dc7c50_g4.png": {
+    "id": "f69835dc7c50",
+    "filename": "heldout_f69835dc7c50_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_f69835dc7c50_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "440e4959e1bade8b654dc94f7b069258f5f3172ef0fda5bd277901d6c26a47ee",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_3dbfbc11e105_g2.png": {
+    "id": "3dbfbc11e105",
+    "filename": "heldout_3dbfbc11e105_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_3dbfbc11e105_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "448c8a6f25ca32ae3ae84ebacec7833a6adcb0a8726b5a127aaced975de5e13a",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_ef8c39eb9157_g0.png": {
+    "id": "ef8c39eb9157",
+    "filename": "heldout_ef8c39eb9157_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_ef8c39eb9157_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "9fb392b2b4f7620f23f64d31a7b0ed2118c49d9f38f262febd107f9130d035b7",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_6253f23229b1_g3.png": {
+    "id": "6253f23229b1",
+    "filename": "heldout_6253f23229b1_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_6253f23229b1_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "309c3b5461f07629470bab4aaa265ac222b0da608c8e65523cb9a91949095291",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_0104b032c141_g3.png": {
+    "id": "0104b032c141",
+    "filename": "heldout_0104b032c141_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_0104b032c141_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "7017d9f074038b3c53b78ca58543226fd5fe2446769114f4736794e4659d7b46",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_ae8472f8d310_g1.png": {
+    "id": "ae8472f8d310",
+    "filename": "heldout_ae8472f8d310_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_ae8472f8d310_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "159d0323b522ce609c9d777ecf9855ced1dc9660ab7b9558ca462567d8fbe92c",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_3ffa14d60b24_g2.png": {
+    "id": "3ffa14d60b24",
+    "filename": "heldout_3ffa14d60b24_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_3ffa14d60b24_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "c6c27831d3e2c87f48dcae99c9fa270fac75764f0703c811b94ea531a4a06285",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_e037643244b7_g4.png": {
+    "id": "e037643244b7",
+    "filename": "heldout_e037643244b7_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_e037643244b7_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "f0dc55599d64d9638ca44090fe8da5f54c3f9f0401eb869eb39340415c735539",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_77baa08a1345_g2.png": {
+    "id": "77baa08a1345",
+    "filename": "heldout_77baa08a1345_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_77baa08a1345_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "a8d7933831385b98e434102689d4e6d3229b9abd539afab2f0d3d1bd46402aa7",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_13d411c85ffd_g0.png": {
+    "id": "13d411c85ffd",
+    "filename": "heldout_13d411c85ffd_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_13d411c85ffd_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "ce1988956864081757056ca1d26ddc2bba55e0bb8cfcca4d32a349cb83f8fdbe",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_299086c6d1b5_g3.png": {
+    "id": "299086c6d1b5",
+    "filename": "heldout_299086c6d1b5_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_299086c6d1b5_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "c62620321f711e2339d58fc50236e62cb3f9f4a6b9bbc27fc707d41dc428fb7f",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_1c0e5dd1b14c_g2.png": {
+    "id": "1c0e5dd1b14c",
+    "filename": "heldout_1c0e5dd1b14c_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_1c0e5dd1b14c_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "f277f524f89ae3be53c5ea59dbe62e0560d7be3319be9e211e9832903eb1c91a",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_5671eb95512b_g1.png": {
+    "id": "5671eb95512b",
+    "filename": "heldout_5671eb95512b_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_5671eb95512b_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "a407a2fe340f356cea833420c9792071bade883776364cf4afe918541d69d5b7",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_e740af6ac6ea_g4.png": {
+    "id": "e740af6ac6ea",
+    "filename": "heldout_e740af6ac6ea_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_e740af6ac6ea_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "a8ba3be359a2144294bc92e8a255aed07e3f14cf1f6ca41cb443ad189b7f0582",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_b37aae3c8fe1_g4.png": {
+    "id": "b37aae3c8fe1",
+    "filename": "heldout_b37aae3c8fe1_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_b37aae3c8fe1_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "b9108e83a88d701e22ee33e4959e734e83024a8a9d01a9bbb970e0b584993e06",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_259d30f693b6_g1.png": {
+    "id": "259d30f693b6",
+    "filename": "heldout_259d30f693b6_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_259d30f693b6_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "d73649d3ad236a2efd9c57b38e55f1a8f4739b1277d2fce5828ff6c957e8e210",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_ed3ce1674761_g0.png": {
+    "id": "ed3ce1674761",
+    "filename": "heldout_ed3ce1674761_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_ed3ce1674761_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "04d479d052936018b50ed745af0e72f5fe1608cba95807d01f02042299c4a5eb",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_1638404f385c_g4.png": {
+    "id": "1638404f385c",
+    "filename": "heldout_1638404f385c_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_1638404f385c_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "4d5128e6abb5db1539ac2445009b6c86bf75680901f120e579ce760bf740e78a",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_4a693dd3921a_g4.png": {
+    "id": "4a693dd3921a",
+    "filename": "heldout_4a693dd3921a_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_4a693dd3921a_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "1df9bd19ca7a153fa490b02ded0300ca2b8711ca4ee240b74adaa64669a42632",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_76e589911303_g1.png": {
+    "id": "76e589911303",
+    "filename": "heldout_76e589911303_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_76e589911303_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "96b49ffc58d42f3dd2d02617eb5f021e820c8dd906758749a9ce2427147e9698",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_8f2996b8d855_g1.png": {
+    "id": "8f2996b8d855",
+    "filename": "heldout_8f2996b8d855_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_8f2996b8d855_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "75615a42fdb523dc34c68b586b3e707b63abc9a23f1ba7b6c6ded8eb74aa291d",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_f6f3ea0d2693_g4.png": {
+    "id": "f6f3ea0d2693",
+    "filename": "heldout_f6f3ea0d2693_g4.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_f6f3ea0d2693_g4.png",
+    "ground_truth_grade": 4,
+    "is_referable": true,
+    "sha256": "7bac108fe90a91251d91fe2d33eb1198992465a02ea7c975c9d30d5f0a39179f",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_58ccba7eec9c_g1.png": {
+    "id": "58ccba7eec9c",
+    "filename": "heldout_58ccba7eec9c_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_58ccba7eec9c_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "c0a31849300b023fe91e669c0e253ab56989c27f198d2a5697a6df33b8438231",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_7bc2e0fa3f72_g2.png": {
+    "id": "7bc2e0fa3f72",
+    "filename": "heldout_7bc2e0fa3f72_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_7bc2e0fa3f72_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "a38803c6a42caa27417ecc69ec679c9746f01be25043ee43fd5f942783eba942",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_2dd28ac497d2_g0.png": {
+    "id": "2dd28ac497d2",
+    "filename": "heldout_2dd28ac497d2_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_2dd28ac497d2_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "69425199ead22ed81ecf6e1285e69ef1b281b06e04934c9695ee6088071fbe4e",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_0ad7f631dedb_g1.png": {
+    "id": "0ad7f631dedb",
+    "filename": "heldout_0ad7f631dedb_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_0ad7f631dedb_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "45ea514287d1df041a75ef172b92f7a4663930f45ccc10ca026fd1e466821df7",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_33b893e18eb3_g1.png": {
+    "id": "33b893e18eb3",
+    "filename": "heldout_33b893e18eb3_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_33b893e18eb3_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "66b902fde3b6d10acc26c781db9a94262488ce378b5b6ad4a7906e31fd3cf88b",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_21037f5c7790_g0.png": {
+    "id": "21037f5c7790",
+    "filename": "heldout_21037f5c7790_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_21037f5c7790_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "d64c94879356853fc8d569dfc3bb7e82a6e97a9bbdefe0a8c1a15d51484eea56",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_812d5adafaf2_g2.png": {
+    "id": "812d5adafaf2",
+    "filename": "heldout_812d5adafaf2_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_812d5adafaf2_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "a26d93fb5d23cf3e5027161f3296f132bda9f38fe8d6228b699597bea4fa2092",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_383e72af1955_g3.png": {
+    "id": "383e72af1955",
+    "filename": "heldout_383e72af1955_g3.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_383e72af1955_g3.png",
+    "ground_truth_grade": 3,
+    "is_referable": true,
+    "sha256": "a66438e7344a5c84294051552f31df24c378e0e3b3643bbc45240c43893ad49c",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_8ed586c43023_g0.png": {
+    "id": "8ed586c43023",
+    "filename": "heldout_8ed586c43023_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_8ed586c43023_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "796cacb320a00dde634a8a7ff4dc41653deb2972bff97febf87d7a3ce54886e3",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_2cceb07ff706_g2.png": {
+    "id": "2cceb07ff706",
+    "filename": "heldout_2cceb07ff706_g2.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_2cceb07ff706_g2.png",
+    "ground_truth_grade": 2,
+    "is_referable": true,
+    "sha256": "06a237dda3f7bcc8c3eac02bf803288fce05adb726d197abca1721cba64380df",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_763ad1236efe_g0.png": {
+    "id": "763ad1236efe",
+    "filename": "heldout_763ad1236efe_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_763ad1236efe_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "e7811d23557c9aa8e03dad6235742654c439d7c60208016a7793931b982b66a4",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_a75bab2463d4_g1.png": {
+    "id": "a75bab2463d4",
+    "filename": "heldout_a75bab2463d4_g1.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_a75bab2463d4_g1.png",
+    "ground_truth_grade": 1,
+    "is_referable": false,
+    "sha256": "bd6367e7b047b5bb0390c63614498ef1a87498091fde4cb2f3adbf380d88a61e",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  },
+  "heldout_ff1e940105f9_g0.png": {
+    "id": "ff1e940105f9",
+    "filename": "heldout_ff1e940105f9_g0.png",
+    "filepath": "d:\\2nd move from os\\d\\PRO R\\data\\heldout_test\\heldout_ff1e940105f9_g0.png",
+    "ground_truth_grade": 0,
+    "is_referable": false,
+    "sha256": "bd392a9a1dfa8ec174b7900c8283c0a06fb6f6863ff27c315e1253a8eb046e53",
+    "dataset_source": "APTOS-2019-Clinical-Heldout"
+  }
+}

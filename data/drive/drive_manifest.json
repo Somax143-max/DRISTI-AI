@@ -1,0 +1,52 @@
+[
+  {
+    "case_id": "01",
+    "image_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\images\\01_test.tif",
+    "mask_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\1st_manual\\01_manual1.gif"
+  },
+  {
+    "case_id": "02",
+    "image_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\images\\02_test.tif",
+    "mask_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\1st_manual\\02_manual1.gif"
+  },
+  {
+    "case_id": "03",
+    "image_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\images\\03_test.tif",
+    "mask_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\1st_manual\\03_manual1.gif"
+  },
+  {
+    "case_id": "04",
+    "image_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\images\\04_test.tif",
+    "mask_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\1st_manual\\04_manual1.gif"
+  },
+  {
+    "case_id": "05",
+    "image_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\images\\05_test.tif",
+    "mask_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\1st_manual\\05_manual1.gif"
+  },
+  {
+    "case_id": "06",
+    "image_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\images\\06_test.tif",
+    "mask_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\1st_manual\\06_manual1.gif"
+  },
+  {
+    "case_id": "07",
+    "image_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\images\\07_test.tif",
+    "mask_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\1st_manual\\07_manual1.gif"
+  },
+  {
+    "case_id": "08",
+    "image_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\images\\08_test.tif",
+    "mask_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\1st_manual\\08_manual1.gif"
+  },
+  {
+    "case_id": "09",
+    "image_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\images\\09_test.tif",
+    "mask_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\1st_manual\\09_manual1.gif"
+  },
+  {
+    "case_id": "10",
+    "image_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\images\\10_test.tif",
+    "mask_path": "d:\\2nd move from os\\d\\PRO R\\data\\drive\\1st_manual\\10_manual1.gif"
+  }
+]

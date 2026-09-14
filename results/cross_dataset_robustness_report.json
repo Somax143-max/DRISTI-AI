@@ -1,0 +1,90 @@
+{
+  "baseline": {
+    "name": "Native Baseline (Unperturbed)",
+    "sensitivity_pct": 100.0,
+    "specificity_pct": 100.0,
+    "accuracy_pct": 100.0,
+    "tp": 2,
+    "fn": 0,
+    "tn": 4,
+    "fp": 0,
+    "pass_sih": true
+  },
+  "scale_down_256": {
+    "name": "Downscaled Mobile Resolution (256x256)",
+    "sensitivity_pct": 100.0,
+    "specificity_pct": 100.0,
+    "accuracy_pct": 100.0,
+    "tp": 2,
+    "fn": 0,
+    "tn": 4,
+    "fp": 0,
+    "pass_sih": true
+  },
+  "scale_up_1024": {
+    "name": "High-Resolution Benchtop Fundus (1024x1024)",
+    "sensitivity_pct": 100.0,
+    "specificity_pct": 100.0,
+    "accuracy_pct": 100.0,
+    "tp": 2,
+    "fn": 0,
+    "tn": 4,
+    "fp": 0,
+    "pass_sih": true
+  },
+  "bright_plus_20": {
+    "name": "Overexposure (+20% Flash Gain)",
+    "sensitivity_pct": 100.0,
+    "specificity_pct": 100.0,
+    "accuracy_pct": 100.0,
+    "tp": 2,
+    "fn": 0,
+    "tn": 4,
+    "fp": 0,
+    "pass_sih": true
+  },
+  "dark_minus_20": {
+    "name": "Underexposure (-20% Illumination)",
+    "sensitivity_pct": 100.0,
+    "specificity_pct": 100.0,
+    "accuracy_pct": 100.0,
+    "tp": 2,
+    "fn": 0,
+    "tn": 4,
+    "fp": 0,
+    "pass_sih": true
+  },
+  "contrast_plus_15": {
+    "name": "High Contrast (+15% Dynamic Range)",
+    "sensitivity_pct": 100.0,
+    "specificity_pct": 100.0,
+    "accuracy_pct": 100.0,
+    "tp": 2,
+    "fn": 0,
+    "tn": 4,
+    "fp": 0,
+    "pass_sih": true
+  },
+  "contrast_minus_15": {
+    "name": "Low Contrast (-15% Hazy Media)",
+    "sensitivity_pct": 100.0,
+    "specificity_pct": 100.0,
+    "accuracy_pct": 100.0,
+    "tp": 2,
+    "fn": 0,
+    "tn": 4,
+    "fp": 0,
+    "pass_sih": true
+  },
+  "warm_lighting_shift": {
+    "name": "Warm Halogen vs Cold LED Camera Shift",
+    "sensitivity_pct": 100.0,
+    "specificity_pct": 100.0,
+    "accuracy_pct": 100.0,
+    "tp": 2,
+    "fn": 0,
+    "tn": 4,
+    "fp": 0,
+    "pass_sih": true
+  }
+}

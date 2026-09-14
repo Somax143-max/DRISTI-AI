@@ -1,0 +1,121 @@
+﻿// Chunk 2: Remaining Patients, State, Logger, Voice, Queue
+Object.assign(PATIENTS, {
+    'PAT_004_SEVERE': {
+        id: 'PAT_004_SEVERE',
+        name: 'Meena Shinde', age: 64, sex: 'F', duration: '16 Yrs',
+        grade: 3, gradeName: 'LEVEL 3 — SEVERE NPDR',
+        referable: true, refTitle: '🔴 URGENT SPECIALIST REFERRAL',
+        refReason: 'Priority: URGENT | Reason: Meets ICDR 4-2-1 rule (>20 intraretinal hemorrhages in all 4 quadrants)',
+        priority: 1, priorityText: 'Urgent (1-2 Wks)',
+        quality: 'ACCEPTABLE', qClass: 'q-good',
+        focus: 36.4, fov: '82.0%', illum: 'Acceptable (0.41)', glare: '3.4%',
+        guidance: 'Severe lesion burden detected. Image passed quality thresholds.',
+        guidanceClass: 'guidance-ok', guidanceTitle: 'Quality Verified:',
+        mas: 48, hemo: 42, exudates: 26, density: '10.8%', csme: '0.08 DD (Severe DME)',
+        conf: 96.8, qualScore: 84.5, agrScore: 95.1, reliability: 'HIGH',
+        rationale: 'Extensive blot hemorrhages in all 4 quadrants fulfilling the 4-2-1 rule. Definite venous beading and prominent intraretinal microvascular abnormalities (IRMA).'
+    },
+    'PAT_005_PDR': {
+        id: 'PAT_005_PDR',
+        name: 'Anand Rao', age: 67, sex: 'M', duration: '22 Yrs',
+        grade: 4, gradeName: 'LEVEL 4 — PROLIFERATIVE DR',
+        referable: true, refTitle: '🚨 EMERGENCY SPECIALIST REFERRAL',
+        refReason: 'Priority: EMERGENCY | Reason: Neovascularization on disc (NVD/NVE) and preretinal hemorrhage risk',
+        priority: 1, priorityText: 'Emergency (<48h)',
+        quality: 'ACCEPTABLE', qClass: 'q-good',
+        focus: 35.1, fov: '80.5%', illum: 'Uneven (0.39)', glare: '4.1%',
+        guidance: 'Critical pathology detected: Neovascular fronds identified with high confidence.',
+        guidanceClass: 'guidance-ok', guidanceTitle: 'Critical Referral Alert:',
+        mas: 62, hemo: 58, exudates: 34, density: '12.6%', csme: '0.05 DD (Active CSME)',
+        conf: 98.9, qualScore: 81.0, agrScore: 97.4, reliability: 'HIGH',
+        rationale: 'Neovascularization at optic disc (NVD) and elsewhere (NVE). Fibrovascular proliferation with high risk of vitreous hemorrhage and tractional retinal detachment.'
+    },
+    'PAT_006_BLURRED': {
+        id: 'PAT_006_BLURRED',
+        name: 'Kavita Joshi', age: 49, sex: 'F', duration: '5 Yrs',
+        grade: -1, gradeName: 'UNGRADEABLE — DEFECTIVE IMAGE',
+        referable: true, refTitle: '⚠ RECAPTURE REQUIRED (NOT DIAGNOSTIC)',
+        refReason: 'Image failed quality gate: Focus 8.2 (<15.0) & Corneal Glare 24.1% (>15%). Recapture required.',
+        priority: 2, priorityText: 'Recapture Needed',
+        quality: 'UNGRADEABLE', qClass: 'q-bad',
+        focus: 8.2, fov: '58.3%', illum: 'Poor (0.22)', glare: '24.1%',
+        guidance: 'Move camera slightly closer to patient and re-focus. Optic disc is completely obscured by corneal reflection and motion blur.',
+        guidanceClass: 'guidance-recapture', guidanceTitle: 'AI Recapture Feedback:',
+        mas: 'N/A', hemo: 'N/A', exudates: 'N/A', density: 'N/A', csme: 'Ungradeable',
+        conf: 32.0, qualScore: 18.0, agrScore: 25.0, reliability: 'UNRELIABLE',
+        rationale: 'Automated AI classification suspended. Tenengrad focus gradient (8.2) is below clinical diagnostic threshold (15.0). Corneal glare covers 24.1% of macular field.'
+    }
+});
+
+let currentPatientId = 'PAT_003_MODERATE';
+let currentRole = 'clinical';
+let isOnline = true;
+let voiceEnabled = true;
+let splitPercent = 50;
+let isDraggingSplit = false;
+let stopwatchSeconds = 14.8;
+let stopwatchRunning = false;
+let stopwatchInterval = null;
+let pendingSyncCount = 3;
+let customUploadedImg = null;
+
+function logAudit(msg) {
+    const logBox = document.getElementById('auditLog');
+    if (!logBox) return;
+    const now = new Date();
+    const timeStr = String(now.getHours()).padStart(2,'0') + ':' + 
+                    String(now.getMinutes()).padStart(2,'0') + ':' + 
+                    String(now.getSeconds()).padStart(2,'0');
+    const entry = document.createElement('div');
+    entry.innerHTML = `<span style="color:#64748b;">${timeStr}</span> — ${msg}`;
+    logBox.insertBefore(entry, logBox.firstChild);
+}
+
+function toggleVoice() {
+    voiceEnabled = !voiceEnabled;
+    const btn = document.getElementById('btnVoiceToggle');
+    if (btn) {
+        btn.innerHTML = voiceEnabled ? '🔊 Voice: ON' : '🔇 Voice: OFF';
+        btn.style.color = voiceEnabled ? '#34d399' : '#94a3b8';
+    }
+    if (voiceEnabled) speakGuidance("Voice assistance enabled for rural screening.");
+}
+
+function speakGuidance(text) {
+    if (!voiceEnabled || !('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+    window.speechSynthesis.speak(utterance);
+}
+
+function populateQueue() {
+    const list = document.getElementById('queueList');
+    if (!list) return;
+    list.innerHTML = '';
+
+    Object.keys(PATIENTS).forEach(key => {
+        const p = PATIENTS[key];
+        const item = document.createElement('div');
+        item.className = 'queue-item' + (key === currentPatientId ? ' active' : '');
+        item.onclick = () => selectPatient(key);
+
+        let pBadgeClass = 'p-low';
+        if (p.priority === 1) pBadgeClass = 'p-urgent';
+        else if (p.priority === 2) pBadgeClass = 'p-mod';
+        else if (p.priority === 3) pBadgeClass = 'p-mild';
+
+        item.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <b style="font-size:12px; color:#f8fafc;">${p.name}</b>
+                <span class="p-badge ${pBadgeClass}">${p.priorityText}</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:10px; color:#94a3b8; margin-top:2px;">
+                <span>${p.id}</span>
+                <span style="font-weight:700; color:${p.referable ? '#fb7185' : '#34d399'};">${p.grade >= 0 ? 'Grade ' + p.grade : 'Ungradeable'}</span>
+            </div>
+        `;
+        list.appendChild(item);
+    });
+}

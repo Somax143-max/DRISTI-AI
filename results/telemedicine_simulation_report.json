@@ -1,0 +1,43 @@
+{
+  "simulation_parameters": {
+    "annual_patient_target": 100000,
+    "operating_days": 250,
+    "num_phcs": 25,
+    "num_doctors": 2,
+    "daily_target": 400.0
+  },
+  "screening_results": {
+    "total_screened": 100694,
+    "total_gradable": 98174,
+    "retention_rate_pct": 97.5,
+    "dr_cases_detected": 17867,
+    "dr_prevalence_pct": 18.2
+  },
+  "workflow_comparison": {
+    "traditional": {
+      "daily_doctor_capacity": 205.7,
+      "total_data_gb": 575.2,
+      "peak_queue_patients": 46745,
+      "peak_wait_time_days": 227.2,
+      "cost_per_patient_inr": 1850.0,
+      "total_cost_inr": 186283900.0
+    },
+    "drishti_ai": {
+      "daily_doctor_capacity": 1440.0,
+      "total_data_gb": 143.8,
+      "bandwidth_reduction_pct": 75.0,
+      "peak_queue_patients": 0,
+      "peak_wait_time_hours": 0.0,
+      "cost_per_patient_inr": 88.0,
+      "total_cost_inr": 8861072.0
+    }
+  },
+  "health_economics": {
+    "net_savings_crore_inr": 17.74,
+    "net_savings_inr": 177422828.0,
+    "sight_years_preserved": 14025,
+    "qalys_gained": 8695.5,
+    "cost_per_qaly_inr": 1019.0,
+    "who_choice_standard": "Highly Cost-Effective (< 1x GDP per capita)"
+  }
+}
