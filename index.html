@@ -597,6 +597,317 @@
             font-size: 9px;
         }
 
+    
+        /* VIRTUAL RETINAL IMAGE EXPLORER (MODAL & FILE INSPECTOR) */
+        .explorer-window {
+            background: #0B1324;
+            border: 1.5px solid #1E3A8A;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 35px rgba(14, 165, 233, 0.25);
+            border-radius: 12px;
+            width: 980px;
+            max-width: 96vw;
+            height: 650px;
+            max-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            color: #F8FAFC;
+            animation: explorerModalPop 0.18s ease-out;
+        }
+        @keyframes explorerModalPop {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .explorer-header {
+            background: #0F172A;
+            border-bottom: 1px solid #1E293B;
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .explorer-path-chip {
+            background: #0284C7;
+            color: #FFFFFF;
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .explorer-close-btn {
+            background: none;
+            border: none;
+            color: #94A3B8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+        .explorer-close-btn:hover { color: #FFFFFF; }
+        .explorer-toolbar {
+            background: #090E1A;
+            border-bottom: 1px solid #1E293B;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            font-size: 11.5px;
+            flex-wrap: wrap;
+        }
+        .explorer-breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #94A3B8;
+            font-size: 11px;
+        }
+        .crumb-sep { color: #475569; font-size: 10px; }
+        .explorer-search-box {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #111827;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 4px 10px;
+        }
+        .explorer-search-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #F8FAFC;
+            font-size: 11px;
+            width: 170px;
+        }
+        .explorer-filter-pills {
+            background: #0F172A;
+            border-bottom: 1px solid #1E293B;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            overflow-x: auto;
+        }
+        .filter-pill {
+            background: #1E293B;
+            border: 1px solid #334155;
+            color: #CBD5E1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        .filter-pill:hover {
+            background: #334155;
+            color: #FFFFFF;
+        }
+        .filter-pill.active {
+            background: #0284C7;
+            border-color: #38BDF8;
+            color: #FFFFFF;
+            box-shadow: 0 0 10px rgba(2, 132, 199, 0.4);
+        }
+        .filter-pill .dot {
+            width: 8px; height: 8px; border-radius: 50%; display: inline-block;
+        }
+        .explorer-body {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+        .explorer-grid-container {
+            padding: 16px;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+            align-content: start;
+            background: #090E1A;
+        }
+        .sample-card {
+            background: #111827;
+            border: 1.5px solid #1E293B;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+        .sample-card:hover {
+            border-color: #38BDF8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+        }
+        .sample-card.selected {
+            border-color: #38BDF8;
+            box-shadow: 0 0 0 2px #0284C7, 0 4px 20px rgba(2, 132, 199, 0.35);
+            background: #132038;
+        }
+        .sample-card-thumb {
+            position: relative;
+            width: 100%;
+            height: 140px;
+            background: #000000;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sample-card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.25s;
+        }
+        .sample-card:hover .sample-card-thumb img {
+            transform: scale(1.05);
+        }
+        .sample-card-badge {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            font-size: 9.5px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 12px;
+            color: #FFFFFF;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+            letter-spacing: 0.3px;
+        }
+        .sample-card-info {
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .sample-card-title {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #F8FAFC;
+            line-height: 1.3;
+        }
+        .sample-card-path {
+            font-size: 10px;
+            color: #38BDF8;
+            font-family: 'JetBrains Mono', monospace;
+            word-break: break-all;
+        }
+        .sample-card-meta {
+            font-size: 10px;
+            color: #64748B;
+            margin-top: 3px;
+        }
+        .explorer-inspector {
+            background: #0B1324;
+            border-left: 1px solid #1E293B;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+        }
+        .inspector-title {
+            font-size: 10.5px;
+            font-weight: 800;
+            color: #38BDF8;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .inspector-preview-box {
+            width: 100%;
+            height: 175px;
+            background: #000000;
+            border: 1px solid #1E293B;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .inspector-preview-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .inspector-details {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+        .insp-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+        .insp-meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            background: #090E1A;
+            border: 1px solid #1E293B;
+            border-radius: 6px;
+            padding: 8px 10px;
+            font-size: 10.5px;
+            margin-top: 2px;
+        }
+        .insp-meta-item span { color: #64748B; display: block; font-size: 9px; text-transform: uppercase; }
+        .insp-meta-item b { color: #F8FAFC; }
+        .insp-patient-box {
+            background: #0F172A;
+            border: 1px solid #1E3A8A;
+            border-radius: 6px;
+            padding: 8px 10px;
+            margin-top: 2px;
+        }
+        .insp-desc {
+            font-size: 11px;
+            color: #94A3B8;
+            line-height: 1.45;
+            background: #090E1A;
+            border-left: 3px solid #0284C7;
+            padding: 8px 10px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 2px;
+        }
+        .insp-load-btn {
+            background: linear-gradient(135deg, #0284C7, #06B6D4);
+            border: none;
+            color: #FFFFFF;
+            font-weight: 800;
+            font-size: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+            transition: all 0.15s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .insp-load-btn:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
+        }
+        .insp-load-btn:active {
+            transform: translateY(0);
+        }
+
     </style>
 </head>
 <body>
@@ -635,6 +946,7 @@
                 <div class="pulse-dot" id="pulseDot"></div>
                 <span id="netText">Online: 2.4 Mbps (PHC Uplink)</span>
             </div>
+            <button class="btn-act" id="btnOpenExplorer" style="background:#0284C7; color:#FFFFFF; font-size:11px; font-weight:700; border:none;" onclick="openVirtualExplorerModal()" title="Browse Predefined Retinal Stages (Grades 0-4 and Rejection Tests)">?? Virtual Explorer</button>
             <button class="btn-act" style="background:var(--healthy-green); color:#FFFFFF; font-size:11px; font-weight:700;" onclick="openPatientInputModal(false)">+ New Patient</button>
             <button class="btn-act" style="background:var(--primary-blue); color:#FFFFFF; font-size:11px;" onclick="openReportModal()">View Report</button>
         </div>
@@ -668,6 +980,8 @@
 
             <!-- LIVE FILE UPLOAD / DRAG-AND-DROP DROPZONE -->
             <div>
+                <button class="btn-act" style="width:100%; justify-content:center; background:#EFF4FA; color:var(--primary-blue); border:1px solid #BFD3E6; padding:8px 12px; font-size:11px; font-weight:700; margin-bottom:10px; border-radius:6px;" onclick="openVirtualExplorerModal()">?? Browse Predefined Sample Retinas</button>
+            
                 <div class="section-header">
                     <span>Analyze Custom Retina</span>
                     <span style="font-size: 9.5px; color: #10b981;">Real-Time</span>
@@ -797,7 +1111,8 @@
                     <!-- REAL-TIME PARAMETER & LESION CONTROL TOOLBAR -->
                     <div class="live-control-toolbar" style="margin-top:8px;">
                         <div class="ctrl-item">
-                            <span>CLAHE Clip Limit:</span>
+                            <button class="btn-act" style="background:#FFFFFF; border:1px solid var(--card-border); color:var(--primary-blue); font-size:10.5px; padding:3px 8px; border-radius:5px;" onclick="openVirtualExplorerModal()" title="Select standard clinical fundus cases">?? Choose Sample Stage</button>
+                        <span>CLAHE Clip:</span>
                             <input type="range" id="sliderClip" min="0.01" max="0.05" step="0.005" value="0.02" oninput="updateRealtimeCanvas()">
                             <span id="valClip" style="color:var(--ai-cyan);">0.020</span>
                         </div>
@@ -3252,6 +3567,408 @@ window.addEventListener('keydown', function(e) {
         selectPatient('PAT_006_BLURRED');
     }
 });
+
+// ==========================================
+// VIRTUAL RETINAL IMAGE EXPLORER ENGINE
+// ==========================================
+let SAMPLE_IMAGES = [
+  {
+    "id": "sample_grade0",
+    "filename": "01_normal_retina_grade0.png",
+    "path": "/sample_images/01_normal_retina_grade0.png",
+    "title": "Normal Healthy Retina",
+    "grade": 0,
+    "grade_label": "Grade 0 - Normal",
+    "badge_color": "#16A34A",
+    "category": "grade0",
+    "referable": false,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 51,
+    "format": "PNG Image",
+    "description": "Clear optic disc margin, healthy macula without foveal thickening. Absence of microaneurysms, hemorrhages, or exudates. Routine annual screening recommended.",
+    "patient": {
+      "name": "Rajesh Patil",
+      "age": 48,
+      "gender": "Male",
+      "dm_duration": "3 Yrs",
+      "hba1c": "6.2%",
+      "bp": "120/80",
+      "eye": "OD (Right)"
+    }
+  },
+  {
+    "id": "sample_grade1",
+    "filename": "02_mild_npdr_grade1.png",
+    "path": "/sample_images/02_mild_npdr_grade1.png",
+    "title": "Mild NPDR Fundus",
+    "grade": 1,
+    "grade_label": "Grade 1 - Mild NPDR",
+    "badge_color": "#EAB308",
+    "category": "grade1",
+    "referable": false,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 51,
+    "format": "PNG Image",
+    "description": "Isolated microaneurysms detected in temporal macular arcade. No retinal hemorrhages or hard exudates present. Non-referable early stage; 6-12 month follow-up advised.",
+    "patient": {
+      "name": "Sunita Deshmukh",
+      "age": 55,
+      "gender": "Female",
+      "dm_duration": "6 Yrs",
+      "hba1c": "7.4%",
+      "bp": "130/85",
+      "eye": "OS (Left)"
+    }
+  },
+  {
+    "id": "sample_grade2",
+    "filename": "03_moderate_npdr_grade2.png",
+    "path": "/sample_images/03_moderate_npdr_grade2.png",
+    "title": "Moderate NPDR & CSME Risk",
+    "grade": 2,
+    "grade_label": "Grade 2 - Moderate NPDR",
+    "badge_color": "#F97316",
+    "category": "grade2",
+    "referable": true,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 46,
+    "format": "PNG Image",
+    "description": "Multiple intraretinal microaneurysms (>15) and blot hemorrhages across 2 quadrants. Hard exudates localized near foveal zone (CSME risk). Refer to specialist within 2-4 weeks.",
+    "patient": {
+      "name": "Ganesh Kulkarni",
+      "age": 58,
+      "gender": "Male",
+      "dm_duration": "11 Yrs",
+      "hba1c": "8.4%",
+      "bp": "142/88",
+      "eye": "OD (Right)"
+    }
+  },
+  {
+    "id": "sample_grade3",
+    "filename": "04_severe_npdr_grade3.png",
+    "path": "/sample_images/04_severe_npdr_grade3.png",
+    "title": "Severe NPDR 4-Quadrant",
+    "grade": 3,
+    "grade_label": "Grade 3 - Severe NPDR",
+    "badge_color": "#DC2626",
+    "category": "grade3",
+    "referable": true,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 51,
+    "format": "PNG Image",
+    "description": "Meets 4:2:1 international criteria: extensive intraretinal hemorrhages in all 4 quadrants with venous beading in 2+ quadrants. High risk of progression to proliferative stage. Urgent referral.",
+    "patient": {
+      "name": "Ananya Sen",
+      "age": 62,
+      "gender": "Female",
+      "dm_duration": "15 Yrs",
+      "hba1c": "9.8%",
+      "bp": "158/94",
+      "eye": "OD (Right)"
+    }
+  },
+  {
+    "id": "sample_grade4",
+    "filename": "05_pdr_grade4.png",
+    "path": "/sample_images/05_pdr_grade4.png",
+    "title": "Proliferative DR (PDR)",
+    "grade": 4,
+    "grade_label": "Grade 4 - PDR",
+    "badge_color": "#991B1B",
+    "category": "grade4",
+    "referable": true,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 39,
+    "format": "PNG Image",
+    "description": "Active neovascularization of the optic disc (NVD) and retina (NVE) with fibrous proliferation. Immediate vitreoretinal surgical / panretinal photocoagulation (PRP) referral.",
+    "patient": {
+      "name": "Mohammed Farooq",
+      "age": 66,
+      "gender": "Male",
+      "dm_duration": "19 Yrs",
+      "hba1c": "11.1%",
+      "bp": "165/100",
+      "eye": "OS (Left)"
+    }
+  },
+  {
+    "id": "sample_rejection_face",
+    "filename": "06_rejection_face.png",
+    "path": "/sample_images/06_rejection_face.png",
+    "title": "Non-Retina / Face Rejection",
+    "grade": -1,
+    "grade_label": "Rejection - Non-Retina",
+    "badge_color": "#64748B",
+    "category": "rejection",
+    "referable": false,
+    "width": 512,
+    "height": 512,
+    "dimensions": "512 x 512 px",
+    "size_kb": 283,
+    "format": "PNG Image",
+    "description": "Test case demonstrating the Smart Quality Gate rejecting non-retinal imagery (face selfie / portrait). Quality Gate triggers automatic rejection and instructs user to acquire a valid fundus image.",
+    "patient": {
+      "name": "Test Subject (Non-Fundus)",
+      "age": 22,
+      "gender": "Male",
+      "dm_duration": "N/A",
+      "hba1c": "N/A",
+      "bp": "N/A",
+      "eye": "N/A"
+    }
+  },
+  {
+    "id": "sample_rejection_diagram",
+    "filename": "07_rejection_diagram.png",
+    "path": "/sample_images/07_rejection_diagram.png",
+    "title": "Diagram / Text Rejection",
+    "grade": -1,
+    "grade_label": "Rejection - Graphic/Text",
+    "badge_color": "#64748B",
+    "category": "rejection",
+    "referable": false,
+    "width": 512,
+    "height": 512,
+    "dimensions": "512 x 512 px",
+    "size_kb": 320,
+    "format": "PNG Image",
+    "description": "Test case demonstrating edge verification rejecting schematic diagrams and medical charts. Confirms system cannot be fooled by medical illustrations or screenshots.",
+    "patient": {
+      "name": "Test Subject (Infographic)",
+      "age": "N/A",
+      "gender": "N/A",
+      "dm_duration": "N/A",
+      "hba1c": "N/A",
+      "bp": "N/A",
+      "eye": "N/A"
+    }
+  }
+];
+let currentSelectedSample = null;
+let currentSampleFilter = 'all';
+
+async function initVirtualExplorer() {
+    try {
+        const res = await fetch('/api/sample-images');
+        if (res.ok) {
+            const data = await res.json();
+            if (data && data.length > 0) {
+                SAMPLE_IMAGES = data;
+            }
+        }
+    } catch (e) {
+        console.warn('Using embedded sample images fallback:', e);
+    }
+    renderSampleGrid();
+}
+
+function openVirtualExplorerModal() {
+    initVirtualExplorer();
+    const m = document.getElementById('virtualExplorerModal');
+    if (m) {
+        m.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeVirtualExplorerModal(e) {
+    if (e && e.target !== document.getElementById('virtualExplorerModal') && !e.target.classList.contains('explorer-close-btn')) return;
+    const m = document.getElementById('virtualExplorerModal');
+    if (m) {
+        m.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function setSampleFilter(cat, btn) {
+    currentSampleFilter = cat;
+    document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    renderSampleGrid();
+}
+
+function filterSampleImages() {
+    renderSampleGrid();
+}
+
+function renderSampleGrid() {
+    const grid = document.getElementById('explorerGrid');
+    if (!grid) return;
+    const searchInput = document.getElementById('explorerSearchInput');
+    const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+
+    const filtered = SAMPLE_IMAGES.filter(s => {
+        const matchesCat = (currentSampleFilter === 'all') || (s.category === currentSampleFilter);
+        const matchesQuery = !query || 
+            s.title.toLowerCase().includes(query) || 
+            s.filename.toLowerCase().includes(query) || 
+            s.grade_label.toLowerCase().includes(query);
+        return matchesCat && matchesQuery;
+    });
+
+    const countEl = document.getElementById('explorerFileCount');
+    if (countEl) countEl.innerText = `${filtered.length} files in /sample-images/`;
+
+    grid.innerHTML = '';
+    if (filtered.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; padding: 40px; text-align: center; color: #64748B;">No sample retinal images match this search or filter.</div>';
+        return;
+    }
+
+    filtered.forEach((sample, idx) => {
+        const isSelected = currentSelectedSample ? (currentSelectedSample.id === sample.id) : (idx === 0);
+        if (isSelected && !currentSelectedSample) {
+            currentSelectedSample = sample;
+        }
+
+        const card = document.createElement('div');
+        card.className = `sample-card ${isSelected ? 'selected' : ''}`;
+        card.onclick = () => selectSampleCard(sample, card);
+        card.innerHTML = `
+            <div class="sample-card-thumb">
+                <img src="${sample.path}" alt="${sample.title}" onerror="this.src='/sample_real_fundus.png'">
+                <span class="sample-card-badge" style="background:${sample.badge_color};">${sample.grade_label}</span>
+            </div>
+            <div class="sample-card-info">
+                <div class="sample-card-title">${sample.title}</div>
+                <div class="sample-card-path">${sample.path}</div>
+                <div class="sample-card-meta">${sample.dimensions} ? ${sample.size_kb} KB</div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+
+    if (currentSelectedSample) {
+        updateInspectionPanel(currentSelectedSample);
+    }
+}
+
+function selectSampleCard(sample, cardEl) {
+    currentSelectedSample = sample;
+    document.querySelectorAll('.sample-card').forEach(c => c.classList.remove('selected'));
+    if (cardEl) cardEl.classList.add('selected');
+    updateInspectionPanel(sample);
+}
+
+function updateInspectionPanel(s) {
+    if (!s) return;
+    const imgEl = document.getElementById('inspImg');
+    if (imgEl) imgEl.src = s.path;
+
+    const titleEl = document.getElementById('inspTitle');
+    if (titleEl) titleEl.innerText = s.title;
+
+    const pathEl = document.getElementById('inspPath');
+    if (pathEl) pathEl.innerText = s.path;
+
+    const badgeEl = document.getElementById('inspBadge');
+    if (badgeEl) {
+        badgeEl.innerText = s.grade_label;
+        badgeEl.style.background = s.badge_color;
+    }
+
+    const dimEl = document.getElementById('inspDim');
+    if (dimEl) dimEl.innerText = s.dimensions;
+
+    const sizeEl = document.getElementById('inspSize');
+    if (sizeEl) sizeEl.innerText = `${s.size_kb} KB`;
+
+    const formatEl = document.getElementById('inspFormat');
+    if (formatEl) formatEl.innerText = s.format;
+
+    const refEl = document.getElementById('inspReferable');
+    if (refEl) {
+        refEl.innerText = s.referable ? 'YES (REFER TO SPECIALIST)' : 'NO (ROUTINE)';
+        refEl.style.color = s.referable ? '#DC2626' : '#16A34A';
+    }
+
+    const descEl = document.getElementById('inspDesc');
+    if (descEl) descEl.innerText = s.description;
+
+    const pBox = document.getElementById('inspPatientBox');
+    if (pBox && s.patient) {
+        pBox.style.display = 'block';
+        document.getElementById('inspPatientName').innerText = `${s.patient.name} (${s.patient.age}y, ${s.patient.gender})`;
+        document.getElementById('inspPatientMeta').innerText = `DM: ${s.patient.dm_duration} | HbA1c: ${s.patient.hba1c} | BP: ${s.patient.bp} | Eye: ${s.patient.eye}`;
+    } else if (pBox) {
+        pBox.style.display = 'none';
+    }
+}
+
+function executeLoadSelectedSample() {
+    if (!currentSelectedSample) return;
+    loadSampleImageForAnalysis(currentSelectedSample);
+}
+
+function loadSampleImageForAnalysis(sample) {
+    const modal = document.getElementById('virtualExplorerModal');
+    if (modal) modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+
+    logAudit(`Virtual Explorer: Loading <b>${sample.title}</b> (${sample.filename})...`);
+
+    // Switch to clinical mode
+    if (typeof setRole === 'function') {
+        setRole('clinical');
+    }
+
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = function() {
+        // Generate base64 representation
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = img.naturalWidth || 512;
+        tempCanvas.height = img.naturalHeight || 512;
+        const ctx = tempCanvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const base64Data = tempCanvas.toDataURL('image/png');
+
+        // Update demographics
+        if (sample.patient) {
+            if (document.getElementById('hdrPatName')) document.getElementById('hdrPatName').innerText = sample.patient.name;
+            if (document.getElementById('hdrPatMeta')) {
+                document.getElementById('hdrPatMeta').innerText = `Age: ${sample.patient.age} | ${sample.patient.gender} | DM: ${sample.patient.dm_duration} | HbA1c: ${sample.patient.hba1c} | BP: ${sample.patient.bp} | Eye: ${sample.patient.eye}`;
+            }
+            if (document.getElementById('hdrPatId')) {
+                document.getElementById('hdrPatId').innerText = `SAMPLE_${sample.category.toUpperCase()}`;
+            }
+            if (document.getElementById('inpName')) document.getElementById('inpName').value = sample.patient.name;
+            if (document.getElementById('inpAge')) document.getElementById('inpAge').value = sample.patient.age;
+            if (document.getElementById('inpGender')) document.getElementById('inpGender').value = sample.patient.gender;
+            if (document.getElementById('inpHbA1c')) document.getElementById('inpHbA1c').value = parseFloat(sample.patient.hba1c) || 7.5;
+            if (document.getElementById('inpDuration')) document.getElementById('inpDuration').value = parseInt(sample.patient.dm_duration) || 5;
+        }
+
+        customUploadedImg = img;
+        processRealEyeVerificationAndAnalysis(img, sample.filename, base64Data);
+    };
+    img.src = sample.path;
+}
+
+// Keyboard shortcut 'E' for Explorer
+window.addEventListener('keydown', function(e) {
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) return;
+    if (e.key === 'e' || e.key === 'E') {
+        const m = document.getElementById('virtualExplorerModal');
+        if (m && m.style.display === 'flex') {
+            closeVirtualExplorerModal();
+        } else {
+            openVirtualExplorerModal();
+        }
+    }
+});
+
 </script>
 
     <!-- RAPID SCREENING HOTKEYS MODAL -->
@@ -3325,6 +4042,98 @@ window.addEventListener('keydown', function(e) {
             </div>
             <div style="display:flex; justify-content:flex-end; margin-top:18px;">
                 <button class="btn-act" onclick="closeHotkeysModal()" style="background:var(--primary-blue); color:#FFFFFF; padding:8px 18px; font-weight:700;">Got It (Esc)</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- VIRTUAL RETINAL IMAGE EXPLORER MODAL -->
+    <div class="modal" id="virtualExplorerModal" onclick="closeVirtualExplorerModal(event)" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); backdrop-filter:blur(5px); z-index:9999; align-items:center; justify-content:center;">
+        <div class="explorer-window" onclick="event.stopPropagation()">
+            <!-- Explorer Title Bar -->
+            <div class="explorer-header">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:18px;">??</span>
+                    <h3 style="font-size:16px; font-weight:800; color:#FFFFFF; margin:0;">Virtual Retinal Image Explorer</h3>
+                    <span class="explorer-path-chip">/sample-images/</span>
+                </div>
+                <button class="explorer-close-btn" onclick="closeVirtualExplorerModal()">&times;</button>
+            </div>
+
+            <!-- Breadcrumb & Search Bar -->
+            <div class="explorer-toolbar">
+                <div class="explorer-breadcrumbs">
+                    <span>?? System Root</span>
+                    <span class="crumb-sep">&gt;</span>
+                    <span>?? project</span>
+                    <span class="crumb-sep">&gt;</span>
+                    <b style="color:#38BDF8;">/sample-images/</b>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px; flex:1; justify-content:flex-end;">
+                    <div class="explorer-search-box">
+                        <span style="color:#64748B;">??</span>
+                        <input type="text" id="explorerSearchInput" placeholder="Search sample files..." oninput="filterSampleImages()">
+                    </div>
+                    <div style="font-size:11px; color:#94A3B8; font-family:'JetBrains Mono',monospace;" id="explorerFileCount">7 files in /sample-images/</div>
+                </div>
+            </div>
+
+            <!-- Filter Category Tabs -->
+            <div class="explorer-filter-pills">
+                <button class="filter-pill active" onclick="setSampleFilter('all', this)">All Files (7)</button>
+                <button class="filter-pill" onclick="setSampleFilter('grade0', this)"><span class="dot" style="background:#16A34A;"></span> Grade 0 Normal</button>
+                <button class="filter-pill" onclick="setSampleFilter('grade1', this)"><span class="dot" style="background:#EAB308;"></span> Grade 1 Mild</button>
+                <button class="filter-pill" onclick="setSampleFilter('grade2', this)"><span class="dot" style="background:#F97316;"></span> Grade 2 Moderate</button>
+                <button class="filter-pill" onclick="setSampleFilter('grade3', this)"><span class="dot" style="background:#DC2626;"></span> Grade 3 Severe</button>
+                <button class="filter-pill" onclick="setSampleFilter('grade4', this)"><span class="dot" style="background:#991B1B;"></span> Grade 4 PDR</button>
+                <button class="filter-pill" onclick="setSampleFilter('rejection', this)"><span style="color:#EF4444; font-weight:bold;">&times;</span> Rejection Test</button>
+            </div>
+
+            <!-- Explorer Content Body: Left Grid + Right Inspection Panel -->
+            <div class="explorer-body">
+                <!-- Left Scrollable Grid -->
+                <div class="explorer-grid-container" id="explorerGrid">
+                    <!-- Sample cards dynamically injected here -->
+                </div>
+
+                <!-- Right File Inspection Panel -->
+                <div class="explorer-inspector">
+                    <div class="inspector-title">FILE INSPECTION PANEL</div>
+                    
+                    <div class="inspector-preview-box">
+                        <img id="inspImg" src="/sample_images/01_normal_retina_grade0.png" alt="Selected sample fundus">
+                    </div>
+
+                    <div class="inspector-details">
+                        <div style="font-size:14px; font-weight:800; color:#FFFFFF;" id="inspTitle">Normal Healthy Retina</div>
+                        <div style="font-size:10.5px; color:#38BDF8; font-family:'JetBrains Mono',monospace; word-break:break-all; margin-top:2px;" id="inspPath">/sample-images/01_normal_retina_grade0.png</div>
+                        
+                        <div style="margin-top:6px;">
+                            <span class="insp-badge" id="inspBadge" style="background:#16A34A; color:#FFFFFF;">Grade 0 - Normal</span>
+                        </div>
+
+                        <div class="insp-meta-grid">
+                            <div class="insp-meta-item"><span>Dimensions:</span> <b id="inspDim">224 ? 224 px</b></div>
+                            <div class="insp-meta-item"><span>File Size:</span> <b id="inspSize">51 KB</b></div>
+                            <div class="insp-meta-item"><span>Format:</span> <b id="inspFormat">PNG Image</b></div>
+                            <div class="insp-meta-item"><span>Referable:</span> <b id="inspReferable" style="color:#16A34A;">NO</b></div>
+                        </div>
+
+                        <div class="insp-patient-box" id="inspPatientBox">
+                            <div style="font-size:9.5px; font-weight:700; color:#94A3B8; text-transform:uppercase;">Associated Patient Profile:</div>
+                            <div style="font-size:11.5px; font-weight:700; color:#F8FAFC; margin-top:2px;" id="inspPatientName">Rajesh Patil (48y, Male)</div>
+                            <div style="font-size:10px; color:#CBD5E1;" id="inspPatientMeta">DM: 3 Yrs | HbA1c: 6.2% | BP: 120/80 | OD</div>
+                        </div>
+
+                        <div class="insp-desc" id="inspDesc">
+                            Clear optic disc margin, healthy macula without foveal thickening. Absence of microaneurysms, hemorrhages, or exudates. Routine annual screening recommended.
+                        </div>
+                    </div>
+
+                    <button class="insp-load-btn" onclick="executeLoadSelectedSample()">
+                        <span>? SELECT & LOAD FILE FOR ANALYSIS</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
