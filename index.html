@@ -42,7 +42,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
         }
         .brand { display: flex; align-items: center; gap: 12px; }
         .brand-logo {
@@ -574,10 +574,10 @@
                 <button class="lang-btn" id="langTE" onclick="setLanguage('te')" title="తెలుగు (Telugu)">TE</button>
             </div>
             <!-- HIGH CONTRAST TOGGLE -->
-            <button class="btn-act" id="btnContrastToggle" style="background:#1e293b; color:#fbbf24; font-size:11px;" onclick="toggleHighContrast()" title="Toggle Clinical High Contrast / Reading Room Mode (H)">🌓 Contrast</button>
+            <button class="btn-act" id="btnContrastToggle" style="background:#f1f5f9; color:#fbbf24; font-size:11px;" onclick="toggleHighContrast()" title="Toggle Clinical High Contrast / Reading Room Mode (H)">🌓 Contrast</button>
             <!-- HOTKEYS HELP -->
-            <button class="btn-act" id="btnHotkeysHelp" style="background:#1e293b; color:#94a3b8; font-size:11px;" onclick="openHotkeysModal()" title="Rapid Screening Keyboard Shortcuts (?)">⌨️ Hotkeys</button>
-<button class="btn-act" id="btnVoiceToggle" style="background:#1e293b; color:#38bdf8; font-size:11px;" onclick="toggleVoice()">🔊 Voice: ON</button>
+            <button class="btn-act" id="btnHotkeysHelp" style="background:#f1f5f9; color:#475569; font-size:11px;" onclick="openHotkeysModal()" title="Rapid Screening Keyboard Shortcuts (?)">⌨️ Hotkeys</button>
+<button class="btn-act" id="btnVoiceToggle" style="background:#f1f5f9; color:#38bdf8; font-size:11px;" onclick="toggleVoice()">🔊 Voice: ON</button>
             <!-- NETWORK STATUS -->
             <div class="net-badge" id="netBadge" onclick="toggleNetwork()">
                 <div class="pulse-dot" id="pulseDot"></div>
@@ -608,7 +608,7 @@
                 </div>
                 <div class="dropzone" id="fileDropzone" onclick="document.getElementById('fileInput').click()">
                     <span style="font-size: 20px;">📤</span>
-                    <div style="font-size: 11.5px; font-weight:700; color:#cbd5e1; margin-top:4px;">Drop Any Fundus Image</div>
+                    <div style="font-size: 11.5px; font-weight:700; color:#334155; margin-top:4px;">Drop Any Fundus Image</div>
                     <div style="font-size: 9.5px; color:#64748b;">or click to browse local files (JPG/PNG)</div>
                     <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileUpload(event)">
                 </div>
@@ -622,7 +622,7 @@
                     <span style="color:#34d399;">9 Synced</span>
                 </div>
                 <button class="btn-act" style="width:100%; justify-content:center; background:#0284c7; color:white; padding:6px; font-size:10.5px;" onclick="syncOfflineQueue()">🔄 SYNC WHEN CONNECTED</button>
-                <div id="syncProg" style="height:3px; background:#1e293b; border-radius:2px; margin-top:6px; display:none; overflow:hidden;">
+                <div id="syncProg" style="height:3px; background:#f1f5f9; border-radius:2px; margin-top:6px; display:none; overflow:hidden;">
                     <div style="width:100%; height:100%; background:#10b981; animation:syncMove 1s infinite linear;"></div>
                 </div>
             </div>
@@ -632,14 +632,14 @@
         <div class="content">
             <!-- ROLE 1: FIELD MODE (ASHA) -->
             <div id="view-field" style="display: none; flex-direction: column; gap: 16px;">
-                <div style="background:#131d33; border:1px solid #1e293b; border-radius:12px; padding:20px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:14px;">
+                <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; padding:20px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:14px;">
                     <h2 style="font-size: 20px; font-weight:800; color:#38bdf8;">📱 DRISHTI AI MOBILE SCREENING (FIELD MODE)</h2>
-                    <p style="color:#94a3b8; font-size:12.5px; max-width:540px;">Simplified automated screening for rural Primary Health Centre workers using portable handheld cameras.</p>
+                    <p style="color:#475569; font-size:12.5px; max-width:540px;">Simplified automated screening for rural Primary Health Centre workers using portable handheld cameras.</p>
                     
                     <button class="btn-act" style="background:#0284c7; color:white; padding:12px 24px; font-size:13.5px;" onclick="simulateFieldCapture()">📷 [ CAPTURE / ACQUIRE RETINA ]</button>
                     <button class="btn-act" style="background:#059669; color:white; padding:10px 18px; font-size:12.5px; font-weight:700;" onclick="openPatientInputModal(false)">📝 [ ENTER / EDIT PATIENT CLINICAL DATA ]</button>
 
-                    <div style="background:#0b1120; border:1px solid #1e293b; border-radius:10px; padding:16px; width:100%; max-width:480px; text-align:left; display:flex; flex-direction:column; gap:8px;">
+                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:16px; width:100%; max-width:480px; text-align:left; display:flex; flex-direction:column; gap:8px;">
                         <div style="font-size:11px; color:#64748b; font-weight:700;">STEP 1: EDGE QUALITY ASSESSMENT</div>
                         <div style="font-size:15px; font-weight:800; color:#34d399;" id="fieldQStatus">🟢 IMAGE QUALITY: GOOD</div>
                         
@@ -647,7 +647,7 @@
                         <button class="btn-act" style="background:#10b981; color:white; justify-content:center; padding:10px;" onclick="runFieldAI()">⚡ [ RUN AI SCREENING ]</button>
                         
                         <div style="font-size:11px; color:#64748b; font-weight:700; margin-top:6px;">STEP 3: ACTIONABLE FIELD RESULT</div>
-                        <div id="fieldResultBox" style="background:#1e293b; padding:10px; border-radius:7px; font-weight:800; font-size:14px; color:#fbbf24;">
+                        <div id="fieldResultBox" style="background:#f1f5f9; padding:10px; border-radius:7px; font-weight:800; font-size:14px; color:#fbbf24;">
                             ⚠ SPECIALIST REVIEW RECOMMENDED (Moderate NPDR)
                         </div>
                         <button class="btn-act" style="background:#3b82f6; color:white; justify-content:center; padding:10px; margin-top:4px;" onclick="sendToHub()">📤 [ SEND TO DISTRICT TELE-HUB ]</button>
@@ -660,12 +660,12 @@
                 <!-- ACTIVE PATIENT DEMOGRAPHICS & QUICK EDIT BAR -->
                 <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
                     <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-                        <div style="font-size:14px; font-weight:800; color:#f8fafc;" id="hdrPatName">Ganesh Kulkarni</div>
-                        <div style="font-size:11px; font-family:'JetBrains Mono'; color:#38bdf8; background:#0d1527; padding:2px 8px; border-radius:4px; border:1px solid #1e293b;" id="hdrPatId">PAT_003_MODERATE</div>
-                        <div style="font-size:11.5px; color:#94a3b8;" id="hdrPatMeta">Age: 58 | Male | DM: 11 Yrs | HbA1c: 8.4% | BP: 142/88 | Eye: OD (Right) | BCVA: 6/18</div>
+                        <div style="font-size:14px; font-weight:800; color:#0f172a;" id="hdrPatName">Ganesh Kulkarni</div>
+                        <div style="font-size:11px; font-family:'JetBrains Mono'; color:#38bdf8; background:#f1f5f9; padding:2px 8px; border-radius:4px; border:1px solid #e2e8f0;" id="hdrPatId">PAT_003_MODERATE</div>
+                        <div style="font-size:11.5px; color:#475569;" id="hdrPatMeta">Age: 58 | Male | DM: 11 Yrs | HbA1c: 8.4% | BP: 142/88 | Eye: OD (Right) | BCVA: 6/18</div>
                     </div>
                     <div style="display:flex; gap:6px;">
-                        <button class="btn-act" style="background:#1e293b; color:#cbd5e1; padding:5px 10px; font-size:10.5px;" onclick="openPatientInputModal(true)">✏️ Edit Clinical Data</button>
+                        <button class="btn-act" style="background:#f1f5f9; color:#334155; padding:5px 10px; font-size:10.5px;" onclick="openPatientInputModal(true)">✏️ Edit Clinical Data</button>
                         <button class="btn-act" style="background:#059669; color:white; padding:5px 10px; font-size:10.5px;" onclick="openPatientInputModal(false)">➕ Input Patient Data</button>
                     </div>
                 </div>
@@ -705,7 +705,7 @@
                         <div class="ref-sub" id="refReason">Priority: HIGH | Reason: Level 2 Moderate NPDR + High DME Risk near foveal zone</div>
                     </div>
                     <div style="text-align:right;">
-                        <div style="font-size:10.5px; color:#cbd5e1; text-transform:uppercase;">ICDR Severity Staging</div>
+                        <div style="font-size:10.5px; color:#334155; text-transform:uppercase;">ICDR Severity Staging</div>
                         <div style="font-size:18px; font-weight:800; color:white;" id="icdrGrade">LEVEL 2 — MODERATE NPDR</div>
                         <div style="font-size:12px; font-weight:700; color:#38bdf8; margin-top:2px;" id="drDamagePercent">Retinopathy Damage: 48.5%</div>
                     </div>
@@ -742,7 +742,7 @@
                         </div>
                                                 <div class="ctrl-item">
                             <span>Grad-CAM Mode:</span>
-                            <button class="btn-act" id="btnGradcamToggle" onclick="toggleGradcamMode()" style="background:#0f172a; border:1px solid #06b6d4; color:#38bdf8; font-size:10.5px; padding:3px 8px; border-radius:6px;" title="Cycle Grad-CAM++ (Second Order) / Standard / Off (G)">🔥 Grad-CAM++ (2nd Order)</button>
+                            <button class="btn-act" id="btnGradcamToggle" onclick="toggleGradcamMode()" style="background:#ffffff; border:1px solid #06b6d4; color:#38bdf8; font-size:10.5px; padding:3px 8px; border-radius:6px;" title="Cycle Grad-CAM++ (Second Order) / Standard / Off (G)">🔥 Grad-CAM++ (2nd Order)</button>
                         </div>
 <div class="ctrl-item">
                             <span>Grad-CAM Heatmap:</span>
@@ -768,7 +768,7 @@
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
                     <div class="quality-card">
                         <div style="font-size:11px; font-weight:800; color:#64748b; text-transform:uppercase;">6. EVIDENCE-TO-DECISION CORRELATION</div>
-                        <div style="font-size:12px; color:#cbd5e1; line-height:1.5; margin-top:4px;" id="evidenceNarrative">
+                        <div style="font-size:12px; color:#334155; line-height:1.5; margin-top:4px;" id="evidenceNarrative">
                             ✓ Microaneurysms detected with sub-pixel parabolic peak interpolation<br>
                             ✓ Hard exudates localized near foveal center (CSME positive)<br>
                             ✓ Grad-CAM attention hotspots precisely align with hemorrhagic clusters
@@ -789,7 +789,7 @@
                                 <span>Model Confidence (Temperature Scaled):</span>
                                 <b id="lblRelConf" style="color:#06b6d4;">91.5%</b>
                             </div>
-                            <div style="width:100%; height:5px; background:#0b1120; border-radius:3px; overflow:hidden;">
+                            <div style="width:100%; height:5px; background:#f8fafc; border-radius:3px; overflow:hidden;">
                                 <div id="barRelConf" style="width:91.5%; height:100%; background:#06b6d4;"></div>
                             </div>
 
@@ -797,7 +797,7 @@
                                 <span>Image Quality Factor:</span>
                                 <b id="lblRelQual" style="color:#10b981;">88.0%</b>
                             </div>
-                            <div style="width:100%; height:5px; background:#0b1120; border-radius:3px; overflow:hidden;">
+                            <div style="width:100%; height:5px; background:#f8fafc; border-radius:3px; overflow:hidden;">
                                 <div id="barRelQual" style="width:88.0%; height:100%; background:#10b981;"></div>
                             </div>
 
@@ -805,7 +805,7 @@
                                 <span>Explanation Agreement:</span>
                                 <b id="lblRelAgr" style="color:#8b5cf6;">92.0%</b>
                             </div>
-                            <div style="width:100%; height:5px; background:#0b1120; border-radius:3px; overflow:hidden;">
+                            <div style="width:100%; height:5px; background:#f8fafc; border-radius:3px; overflow:hidden;">
                                 <div id="barRelAgr" style="width:92.0%; height:100%; background:#8b5cf6;"></div>
                             </div>
                         </div>
@@ -824,7 +824,7 @@
                     </div>
 
                     <div class="stopwatch">
-                        <span style="font-size:10.5px; color:#94a3b8;">STOPWATCH:</span>
+                        <span style="font-size:10.5px; color:#475569;">STOPWATCH:</span>
                         <span class="stopwatch-time" id="reviewStopwatch">00.0s</span>
                         <button onclick="toggleStopwatch()" style="background:none; border:none; color:var(--accent-cyan); cursor:pointer; font-size:12px;">⏸/▶</button>
                         <span style="font-size:9.5px; color:#10b981; font-weight:700;">[&lt;30s TARGET]</span>
@@ -841,7 +841,7 @@
             <!-- ROLE 3: DISTRICT ADMIN & SIMULINK MODE -->
             <div id="view-admin" style="display: none; flex-direction: column; gap: 16px;">
                 
-                <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:16px;">
+                <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
                         <div>
                             <span style="font-size:10.5px; text-transform:uppercase; color:#64748b; font-weight:800;">12. District Screening Intelligence</span>
@@ -861,7 +861,7 @@
                 </div>
 
                 <!-- SIMULINK INTERACTIVE QUEUING ENGINE & LIVE GRAPH CANVAS -->
-                <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:12px;">
+                <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:12px;">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <div>
                             <span style="font-size:10.5px; text-transform:uppercase; color:#64748b; font-weight:800;">14 & 15. Real-Time Simulink Resource Optimization Engine</span>
@@ -889,7 +889,7 @@
                     </div>
 
                     <!-- LIVE SIMULINK CANVAS CHART -->
-                    <div style="background:#070a13; border:1px solid #1e293b; border-radius:10px; padding:12px;">
+                    <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:10px; padding:12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
                         <canvas id="simulinkCanvas" width="800" height="220" style="width:100%; height:220px; display:block;"></canvas>
                     </div>
 
@@ -900,7 +900,7 @@
                         <div class="q-metric-box"><span>Doctor Throughput Multiplier</span><b id="simMult" style="color:#34d399; font-size:16px;">7.0x (30s Review)</b></div>
                     </div>
 
-                    <div style="background:#0b1120; border-left:4px solid #38bdf8; padding:12px; border-radius:0 7px 7px 0; font-size:12px; line-height:1.5;" id="whatIfAdvice">
+                    <div style="background:#f8fafc; border-left:4px solid #38bdf8; padding:12px; border-radius:0 7px 7px 0; font-size:12px; line-height:1.5;" id="whatIfAdvice">
                         <b>🤖 AI Resource Planning Advisory:</b> Target of 100,000+ patients ACHIEVED! Current configuration of <b>2 Specialists</b> and <b>2.4 Mbps</b> cellular link accommodates <b>100,000 patients/year</b> with negligible queue wait time.
                     </div>
                 </div>
@@ -911,7 +911,7 @@
                         <span style="font-size:10.5px; text-transform:uppercase; color:#64748b; font-weight:800;">16. Held-Out Indian Benchmark Validation</span>
                         <table style="width:100%; border-collapse:collapse; font-size:11px; font-family:'JetBrains Mono'; margin-top:8px;">
                             <thead>
-                                <tr style="border-bottom:1px solid #334155; color:#94a3b8; text-align:left;">
+                                <tr style="border-bottom:1px solid #334155; color:#475569; text-align:left;">
                                     <th style="padding:5px;">Metric</th>
                                     <th style="padding:5px;">Target</th>
                                     <th style="padding:5px;">DRISHTI Pipeline</th>
@@ -919,22 +919,22 @@
                             </thead>
                             <tbody>
                                 <tr style="border-bottom:1px solid #1e293b;">
-                                    <td style="padding:6px; color:#cbd5e1;">Referable Sensitivity</td>
+                                    <td style="padding:6px; color:#334155;">Referable Sensitivity</td>
                                     <td style="padding:6px;">&gt; 90.0%</td>
                                     <td style="padding:6px; color:#34d399; font-weight:bold;">94.8%</td>
                                 </tr>
                                 <tr style="border-bottom:1px solid #1e293b;">
-                                    <td style="padding:6px; color:#cbd5e1;">Referable Specificity</td>
+                                    <td style="padding:6px; color:#334155;">Referable Specificity</td>
                                     <td style="padding:6px;">&gt; 85.0%</td>
                                     <td style="padding:6px; color:#34d399; font-weight:bold;">92.4%</td>
                                 </tr>
                                 <tr style="border-bottom:1px solid #1e293b;">
-                                    <td style="padding:6px; color:#cbd5e1;">AUC-ROC</td>
+                                    <td style="padding:6px; color:#334155;">AUC-ROC</td>
                                     <td style="padding:6px;">&gt; 0.900</td>
                                     <td style="padding:6px; color:#38bdf8;">0.981</td>
                                 </tr>
                                 <tr>
-                                    <td style="padding:6px; color:#cbd5e1;">Quadratic Kappa</td>
+                                    <td style="padding:6px; color:#334155;">Quadratic Kappa</td>
                                     <td style="padding:6px;">&gt; 0.800</td>
                                     <td style="padding:6px; color:#38bdf8;">0.916</td>
                                 </tr>
@@ -944,7 +944,7 @@
 
                     <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:14px; display:flex; flex-direction:column; gap:6px;">
                         <span style="font-size:10.5px; text-transform:uppercase; color:#64748b; font-weight:800;">19. Live Clinical Audit Log</span>
-                        <div style="background:#0b1120; border:1px solid #1e293b; border-radius:7px; padding:8px 10px; font-family:'JetBrains Mono'; font-size:10px; color:#cbd5e1; display:flex; flex-direction:column; gap:4px; max-height:130px; overflow-y:auto;" id="auditLog">
+                        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:7px; padding:8px 10px; font-family:'JetBrains Mono'; font-size:10px; color:#334155; display:flex; flex-direction:column; gap:4px; max-height:130px; overflow-y:auto;" id="auditLog">
                             <div><span style="color:#64748b;">10:24:02</span> — Fundus capture acquired at Nanded PHC #4</div>
                             <div><span style="color:#64748b;">10:24:04</span> — Image Quality Gate: PASS (Focus: 41.8, Glare: 1.8%)</div>
                             <div><span style="color:#64748b;">10:24:06</span> — Edge AI completed: Level 2 Moderate NPDR (91.5%)</div>
@@ -968,7 +968,7 @@
                         <span style="font-size:18px;">📋</span>
                         <h2 style="font-size:18px; font-weight:800; color:#38bdf8;" id="inputModalTitle">PATIENT INTAKE & CLINICAL DATA ENTRY SPACE</h2>
                     </div>
-                    <div style="font-size:11px; color:#94a3b8; margin-top:2px;">Rural Health Center Screening Portal | Ayushman Bharat Health Account (ABDM) Compatible</div>
+                    <div style="font-size:11px; color:#475569; margin-top:2px;">Rural Health Center Screening Portal | Ayushman Bharat Health Account (ABDM) Compatible</div>
                 </div>
                 <div style="display:flex; gap:8px; align-items:center;">
                     <button class="btn-act" style="background:#0284c7; color:white; font-size:10.5px;" onclick="quickAutofillPatientData()">⚡ Quick Autofill Demo Patient</button>
@@ -1117,12 +1117,12 @@
             </div>
 
             <!-- SYSTEMIC + RETINAL RISK PREVIEW BAR -->
-            <div style="background:#070a13; border:1px solid #1e293b; border-radius:8px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;" id="riskPreviewBox">
+            <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;" id="riskPreviewBox">
                 <div>
-                    <span style="font-size:10px; color:#94a3b8; text-transform:uppercase; font-weight:700;">Calculated Combined Microvascular Risk</span>
+                    <span style="font-size:10px; color:#475569; text-transform:uppercase; font-weight:700;">Calculated Combined Microvascular Risk</span>
                     <div style="font-size:13px; font-weight:800; color:#fbbf24;" id="riskPreviewTitle">⚠️ ELEVATED SYSTEMIC RISK (HbA1c: 8.4%, BP: 142/88)</div>
                 </div>
-                <div style="font-size:11px; color:#cbd5e1; text-align:right;">
+                <div style="font-size:11px; color:#334155; text-align:right;">
                     <div>Estimated Referral Urgency: <b style="color:#ef4444;" id="riskPreviewUrgency">PRIORITY 1 (4-6 Weeks)</b></div>
                 </div>
             </div>
@@ -1370,10 +1370,10 @@ function populateQueue() {
 
         item.innerHTML = `
             <div style="display:flex; justify-content:space-between; align-items:center;">
-                <b style="font-size:12px; color:#f8fafc;">${p.name}</b>
+                <b style="font-size:12px; color:#0f172a;">${p.name}</b>
                 <span class="p-badge ${pBadgeClass}">${p.priorityText}</span>
             </div>
-            <div style="display:flex; justify-content:space-between; font-size:10px; color:#94a3b8; margin-top:2px;">
+            <div style="display:flex; justify-content:space-between; font-size:10px; color:#475569; margin-top:2px;">
                 <span>${p.id}</span>
                 <span style="font-weight:700; color:${p.referable ? '#fb7185' : '#34d399'};">${p.grade >= 0 ? 'Grade ' + p.grade : 'Ungradeable'}</span>
             </div>
@@ -3190,16 +3190,16 @@ window.addEventListener('keydown', function(e) {
 
     <!-- RAPID SCREENING HOTKEYS MODAL -->
     <div class="modal" id="hotkeysModal" onclick="closeHotkeysModal(event)" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); backdrop-filter:blur(4px); z-index:9999; align-items:center; justify-content:center;">
-        <div class="modal-content" style="background:#0f172a; border:1px solid #334155; border-radius:14px; width:90%; max-width:620px; padding:22px; box-shadow:0 10px 40px rgba(0,0,0,0.6);">
+        <div class="modal-content" style="background:#ffffff; border:1px solid #cbd5e1; border-radius:14px; width:90%; max-width:620px; padding:22px; box-shadow:0 10px 40px rgba(0,0,0,0.6);">
             <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1e293b; padding-bottom:12px;">
                 <div style="display:flex; align-items:center; gap:8px;">
                     <span style="font-size:20px;">⌨️</span>
-                    <h3 style="font-size:16px; font-weight:800; color:#f8fafc;">Rapid Screening Keyboard Shortcuts</h3>
+                    <h3 style="font-size:16px; font-weight:800; color:#0f172a;">Rapid Screening Keyboard Shortcuts</h3>
                 </div>
-                <button class="close-btn" onclick="closeHotkeysModal()" style="background:none; border:none; color:#94a3b8; font-size:22px; cursor:pointer;">&times;</button>
+                <button class="close-btn" onclick="closeHotkeysModal()" style="background:none; border:none; color:#475569; font-size:22px; cursor:pointer;">&times;</button>
             </div>
             <div style="margin-top:14px;">
-                <p style="font-size:12px; color:#94a3b8; margin-bottom:12px;">Use these clinical hotkeys during rapid screening camps to accelerate patient intake, grading, and referral workflows without reaching for the mouse.</p>
+                <p style="font-size:12px; color:#475569; margin-bottom:12px;">Use these clinical hotkeys during rapid screening camps to accelerate patient intake, grading, and referral workflows without reaching for the mouse.</p>
                 <table class="hotkeys-table">
                     <thead>
                         <tr>
