@@ -786,8 +786,9 @@
         .sample-card-thumb {
             position: relative;
             width: 100%;
-            height: 140px;
-            background: #000000;
+            height: 165px;
+            background: radial-gradient(circle at center, #1E293B 0%, #060B13 100%);
+            border-bottom: 1.5px solid #1E293B;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -796,22 +797,25 @@
         .sample-card-thumb img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.25s;
+            object-fit: contain;
+            padding: 6px;
+            filter: contrast(1.15) brightness(1.12);
+            transition: transform 0.25s, filter 0.25s;
         }
         .sample-card:hover .sample-card-thumb img {
             transform: scale(1.05);
+            filter: contrast(1.22) brightness(1.18);
         }
         .sample-card-badge {
             position: absolute;
-            bottom: 8px;
+            top: 8px;
             left: 8px;
             font-size: 9.5px;
             font-weight: 800;
             padding: 3px 8px;
-            border-radius: 12px;
+            border-radius: 6px;
             color: #FFFFFF;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.7);
             letter-spacing: 0.3px;
         }
         .sample-card-info {
@@ -855,19 +859,22 @@
         }
         .inspector-preview-box {
             width: 100%;
-            height: 175px;
-            background: #000000;
+            height: 210px;
+            background: radial-gradient(circle at center, #1E293B 0%, #060B13 100%);
             border: 1px solid #1E293B;
             border-radius: 8px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 8px;
         }
         .inspector-preview-box img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            filter: contrast(1.15) brightness(1.12);
+            border-radius: 6px;
         }
         .inspector-details {
             display: flex;
@@ -978,10 +985,12 @@
         }
         .preset-card-img {
             width: 100%;
-            height: 68px;
-            background: #000000;
+            height: 82px;
+            background: radial-gradient(circle at center, #1E293B 0%, #0B1324 100%);
             border-radius: 5px;
-            object-fit: cover;
+            object-fit: contain;
+            padding: 4px;
+            filter: contrast(1.1) brightness(1.08);
         }
         .preset-card-title {
             font-size: 11px;
@@ -1059,7 +1068,7 @@
                 <div class="pulse-dot" id="pulseDot"></div>
                 <span id="netText">Online: 2.4 Mbps (PHC Uplink)</span>
             </div>
-            <button class="btn-act" id="btnOpenExplorer" style="background:#0284C7; color:#FFFFFF; font-size:11px; font-weight:700; border:none;" onclick="openVirtualExplorerModal()" title="Browse Predefined Retinal Stages (Grades 0-4 and Rejection Tests)">?? Virtual Explorer</button>
+            <button class="btn-act" id="btnOpenExplorer" style="background:#0284C7; color:#FFFFFF; font-size:11px; font-weight:700; border:none;" onclick="openVirtualExplorerModal()" title="Browse Predefined Retinal Stages (Grades 0-4 and Rejection Tests)">&#128193; Virtual Explorer</button>
             <button class="btn-act" style="background:var(--healthy-green); color:#FFFFFF; font-size:11px; font-weight:700;" onclick="openPatientInputModal(false)">+ New Patient</button>
             <button class="btn-act" style="background:var(--primary-blue); color:#FFFFFF; font-size:11px;" onclick="openReportModal()">View Report</button>
         </div>
@@ -1093,7 +1102,7 @@
 
             <!-- LIVE FILE UPLOAD / DRAG-AND-DROP DROPZONE -->
             <div>
-                <button class="btn-act" style="width:100%; justify-content:center; background:#EFF4FA; color:var(--primary-blue); border:1px solid #BFD3E6; padding:8px 12px; font-size:11px; font-weight:700; margin-bottom:10px; border-radius:6px;" onclick="openVirtualExplorerModal()">?? Browse Predefined Sample Retinas</button>
+                <button class="btn-act" style="width:100%; justify-content:center; background:#EFF4FA; color:var(--primary-blue); border:1px solid #BFD3E6; padding:8px 12px; font-size:11px; font-weight:700; margin-bottom:10px; border-radius:6px;" onclick="openVirtualExplorerModal()">&#128193; Browse Predefined Sample Retinas</button>
             
                 <div class="section-header">
                     <span>Analyze Custom Retina</span>
@@ -1224,7 +1233,7 @@
                     <!-- REAL-TIME PARAMETER & LESION CONTROL TOOLBAR -->
                     <div class="live-control-toolbar" style="margin-top:8px;">
                         <div class="ctrl-item">
-                            <button class="btn-act" style="background:#FFFFFF; border:1px solid var(--card-border); color:var(--primary-blue); font-size:10.5px; padding:3px 8px; border-radius:5px;" onclick="openVirtualExplorerModal()" title="Select standard clinical fundus cases">?? Choose Sample Stage</button>
+                            <button class="btn-act" style="background:#FFFFFF; border:1px solid var(--card-border); color:var(--primary-blue); font-size:10.5px; padding:3px 8px; border-radius:5px;" onclick="openVirtualExplorerModal()" title="Select standard clinical fundus cases">&#128193; Choose Sample Stage</button>
                         <span>CLAHE Clip:</span>
                             <input type="range" id="sliderClip" min="0.01" max="0.05" step="0.005" value="0.02" oninput="updateRealtimeCanvas()">
                             <span id="valClip" style="color:var(--ai-cyan);">0.020</span>
@@ -1604,19 +1613,19 @@
             <!-- ACTIVE PRESET ATTACHMENT DETAILS -->
             <div style="display:grid; grid-template-columns: 1fr auto; gap:12px; align-items:center; background:#F8FAFC; border:1.5px solid var(--card-border); border-radius:8px; padding:10px 14px; margin-top:6px;">
                 <div style="display:flex; align-items:center; gap:12px;">
-                    <img id="presetAttachedThumb" src="/sample_images/user_preset_fundus_pat003.png" style="width:52px; height:52px; border-radius:6px; object-fit:cover; border:1px solid #DCE6F0; background:#000;">
+                    <img id="presetAttachedThumb" src="sample_images/user_preset_fundus_pat003.png" style="width:52px; height:52px; border-radius:6px; object-fit:contain; border:1px solid #DCE6F0; background:#0B1324; padding:2px; filter:contrast(1.1) brightness(1.08);">
                     <div>
                         <div style="display:flex; align-items:center; gap:8px;">
                             <b style="font-size:12.5px; color:#0F172A;" id="presetAttachedTitle">User Fundus: Moderate NPDR (PAT_003)</b>
                             <span id="presetAttachedBadge" style="font-size:9.5px; font-weight:800; padding:2px 7px; border-radius:4px; background:#F97316; color:#FFF;">Grade 2 - Moderate</span>
                         </div>
-                        <div style="font-size:10.5px; color:#155EEF; font-family:'JetBrains Mono',monospace; margin-top:2px;" id="presetAttachedFile">/sample_images/user_preset_fundus_pat003.png</div>
+                        <div style="font-size:10.5px; color:#155EEF; font-family:'JetBrains Mono',monospace; margin-top:2px;" id="presetAttachedFile">sample_images/user_preset_fundus_pat003.png</div>
                         <div style="font-size:10px; color:#64748B; margin-top:2px;" id="presetAttachedDesc">Attached: Microaneurysms + blot hemorrhages + hard exudates (CSME Risk).</div>
                     </div>
                 </div>
                 <div style="display:flex; gap:6px; align-items:center;">
-                    <button type="button" class="btn-act" style="background:#FFFFFF; border:1px solid var(--card-border); color:var(--primary-blue); font-size:11px;" onclick="openVirtualExplorerModal()">?? Full Explorer</button>
-                    <button type="button" class="btn-act" style="background:#FFFFFF; border:1px solid var(--card-border); color:#475569; font-size:11px;" onclick="document.getElementById('inpCustomFile').click()">?? Or Upload Custom</button>
+                    <button type="button" class="btn-act" style="background:#FFFFFF; border:1px solid var(--card-border); color:var(--primary-blue); font-size:11px;" onclick="openVirtualExplorerModal()">&#128193; Full Explorer</button>
+                    <button type="button" class="btn-act" style="background:#FFFFFF; border:1px solid var(--card-border); color:#475569; font-size:11px;" onclick="document.getElementById('inpCustomFile').click()">&#128228; Or Upload Custom</button>
                     <input type="file" id="inpCustomFile" accept="image/*" style="display:none;" onchange="handleModalCustomUpload(event)">
                 </div>
             </div>
@@ -1627,7 +1636,7 @@
             <div style="background:#F8FAFC; border:1.5px solid var(--card-border); border-radius:8px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;" id="riskPreviewBox">
                 <div>
                     <span style="font-size:10px; color:#64748B; text-transform:uppercase; font-weight:700;">Calculated Combined Microvascular Risk</span>
-                    <div style="font-size:13px; font-weight:800; color:var(--warning-amber);" id="riskPreviewTitle"> ELEVATED SYSTEMIC RISK (HbA1c: 8.4%, BP: 142/88)</div>
+                    <div style="font-size:13px; font-weight:800; color:var(--warning-amber);" id="riskPreviewTitle">&#9888; ELEVATED SYSTEMIC RISK (HbA1c: 8.4%, BP: 142/88)</div>
                 </div>
                 <div style="font-size:11px; color:#475569; text-align:right;">
                     <div>Estimated Referral Urgency: <b style="color:#ef4444;" id="riskPreviewUrgency">PRIORITY 1 (4-6 Weeks)</b></div>
@@ -3733,7 +3742,7 @@ const REGISTRATION_PRESETS = [
   {
     "id": "user_preset_1",
     "filename": "user_preset_fundus_pat003.png",
-    "path": "/sample_images/user_preset_fundus_pat003.png",
+    "path": "sample_images/user_preset_fundus_pat003.png",
     "title": "User Fundus: Moderate NPDR (PAT_003)",
     "grade": 2,
     "grade_label": "Grade 2 - Moderate NPDR",
@@ -3759,7 +3768,7 @@ const REGISTRATION_PRESETS = [
   {
     "id": "user_preset_2",
     "filename": "user_preset_retinal_diagram.png",
-    "path": "/sample_images/user_preset_retinal_diagram.png",
+    "path": "sample_images/user_preset_retinal_diagram.png",
     "title": "User Fundus: Retinal Lesions & Vascular Map",
     "grade": 3,
     "grade_label": "Grade 3 - Severe NPDR",
@@ -3785,7 +3794,7 @@ const REGISTRATION_PRESETS = [
   {
     "id": "user_preset_3",
     "filename": "user_preset_exudates_fundus.png",
-    "path": "/sample_images/user_preset_exudates_fundus.png",
+    "path": "sample_images/user_preset_exudates_fundus.png",
     "title": "User Fundus: Circinate Hard Exudates",
     "grade": 2,
     "grade_label": "Grade 2 - Moderate NPDR",
@@ -3811,7 +3820,7 @@ const REGISTRATION_PRESETS = [
   {
     "id": "sample_grade0",
     "filename": "01_normal_retina_grade0.png",
-    "path": "/sample_images/01_normal_retina_grade0.png",
+    "path": "sample_images/01_normal_retina_grade0.png",
     "title": "Normal Healthy Retina",
     "grade": 0,
     "grade_label": "Grade 0 - Normal",
@@ -3837,7 +3846,7 @@ const REGISTRATION_PRESETS = [
   {
     "id": "sample_grade1",
     "filename": "02_mild_npdr_grade1.png",
-    "path": "/sample_images/02_mild_npdr_grade1.png",
+    "path": "sample_images/02_mild_npdr_grade1.png",
     "title": "Mild NPDR Fundus",
     "grade": 1,
     "grade_label": "Grade 1 - Mild NPDR",
@@ -3863,7 +3872,7 @@ const REGISTRATION_PRESETS = [
   {
     "id": "sample_grade2",
     "filename": "03_moderate_npdr_grade2.png",
-    "path": "/sample_images/03_moderate_npdr_grade2.png",
+    "path": "sample_images/03_moderate_npdr_grade2.png",
     "title": "Moderate NPDR & CSME Risk",
     "grade": 2,
     "grade_label": "Grade 2 - Moderate NPDR",
@@ -3889,7 +3898,7 @@ const REGISTRATION_PRESETS = [
   {
     "id": "sample_grade3",
     "filename": "04_severe_npdr_grade3.png",
-    "path": "/sample_images/04_severe_npdr_grade3.png",
+    "path": "sample_images/04_severe_npdr_grade3.png",
     "title": "Severe NPDR 4-Quadrant",
     "grade": 3,
     "grade_label": "Grade 3 - Severe NPDR",
@@ -3915,7 +3924,7 @@ const REGISTRATION_PRESETS = [
   {
     "id": "sample_grade4",
     "filename": "05_pdr_grade4.png",
-    "path": "/sample_images/05_pdr_grade4.png",
+    "path": "sample_images/05_pdr_grade4.png",
     "title": "Proliferative DR (PDR)",
     "grade": 4,
     "grade_label": "Grade 4 - PDR",
@@ -3941,7 +3950,7 @@ const REGISTRATION_PRESETS = [
   {
     "id": "sample_rejection_face",
     "filename": "06_rejection_face.png",
-    "path": "/sample_images/06_rejection_face.png",
+    "path": "sample_images/06_rejection_face.png",
     "title": "Non-Retina / Face Rejection",
     "grade": -1,
     "grade_label": "Rejection - Non-Retina",
@@ -3967,7 +3976,7 @@ const REGISTRATION_PRESETS = [
   {
     "id": "sample_rejection_diagram",
     "filename": "07_rejection_diagram.png",
-    "path": "/sample_images/07_rejection_diagram.png",
+    "path": "sample_images/07_rejection_diagram.png",
     "title": "Diagram / Text Rejection",
     "grade": -1,
     "grade_label": "Rejection - Graphic/Text",
@@ -4010,8 +4019,8 @@ function initRegistrationPresetGrid() {
         card.id = `preset_card_${preset.id}`;
         card.onclick = () => selectRegistrationPreset(preset);
         card.innerHTML = `
-            <div class="preset-card-check">?</div>
-            <img class="preset-card-img" src="${preset.path}" alt="${preset.title}" onerror="this.src='/sample_real_fundus.png'">
+            <div class="preset-card-check">&#10003;</div>
+            <img class="preset-card-img" src="${preset.path}" alt="${preset.title}" onerror="this.onerror=null; this.src='sample_real_fundus.png'">
             <div class="preset-card-title">${preset.title}</div>
             <span class="preset-card-tag" style="background:${preset.badge_color};">${preset.grade_label}</span>
         `;
@@ -4087,9 +4096,87 @@ function updateRegistrationPresetDetails(preset) {
 // ==========================================
 let SAMPLE_IMAGES = [
   {
+    "id": "user_preset_1",
+    "filename": "user_preset_fundus_pat003.png",
+    "path": "sample_images/user_preset_fundus_pat003.png",
+    "title": "User Fundus: Moderate NPDR (PAT_003)",
+    "grade": 2,
+    "grade_label": "Grade 2 - Moderate NPDR",
+    "badge_color": "#F97316",
+    "category": "grade2",
+    "referable": true,
+    "width": 512,
+    "height": 512,
+    "dimensions": "512 x 512 px",
+    "size_kb": 365,
+    "format": "PNG Image",
+    "description": "User uploaded clinical case demonstrating moderate non-proliferative retinopathy with blot hemorrhages, multiple microaneurysms, and macular hard exudates.",
+    "patient": {
+      "name": "Ganesh Kulkarni",
+      "age": 58,
+      "gender": "Male",
+      "dm_duration": "11 Yrs",
+      "hba1c": "8.4%",
+      "bp": "142/88",
+      "eye": "OD (Right)"
+    }
+  },
+  {
+    "id": "user_preset_2",
+    "filename": "user_preset_retinal_diagram.png",
+    "path": "sample_images/user_preset_retinal_diagram.png",
+    "title": "User Fundus: Retinal Lesions & Vascular Map",
+    "grade": 3,
+    "grade_label": "Grade 3 - Severe NPDR",
+    "badge_color": "#DC2626",
+    "category": "grade3",
+    "referable": true,
+    "width": 512,
+    "height": 512,
+    "dimensions": "512 x 512 px",
+    "size_kb": 380,
+    "format": "PNG Image",
+    "description": "User uploaded diagnostic lesion distribution depicting widespread intraretinal hemorrhages, venous loops, and extensive lipid exudate plaques.",
+    "patient": {
+      "name": "Kavita Rao",
+      "age": 63,
+      "gender": "Female",
+      "dm_duration": "14 Yrs",
+      "hba1c": "9.2%",
+      "bp": "150/92",
+      "eye": "OS (Left)"
+    }
+  },
+  {
+    "id": "user_preset_3",
+    "filename": "user_preset_exudates_fundus.png",
+    "path": "sample_images/user_preset_exudates_fundus.png",
+    "title": "User Fundus: Circinate Hard Exudates",
+    "grade": 2,
+    "grade_label": "Grade 2 - Moderate NPDR",
+    "badge_color": "#F97316",
+    "category": "grade2",
+    "referable": true,
+    "width": 400,
+    "height": 400,
+    "dimensions": "400 x 400 px",
+    "size_kb": 197,
+    "format": "PNG Image",
+    "description": "User uploaded fundus showing dense circinate rings of hard lipid exudates encroaching upon the macula, indicative of clinically significant macular edema risk.",
+    "patient": {
+      "name": "Harish Mehta",
+      "age": 54,
+      "gender": "Male",
+      "dm_duration": "8 Yrs",
+      "hba1c": "8.1%",
+      "bp": "138/86",
+      "eye": "OD (Right)"
+    }
+  },
+  {
     "id": "sample_grade0",
     "filename": "01_normal_retina_grade0.png",
-    "path": "/sample_images/01_normal_retina_grade0.png",
+    "path": "sample_images/01_normal_retina_grade0.png",
     "title": "Normal Healthy Retina",
     "grade": 0,
     "grade_label": "Grade 0 - Normal",
@@ -4115,7 +4202,7 @@ let SAMPLE_IMAGES = [
   {
     "id": "sample_grade1",
     "filename": "02_mild_npdr_grade1.png",
-    "path": "/sample_images/02_mild_npdr_grade1.png",
+    "path": "sample_images/02_mild_npdr_grade1.png",
     "title": "Mild NPDR Fundus",
     "grade": 1,
     "grade_label": "Grade 1 - Mild NPDR",
@@ -4141,7 +4228,7 @@ let SAMPLE_IMAGES = [
   {
     "id": "sample_grade2",
     "filename": "03_moderate_npdr_grade2.png",
-    "path": "/sample_images/03_moderate_npdr_grade2.png",
+    "path": "sample_images/03_moderate_npdr_grade2.png",
     "title": "Moderate NPDR & CSME Risk",
     "grade": 2,
     "grade_label": "Grade 2 - Moderate NPDR",
@@ -4167,7 +4254,7 @@ let SAMPLE_IMAGES = [
   {
     "id": "sample_grade3",
     "filename": "04_severe_npdr_grade3.png",
-    "path": "/sample_images/04_severe_npdr_grade3.png",
+    "path": "sample_images/04_severe_npdr_grade3.png",
     "title": "Severe NPDR 4-Quadrant",
     "grade": 3,
     "grade_label": "Grade 3 - Severe NPDR",
@@ -4193,7 +4280,7 @@ let SAMPLE_IMAGES = [
   {
     "id": "sample_grade4",
     "filename": "05_pdr_grade4.png",
-    "path": "/sample_images/05_pdr_grade4.png",
+    "path": "sample_images/05_pdr_grade4.png",
     "title": "Proliferative DR (PDR)",
     "grade": 4,
     "grade_label": "Grade 4 - PDR",
@@ -4219,7 +4306,7 @@ let SAMPLE_IMAGES = [
   {
     "id": "sample_rejection_face",
     "filename": "06_rejection_face.png",
-    "path": "/sample_images/06_rejection_face.png",
+    "path": "sample_images/06_rejection_face.png",
     "title": "Non-Retina / Face Rejection",
     "grade": -1,
     "grade_label": "Rejection - Non-Retina",
@@ -4245,7 +4332,7 @@ let SAMPLE_IMAGES = [
   {
     "id": "sample_rejection_diagram",
     "filename": "07_rejection_diagram.png",
-    "path": "/sample_images/07_rejection_diagram.png",
+    "path": "sample_images/07_rejection_diagram.png",
     "title": "Diagram / Text Rejection",
     "grade": -1,
     "grade_label": "Rejection - Graphic/Text",
@@ -4332,7 +4419,7 @@ function renderSampleGrid() {
     });
 
     const countEl = document.getElementById('explorerFileCount');
-    if (countEl) countEl.innerText = `${filtered.length} files in /sample-images/`;
+    if (countEl) countEl.innerText = `${filtered.length} files in sample_images/`;
 
     grid.innerHTML = '';
     if (filtered.length === 0) {
@@ -4351,13 +4438,13 @@ function renderSampleGrid() {
         card.onclick = () => selectSampleCard(sample, card);
         card.innerHTML = `
             <div class="sample-card-thumb">
-                <img src="${sample.path}" alt="${sample.title}" onerror="this.src='/sample_real_fundus.png'">
+                <img src="${sample.path}" alt="${sample.title}" onerror="this.onerror=null; this.src='sample_real_fundus.png'">
                 <span class="sample-card-badge" style="background:${sample.badge_color};">${sample.grade_label}</span>
             </div>
             <div class="sample-card-info">
                 <div class="sample-card-title">${sample.title}</div>
                 <div class="sample-card-path">${sample.path}</div>
-                <div class="sample-card-meta">${sample.dimensions} ? ${sample.size_kb} KB</div>
+                <div class="sample-card-meta">${sample.dimensions} &bull; ${sample.size_kb} KB</div>
             </div>
         `;
         grid.appendChild(card);
@@ -4567,9 +4654,9 @@ window.addEventListener('keydown', function(e) {
             <!-- Explorer Title Bar -->
             <div class="explorer-header">
                 <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:18px;">??</span>
+                    <span style="font-size:18px;">&#128193;</span>
                     <h3 style="font-size:16px; font-weight:800; color:#FFFFFF; margin:0;">Virtual Retinal Image Explorer</h3>
-                    <span class="explorer-path-chip">/sample-images/</span>
+                    <span class="explorer-path-chip">sample_images/</span>
                 </div>
                 <button class="explorer-close-btn" onclick="closeVirtualExplorerModal()">&times;</button>
             </div>
@@ -4577,24 +4664,24 @@ window.addEventListener('keydown', function(e) {
             <!-- Breadcrumb & Search Bar -->
             <div class="explorer-toolbar">
                 <div class="explorer-breadcrumbs">
-                    <span>?? System Root</span>
+                    <span>&#128421; System Root</span>
                     <span class="crumb-sep">&gt;</span>
-                    <span>?? project</span>
+                    <span>&#128193; project</span>
                     <span class="crumb-sep">&gt;</span>
-                    <b style="color:#38BDF8;">/sample-images/</b>
+                    <b style="color:#38BDF8;">sample_images/</b>
                 </div>
                 <div style="display:flex; align-items:center; gap:12px; flex:1; justify-content:flex-end;">
                     <div class="explorer-search-box">
-                        <span style="color:#64748B;">??</span>
+                        <span style="color:#64748B;">&#128269;</span>
                         <input type="text" id="explorerSearchInput" placeholder="Search sample files..." oninput="filterSampleImages()">
                     </div>
-                    <div style="font-size:11px; color:#94A3B8; font-family:'JetBrains Mono',monospace;" id="explorerFileCount">7 files in /sample-images/</div>
+                    <div style="font-size:11px; color:#94A3B8; font-family:'JetBrains Mono',monospace;" id="explorerFileCount">10 files in sample_images/</div>
                 </div>
             </div>
 
             <!-- Filter Category Tabs -->
             <div class="explorer-filter-pills">
-                <button class="filter-pill active" onclick="setSampleFilter('all', this)">All Files (7)</button>
+                <button class="filter-pill active" onclick="setSampleFilter('all', this)">All Files (10)</button>
                 <button class="filter-pill" onclick="setSampleFilter('grade0', this)"><span class="dot" style="background:#16A34A;"></span> Grade 0 Normal</button>
                 <button class="filter-pill" onclick="setSampleFilter('grade1', this)"><span class="dot" style="background:#EAB308;"></span> Grade 1 Mild</button>
                 <button class="filter-pill" onclick="setSampleFilter('grade2', this)"><span class="dot" style="background:#F97316;"></span> Grade 2 Moderate</button>
@@ -4615,12 +4702,12 @@ window.addEventListener('keydown', function(e) {
                     <div class="inspector-title">FILE INSPECTION PANEL</div>
                     
                     <div class="inspector-preview-box">
-                        <img id="inspImg" src="/sample_images/01_normal_retina_grade0.png" alt="Selected sample fundus">
+                        <img id="inspImg" src="sample_images/01_normal_retina_grade0.png" alt="Selected sample fundus" onerror="this.onerror=null; this.src='sample_real_fundus.png'">
                     </div>
 
                     <div class="inspector-details">
                         <div style="font-size:14px; font-weight:800; color:#FFFFFF;" id="inspTitle">Normal Healthy Retina</div>
-                        <div style="font-size:10.5px; color:#38BDF8; font-family:'JetBrains Mono',monospace; word-break:break-all; margin-top:2px;" id="inspPath">/sample-images/01_normal_retina_grade0.png</div>
+                        <div style="font-size:10.5px; color:#38BDF8; font-family:'JetBrains Mono',monospace; word-break:break-all; margin-top:2px;" id="inspPath">sample_images/01_normal_retina_grade0.png</div>
                         
                         <div style="margin-top:6px;">
                             <span class="insp-badge" id="inspBadge" style="background:#16A34A; color:#FFFFFF;">Grade 0 - Normal</span>

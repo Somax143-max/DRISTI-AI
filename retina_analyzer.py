@@ -179,9 +179,11 @@ def assess_retinal_image_quality(img_bgr, fov_mask=None):
     if fov_coverage < 0.20:
         reasons.append('CLIPPED_FOV')
         guidance.append('Field of view severely clipped (<20%). Re-align camera objective with the optical axis of the patient pupil.')
-    if focus_score < 12.0:
+    focus_thresh_severe = 1.2
+    focus_thresh_border = 4.0
+    if focus_score < focus_thresh_severe:
         reasons.append('SEVERE_DEFOCUS')
-        guidance.append('Image severely blurred (Focus score < 12). Stabilize camera, instruct patient not to blink, and refocus using diopter ring.')
+        guidance.append(f'Image severely blurred (Focus score < {focus_thresh_severe}). Stabilize camera, instruct patient not to blink, and refocus using diopter ring.')
     if glare_pct > 15.0:
         reasons.append('EXCESSIVE_GLARE')
         guidance.append('Excessive corneal glare / reflection detected (> 15% area). Adjust camera angle by 5-10 degrees and ask patient to blink.')
@@ -193,7 +195,7 @@ def assess_retinal_image_quality(img_bgr, fov_mask=None):
         quality_grade = 'Ungradeable'
         is_gradable = False
         primary_guidance = ' | '.join(guidance)
-    elif focus_score < 25.0 or glare_pct > 6.0 or underexposed_pct > 20.0 or contrast_score < 18.0:
+    elif focus_score < focus_thresh_border or glare_pct > 6.0 or underexposed_pct > 20.0 or contrast_score < 18.0:
         quality_grade = 'Borderline'
         is_gradable = True
         primary_guidance = 'Borderline image quality. Diagnostic analysis proceeded with adaptive contrast enhancement.'

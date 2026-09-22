@@ -2,7 +2,7 @@
   {
     "id": "user_preset_1",
     "filename": "user_preset_fundus_pat003.png",
-    "path": "/sample_images/user_preset_fundus_pat003.png",
+    "path": "sample_images/user_preset_fundus_pat003.png",
     "title": "User Fundus: Moderate NPDR (PAT_003)",
     "grade": 2,
     "grade_label": "Grade 2 - Moderate NPDR",
@@ -28,7 +28,7 @@
   {
     "id": "user_preset_2",
     "filename": "user_preset_retinal_diagram.png",
-    "path": "/sample_images/user_preset_retinal_diagram.png",
+    "path": "sample_images/user_preset_retinal_diagram.png",
     "title": "User Fundus: Retinal Lesions & Vascular Map",
     "grade": 3,
     "grade_label": "Grade 3 - Severe NPDR",
@@ -54,7 +54,7 @@
   {
     "id": "user_preset_3",
     "filename": "user_preset_exudates_fundus.png",
-    "path": "/sample_images/user_preset_exudates_fundus.png",
+    "path": "sample_images/user_preset_exudates_fundus.png",
     "title": "User Fundus: Circinate Hard Exudates",
     "grade": 2,
     "grade_label": "Grade 2 - Moderate NPDR",
@@ -80,7 +80,7 @@
   {
     "id": "sample_grade0",
     "filename": "01_normal_retina_grade0.png",
-    "path": "/sample_images/01_normal_retina_grade0.png",
+    "path": "sample_images/01_normal_retina_grade0.png",
     "title": "Normal Healthy Retina",
     "grade": 0,
     "grade_label": "Grade 0 - Normal",
@@ -106,7 +106,7 @@
   {
     "id": "sample_grade1",
     "filename": "02_mild_npdr_grade1.png",
-    "path": "/sample_images/02_mild_npdr_grade1.png",
+    "path": "sample_images/02_mild_npdr_grade1.png",
     "title": "Mild NPDR Fundus",
     "grade": 1,
     "grade_label": "Grade 1 - Mild NPDR",
@@ -132,7 +132,7 @@
   {
     "id": "sample_grade2",
     "filename": "03_moderate_npdr_grade2.png",
-    "path": "/sample_images/03_moderate_npdr_grade2.png",
+    "path": "sample_images/03_moderate_npdr_grade2.png",
     "title": "Moderate NPDR & CSME Risk",
     "grade": 2,
     "grade_label": "Grade 2 - Moderate NPDR",
@@ -158,7 +158,7 @@
   {
     "id": "sample_grade3",
     "filename": "04_severe_npdr_grade3.png",
-    "path": "/sample_images/04_severe_npdr_grade3.png",
+    "path": "sample_images/04_severe_npdr_grade3.png",
     "title": "Severe NPDR 4-Quadrant",
     "grade": 3,
     "grade_label": "Grade 3 - Severe NPDR",
@@ -184,7 +184,7 @@
   {
     "id": "sample_grade4",
     "filename": "05_pdr_grade4.png",
-    "path": "/sample_images/05_pdr_grade4.png",
+    "path": "sample_images/05_pdr_grade4.png",
     "title": "Proliferative DR (PDR)",
     "grade": 4,
     "grade_label": "Grade 4 - PDR",
@@ -210,7 +210,7 @@
   {
     "id": "sample_rejection_face",
     "filename": "06_rejection_face.png",
-    "path": "/sample_images/06_rejection_face.png",
+    "path": "sample_images/06_rejection_face.png",
     "title": "Non-Retina / Face Rejection",
     "grade": -1,
     "grade_label": "Rejection - Non-Retina",
@@ -236,7 +236,7 @@
   {
     "id": "sample_rejection_diagram",
     "filename": "07_rejection_diagram.png",
-    "path": "/sample_images/07_rejection_diagram.png",
+    "path": "sample_images/07_rejection_diagram.png",
     "title": "Diagram / Text Rejection",
     "grade": -1,
     "grade_label": "Rejection - Graphic/Text",
