@@ -1,0 +1,13 @@
+# Binaries & Tunnels
+cloudflared.exe
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.pytest_cache/
+
+# Logs & Temp
+logs/prediction_audit.jsonl
+temp_academic_pulse/

@@ -3,28 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRISHTI AI | Real-Time Retinal Screening Intelligence (MathWorks SIH26038)</title>
+    <title>DR-SHIELD AI | Explainable Retinal Screening Command Center (MathWorks SIH 2026)</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #070a13;
-            --panel-bg: #0d1527;
-            --card-bg: #131d33;
-            --card-border: #1e293b;
-            --accent-blue: #0284c7;
-            --accent-cyan: #06b6d4;
-            --accent-emerald: #10b981;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --purple: #8b5cf6;
+            /* DR-SHIELD AI: MathWorks SIH 2026 Clinical Palette */
+            --bg-clinical: #F5F9FC;
+            --card-bg: #FFFFFF;
+            --panel-bg: #F8FAFC;
+            --card-border: #DCE6F0;
+            --card-border-hover: #BFD3E6;
+            
+            /* Core Brand & Status Accents */
+            --primary-blue: #155EEF;
+            --primary-blue-hover: #0D4CD3;
+            --ai-cyan: #06B6D4;
+            --medical-teal: #0F9D8A;
+            --healthy-green: #16A34A;
+            --warning-amber: #F59E0B;
+            --danger-red: #DC2626;
+            
+            /* Clinical Typography Tokens */
+            --text-primary: #0F172A;
+            --text-secondary: #64748B;
+            --text-muted: #94A3B8;
+            
+            /* Shadow tokens */
+            --shadow-subtle: 0 1px 3px rgba(15, 23, 42, 0.05);
+            --shadow-card: 0 2px 6px -1px rgba(15, 23, 42, 0.06), 0 1px 4px -1px rgba(15, 23, 42, 0.04);
+            --shadow-modal: 0 20px 25px -5px rgba(15, 23, 42, 0.15), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-clinical);
             color: var(--text-primary);
             min-height: 100vh;
             display: flex;
@@ -32,8 +44,8 @@
             overflow-x: hidden;
         }
         header {
-            background: linear-gradient(90deg, #090d16 0%, #111827 50%, #1e1b4b 100%);
-            border-bottom: 1px solid #1e293b;
+            background-color: #FFFFFF;
+            border-bottom: 1px solid var(--card-border);
             padding: 10px 24px;
             display: flex;
             justify-content: space-between;
@@ -41,53 +53,56 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: var(--shadow-subtle);
         }
         .brand { display: flex; align-items: center; gap: 12px; }
         .brand-logo {
             width: 38px; height: 38px;
-            background: linear-gradient(135deg, #0284c7, #06b6d4);
+            background: var(--primary-blue);
             border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
             font-size: 20px; font-weight: 800; color: white;
-            box-shadow: 0 4px 14px rgba(6, 182, 212, 0.4);
+            box-shadow: var(--shadow-subtle);
         }
         .brand-text h1 { font-size: 17px; font-weight: 800; letter-spacing: -0.5px; }
         .brand-text p { font-size: 11px; color: var(--accent-cyan); font-weight: 600; }
         
         .role-switcher {
             display: flex;
-            background: #0b1120;
-            border: 1px solid #334155;
+            background: #F1F5F9;
+            border: 1px solid var(--card-border);
             padding: 3px;
-            border-radius: 9px;
+            border-radius: 8px;
             gap: 3px;
         }
         .role-btn {
             background: none;
             border: none;
-            color: #94a3b8;
+            color: var(--text-secondary);
             font-size: 11.5px;
-            font-weight: 700;
-            padding: 6px 13px;
-            border-radius: 7px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.15s;
             display: flex;
             align-items: center;
             gap: 6px;
         }
         .role-btn.active {
-            background: var(--accent-blue);
-            color: white;
-            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+            background: #FFFFFF;
+            color: var(--primary-blue);
+            font-weight: 700;
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+            border: 1px solid var(--card-border);
         }
-        .role-btn:hover:not(.active) { color: white; background: #1e293b; }
+        .role-btn:hover:not(.active) { color: var(--text-primary); background: #E2E8F0; }
         
         .header-status { display: flex; align-items: center; gap: 10px; }
         .net-badge {
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid #10b981;
-            color: #34d399;
+            background: #F0FDF4;
+            border: 1px solid #BBF7D0;
+            color: #16A34A;
             padding: 5px 12px;
             border-radius: 20px;
             font-size: 11px;
@@ -98,9 +113,9 @@
             cursor: pointer;
         }
         .net-badge.offline {
-            background: rgba(245, 158, 11, 0.15);
-            border-color: #f59e0b;
-            color: #fbbf24;
+            background: #FFFBEB;
+            border-color: #FDE68A;
+            color: #D97706;
         }
         .pulse-dot {
             width: 7px; height: 7px; border-radius: 50%;
@@ -116,8 +131,8 @@
         }
         
         .sidebar {
-            background-color: #0b1120;
-            border-right: 1px solid #1e293b;
+            background-color: #FFFFFF;
+            border-right: 1px solid var(--card-border);
             padding: 14px;
             overflow-y: auto;
             display: flex;
@@ -130,29 +145,31 @@
             align-items: center;
             font-size: 10.5px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #64748b;
-            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            font-weight: 700;
             margin-bottom: 6px;
         }
         
         .queue-list { display: flex; flex-direction: column; gap: 6px; }
         .queue-item {
-            background: var(--card-bg);
+            background: #FFFFFF;
             border: 1px solid var(--card-border);
             padding: 10px 12px;
-            border-radius: 9px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.15s ease-in-out;
             display: flex;
             flex-direction: column;
             gap: 3px;
+            box-shadow: var(--shadow-subtle);
         }
-        .queue-item:hover { border-color: var(--accent-cyan); background: #1a2744; transform: translateX(2px); }
+        .queue-item:hover { border-color: var(--primary-blue); background: #F8FAFC; transform: translateX(2px); }
         .queue-item.active {
             border-color: var(--accent-cyan);
-            background: linear-gradient(135deg, rgba(2, 132, 199, 0.2), rgba(6, 182, 212, 0.1));
-            box-shadow: 0 0 12px rgba(6, 182, 212, 0.2);
+            background: #EFF4FA;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 1px var(--primary-blue);
         }
         .q-top { display: flex; justify-content: space-between; align-items: center; }
         .q-id { font-weight: 700; font-size: 12px; font-family: 'JetBrains Mono', monospace; }
@@ -160,24 +177,24 @@
             font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 10px;
             text-transform: uppercase; letter-spacing: 0.4px;
         }
-        .p-urgent { background: rgba(239, 68, 68, 0.25); color: #f87171; border: 1px solid #ef4444; }
-        .p-review { background: rgba(245, 158, 11, 0.25); color: #fbbf24; border: 1px solid #f59e0b; }
-        .p-routine { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; }
-        .p-retake  { background: rgba(225, 29, 72, 0.3); color: #fb7185; border: 1px dashed #e11d48; }
+        .p-urgent { background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; }
+        .p-review { background: #FFFBEB; color: #D97706; border: 1px solid #FDE68A; }
+        .p-routine { background: #F0FDF4; color: #16A34A; border: 1px solid #BBF7D0; }
+        .p-retake  { background: #FFF1F2; color: #E11D48; border: 1px dashed #FDA4AF; }
         .q-desc { font-size: 10.5px; color: var(--text-secondary); display: flex; justify-content: space-between; }
         
         .dropzone {
-            border: 2px dashed #334155;
+            border: 2px dashed var(--card-border);
             border-radius: 10px;
-            padding: 12px;
+            padding: 14px;
             text-align: center;
-            background: #0d1527;
+            background: #F8FAFC;
             cursor: pointer;
             transition: all 0.2s;
         }
         .dropzone:hover, .dropzone.dragover {
-            border-color: var(--accent-cyan);
-            background: rgba(6, 182, 212, 0.08);
+            border-color: var(--primary-blue);
+            background: #EFF4FA;
         }
         
         .content {
@@ -190,20 +207,21 @@
         .quality-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 14px 18px;
+            border-radius: 10px;
+            padding: 16px 20px;
             display: flex;
             flex-direction: column;
             gap: 10px;
+            box-shadow: var(--shadow-card);
         }
         .quality-header { display: flex; justify-content: space-between; align-items: center; }
         .q-status-badge {
             font-size: 11.5px; font-weight: 800; padding: 4px 12px; border-radius: 20px;
             display: flex; align-items: center; gap: 6px;
         }
-        .q-good { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; }
-        .q-borderline { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; }
-        .q-ungradeable { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
+        .q-good { background: #F0FDF4; color: #16A34A; border: 1px solid #86EFAC; font-weight: 700; }
+        .q-borderline { background: #FFFBEB; color: #D97706; border: 1px solid #FDE68A; font-weight: 700; }
+        .q-ungradeable { background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; font-weight: 700; }
         
         .q-metrics-row {
             display: grid;
@@ -213,10 +231,10 @@
             font-size: 11.5px;
         }
         .q-metric-box {
-            background: #0b1120;
-            padding: 7px 10px;
-            border-radius: 7px;
-            border: 1px solid #1e293b;
+            background: #F8FAFC;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--card-border);
         }
         .q-metric-box span { color: var(--text-secondary); font-size: 9.5px; text-transform: uppercase; display: block; }
         .q-metric-box b { font-size: 13.5px; margin-top: 2px; display: block; }
@@ -230,14 +248,14 @@
             gap: 10px;
         }
         .guidance-recapture {
-            background: rgba(239, 68, 68, 0.12);
-            border-left: 4px solid #ef4444;
-            color: #fca5a5;
+            background: #FEF2F2;
+            border-left: 4px solid #DC2626;
+            color: #991B1B;
         }
         .guidance-enhance {
-            background: rgba(6, 182, 212, 0.12);
-            border-left: 4px solid #06b6d4;
-            color: #7dd3fc;
+            background: #ECFEFF;
+            border-left: 4px solid #06B6D4;
+            color: #0E7490;
         }
         
         /* INTERACTIVE SPLIT CANVAS */
@@ -246,9 +264,9 @@
             width: 100%;
             height: 480px;
             background: #000;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            border: 1px solid #1e293b;
+            border: 1px solid var(--card-border);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -262,8 +280,8 @@
         .split-curtain {
             position: absolute;
             top: 0; bottom: 0; width: 4px;
-            background: var(--accent-cyan);
-            box-shadow: 0 0 12px rgba(6, 182, 212, 0.9);
+            background: #06B6D4;
+            box-shadow: 0 0 8px rgba(6, 182, 212, 0.7);
             cursor: ew-resize;
             display: flex;
             align-items: center;
@@ -308,36 +326,39 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
         .ref-urgent {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(153, 27, 27, 0.45));
-            border: 1.5px solid #ef4444;
+            background: #FEF2F2;
+            border: 1.5px solid #F87171;
+            color: #991B1B;
         }
         .ref-routine {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 95, 70, 0.35));
-            border: 1.5px solid #10b981;
+            background: #F0FDF4;
+            border: 1.5px solid #86EFAC;
+            color: #166534;
         }
         .ref-title { font-size: 20px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
         .ref-sub { font-size: 12px; color: #cbd5e1; margin-top: 3px; }
         
         .review-console {
-            background: var(--card-bg);
+            background: #FFFFFF;
             border: 1px solid var(--card-border);
-            border-radius: 12px;
+            border-radius: 10px;
             padding: 14px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 14px;
+            box-shadow: var(--shadow-card);
         }
         .stopwatch {
             display: flex;
             align-items: center;
             gap: 8px;
             font-family: 'JetBrains Mono', monospace;
-            background: #0b1120;
-            border: 1px solid #1e293b;
+            background: #F8FAFC;
+            border: 1px solid var(--card-border);
             padding: 6px 14px;
-            border-radius: 7px;
+            border-radius: 6px;
         }
         .stopwatch-time { font-size: 18px; font-weight: 800; color: var(--accent-cyan); }
         
@@ -348,15 +369,15 @@
             display: flex; align-items: center; gap: 5px;
         }
         .btn-confirm { background: #10b981; color: white; }
-        .btn-modify  { background: #334155; color: #f8fafc; }
+        .btn-modify  { background: #334155; color: #0F172A; }
         .btn-recapture { background: #ef4444; color: white; }
         .btn-refer   { background: var(--accent-blue); color: white; }
         .btn-act:hover { opacity: 0.9; transform: translateY(-1px); }
         
         .sim-control-box {
-            background: #0b1120;
-            border: 1px solid #1e293b;
-            border-radius: 10px;
+            background: #F8FAFC;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
             padding: 14px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -394,8 +415,8 @@
 
         /* USER INPUT SPACE & CLINICAL INTAKE SHEET */
         .input-sheet {
-            background: #0d1527;
-            color: #f8fafc;
+            background: #F8FAFC;
+            color: #0F172A;
             width: 820px;
             max-width: 95vw;
             max-height: 92vh;
@@ -432,27 +453,57 @@
             letter-spacing: 0.3px;
         }
         .form-control {
-            background: #131d33;
-            border: 1px solid #1e293b;
+            background: #FFFFFF !important;
+            border: 1.5px solid #DCE6F0 !important;
             border-radius: 6px;
-            padding: 7px 10px;
-            color: #f8fafc;
+            padding: 8px 12px;
+            color: #0F172A !important;
             font-size: 12px;
             font-family: inherit;
             outline: none;
             transition: border-color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
         }
         .form-control:focus {
-            border-color: #0284c7;
-            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.25);
+            border-color: var(--primary-blue) !important;
+            background: #FFFFFF !important;
+            box-shadow: 0 0 0 3px rgba(21, 94, 239, 0.15) !important;
+        }
+        .form-group label {
+            font-size: 10.5px;
+            font-weight: 700;
+            color: #475569 !important;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .input-sheet {
+            background: #FFFFFF !important;
+            color: #0F172A !important;
+            width: 860px;
+            max-width: 95vw;
+            max-height: 92vh;
+            overflow-y: auto;
+            border-radius: 12px;
+            border: 1px solid #DCE6F0 !important;
+            padding: 24px;
+            box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.15), 0 10px 10px -5px rgba(15, 23, 42, 0.04) !important;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            font-size: 12.5px;
+        }
+        .form-control:focus {
+            border-color: var(--primary-blue);
+            background: #FFFFFF;
+            box-shadow: 0 0 0 2px rgba(21, 94, 239, 0.15);
         }
         .section-tag {
             font-size: 11px;
             font-weight: 800;
-            color: #38bdf8;
+            color: var(--primary-blue);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            border-bottom: 1px solid #1e293b;
+            border-bottom: 1px solid var(--card-border);
             padding-bottom: 4px;
             margin-top: 6px;
             display: flex;
@@ -503,7 +554,7 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .lang-btn:hover { color: white; background: #1e293b; }
+        .lang-btn:hover { color: white; background: #F1F5F9; }
         .lang-btn.active {
             background: #0284c7;
             color: white;
@@ -520,20 +571,20 @@
         .hotkeys-table th {
             text-align: left;
             padding: 8px 10px;
-            background: #0d1527;
+            background: #F8FAFC;
             color: #38bdf8;
-            border-bottom: 1px solid #334155;
+            border-bottom: 1px solid var(--card-border);
             font-weight: 800;
         }
         .hotkeys-table td {
             padding: 8px 10px;
-            border-bottom: 1px solid #1e293b;
+            border-bottom: 1px solid var(--card-border);
             color: #cbd5e1;
         }
         .kbd-badge {
-            background: #1e293b;
-            border: 1px solid #475569;
-            color: #f8fafc;
+            background: #F1F5F9;
+            border: 1px solid var(--card-border);
+            color: #0F172A;
             padding: 3px 8px;
             border-radius: 6px;
             font-family: 'JetBrains Mono', monospace;
@@ -543,6 +594,442 @@
             display: inline-block;
         }
 
+    
+        /* CLINICAL AI PIPELINE RIBBON */
+        .pipeline-ribbon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: #FFFFFF;
+            border-bottom: 1px solid var(--card-border);
+            padding: 5px 16px;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            letter-spacing: 0.4px;
+            flex-wrap: wrap;
+        }
+        .pipeline-ribbon .p-step {
+            padding: 2px 7px;
+            border-radius: 4px;
+            background: #F1F5F9;
+            color: #475569;
+        }
+        .pipeline-ribbon .p-step.active {
+            background: #EFF4FA;
+            color: var(--primary-blue);
+            border: 1px solid #BFD3E6;
+        }
+        .pipeline-ribbon .p-sep {
+            color: #94A3B8;
+            font-size: 9px;
+        }
+
+    
+        /* VIRTUAL RETINAL IMAGE EXPLORER (MODAL & FILE INSPECTOR) */
+        .explorer-window {
+            background: #0B1324;
+            border: 1.5px solid #1E3A8A;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 35px rgba(14, 165, 233, 0.25);
+            border-radius: 12px;
+            width: 980px;
+            max-width: 96vw;
+            height: 650px;
+            max-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            color: #F8FAFC;
+            animation: explorerModalPop 0.18s ease-out;
+        }
+        @keyframes explorerModalPop {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .explorer-header {
+            background: #0F172A;
+            border-bottom: 1px solid #1E293B;
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .explorer-path-chip {
+            background: #0284C7;
+            color: #FFFFFF;
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .explorer-close-btn {
+            background: none;
+            border: none;
+            color: #94A3B8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.15s;
+        }
+        .explorer-close-btn:hover { color: #FFFFFF; }
+        .explorer-toolbar {
+            background: #090E1A;
+            border-bottom: 1px solid #1E293B;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            font-size: 11.5px;
+            flex-wrap: wrap;
+        }
+        .explorer-breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #94A3B8;
+            font-size: 11px;
+        }
+        .crumb-sep { color: #475569; font-size: 10px; }
+        .explorer-search-box {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #111827;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 4px 10px;
+        }
+        .explorer-search-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #F8FAFC;
+            font-size: 11px;
+            width: 170px;
+        }
+        .explorer-filter-pills {
+            background: #0F172A;
+            border-bottom: 1px solid #1E293B;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            overflow-x: auto;
+        }
+        .filter-pill {
+            background: #1E293B;
+            border: 1px solid #334155;
+            color: #CBD5E1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        .filter-pill:hover {
+            background: #334155;
+            color: #FFFFFF;
+        }
+        .filter-pill.active {
+            background: #0284C7;
+            border-color: #38BDF8;
+            color: #FFFFFF;
+            box-shadow: 0 0 10px rgba(2, 132, 199, 0.4);
+        }
+        .filter-pill .dot {
+            width: 8px; height: 8px; border-radius: 50%; display: inline-block;
+        }
+        .explorer-body {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+        .explorer-grid-container {
+            padding: 16px;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+            align-content: start;
+            background: #090E1A;
+        }
+        .sample-card {
+            background: #111827;
+            border: 1.5px solid #1E293B;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+        .sample-card:hover {
+            border-color: #38BDF8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+        }
+        .sample-card.selected {
+            border-color: #38BDF8;
+            box-shadow: 0 0 0 2px #0284C7, 0 4px 20px rgba(2, 132, 199, 0.35);
+            background: #132038;
+        }
+        .sample-card-thumb {
+            position: relative;
+            width: 100%;
+            height: 165px;
+            background: radial-gradient(circle at center, #1E293B 0%, #060B13 100%);
+            border-bottom: 1.5px solid #1E293B;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sample-card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 6px;
+            filter: contrast(1.15) brightness(1.12);
+            transition: transform 0.25s, filter 0.25s;
+        }
+        .sample-card:hover .sample-card-thumb img {
+            transform: scale(1.05);
+            filter: contrast(1.22) brightness(1.18);
+        }
+        .sample-card-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            font-size: 9.5px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            color: #FFFFFF;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+            letter-spacing: 0.3px;
+        }
+        .sample-card-info {
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .sample-card-title {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #F8FAFC;
+            line-height: 1.3;
+        }
+        .sample-card-path {
+            font-size: 10px;
+            color: #38BDF8;
+            font-family: 'JetBrains Mono', monospace;
+            word-break: break-all;
+        }
+        .sample-card-meta {
+            font-size: 10px;
+            color: #64748B;
+            margin-top: 3px;
+        }
+        .explorer-inspector {
+            background: #0B1324;
+            border-left: 1px solid #1E293B;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+        }
+        .inspector-title {
+            font-size: 10.5px;
+            font-weight: 800;
+            color: #38BDF8;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .inspector-preview-box {
+            width: 100%;
+            height: 210px;
+            background: radial-gradient(circle at center, #1E293B 0%, #060B13 100%);
+            border: 1px solid #1E293B;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+        }
+        .inspector-preview-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: contrast(1.15) brightness(1.12);
+            border-radius: 6px;
+        }
+        .inspector-details {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+        .insp-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+        .insp-meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            background: #090E1A;
+            border: 1px solid #1E293B;
+            border-radius: 6px;
+            padding: 8px 10px;
+            font-size: 10.5px;
+            margin-top: 2px;
+        }
+        .insp-meta-item span { color: #64748B; display: block; font-size: 9px; text-transform: uppercase; }
+        .insp-meta-item b { color: #F8FAFC; }
+        .insp-patient-box {
+            background: #0F172A;
+            border: 1px solid #1E3A8A;
+            border-radius: 6px;
+            padding: 8px 10px;
+            margin-top: 2px;
+        }
+        .insp-desc {
+            font-size: 11px;
+            color: #94A3B8;
+            line-height: 1.45;
+            background: #090E1A;
+            border-left: 3px solid #0284C7;
+            padding: 8px 10px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 2px;
+        }
+        .insp-load-btn {
+            background: linear-gradient(135deg, #0284C7, #06B6D4);
+            border: none;
+            color: #FFFFFF;
+            font-weight: 800;
+            font-size: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+            transition: all 0.15s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .insp-load-btn:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
+        }
+        .insp-load-btn:active {
+            transform: translateY(0);
+        }
+
+    
+        select.form-control option {
+            background: #FFFFFF;
+            color: #0F172A;
+            padding: 6px;
+        }
+        /* PRESET GALLERY CARDS IN REGISTER MODAL */
+        .preset-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+            max-height: 220px;
+            overflow-y: auto;
+            padding: 2px;
+        }
+        .preset-card {
+            background: #FFFFFF;
+            border: 1.5px solid #DCE6F0;
+            border-radius: 8px;
+            padding: 6px;
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            position: relative;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+        }
+        .preset-card:hover {
+            border-color: #155EEF;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(21, 94, 239, 0.1);
+        }
+        .preset-card.active {
+            border-color: #155EEF;
+            background: #EFF4FA;
+            box-shadow: 0 0 0 2px #155EEF;
+        }
+        .preset-card-img {
+            width: 100%;
+            height: 82px;
+            background: radial-gradient(circle at center, #1E293B 0%, #0B1324 100%);
+            border-radius: 5px;
+            object-fit: contain;
+            padding: 4px;
+            filter: contrast(1.1) brightness(1.08);
+        }
+        .preset-card-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #0F172A;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.2;
+        }
+        .preset-card-tag {
+            font-size: 9px;
+            font-weight: 800;
+            padding: 1px 6px;
+            border-radius: 4px;
+            color: #FFFFFF;
+            display: inline-block;
+            align-self: flex-start;
+        }
+        .preset-card-check {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #155EEF;
+            color: #FFFFFF;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .preset-card.active .preset-card-check {
+            display: flex;
+        }
+
     </style>
 </head>
 <body>
@@ -550,16 +1037,16 @@
         <div class="brand">
             <div class="brand-logo">D</div>
             <div class="brand-text">
-                <h1>DRISHTI AI Screening Engine</h1>
-                <p>Real-Time Functional Clinical & Telemedicine Portal | MathWorks SIH26038</p>
+                <h1>DR-SHIELD AI <span style="font-size:10.5px; font-weight:700; color:var(--primary-blue); background:#EFF4FA; padding:2px 8px; border-radius:12px; border:1px solid var(--card-border); margin-left:6px;">MathWorks PS 26038</span></h1>
+                <p>Explainable Diabetic Retinopathy Screening Command Center | Rural India Tele-Triage</p>
             </div>
         </div>
 
         <!-- ROLE SWITCHER -->
         <div class="role-switcher">
-            <button class="role-btn" id="roleField" onclick="setRole('field')">📱 Field Mode (ASHA)</button>
-            <button class="role-btn active" id="roleClinical" onclick="setRole('clinical')">👨‍⚕️ Clinical Mode (Ophthalmologist)</button>
-            <button class="role-btn" id="roleAdmin" onclick="setRole('admin')">🗺️ District Admin & Simulink</button>
+            <button class="role-btn" id="roleField" onclick="setRole('field')">Field Mode (ASHA)</button>
+            <button class="role-btn active" id="roleClinical" onclick="setRole('clinical')">Clinical Mode (Ophthalmologist)</button>
+            <button class="role-btn" id="roleAdmin" onclick="setRole('admin')">District Admin & Simulink</button>
         </div>
 
         <div class="header-status">
@@ -572,24 +1059,39 @@
                 <button class="lang-btn" id="langTE" onclick="setLanguage('te')" title="తెలుగు (Telugu)">TE</button>
             </div>
             <!-- HIGH CONTRAST TOGGLE -->
-            <button class="btn-act" id="btnContrastToggle" style="background:#1e293b; color:#fbbf24; font-size:11px;" onclick="toggleHighContrast()" title="Toggle Clinical High Contrast / Reading Room Mode (H)">🌓 Contrast</button>
+            <button class="btn-act" id="btnContrastToggle" style="background:#F1F5F9; color:var(--warning-amber); font-size:11px;" onclick="toggleHighContrast()" title="Toggle Clinical High Contrast / Reading Room Mode (H)">High Contrast</button>
             <!-- HOTKEYS HELP -->
-            <button class="btn-act" id="btnHotkeysHelp" style="background:#1e293b; color:#94a3b8; font-size:11px;" onclick="openHotkeysModal()" title="Rapid Screening Keyboard Shortcuts (?)">⌨️ Hotkeys</button>
-<button class="btn-act" id="btnVoiceToggle" style="background:#1e293b; color:#38bdf8; font-size:11px;" onclick="toggleVoice()">🔊 Voice: ON</button>
+            <button class="btn-act" id="btnHotkeysHelp" style="background:#F8FAFC; color:#64748B; border:1px solid var(--card-border); font-size:11px;" onclick="openHotkeysModal()" title="Rapid Screening Keyboard Shortcuts (?)">Shortcuts</button>
+<button class="btn-act" id="btnVoiceToggle" style="background:#F8FAFC; color:var(--primary-blue); border:1px solid var(--card-border); font-size:11px;" onclick="toggleVoice()">Voice: ON</button>
             <!-- NETWORK STATUS -->
             <div class="net-badge" id="netBadge" onclick="toggleNetwork()">
                 <div class="pulse-dot" id="pulseDot"></div>
                 <span id="netText">Online: 2.4 Mbps (PHC Uplink)</span>
             </div>
-            <button class="btn-act" style="background:#059669; color:white; font-size:11px; font-weight:700;" onclick="openPatientInputModal(false)">➕ Input Patient Data</button>
-            <button class="btn-act" style="background:#0284c7; color:white; font-size:11px;" onclick="openReportModal()">📄 Report</button>
+            <button class="btn-act" id="btnOpenExplorer" style="background:#0284C7; color:#FFFFFF; font-size:11px; font-weight:700; border:none;" onclick="openVirtualExplorerModal()" title="Browse Predefined Retinal Stages (Grades 0-4 and Rejection Tests)">&#128193; Virtual Explorer</button>
+            <button class="btn-act" style="background:var(--healthy-green); color:#FFFFFF; font-size:11px; font-weight:700;" onclick="openPatientInputModal(false)">+ New Patient</button>
+            <button class="btn-act" style="background:var(--primary-blue); color:#FFFFFF; font-size:11px;" onclick="openReportModal()">View Report</button>
         </div>
     </header>
+
+    <!-- CORE CLINICAL WORKFLOW RIBBON: QUALITY -> ENHANCE -> DETECT -> GRADE -> EXPLAIN -> TRIAGE -> REVIEW -> REPORT -> SIMULATE -->
+    <div class="pipeline-ribbon">
+        <span class="p-step active">1. QUALITY GATE</span><span class="p-sep">&rarr;</span>
+        <span class="p-step active">2. ADAPTIVE ENHANCE</span><span class="p-sep">&rarr;</span>
+        <span class="p-step active">3. LESION DETECT</span><span class="p-sep">&rarr;</span>
+        <span class="p-step active">4. ICDR GRADE</span><span class="p-sep">&rarr;</span>
+        <span class="p-step active" style="color:var(--ai-cyan); border-color:#A5F3FC; background:#ECFEFF;">5. EXPLAINABLE AI</span><span class="p-sep">&rarr;</span>
+        <span class="p-step active">6. TELE-TRIAGE</span><span class="p-sep">&rarr;</span>
+        <span class="p-step active" style="color:var(--primary-blue); border-color:#BFD3E6;">7. HUMAN REVIEW</span><span class="p-sep">&rarr;</span>
+        <span class="p-step active">8. CLINICAL REPORT</span><span class="p-sep">&rarr;</span>
+        <span class="p-step active" style="color:var(--medical-teal); border-color:#99F6E4; background:#F0FDFA;">9. 100K SIMULINK</span>
+    </div>
+
 
     <div class="main-layout">
         <!-- SIDEBAR: PRIORITY QUEUE + LIVE DROPZONE -->
         <div class="sidebar">
-            <button class="btn-act" style="width:100%; justify-content:center; background:#059669; color:white; padding:9px 12px; font-size:11.5px; font-weight:700; margin-bottom:12px; box-shadow:0 2px 10px rgba(5,150,105,0.35);" onclick="openPatientInputModal(false)">➕ REGISTER NEW PATIENT</button>
+            <button class="btn-act" style="width:100%; justify-content:center; background:var(--healthy-green); color:#FFFFFF; padding:9px 12px; font-size:11.5px; font-weight:700; margin-bottom:12px; box-shadow:0 2px 10px rgba(5,150,105,0.35);" onclick="openPatientInputModal(false)">+ Register New Patient</button>
             <div>
                 <div class="section-header">
                     <span>Priority Triage Queue</span>
@@ -600,28 +1102,30 @@
 
             <!-- LIVE FILE UPLOAD / DRAG-AND-DROP DROPZONE -->
             <div>
+                <button class="btn-act" style="width:100%; justify-content:center; background:#EFF4FA; color:var(--primary-blue); border:1px solid #BFD3E6; padding:8px 12px; font-size:11px; font-weight:700; margin-bottom:10px; border-radius:6px;" onclick="openVirtualExplorerModal()">&#128193; Browse Predefined Sample Retinas</button>
+            
                 <div class="section-header">
                     <span>Analyze Custom Retina</span>
                     <span style="font-size: 9.5px; color: #10b981;">Real-Time</span>
                 </div>
                 <div class="dropzone" id="fileDropzone" onclick="document.getElementById('fileInput').click()">
-                    <span style="font-size: 20px;">📤</span>
-                    <div style="font-size: 11.5px; font-weight:700; color:#cbd5e1; margin-top:4px;">Drop Any Fundus Image</div>
+                    <span style="font-size: 20px;"></span>
+                    <div style="font-size: 11.5px; font-weight:700; color:#475569; margin-top:4px;">Drop Any Fundus Image</div>
                     <div style="font-size: 9.5px; color:#64748b;">or click to browse local files (JPG/PNG)</div>
                     <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileUpload(event)">
                 </div>
             </div>
 
             <!-- RURAL OFFLINE QUEUE -->
-            <div style="background: #0d1527; border: 1px solid #1e293b; border-radius: 9px; padding: 10px; margin-top: auto;">
+            <div style="background: #F8FAFC; border: 1px solid #1e293b; border-radius: 9px; padding: 10px; margin-top: auto;">
                 <div style="font-size: 10.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px;">Offline Rural Hub</div>
                 <div style="font-size: 11px; display: flex; justify-content: space-between; color: #cbd5e1; margin-bottom: 6px;">
-                    <span>Pending Local Sync: <b id="pendingSyncCount" style="color:#fbbf24;">3 Cases</b></span>
-                    <span style="color:#34d399;">9 Synced</span>
+                    <span>Pending Local Sync: <b id="pendingSyncCount" style="color:var(--warning-amber);">3 Cases</b></span>
+                    <span style="color:var(--healthy-green);">9 Synced</span>
                 </div>
-                <button class="btn-act" style="width:100%; justify-content:center; background:#0284c7; color:white; padding:6px; font-size:10.5px;" onclick="syncOfflineQueue()">🔄 SYNC WHEN CONNECTED</button>
-                <div id="syncProg" style="height:3px; background:#1e293b; border-radius:2px; margin-top:6px; display:none; overflow:hidden;">
-                    <div style="width:100%; height:100%; background:#10b981; animation:syncMove 1s infinite linear;"></div>
+                <button class="btn-act" style="width:100%; justify-content:center; background:var(--primary-blue); color:#FFFFFF; padding:6px; font-size:10.5px;" onclick="syncOfflineQueue()">Sync Offline Queue</button>
+                <div id="syncProg" style="height:3px; background:#F1F5F9; border-radius:2px; margin-top:6px; display:none; overflow:hidden;">
+                    <div style="width:100%; height:100%; background:var(--healthy-green); animation:syncMove 1s infinite linear;"></div>
                 </div>
             </div>
         </div>
@@ -630,25 +1134,25 @@
         <div class="content">
             <!-- ROLE 1: FIELD MODE (ASHA) -->
             <div id="view-field" style="display: none; flex-direction: column; gap: 16px;">
-                <div style="background:#131d33; border:1px solid #1e293b; border-radius:12px; padding:20px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:14px;">
-                    <h2 style="font-size: 20px; font-weight:800; color:#38bdf8;">📱 DRISHTI AI MOBILE SCREENING (FIELD MODE)</h2>
-                    <p style="color:#94a3b8; font-size:12.5px; max-width:540px;">Simplified automated screening for rural Primary Health Centre workers using portable handheld cameras.</p>
+                <div style="background:#FFFFFF; border:1px solid var(--card-border); border-radius:12px; padding:20px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:14px;">
+                    <h2 style="font-size: 20px; font-weight:800; color:var(--primary-blue);"> DRISHTI AI MOBILE SCREENING (FIELD MODE)</h2>
+                    <p style="color:#64748B; font-size:12.5px; max-width:540px;">Simplified automated screening for rural Primary Health Centre workers using portable handheld cameras.</p>
                     
-                    <button class="btn-act" style="background:#0284c7; color:white; padding:12px 24px; font-size:13.5px;" onclick="simulateFieldCapture()">📷 [ CAPTURE / ACQUIRE RETINA ]</button>
-                    <button class="btn-act" style="background:#059669; color:white; padding:10px 18px; font-size:12.5px; font-weight:700;" onclick="openPatientInputModal(false)">📝 [ ENTER / EDIT PATIENT CLINICAL DATA ]</button>
+                    <button class="btn-act" style="background:var(--primary-blue); color:#FFFFFF; padding:12px 24px; font-size:13.5px;" onclick="simulateFieldCapture()">Capture Retinal Scan</button>
+                    <button class="btn-act" style="background:var(--healthy-green); color:#FFFFFF; padding:10px 18px; font-size:12.5px; font-weight:700;" onclick="openPatientInputModal(false)">Enter Clinical Data</button>
 
-                    <div style="background:#0b1120; border:1px solid #1e293b; border-radius:10px; padding:16px; width:100%; max-width:480px; text-align:left; display:flex; flex-direction:column; gap:8px;">
+                    <div style="background:#F8FAFC; border:1px solid var(--card-border); border-radius:10px; padding:16px; width:100%; max-width:480px; text-align:left; display:flex; flex-direction:column; gap:8px;">
                         <div style="font-size:11px; color:#64748b; font-weight:700;">STEP 1: EDGE QUALITY ASSESSMENT</div>
-                        <div style="font-size:15px; font-weight:800; color:#34d399;" id="fieldQStatus">🟢 IMAGE QUALITY: GOOD</div>
+                        <div style="font-size:15px; font-weight:800; color:var(--healthy-green);" id="fieldQStatus"> IMAGE QUALITY: GOOD</div>
                         
                         <div style="font-size:11px; color:#64748b; font-weight:700; margin-top:6px;">STEP 2: RAPID EDGE AI TRIAGE</div>
-                        <button class="btn-act" style="background:#10b981; color:white; justify-content:center; padding:10px;" onclick="runFieldAI()">⚡ [ RUN AI SCREENING ]</button>
+                        <button class="btn-act" style="background:var(--healthy-green); color:#FFFFFF; justify-content:center; padding:10px;" onclick="runFieldAI()">Run AI Screening</button>
                         
                         <div style="font-size:11px; color:#64748b; font-weight:700; margin-top:6px;">STEP 3: ACTIONABLE FIELD RESULT</div>
-                        <div id="fieldResultBox" style="background:#1e293b; padding:10px; border-radius:7px; font-weight:800; font-size:14px; color:#fbbf24;">
-                            ⚠ SPECIALIST REVIEW RECOMMENDED (Moderate NPDR)
+                        <div id="fieldResultBox" style="background:#F1F5F9; padding:10px; border-radius:7px; font-weight:800; font-size:14px; color:var(--warning-amber);">
+                             SPECIALIST REVIEW RECOMMENDED (Moderate NPDR)
                         </div>
-                        <button class="btn-act" style="background:#3b82f6; color:white; justify-content:center; padding:10px; margin-top:4px;" onclick="sendToHub()">📤 [ SEND TO DISTRICT TELE-HUB ]</button>
+                        <button class="btn-act" style="background:var(--primary-blue); color:#FFFFFF; justify-content:center; padding:10px; margin-top:4px;" onclick="sendToHub()">Send to District Hub</button>
                     </div>
                 </div>
             </div>
@@ -656,15 +1160,15 @@
             <!-- ROLE 2: CLINICAL MODE (OPHTHALMOLOGIST) -->
             <div id="view-clinical" style="display: flex; flex-direction: column; gap: 16px;">
                 <!-- ACTIVE PATIENT DEMOGRAPHICS & QUICK EDIT BAR -->
-                <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                <div style="background:#FFFFFF; border:1px solid var(--card-border); box-shadow:var(--shadow-card); border-radius:10px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
                     <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-                        <div style="font-size:14px; font-weight:800; color:#f8fafc;" id="hdrPatName">Ganesh Kulkarni</div>
-                        <div style="font-size:11px; font-family:'JetBrains Mono'; color:#38bdf8; background:#0d1527; padding:2px 8px; border-radius:4px; border:1px solid #1e293b;" id="hdrPatId">PAT_003_MODERATE</div>
-                        <div style="font-size:11.5px; color:#94a3b8;" id="hdrPatMeta">Age: 58 | Male | DM: 11 Yrs | HbA1c: 8.4% | BP: 142/88 | Eye: OD (Right) | BCVA: 6/18</div>
+                        <div style="font-size:14px; font-weight:800; color:#0F172A;" id="hdrPatName">Ganesh Kulkarni</div>
+                        <div style="font-size:11px; font-family:'JetBrains Mono'; color:var(--primary-blue); background:#F8FAFC; padding:2px 8px; border-radius:4px; border:1px solid var(--card-border);" id="hdrPatId">PAT_003_MODERATE</div>
+                        <div style="font-size:11.5px; color:#64748B;" id="hdrPatMeta">Age: 58 | Male | DM: 11 Yrs | HbA1c: 8.4% | BP: 142/88 | Eye: OD (Right) | BCVA: 6/18</div>
                     </div>
                     <div style="display:flex; gap:6px;">
-                        <button class="btn-act" style="background:#1e293b; color:#cbd5e1; padding:5px 10px; font-size:10.5px;" onclick="openPatientInputModal(true)">✏️ Edit Clinical Data</button>
-                        <button class="btn-act" style="background:#059669; color:white; padding:5px 10px; font-size:10.5px;" onclick="openPatientInputModal(false)">➕ Input Patient Data</button>
+                        <button class="btn-act" style="background:#F1F5F9; color:#475569; padding:5px 10px; font-size:10.5px;" onclick="openPatientInputModal(true)">Edit Clinical Data</button>
+                        <button class="btn-act" style="background:var(--healthy-green); color:#FFFFFF; padding:5px 10px; font-size:10.5px;" onclick="openPatientInputModal(false)">+ New Patient</button>
                     </div>
                 </div>
 
@@ -675,7 +1179,7 @@
                             <span style="font-size: 10.5px; text-transform:uppercase; color:#64748b; font-weight:800; letter-spacing:0.5px;">1. Smart Fundus Image Quality Gate</span>
                             <h3 style="font-size: 15px; font-weight:800; margin-top:2px;" id="qCardTitle">Camera Alignment & Focus Evaluation</h3>
                         </div>
-                        <div class="q-status-badge q-good" id="qBadge">● IMAGE QUALITY: ACCEPTABLE</div>
+                        <div class="q-status-badge q-good" id="qBadge"> IMAGE QUALITY: ACCEPTABLE</div>
                     </div>
 
                     <div class="q-metrics-row">
@@ -687,7 +1191,7 @@
 
                     <!-- AI-GUIDED RECAPTURE GUIDANCE -->
                     <div class="guidance-box guidance-enhance" id="qGuidance">
-                        <span style="font-size: 16px;">✨</span>
+                        <span style="font-size: 16px;"></span>
                         <div>
                             <b id="guidanceTitle">Adaptive Auto-Enhancement Active:</b>
                             <span id="guidanceText">Borderline illumination normalized via CLAHE in CIE L*a*b* space. Proceeding to clinical classification.</span>
@@ -699,13 +1203,13 @@
                 <div class="referable-banner ref-urgent" id="refBanner">
                     <div>
                         <span style="font-size:10.5px; text-transform:uppercase; letter-spacing:1px; font-weight:800; color:#fca5a5;">REFERABLE DR STATUS</span>
-                        <div class="ref-title" id="refTitle">🔴 REFER TO OPHTHALMOLOGIST</div>
+                        <div class="ref-title" id="refTitle"> REFER TO OPHTHALMOLOGIST</div>
                         <div class="ref-sub" id="refReason">Priority: HIGH | Reason: Level 2 Moderate NPDR + High DME Risk near foveal zone</div>
                     </div>
                     <div style="text-align:right;">
-                        <div style="font-size:10.5px; color:#cbd5e1; text-transform:uppercase;">ICDR Severity Staging</div>
-                        <div style="font-size:18px; font-weight:800; color:white;" id="icdrGrade">LEVEL 2 — MODERATE NPDR</div>
-                        <div style="font-size:12px; font-weight:700; color:#38bdf8; margin-top:2px;" id="drDamagePercent">Retinopathy Damage: 48.5%</div>
+                        <div style="font-size:10.5px; color:#475569; text-transform:uppercase;">ICDR Severity Staging</div>
+                        <div style="font-size:18px; font-weight:800; color:#FFFFFF;" id="icdrGrade">LEVEL 2 — MODERATE NPDR</div>
+                        <div style="font-size:12px; font-weight:700; color:var(--primary-blue); margin-top:2px;" id="drDamagePercent">Retinopathy Damage: 48.5%</div>
                     </div>
                 </div>
 
@@ -713,39 +1217,40 @@
                 <div class="quality-card" style="padding:14px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                         <span style="font-size: 13px; font-weight:800; display:flex; align-items:center; gap:8px;">
-                            <span>👁️ Real-Time Interactive Viewport</span>
-                            <span style="font-size:10.5px; font-weight:normal; color:#06b6d4;">(Drag divider across canvas to wipe Before / Enhanced)</span>
+                            <span> Real-Time Interactive Viewport</span>
+                            <span style="font-size:10.5px; font-weight:normal; color:var(--ai-cyan);">(Drag divider across canvas to wipe Before / Enhanced)</span>
                         </span>
-                        <span style="font-size: 11px; font-family:'JetBrains Mono'; color:#34d399;" id="canvasModeLabel">SPLIT: RAW (LEFT) vs ENHANCED (RIGHT)</span>
+                        <span style="font-size: 11px; font-family:'JetBrains Mono'; color:var(--healthy-green);" id="canvasModeLabel">SPLIT: RAW (LEFT) vs ENHANCED (RIGHT)</span>
                     </div>
 
                     <div class="viewport-box" id="viewportBox">
                         <canvas id="mainCanvas" width="512" height="512"></canvas>
                         <div class="split-curtain" id="splitCurtain" style="left: 50%;">
-                            <div class="split-handle">⬌</div>
+                            <div class="split-handle"></div>
                         </div>
                     </div>
 
                     <!-- REAL-TIME PARAMETER & LESION CONTROL TOOLBAR -->
                     <div class="live-control-toolbar" style="margin-top:8px;">
                         <div class="ctrl-item">
-                            <span>CLAHE Clip Limit:</span>
+                            <button class="btn-act" style="background:#FFFFFF; border:1px solid var(--card-border); color:var(--primary-blue); font-size:10.5px; padding:3px 8px; border-radius:5px;" onclick="openVirtualExplorerModal()" title="Select standard clinical fundus cases">&#128193; Choose Sample Stage</button>
+                        <span>CLAHE Clip:</span>
                             <input type="range" id="sliderClip" min="0.01" max="0.05" step="0.005" value="0.02" oninput="updateRealtimeCanvas()">
-                            <span id="valClip" style="color:#06b6d4;">0.020</span>
+                            <span id="valClip" style="color:var(--ai-cyan);">0.020</span>
                         </div>
                         <div class="ctrl-item">
                             <span>Illum. Flattening:</span>
                             <input type="range" id="sliderFlatten" min="0" max="100" step="5" value="75" oninput="updateRealtimeCanvas()">
-                            <span id="valFlatten" style="color:#06b6d4;">75%</span>
+                            <span id="valFlatten" style="color:var(--ai-cyan);">75%</span>
                         </div>
                                                 <div class="ctrl-item">
                             <span>Grad-CAM Mode:</span>
-                            <button class="btn-act" id="btnGradcamToggle" onclick="toggleGradcamMode()" style="background:#0f172a; border:1px solid #06b6d4; color:#38bdf8; font-size:10.5px; padding:3px 8px; border-radius:6px;" title="Cycle Grad-CAM++ (Second Order) / Standard / Off (G)">🔥 Grad-CAM++ (2nd Order)</button>
+                            <button class="btn-act" id="btnGradcamToggle" onclick="toggleGradcamMode()" style="background:#F8FAFC; border:1px solid #06b6d4; color:var(--primary-blue); font-size:10.5px; padding:3px 8px; border-radius:6px;" title="Cycle Grad-CAM++ (Second Order) / Standard / Off (G)"> Grad-CAM++ (2nd Order)</button>
                         </div>
 <div class="ctrl-item">
                             <span>Grad-CAM Heatmap:</span>
                             <input type="range" id="sliderHeatmap" min="0" max="100" step="5" value="50" oninput="updateRealtimeCanvas()">
-                            <span id="valHeatmap" style="color:#06b6d4;">50%</span>
+                            <span id="valHeatmap" style="color:var(--ai-cyan);">50%</span>
                         </div>
                         <div class="ctrl-item">
                             <label><input type="checkbox" id="chkVessels" checked onchange="updateRealtimeCanvas()"> Vessels (DRIVE)</label>
@@ -766,16 +1271,16 @@
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
                     <div class="quality-card">
                         <div style="font-size:11px; font-weight:800; color:#64748b; text-transform:uppercase;">6. EVIDENCE-TO-DECISION CORRELATION</div>
-                        <div style="font-size:12px; color:#cbd5e1; line-height:1.5; margin-top:4px;" id="evidenceNarrative">
-                            ✓ Microaneurysms detected with sub-pixel parabolic peak interpolation<br>
-                            ✓ Hard exudates localized near foveal center (CSME positive)<br>
-                            ✓ Grad-CAM attention hotspots precisely align with hemorrhagic clusters
+                        <div style="font-size:12px; color:#475569; line-height:1.5; margin-top:4px;" id="evidenceNarrative">
+                             Microaneurysms detected with sub-pixel parabolic peak interpolation<br>
+                             Hard exudates localized near foveal center (CSME positive)<br>
+                             Grad-CAM attention hotspots precisely align with hemorrhagic clusters
                         </div>
                         <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:6px; font-family:'JetBrains Mono'; font-size:11px; margin-top:8px;">
-                            <div class="q-metric-box"><span>DR Damage</span><b id="liveDRDamage" style="color:#c084fc;">48.5%</b></div>
-                            <div class="q-metric-box"><span>MAs</span><b id="liveMAs" style="color:#38bdf8;">19</b></div>
-                            <div class="q-metric-box"><span>Hemo</span><b id="liveHemo" style="color:#f87171;">18</b></div>
-                            <div class="q-metric-box"><span>Exudates</span><b id="liveExudates" style="color:#fbbf24;">12</b></div>
+                            <div class="q-metric-box"><span>DR Damage</span><b id="liveDRDamage" style="color:var(--ai-cyan);">48.5%</b></div>
+                            <div class="q-metric-box"><span>MAs</span><b id="liveMAs" style="color:var(--primary-blue);">19</b></div>
+                            <div class="q-metric-box"><span>Hemo</span><b id="liveHemo" style="color:var(--danger-red);">18</b></div>
+                            <div class="q-metric-box"><span>Exudates</span><b id="liveExudates" style="color:var(--warning-amber);">12</b></div>
                             <div class="q-metric-box"><span>CSME</span><b id="liveCSME" style="color:#f43f5e;">0.12 DD</b></div>
                         </div>
                     </div>
@@ -785,9 +1290,9 @@
                         <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px;">
                             <div style="display:flex; justify-content:space-between; font-size:11px;">
                                 <span>Model Confidence (Temperature Scaled):</span>
-                                <b id="lblRelConf" style="color:#06b6d4;">91.5%</b>
+                                <b id="lblRelConf" style="color:var(--ai-cyan);">91.5%</b>
                             </div>
-                            <div style="width:100%; height:5px; background:#0b1120; border-radius:3px; overflow:hidden;">
+                            <div style="width:100%; height:5px; background:#F8FAFC; border-radius:3px; overflow:hidden;">
                                 <div id="barRelConf" style="width:91.5%; height:100%; background:#06b6d4;"></div>
                             </div>
 
@@ -795,21 +1300,21 @@
                                 <span>Image Quality Factor:</span>
                                 <b id="lblRelQual" style="color:#10b981;">88.0%</b>
                             </div>
-                            <div style="width:100%; height:5px; background:#0b1120; border-radius:3px; overflow:hidden;">
-                                <div id="barRelQual" style="width:88.0%; height:100%; background:#10b981;"></div>
+                            <div style="width:100%; height:5px; background:#F8FAFC; border-radius:3px; overflow:hidden;">
+                                <div id="barRelQual" style="width:88.0%; height:100%; background:var(--healthy-green);"></div>
                             </div>
 
                             <div style="display:flex; justify-content:space-between; font-size:11px; margin-top:2px;">
                                 <span>Explanation Agreement:</span>
                                 <b id="lblRelAgr" style="color:#8b5cf6;">92.0%</b>
                             </div>
-                            <div style="width:100%; height:5px; background:#0b1120; border-radius:3px; overflow:hidden;">
+                            <div style="width:100%; height:5px; background:#F8FAFC; border-radius:3px; overflow:hidden;">
                                 <div id="barRelAgr" style="width:92.0%; height:100%; background:#8b5cf6;"></div>
                             </div>
                         </div>
                         <div style="margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
                             <span style="font-size:11px; font-weight:700;">Overall Reliability:</span>
-                            <span class="q-status-badge q-good" id="relStatusBadge">🟢 HIGH RELIABILITY</span>
+                            <span class="q-status-badge q-good" id="relStatusBadge"> HIGH RELIABILITY</span>
                         </div>
                     </div>
                 </div>
@@ -822,16 +1327,16 @@
                     </div>
 
                     <div class="stopwatch">
-                        <span style="font-size:10.5px; color:#94a3b8;">STOPWATCH:</span>
+                        <span style="font-size:10.5px; color:#64748B;">STOPWATCH:</span>
                         <span class="stopwatch-time" id="reviewStopwatch">00.0s</span>
-                        <button onclick="toggleStopwatch()" style="background:none; border:none; color:var(--accent-cyan); cursor:pointer; font-size:12px;">⏸/▶</button>
+                        <button onclick="toggleStopwatch()" style="background:none; border:none; color:var(--accent-cyan); cursor:pointer; font-size:12px;">/</button>
                         <span style="font-size:9.5px; color:#10b981; font-weight:700;">[&lt;30s TARGET]</span>
                     </div>
 
                     <div class="action-group">
-                        <button class="btn-act btn-confirm" onclick="confirmDiagnosis()">✓ Confirm AI</button>
-                        <button class="btn-act btn-modify" onclick="modifyGradePrompt()">✎ Modify Grade</button>
-                        <button class="btn-act btn-recapture" onclick="triggerRecapture()">⚠ Request Recapture</button>
+                        <button class="btn-act btn-confirm" onclick="confirmDiagnosis()">Accept AI Result</button>
+                        <button class="btn-act btn-modify" onclick="modifyGradePrompt()">Modify Grade</button>
+                        <button class="btn-act btn-recapture" onclick="triggerRecapture()">Request Recapture</button>
                         <button class="btn-act btn-refer" onclick="referSpecialist()">→ Refer Patient</button>
                     </div>
                 </div>
@@ -839,77 +1344,77 @@
             <!-- ROLE 3: DISTRICT ADMIN & SIMULINK MODE -->
             <div id="view-admin" style="display: none; flex-direction: column; gap: 16px;">
                 
-                <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:16px;">
+                <div style="background:#FFFFFF; border:1px solid var(--card-border); box-shadow:var(--shadow-card); border-radius:12px; padding:16px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
                         <div>
                             <span style="font-size:10.5px; text-transform:uppercase; color:#64748b; font-weight:800;">12. District Screening Intelligence</span>
                             <h3 style="font-size:16px; font-weight:800; margin-top:2px;">Nanded District Retinal Tele-Program (Annual Monitoring)</h3>
                         </div>
-                        <div class="q-status-badge q-good">● 25 PHCs & 3 Mobile Vans Connected</div>
+                        <div class="q-status-badge q-good"> 25 PHCs & 3 Mobile Vans Connected</div>
                     </div>
 
                     <div style="display:grid; grid-template-columns:repeat(6, 1fr); gap:10px;">
-                        <div class="q-metric-box"><span>Patients Screened</span><b style="color:#38bdf8; font-size:18px;">12,458</b></div>
-                        <div class="q-metric-box"><span>Referable DR Cases</span><b style="color:#fb7185; font-size:18px;">2,142</b></div>
+                        <div class="q-metric-box"><span>Patients Screened</span><b style="color:var(--primary-blue); font-size:18px;">12,458</b></div>
+                        <div class="q-metric-box"><span>Referable DR Cases</span><b style="color:var(--danger-red); font-size:18px;">2,142</b></div>
                         <div class="q-metric-box"><span>High Priority Queue</span><b style="color:#ef4444; font-size:18px;">318</b></div>
-                        <div class="q-metric-box"><span>Recaptures Advised</span><b style="color:#fbbf24; font-size:18px;">672</b></div>
-                        <div class="q-metric-box"><span>Avg AI Pipeline</span><b style="color:#34d399; font-size:18px;">1.2s</b></div>
-                        <div class="q-metric-box"><span>Avg Review Time</span><b style="color:#a78bfa; font-size:18px;">18.4s</b></div>
+                        <div class="q-metric-box"><span>Recaptures Advised</span><b style="color:var(--warning-amber); font-size:18px;">672</b></div>
+                        <div class="q-metric-box"><span>Avg AI Pipeline</span><b style="color:var(--healthy-green); font-size:18px;">1.2s</b></div>
+                        <div class="q-metric-box"><span>Avg Review Time</span><b style="color:var(--medical-teal); font-size:18px;">18.4s</b></div>
                     </div>
                 </div>
 
                 <!-- SIMULINK INTERACTIVE QUEUING ENGINE & LIVE GRAPH CANVAS -->
-                <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:12px;">
+                <div style="background:#FFFFFF; border:1px solid var(--card-border); box-shadow:var(--shadow-card); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:12px;">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <div>
                             <span style="font-size:10.5px; text-transform:uppercase; color:#64748b; font-weight:800;">14 & 15. Real-Time Simulink Resource Optimization Engine</span>
                             <h3 style="font-size:16px; font-weight:800; margin-top:2px;">District Dynamic Queuing Model (100,000+ Target)</h3>
                         </div>
-                        <span style="font-size:11px; color:#38bdf8; font-family:'JetBrains Mono';">telemed_dr_screening.slx (Live JS Solver)</span>
+                        <span style="font-size:11px; color:var(--primary-blue); font-family:'JetBrains Mono';">telemed_dr_screening.slx (Live JS Solver)</span>
                     </div>
 
                     <div class="sim-control-box">
                         <div class="sim-slider-group">
-                            <label><span>Patients / Day:</span> <b id="lblPatientsDay" style="color:#38bdf8;">400</b></label>
+                            <label><span>Patients / Day:</span> <b id="lblPatientsDay" style="color:var(--primary-blue);">400</b></label>
                             <input type="range" id="sliderPatients" min="100" max="600" step="25" value="400" oninput="runSimulinkEngine()">
                             <span style="font-size:9.5px; color:#64748b;">Annual Cohort: 25,000 to 150,000</span>
                         </div>
                         <div class="sim-slider-group">
-                            <label><span>Rural Bandwidth:</span> <b id="lblBandwidth" style="color:#34d399;">2.4 Mbps</b></label>
+                            <label><span>Rural Bandwidth:</span> <b id="lblBandwidth" style="color:var(--healthy-green);">2.4 Mbps</b></label>
                             <input type="range" id="sliderBw" min="0.5" max="10" step="0.5" value="2.4" oninput="runSimulinkEngine()">
                             <span style="font-size:9.5px; color:#64748b;">Cellular Uplink Speed</span>
                         </div>
                         <div class="sim-slider-group">
-                            <label><span>District Specialists:</span> <b id="lblDoctors" style="color:#fbbf24;">2 Doctors</b></label>
+                            <label><span>District Specialists:</span> <b id="lblDoctors" style="color:var(--warning-amber);">2 Doctors</b></label>
                             <input type="range" id="sliderDocs" min="1" max="6" step="1" value="2" oninput="runSimulinkEngine()">
                             <span style="font-size:9.5px; color:#64748b;">Ophthalmologist Reading Pool</span>
                         </div>
                     </div>
 
                     <!-- LIVE SIMULINK CANVAS CHART -->
-                    <div style="background:#070a13; border:1px solid #1e293b; border-radius:10px; padding:12px;">
+                    <div style="background:#FFFFFF; border:1px solid var(--card-border); border-radius:10px; padding:12px;">
                         <canvas id="simulinkCanvas" width="800" height="220" style="width:100%; height:220px; display:block;"></canvas>
                     </div>
 
                     <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; font-family:'JetBrains Mono';">
-                        <div class="q-metric-box"><span>Annual Screening Capacity</span><b id="simCap" style="color:#34d399; font-size:16px;">100,000</b></div>
-                        <div class="q-metric-box"><span>Average Patient Queue Delay</span><b id="simWait" style="color:#38bdf8; font-size:16px;">0.4 hrs (No Backlog)</b></div>
-                        <div class="q-metric-box"><span>Annual Cellular Data Saved</span><b id="simDataSaved" style="color:#a78bfa; font-size:16px;">431.3 GB (75.0%)</b></div>
-                        <div class="q-metric-box"><span>Doctor Throughput Multiplier</span><b id="simMult" style="color:#34d399; font-size:16px;">7.0x (30s Review)</b></div>
+                        <div class="q-metric-box"><span>Annual Screening Capacity</span><b id="simCap" style="color:var(--healthy-green); font-size:16px;">100,000</b></div>
+                        <div class="q-metric-box"><span>Average Patient Queue Delay</span><b id="simWait" style="color:var(--primary-blue); font-size:16px;">0.4 hrs (No Backlog)</b></div>
+                        <div class="q-metric-box"><span>Annual Cellular Data Saved</span><b id="simDataSaved" style="color:var(--medical-teal); font-size:16px;">431.3 GB (75.0%)</b></div>
+                        <div class="q-metric-box"><span>Doctor Throughput Multiplier</span><b id="simMult" style="color:var(--healthy-green); font-size:16px;">7.0x (30s Review)</b></div>
                     </div>
 
-                    <div style="background:#0b1120; border-left:4px solid #38bdf8; padding:12px; border-radius:0 7px 7px 0; font-size:12px; line-height:1.5;" id="whatIfAdvice">
-                        <b>🤖 AI Resource Planning Advisory:</b> Target of 100,000+ patients ACHIEVED! Current configuration of <b>2 Specialists</b> and <b>2.4 Mbps</b> cellular link accommodates <b>100,000 patients/year</b> with negligible queue wait time.
+                    <div style="background:#F8FAFC; border-left:4px solid #38bdf8; padding:12px; border-radius:0 7px 7px 0; font-size:12px; line-height:1.5;" id="whatIfAdvice">
+                        <b> AI Resource Planning Advisory:</b> Target of 100,000+ patients ACHIEVED! Current configuration of <b>2 Specialists</b> and <b>2.4 Mbps</b> cellular link accommodates <b>100,000 patients/year</b> with negligible queue wait time.
                     </div>
                 </div>
 
                 <!-- MODEL BENCHMARKS & AUDIT TRAIL -->
                 <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:14px;">
-                    <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:14px;">
+                    <div style="background:#FFFFFF; border:1px solid var(--card-border); box-shadow:var(--shadow-card); border-radius:12px; padding:14px;">
                         <span style="font-size:10.5px; text-transform:uppercase; color:#64748b; font-weight:800;">16. Held-Out Indian Benchmark Validation</span>
                         <table style="width:100%; border-collapse:collapse; font-size:11px; font-family:'JetBrains Mono'; margin-top:8px;">
                             <thead>
-                                <tr style="border-bottom:1px solid #334155; color:#94a3b8; text-align:left;">
+                                <tr style="border-bottom:1px solid #334155; color:#64748B; text-align:left;">
                                     <th style="padding:5px;">Metric</th>
                                     <th style="padding:5px;">Target</th>
                                     <th style="padding:5px;">DRISHTI Pipeline</th>
@@ -917,32 +1422,32 @@
                             </thead>
                             <tbody>
                                 <tr style="border-bottom:1px solid #1e293b;">
-                                    <td style="padding:6px; color:#cbd5e1;">Referable Sensitivity</td>
+                                    <td style="padding:6px; color:#475569;">Referable Sensitivity</td>
                                     <td style="padding:6px;">&gt; 90.0%</td>
-                                    <td style="padding:6px; color:#34d399; font-weight:bold;">94.8%</td>
+                                    <td style="padding:6px; color:var(--healthy-green); font-weight:bold;">94.8%</td>
                                 </tr>
                                 <tr style="border-bottom:1px solid #1e293b;">
-                                    <td style="padding:6px; color:#cbd5e1;">Referable Specificity</td>
+                                    <td style="padding:6px; color:#475569;">Referable Specificity</td>
                                     <td style="padding:6px;">&gt; 85.0%</td>
-                                    <td style="padding:6px; color:#34d399; font-weight:bold;">92.4%</td>
+                                    <td style="padding:6px; color:var(--healthy-green); font-weight:bold;">92.4%</td>
                                 </tr>
                                 <tr style="border-bottom:1px solid #1e293b;">
-                                    <td style="padding:6px; color:#cbd5e1;">AUC-ROC</td>
+                                    <td style="padding:6px; color:#475569;">AUC-ROC</td>
                                     <td style="padding:6px;">&gt; 0.900</td>
-                                    <td style="padding:6px; color:#38bdf8;">0.981</td>
+                                    <td style="padding:6px; color:var(--primary-blue);">0.981</td>
                                 </tr>
                                 <tr>
-                                    <td style="padding:6px; color:#cbd5e1;">Quadratic Kappa</td>
+                                    <td style="padding:6px; color:#475569;">Quadratic Kappa</td>
                                     <td style="padding:6px;">&gt; 0.800</td>
-                                    <td style="padding:6px; color:#38bdf8;">0.916</td>
+                                    <td style="padding:6px; color:var(--primary-blue);">0.916</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:14px; display:flex; flex-direction:column; gap:6px;">
+                    <div style="background:#FFFFFF; border:1px solid var(--card-border); box-shadow:var(--shadow-card); border-radius:12px; padding:14px; display:flex; flex-direction:column; gap:6px;">
                         <span style="font-size:10.5px; text-transform:uppercase; color:#64748b; font-weight:800;">19. Live Clinical Audit Log</span>
-                        <div style="background:#0b1120; border:1px solid #1e293b; border-radius:7px; padding:8px 10px; font-family:'JetBrains Mono'; font-size:10px; color:#cbd5e1; display:flex; flex-direction:column; gap:4px; max-height:130px; overflow-y:auto;" id="auditLog">
+                        <div style="background:#F8FAFC; border:1px solid var(--card-border); border-radius:7px; padding:8px 10px; font-family:'JetBrains Mono'; font-size:10px; color:#475569; display:flex; flex-direction:column; gap:4px; max-height:130px; overflow-y:auto;" id="auditLog">
                             <div><span style="color:#64748b;">10:24:02</span> — Fundus capture acquired at Nanded PHC #4</div>
                             <div><span style="color:#64748b;">10:24:04</span> — Image Quality Gate: PASS (Focus: 41.8, Glare: 1.8%)</div>
                             <div><span style="color:#64748b;">10:24:06</span> — Edge AI completed: Level 2 Moderate NPDR (91.5%)</div>
@@ -960,17 +1465,17 @@
     <div class="modal" id="patientInputModal" onclick="closePatientInputModal(event)">
         <div class="input-sheet" onclick="event.stopPropagation()">
             <!-- HEADER -->
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid #1e293b; padding-bottom:12px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid var(--card-border); padding-bottom:12px;">
                 <div>
                     <div style="display:flex; align-items:center; gap:8px;">
-                        <span style="font-size:18px;">📋</span>
-                        <h2 style="font-size:18px; font-weight:800; color:#38bdf8;" id="inputModalTitle">PATIENT INTAKE & CLINICAL DATA ENTRY SPACE</h2>
+                        <span style="font-size:18px;"></span>
+                        <h2 style="font-size:18px; font-weight:800; color:var(--primary-blue);" id="inputModalTitle">PATIENT INTAKE & CLINICAL DATA ENTRY SPACE</h2>
                     </div>
-                    <div style="font-size:11px; color:#94a3b8; margin-top:2px;">Rural Health Center Screening Portal | Ayushman Bharat Health Account (ABDM) Compatible</div>
+                    <div style="font-size:11px; color:#64748B; margin-top:2px;">Rural Health Center Screening Portal | Ayushman Bharat Health Account (ABDM) Compatible</div>
                 </div>
                 <div style="display:flex; gap:8px; align-items:center;">
-                    <button class="btn-act" style="background:#0284c7; color:white; font-size:10.5px;" onclick="quickAutofillPatientData()">⚡ Quick Autofill Demo Patient</button>
-                    <button class="btn-act" style="background:#334155; color:white; padding:4px 8px;" onclick="closePatientInputModal()">✕</button>
+                    <button class="btn-act" style="background:var(--primary-blue); color:#FFFFFF; font-size:10.5px;" onclick="quickAutofillPatientData()"> Quick Autofill Demo Patient</button>
+                    <button class="btn-act" style="background:#F1F5F9; color:#475569; border:1px solid var(--card-border); font-size:16px; padding:2px 8px;" onclick="closePatientInputModal()">&times;</button>
                 </div>
             </div>
 
@@ -1013,7 +1518,7 @@
             <!-- SECTION 2: SYSTEMIC BIOMARKERS -->
             <div class="section-tag">
                 <span>2. Systemic Metabolic & Diabetes Profile</span>
-                <span style="color:#34d399; font-weight:normal; font-size:9.5px;">Biomarker Risk Engine</span>
+                <span style="color:var(--healthy-green); font-weight:normal; font-size:9.5px;">Biomarker Risk Engine</span>
             </div>
             <div class="form-grid">
                 <div class="form-group">
@@ -1090,45 +1595,58 @@
                 </div>
             </div>
 
-            <!-- SECTION 4: FUNDUS IMAGE SOURCE -->
+            <!-- SECTION 4: FUNDUS IMAGE SOURCE & PRESET SELECTION -->
             <div class="section-tag">
-                <span>4. Retinal Fundus Image Source</span>
-                <span style="color:#06b6d4; font-weight:normal; font-size:9.5px;">Real-Time AI Ingestion</span>
+                <span>4. Select Retinal Presentation / Predefined Preset</span>
+                <span style="color:var(--primary-blue); font-weight:700; font-size:10.5px;">Click any preset to auto-attach retinal scan</span>
             </div>
-            <div class="form-grid-2">
-                <div class="form-group">
-                    <label>Select Retinal Presentation / Preset</label>
-                    <select id="inpPreset" class="form-control" onchange="handlePresetSelect(this.value)">
-                        <option value="PAT_003_MODERATE" selected>Preset: Moderate NPDR with Hard Exudates (CSME Risk)</option>
-                        <option value="PAT_001_NORMAL">Preset: Normal Healthy Retina (Routine Screen)</option>
-                        <option value="PAT_002_MILD">Preset: Mild NPDR (Isolated Microaneurysms)</option>
-                        <option value="PAT_004_SEVERE">Preset: Severe NPDR (Extensive 4-Quadrant Hemorrhages)</option>
-                        <option value="PAT_005_PDR">Preset: Proliferative DR (Active Neovascularization)</option>
-                        <option value="PAT_006_BLURRED">Preset: Defective Quality (Motion Blur & Glare Flash)</option>
-                        <option value="CUSTOM">Upload My Own Local Fundus File (JPG/PNG)</option>
-                    </select>
+            
+            <div style="font-size:11.5px; color:#475569; margin-top:-4px;">
+                Choose one of the predefined patient retinal presentations below. The fundus scan will be automatically loaded into the AI screening engine upon registration:
+            </div>
+
+            <!-- PREDEFINED RETINAL PRESETS GRID (SHOWN IN FRONT OF USER) -->
+            <div class="preset-gallery-grid" id="modalPresetGrid">
+                <!-- Preset Cards injected dynamically -->
+            </div>
+
+            <!-- ACTIVE PRESET ATTACHMENT DETAILS -->
+            <div style="display:grid; grid-template-columns: 1fr auto; gap:12px; align-items:center; background:#F8FAFC; border:1.5px solid var(--card-border); border-radius:8px; padding:10px 14px; margin-top:6px;">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <img id="presetAttachedThumb" src="sample_images/user_preset_fundus_pat003.png" style="width:52px; height:52px; border-radius:6px; object-fit:contain; border:1px solid #DCE6F0; background:#0B1324; padding:2px; filter:contrast(1.1) brightness(1.08);">
+                    <div>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <b style="font-size:12.5px; color:#0F172A;" id="presetAttachedTitle">User Fundus: Moderate NPDR (PAT_003)</b>
+                            <span id="presetAttachedBadge" style="font-size:9.5px; font-weight:800; padding:2px 7px; border-radius:4px; background:#F97316; color:#FFF;">Grade 2 - Moderate</span>
+                        </div>
+                        <div style="font-size:10.5px; color:#155EEF; font-family:'JetBrains Mono',monospace; margin-top:2px;" id="presetAttachedFile">sample_images/user_preset_fundus_pat003.png</div>
+                        <div style="font-size:10px; color:#64748B; margin-top:2px;" id="presetAttachedDesc">Attached: Microaneurysms + blot hemorrhages + hard exudates (CSME Risk).</div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Or Upload Custom Fundus Image File</label>
-                    <input type="file" id="inpCustomFile" class="form-control" accept="image/*" onchange="handleModalCustomUpload(event)">
+                <div style="display:flex; gap:6px; align-items:center;">
+                    <button type="button" class="btn-act" style="background:#FFFFFF; border:1px solid var(--card-border); color:var(--primary-blue); font-size:11px;" onclick="openVirtualExplorerModal()">&#128193; Full Explorer</button>
+                    <button type="button" class="btn-act" style="background:#FFFFFF; border:1px solid var(--card-border); color:#475569; font-size:11px;" onclick="document.getElementById('inpCustomFile').click()">&#128228; Or Upload Custom</button>
+                    <input type="file" id="inpCustomFile" accept="image/*" style="display:none;" onchange="handleModalCustomUpload(event)">
                 </div>
             </div>
 
+            <input type="hidden" id="inpSelectedPresetId" value="user_preset_1">
+            
             <!-- SYSTEMIC + RETINAL RISK PREVIEW BAR -->
-            <div style="background:#070a13; border:1px solid #1e293b; border-radius:8px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;" id="riskPreviewBox">
+            <div style="background:#F8FAFC; border:1.5px solid var(--card-border); border-radius:8px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;" id="riskPreviewBox">
                 <div>
-                    <span style="font-size:10px; color:#94a3b8; text-transform:uppercase; font-weight:700;">Calculated Combined Microvascular Risk</span>
-                    <div style="font-size:13px; font-weight:800; color:#fbbf24;" id="riskPreviewTitle">⚠️ ELEVATED SYSTEMIC RISK (HbA1c: 8.4%, BP: 142/88)</div>
+                    <span style="font-size:10px; color:#64748B; text-transform:uppercase; font-weight:700;">Calculated Combined Microvascular Risk</span>
+                    <div style="font-size:13px; font-weight:800; color:var(--warning-amber);" id="riskPreviewTitle">&#9888; ELEVATED SYSTEMIC RISK (HbA1c: 8.4%, BP: 142/88)</div>
                 </div>
-                <div style="font-size:11px; color:#cbd5e1; text-align:right;">
+                <div style="font-size:11px; color:#475569; text-align:right;">
                     <div>Estimated Referral Urgency: <b style="color:#ef4444;" id="riskPreviewUrgency">PRIORITY 1 (4-6 Weeks)</b></div>
                 </div>
             </div>
 
             <!-- FOOTER BUTTONS -->
             <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:6px;">
-                <button class="btn-act" style="background:#334155; color:white;" onclick="closePatientInputModal()">Cancel</button>
-                <button class="btn-act" style="background:#059669; color:white; font-weight:800; padding:10px 20px; font-size:13px; box-shadow:0 4px 14px rgba(5,150,105,0.4);" onclick="submitPatientInputForm()">🚀 RUN AI SCREENING & ENROLL PATIENT</button>
+                <button class="btn-act" style="background:#F1F5F9; color:#475569; border:1px solid var(--card-border);" onclick="closePatientInputModal()">Cancel</button>
+                <button class="btn-act" style="background:var(--healthy-green); color:#FFFFFF; font-weight:800; padding:10px 20px; font-size:13px; " onclick="submitPatientInputForm()">Run AI Screening & Enroll</button>
             </div>
         </div>
     </div>
@@ -1198,8 +1716,8 @@
             </div>
 
             <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:4px;">
-                <button class="btn-act" style="background:#475569; color:white;" onclick="closeReportModal()">Close</button>
-                <button class="btn-act" style="background:#0284c7; color:white;" onclick="window.print()">🖨️ Print / Save PDF</button>
+                <button class="btn-act" style="background:#475569; color:#FFFFFF;" onclick="closeReportModal()">Close</button>
+                <button class="btn-act" style="background:var(--primary-blue); color:#FFFFFF;" onclick="window.print()"> Print / Save PDF</button>
             </div>
         </div>
     </div>
@@ -1211,7 +1729,7 @@ const PATIENTS = {
         id: 'PAT_001_NORMAL',
         name: 'Rajesh Patil', age: 52, sex: 'M', duration: '4 Yrs',
         grade: 0, gradeName: 'LEVEL 0 — NO APPARENT RETINOPATHY',
-        referable: false, refTitle: '🟢 NO REFERRAL REQUIRED',
+        referable: false, refTitle: ' NO REFERRAL REQUIRED',
         refReason: 'Routine annual diabetic eye screening in 12 months at local PHC.',
         priority: 4, priorityText: 'Routine (12 Mo)',
         quality: 'ACCEPTABLE', qClass: 'q-good',
@@ -1226,7 +1744,7 @@ const PATIENTS = {
         id: 'PAT_002_MILD',
         name: 'Sunita Deshmukh', age: 61, sex: 'F', duration: '7 Yrs',
         grade: 1, gradeName: 'LEVEL 1 — MILD NPDR',
-        referable: false, refTitle: '🟢 ROUTINE FOLLOW-UP',
+        referable: false, refTitle: ' ROUTINE FOLLOW-UP',
         refReason: 'Microaneurysms only. Schedule follow-up dilated exam in 6-12 months.',
         priority: 3, priorityText: 'Mild (6-12 Mo)',
         quality: 'ACCEPTABLE', qClass: 'q-good',
@@ -1241,7 +1759,7 @@ const PATIENTS = {
         id: 'PAT_003_MODERATE',
         name: 'Ganesh Kulkarni', age: 58, sex: 'M', duration: '11 Yrs',
         grade: 2, gradeName: 'LEVEL 2 — MODERATE NPDR',
-        referable: true, refTitle: '🔴 REFER TO OPHTHALMOLOGIST',
+        referable: true, refTitle: ' REFER TO OPHTHALMOLOGIST',
         refReason: 'Priority: HIGH | Reason: Level 2 Moderate NPDR + High DME Risk near foveal zone',
         priority: 1, priorityText: 'Priority 1 (Urgent)',
         quality: 'ACCEPTABLE', qClass: 'q-good',
@@ -1260,7 +1778,7 @@ Object.assign(PATIENTS, {
         id: 'PAT_004_SEVERE',
         name: 'Meena Shinde', age: 64, sex: 'F', duration: '16 Yrs',
         grade: 3, gradeName: 'LEVEL 3 — SEVERE NPDR',
-        referable: true, refTitle: '🔴 URGENT SPECIALIST REFERRAL',
+        referable: true, refTitle: ' URGENT SPECIALIST REFERRAL',
         refReason: 'Priority: URGENT | Reason: Meets ICDR 4-2-1 rule (>20 intraretinal hemorrhages in all 4 quadrants)',
         priority: 1, priorityText: 'Urgent (1-2 Wks)',
         quality: 'ACCEPTABLE', qClass: 'q-good',
@@ -1275,7 +1793,7 @@ Object.assign(PATIENTS, {
         id: 'PAT_005_PDR',
         name: 'Anand Rao', age: 67, sex: 'M', duration: '22 Yrs',
         grade: 4, gradeName: 'LEVEL 4 — PROLIFERATIVE DR',
-        referable: true, refTitle: '🚨 EMERGENCY SPECIALIST REFERRAL',
+        referable: true, refTitle: ' EMERGENCY SPECIALIST REFERRAL',
         refReason: 'Priority: EMERGENCY | Reason: Neovascularization on disc (NVD/NVE) and preretinal hemorrhage risk',
         priority: 1, priorityText: 'Emergency (<48h)',
         quality: 'ACCEPTABLE', qClass: 'q-good',
@@ -1290,7 +1808,7 @@ Object.assign(PATIENTS, {
         id: 'PAT_006_BLURRED',
         name: 'Kavita Joshi', age: 49, sex: 'F', duration: '5 Yrs',
         grade: -1, gradeName: 'UNGRADEABLE — DEFECTIVE IMAGE',
-        referable: true, refTitle: '⚠ RECAPTURE REQUIRED (NOT DIAGNOSTIC)',
+        referable: true, refTitle: ' RECAPTURE REQUIRED (NOT DIAGNOSTIC)',
         refReason: 'Image failed quality gate: Focus 8.2 (<15.0) & Corneal Glare 24.1% (>15%). Recapture required.',
         priority: 2, priorityText: 'Recapture Needed',
         quality: 'UNGRADEABLE', qClass: 'q-bad',
@@ -1335,7 +1853,7 @@ function toggleVoice() {
     voiceEnabled = !voiceEnabled;
     const btn = document.getElementById('btnVoiceToggle');
     if (btn) {
-        btn.innerHTML = voiceEnabled ? '🔊 Voice: ON' : '🔇 Voice: OFF';
+        btn.innerHTML = voiceEnabled ? ' Voice: ON' : ' Voice: OFF';
         btn.style.color = voiceEnabled ? '#34d399' : '#94a3b8';
     }
     if (voiceEnabled) speakGuidance("Voice assistance enabled for rural screening.");
@@ -1368,10 +1886,10 @@ function populateQueue() {
 
         item.innerHTML = `
             <div style="display:flex; justify-content:space-between; align-items:center;">
-                <b style="font-size:12px; color:#f8fafc;">${p.name}</b>
+                <b style="font-size:12px; color:#0F172A;">${p.name}</b>
                 <span class="p-badge ${pBadgeClass}">${p.priorityText}</span>
             </div>
-            <div style="display:flex; justify-content:space-between; font-size:10px; color:#94a3b8; margin-top:2px;">
+            <div style="display:flex; justify-content:space-between; font-size:10px; color:#64748B; margin-top:2px;">
                 <span>${p.id}</span>
                 <span style="font-weight:700; color:${p.referable ? '#fb7185' : '#34d399'};">${p.grade >= 0 ? 'Grade ' + p.grade : 'Ungradeable'}</span>
             </div>
@@ -1392,7 +1910,7 @@ function selectPatient(patId) {
     const qBadge = document.getElementById('qBadge');
     if (qBadge) {
         qBadge.className = 'q-status-badge ' + p.qClass;
-        qBadge.innerText = '● IMAGE QUALITY: ' + p.quality;
+        qBadge.innerText = ' IMAGE QUALITY: ' + p.quality;
     }
     document.getElementById('mBlur').innerText = p.focus + ' (>15.0)';
     document.getElementById('mIllum').innerText = p.illum;
@@ -1442,8 +1960,8 @@ function selectPatient(patId) {
     if (liveDens) liveDens.innerText = p.density;
     document.getElementById('liveCSME').innerText = p.csme;
     document.getElementById('evidenceNarrative').innerHTML = `
-        ✓ ${p.rationale}<br>
-        ✓ Feature attribution aligned with clinical microvascular biomarkers.
+         ${p.rationale}<br>
+         Feature attribution aligned with clinical microvascular biomarkers.
     `;
 
     // 4. Reliability Meter
@@ -1457,25 +1975,25 @@ function selectPatient(patId) {
     const relBadge = document.getElementById('relStatusBadge');
     if (relBadge) {
         relBadge.className = 'q-status-badge ' + (p.reliability === 'HIGH' ? 'q-good' : 'q-bad');
-        relBadge.innerText = p.reliability === 'HIGH' ? '🟢 HIGH RELIABILITY' : '🔴 UNRELIABLE (RECAPTURE)';
+        relBadge.innerText = p.reliability === 'HIGH' ? ' HIGH RELIABILITY' : ' UNRELIABLE (RECAPTURE)';
     }
 
     // 5. Field Mode Sync
     const fQ = document.getElementById('fieldQStatus');
-    if (fQ) fQ.innerText = (p.quality === 'ACCEPTABLE' ? '🟢 IMAGE QUALITY: GOOD' : '🔴 IMAGE QUALITY: UNGRADEABLE');
+    if (fQ) fQ.innerText = (p.quality === 'ACCEPTABLE' ? ' IMAGE QUALITY: GOOD' : ' IMAGE QUALITY: UNGRADEABLE');
     const fR = document.getElementById('fieldResultBox');
     if (fR) {
         if (p.grade === -1) {
             fR.style.color = '#ef4444';
-            fR.innerText = '⚠ RECAPTURE REQUIRED: ' + p.guidance;
+            fR.innerText = ' RECAPTURE REQUIRED: ' + p.guidance;
         } else if (p.referable) {
             fR.style.color = '#fbbf24';
             const gShort = (p.gradeName && p.gradeName.includes('—')) ? p.gradeName.split('—')[1].trim() : (p.gradeName || 'Referral');
-            fR.innerText = '⚠ SPECIALIST REFERRAL REQUIRED (' + gShort + ')';
+            fR.innerText = ' SPECIALIST REFERRAL REQUIRED (' + gShort + ')';
         } else {
             fR.style.color = '#34d399';
             const gShort = (p.gradeName && p.gradeName.includes('—')) ? p.gradeName.split('—')[1].trim() : (p.gradeName || 'Routine');
-            fR.innerText = '✓ ROUTINE SCREENING PASS (' + gShort + ')';
+            fR.innerText = ' ROUTINE SCREENING PASS (' + gShort + ')';
         }
     }
 
@@ -1682,7 +2200,7 @@ function updateRealtimeCanvas() {
         ctx.fillStyle = '#fef2f2';
         ctx.font = 'bold 24px Inter, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText('❌ NOT AN EYE / RETINAL IMAGE', w / 2, 195);
+        ctx.fillText(' NOT AN EYE / RETINAL IMAGE', w / 2, 195);
         
         ctx.font = 'bold 14px Inter, sans-serif';
         ctx.fillStyle = '#fca5a5';
@@ -1696,7 +2214,7 @@ function updateRealtimeCanvas() {
         
         ctx.fillStyle = '#fbbf24';
         ctx.font = 'bold 12px Inter, sans-serif';
-        ctx.fillText('⚠ Analysis suspended to prevent fake diagnostic reading.', w / 2, 350);
+        ctx.fillText(' Analysis suspended to prevent fake diagnostic reading.', w / 2, 350);
         ctx.restore();
         return; // ABSOLUTELY NO FAKE LESIONS OR HEATMAPS DRAWN
     }
@@ -2065,7 +2583,7 @@ function processRealEyeVerificationAndAnalysis(img, filename, base64Data) {
             handleRejectedNonEyeImage(filename, apiRes.message);
             if (riskTitle) {
                 riskTitle.style.color = '#ef4444';
-                riskTitle.innerText = `❌ VERIFICATION FAILED: NON-RETINAL IMAGE (${filename})`;
+                riskTitle.innerText = ` VERIFICATION FAILED: NON-RETINAL IMAGE (${filename})`;
             }
             if (riskUrg) {
                 riskUrg.style.color = '#ef4444';
@@ -2078,7 +2596,7 @@ function processRealEyeVerificationAndAnalysis(img, filename, base64Data) {
             handleVerifiedEyeImage(img, filename, apiRes);
             if (riskTitle) {
                 riskTitle.style.color = '#10b981';
-                riskTitle.innerText = `✅ VERIFIED RETINAL FUNDUS: ${apiRes.grade_name} (DR Damage: ${apiRes.dr_damage_percentage}%)`;
+                riskTitle.innerText = ` VERIFIED RETINAL FUNDUS: ${apiRes.grade_name} (DR Damage: ${apiRes.dr_damage_percentage}%)`;
             }
             if (riskUrg) {
                 riskUrg.style.color = apiRes.referable ? '#ef4444' : '#10b981';
@@ -2105,7 +2623,7 @@ function fallbackClientSideVerification(img, filename) {
         handleRejectedNonEyeImage(filename, currentModalRejectionMsg);
         if (riskTitle) {
             riskTitle.style.color = '#ef4444';
-            riskTitle.innerText = `❌ VERIFICATION FAILED: NON-RETINAL IMAGE (${filename})`;
+            riskTitle.innerText = ` VERIFICATION FAILED: NON-RETINAL IMAGE (${filename})`;
         }
         if (riskUrg) {
             riskUrg.style.color = '#ef4444';
@@ -2119,17 +2637,17 @@ function fallbackClientSideVerification(img, filename) {
         const hCount = lesions.hemo.length;
         const eCount = lesions.exudates.length;
 
-        let grade = 0, gradeName = "LEVEL 0 — NO APPARENT RETINOPATHY", referable = false, refTitle = "🟢 NO REFERRAL REQUIRED";
+        let grade = 0, gradeName = "LEVEL 0 — NO APPARENT RETINOPATHY", referable = false, refTitle = " NO REFERRAL REQUIRED";
         let refReason = "No microaneurysms, blot hemorrhages, or hard exudates detected on genuine retinal scan.";
 
         if (mCount > 0 && mCount <= 5 && hCount === 0 && eCount === 0) {
-            grade = 1; gradeName = "LEVEL 1 — MILD NPDR"; referable = false; refTitle = "🟢 ROUTINE FOLLOW-UP";
+            grade = 1; gradeName = "LEVEL 1 — MILD NPDR"; referable = false; refTitle = " ROUTINE FOLLOW-UP";
             refReason = `Isolated microaneurysms detected (${mCount} MAs). No hemorrhages or lipid exudates.`;
         } else if (hCount >= 15 || mCount >= 20) {
-            grade = 3; gradeName = "LEVEL 3 — SEVERE NPDR"; referable = true; refTitle = "🔴 URGENT SPECIALIST REFERRAL";
+            grade = 3; gradeName = "LEVEL 3 — SEVERE NPDR"; referable = true; refTitle = " URGENT SPECIALIST REFERRAL";
             refReason = `Extensive retinal lesion burden (${hCount} blot hemorrhages, ${mCount} MAs). ICDR 4-2-1 criteria met.`;
         } else if (mCount > 5 || hCount > 0 || eCount > 0) {
-            grade = 2; gradeName = "LEVEL 2 — MODERATE NPDR"; referable = true; refTitle = "🔴 REFER TO OPHTHALMOLOGIST";
+            grade = 2; gradeName = "LEVEL 2 — MODERATE NPDR"; referable = true; refTitle = " REFER TO OPHTHALMOLOGIST";
             refReason = `Significant lesions detected: ${mCount} MAs, ${hCount} hemorrhages, ${eCount} exudates. CSME: ${lesions.csme_positive ? 'Positive' : 'Negative'}.`;
         }
 
@@ -2166,7 +2684,7 @@ function handleRejectedNonEyeImage(filename, reasonMsg) {
         grade: -99,
         gradeName: 'REJECTED — NOT AN EYE / RETINAL IMAGE',
         referable: false,
-        refTitle: '❌ REJECTED: NON-RETINAL IMAGE DETECTED',
+        refTitle: ' REJECTED: NON-RETINAL IMAGE DETECTED',
         refReason: reasonMsg || 'Anatomical eye recognition failed: Uploaded photograph does not match human ocular fundus criteria (Missing optic disc, retinal vasculature, or fundus chromatic profile).',
         priority: 4,
         priorityText: 'REJECTED',
@@ -2178,7 +2696,7 @@ function handleRejectedNonEyeImage(filename, reasonMsg) {
         glare: 'N/A',
         guidance: 'The uploaded image was examined by the trained AI verifier and confirmed as a non-retinal image. Please upload an authentic ocular fundus photograph. Diagnosis aborted to prevent false readings.',
         guidanceClass: 'guidance-recapture',
-        guidanceTitle: '❌ Anatomical Verification Failed:',
+        guidanceTitle: ' Anatomical Verification Failed:',
         mas: 'None (Invalid)',
         hemo: 'None (Invalid)',
         exudates: 'None (Invalid)',
@@ -2195,10 +2713,10 @@ function handleRejectedNonEyeImage(filename, reasonMsg) {
     PATIENTS['PAT_REJECTED'] = customCase;
     selectPatient('PAT_REJECTED');
 
-    logAudit(`<b>❌ IMAGE REJECTED:</b> Uploaded file <b>${filename}</b> failed anatomical retinal verification tests. Diagnostic analysis aborted.`);
+    logAudit(`<b> IMAGE REJECTED:</b> Uploaded file <b>${filename}</b> failed anatomical retinal verification tests. Diagnostic analysis aborted.`);
     speakGuidance("Uploaded image is not a retinal photograph. Anatomical verification failed. Please upload an authentic eye fundus image.");
 
-    alert(`❌ NOT AN EYE / RETINAL IMAGE DETECTED!
+    alert(` NOT AN EYE / RETINAL IMAGE DETECTED!
 
 The AI system examined "${filename}" and confirmed it is NOT an authentic retinal fundus photograph.
 
@@ -2282,7 +2800,7 @@ function handleVerifiedEyeImage(img, filename, res) {
     logAudit(`<b>Authentic Retinal Fundus Verified:</b> <b>${filename}</b> (Confidence: ${confVal}%). Grade: ${res.grade_name} | DR Damage: ${drPct}%. MAs: ${res.mas_count}, Hemorrhages: ${res.hemo_count}, Exudates: ${res.exudates_count}. Grad-CAM: Ready.`);
     speakGuidance("Authentic retinal photograph verified. Real-time diagnostic evaluation completed: " + res.grade_name + ". Retinopathy damage " + drPct + " percent.");
 
-    alert(`✅ AUTHENTIC RETINAL SCAN VERIFIED!
+    alert(` AUTHENTIC RETINAL SCAN VERIFIED!
 
 Patient Image: ${filename}
 AI Authenticity Confidence: ${confVal}%
@@ -2332,13 +2850,13 @@ function runSimulinkEngine() {
     if (adviceBox) {
         if (annualCapacity >= 100000 && waitHours < 1.0) {
             adviceBox.style.borderLeftColor = '#34d399';
-            adviceBox.innerHTML = `<b>🤖 AI Resource Planning Advisory:</b> Target of 100,000+ patients ACHIEVED! Current configuration of <b>${docs} Specialists</b> and <b>${bw} Mbps</b> link accommodates <b>${annualCapacity.toLocaleString()} patients/year</b> with negligible review delay (${(waitHours*60).toFixed(0)}m).`;
+            adviceBox.innerHTML = `<b> AI Resource Planning Advisory:</b> Target of 100,000+ patients ACHIEVED! Current configuration of <b>${docs} Specialists</b> and <b>${bw} Mbps</b> link accommodates <b>${annualCapacity.toLocaleString()} patients/year</b> with negligible review delay (${(waitHours*60).toFixed(0)}m).`;
         } else if (bw < 1.0) {
             adviceBox.style.borderLeftColor = '#f59e0b';
-            adviceBox.innerHTML = `<b>⚠️ Uplink Congestion Warning:</b> At <b>${bw} Mbps</b>, remote PHC image transmission causes localized queue delays. Recommendation: Enable ultra-compact progressive JPEG-2000 encoding.`;
+            adviceBox.innerHTML = `<b> Uplink Congestion Warning:</b> At <b>${bw} Mbps</b>, remote PHC image transmission causes localized queue delays. Recommendation: Enable ultra-compact progressive JPEG-2000 encoding.`;
         } else {
             adviceBox.style.borderLeftColor = '#ef4444';
-            adviceBox.innerHTML = `<b>⚠️ Specialist Bottleneck:</b> With <b>${docs} Specialist</b> for ${patients} patients/day, the review queue exceeds target SLA (Wait: ${waitHours.toFixed(1)} hrs). Recommend adding 1 additional reading specialist.`;
+            adviceBox.innerHTML = `<b> Specialist Bottleneck:</b> With <b>${docs} Specialist</b> for ${patients} patients/day, the review queue exceeds target SLA (Wait: ${waitHours.toFixed(1)} hrs). Recommend adding 1 additional reading specialist.`;
         }
     }
 
@@ -2419,7 +2937,7 @@ function confirmDiagnosis() {
     if (stopwatchRunning) toggleStopwatch();
     const p = PATIENTS[currentPatientId];
     logAudit(`Clinical Diagnosis <b>CONFIRMED</b> by Dr. R. Sharma, MS (Ophth) in <b>${stopwatchSeconds.toFixed(1)}s</b>. Patient: ${p.id} (${p.gradeName}). Digitally cryptographically signed.`);
-    alert(`✅ CASE DIGITALLY SIGNED & VALIDATED!\n\nPatient: ${p.id} (${p.name})\nConfirmed Grade: ${p.gradeName}\nReview Duration: ${stopwatchSeconds.toFixed(1)} seconds (<30s Target Met)\nAudit entry timestamped to secure district log.`);
+    alert(` CASE DIGITALLY SIGNED & VALIDATED!\n\nPatient: ${p.id} (${p.name})\nConfirmed Grade: ${p.gradeName}\nReview Duration: ${stopwatchSeconds.toFixed(1)} seconds (<30s Target Met)\nAudit entry timestamped to secure district log.`);
 }
 
 function modifyGradePrompt() {
@@ -2437,13 +2955,13 @@ function triggerRecapture() {
     const p = PATIENTS[currentPatientId];
     logAudit(`Recapture Requested by Clinician for <b>${p.id}</b>. Notification dispatched to Nanded PHC operator.`);
     speakGuidance("Recapture requested. Please re-acquire image with improved pupil alignment.");
-    alert(`⚠ RECAPTURE REQUESTED\n\nASHA operator at PHC notified to recapture retinal image for ${p.name}. Quality reason dispatched.`);
+    alert(` RECAPTURE REQUESTED\n\nASHA operator at PHC notified to recapture retinal image for ${p.name}. Quality reason dispatched.`);
 }
 
 function referSpecialist() {
     const p = PATIENTS[currentPatientId];
     logAudit(`Priority Referral Slip Issued for <b>${p.id}</b> (${p.name}) to District Eye Hospital.`);
-    alert(`🏥 SPECIALIST REFERRAL CONFIRMED\n\nPatient ${p.name} routed to Nanded District Eye Hospital.\nAutomated SMS sent to patient & PHC ANM.`);
+    alert(` SPECIALIST REFERRAL CONFIRMED\n\nPatient ${p.name} routed to Nanded District Eye Hospital.\nAutomated SMS sent to patient & PHC ANM.`);
 }
 
 function simulateFieldCapture() {
@@ -2465,7 +2983,7 @@ function runFieldAI() {
 function sendToHub() {
     const p = PATIENTS[currentPatientId];
     logAudit(`Telemetry bundle for <b>${p.id}</b> queued for District Hub Priority Triage.`);
-    alert(`📤 SENT TO DISTRICT TELE-HUB\n\nPatient ${p.id} bundle sent via secure 2.4 Mbps cellular uplink.\nPriority Triage Queue Position: HIGH.`);
+    alert(` SENT TO DISTRICT TELE-HUB\n\nPatient ${p.id} bundle sent via secure 2.4 Mbps cellular uplink.\nPriority Triage Queue Position: HIGH.`);
 }
 
 function toggleNetwork() {
@@ -2484,7 +3002,7 @@ function toggleNetwork() {
         if (netText) { netText.innerText = 'OFFLINE (Autonomous PHC)'; netText.style.color = '#fbbf24'; }
         if (pulse) pulse.style.background = '#f59e0b';
         logAudit(`Telemedicine Network state: <b>OFFLINE</b>. Edge storage mode active.`);
-        alert(`📡 RURAL OFFLINE MODE ACTIVE\n\nSystem is fully operational offline.\nImages and AI assessments are securely stored locally at PHC and will auto-sync when cellular signal returns.`);
+        alert(` RURAL OFFLINE MODE ACTIVE\n\nSystem is fully operational offline.\nImages and AI assessments are securely stored locally at PHC and will auto-sync when cellular signal returns.`);
     }
 }
 
@@ -2498,7 +3016,7 @@ function syncOfflineQueue() {
         const counter = document.getElementById('pendingSyncCount');
         if (counter) counter.innerText = '0 Cases';
         logAudit(`Manual Sync: <b>3 pending cases</b> synchronized to District Cloud.`);
-        alert(`🔄 SYNCHRONIZATION COMPLETE!\n\nAll local PHC screening records have been uploaded and encrypted.`);
+        alert(` SYNCHRONIZATION COMPLETE!\n\nAll local PHC screening records have been uploaded and encrypted.`);
     }, 1200);
 }
 
@@ -2692,19 +3210,19 @@ function updateRiskPreview() {
 
     if (hba1c >= 8.5 || sys >= 145 || dur >= 15) {
         title.style.color = '#ef4444';
-        title.innerText = `🚨 HIGH MICROVASCULAR PROGRESSION RISK (HbA1c: ${hba1c}%, BP: ${sys} mmHg)`;
+        title.innerText = ` HIGH MICROVASCULAR PROGRESSION RISK (HbA1c: ${hba1c}%, BP: ${sys} mmHg)`;
         urg.style.color = '#ef4444';
         urg.innerText = 'HIGH PRIORITY (Accelerated Retinal Damage Risk)';
         if (box) box.style.borderColor = '#ef4444';
     } else if (hba1c >= 7.5 || sys >= 135 || dur >= 8) {
         title.style.color = '#fbbf24';
-        title.innerText = `⚠️ ELEVATED SYSTEMIC RISK (HbA1c: ${hba1c}%, Duration: ${dur} Yrs)`;
+        title.innerText = ` ELEVATED SYSTEMIC RISK (HbA1c: ${hba1c}%, Duration: ${dur} Yrs)`;
         urg.style.color = '#fbbf24';
         urg.innerText = 'PRIORITY 2 (Moderate DME Risk)';
         if (box) box.style.borderColor = '#fbbf24';
     } else {
         title.style.color = '#34d399';
-        title.innerText = `✓ CONTROLLED SYSTEMIC PROFILE (HbA1c: ${hba1c}%, BP: ${sys} mmHg)`;
+        title.innerText = ` CONTROLLED SYSTEMIC PROFILE (HbA1c: ${hba1c}%, BP: ${sys} mmHg)`;
         urg.style.color = '#34d399';
         urg.innerText = 'ROUTINE SURVEILLANCE';
         if (box) box.style.borderColor = '#34d399';
@@ -2731,7 +3249,7 @@ function handleModalCustomUpload(event) {
     const riskUrg = document.getElementById('riskPreviewUrgency');
     if (riskTitle) {
         riskTitle.style.color = '#38bdf8';
-        riskTitle.innerText = `⏳ ANALYZING & VERIFYING RETINAL FUNDUS (${file.name})...`;
+        riskTitle.innerText = ` ANALYZING & VERIFYING RETINAL FUNDUS (${file.name})...`;
     }
     if (riskUrg) {
         riskUrg.style.color = '#38bdf8';
@@ -2770,19 +3288,21 @@ function submitPatientInputForm() {
     const va = document.getElementById('inpVA')?.value || '6/12 (Moderate)';
     const symptoms = document.getElementById('inpSymptoms')?.value || 'Routine examination';
     const priorTreat = document.getElementById('inpPriorTreat')?.value || 'None';
-    const presetKey = document.getElementById('inpPreset')?.value || 'PAT_003_MODERATE';
+    const selectedPresetId = document.getElementById('inpSelectedPresetId')?.value || 'user_preset_1';
+    const chosenPreset = REGISTRATION_PRESETS.find(p => p.id === selectedPresetId) || REGISTRATION_PRESETS[0];
+    const presetKey = chosenPreset ? chosenPreset.id : 'PAT_003_MODERATE';
 
     if (presetKey === 'CUSTOM') {
         if (!modalCustomImg && !customUploadedImg) {
-            alert("⚠️ Please choose an authentic retinal fundus image file first using 'Choose File'.");
+            alert(" Please choose an authentic retinal fundus image file first using 'Choose File'.");
             return;
         }
         if (currentModalUploadStatus === 'verifying') {
-            alert("⏳ Retinal AI verification is currently running on the uploaded image. Please wait 2 seconds and click again.");
+            alert(" Retinal AI verification is currently running on the uploaded image. Please wait 2 seconds and click again.");
             return;
         }
         if (currentModalUploadStatus === 'rejected') {
-            alert("❌ CANNOT ENROLL PATIENT WITH NON-RETINAL IMAGE!\n\n" + (currentModalRejectionMsg || "The uploaded file failed anatomical eye verification. Please provide an authentic ocular fundus camera photograph."));
+            alert(" CANNOT ENROLL PATIENT WITH NON-RETINAL IMAGE!\n\n" + (currentModalRejectionMsg || "The uploaded file failed anatomical eye verification. Please provide an authentic ocular fundus camera photograph."));
             return;
         }
     }
@@ -2793,6 +3313,13 @@ function submitPatientInputForm() {
     if (!targetId) {
         const cleanName = name.split(' ')[0].toUpperCase().replace(/[^A-Z]/g, '');
         targetId = 'PAT_' + cleanName + '_' + Math.floor(Math.random() * 899 + 100);
+    }
+
+    let attachedImg = (presetKey === 'CUSTOM' ? (modalCustomImg || customUploadedImg) : activeRegistrationPresetImg);
+    if (!attachedImg && chosenPreset) {
+        attachedImg = new Image();
+        attachedImg.crossOrigin = 'anonymous';
+        attachedImg.src = chosenPreset.path;
     }
 
     const newPatient = Object.assign({}, basePatient, {
@@ -2811,9 +3338,31 @@ function submitPatientInputForm() {
         phc: phc,
         symptoms: symptoms,
         priorTreat: priorTreat,
-        customImg: (presetKey === 'CUSTOM' ? (modalCustomImg || customUploadedImg) : null),
-        rationale: `Clinical Biomarkers: ${basePatient.rationale} Systemic Control: HbA1c ${hba1c}%, BP ${bpSys}/${bpDia} mmHg, Duration ${duration} yrs. Eye Examined: ${eye} (BCVA ${va}). Complaints: ${symptoms}.`
+        grade: chosenPreset ? chosenPreset.grade : basePatient.grade,
+        gradeName: chosenPreset ? (chosenPreset.grade_label.toUpperCase()) : basePatient.gradeName,
+        referable: chosenPreset ? chosenPreset.referable : basePatient.referable,
+        refTitle: chosenPreset ? (chosenPreset.referable ? 'REFER TO OPHTHALMOLOGIST' : 'NO REFERRAL REQUIRED') : basePatient.refTitle,
+        refReason: chosenPreset ? chosenPreset.description : basePatient.refReason,
+        customImg: attachedImg,
+        imgPath: chosenPreset ? chosenPreset.path : null,
+        rationale: `Clinical Biomarkers: ${chosenPreset ? chosenPreset.description : basePatient.rationale} Systemic Control: HbA1c ${hba1c}%, BP ${bpSys}/${bpDia} mmHg, Duration ${duration} yrs. Eye Examined: ${eye} (BCVA ${va}). Complaints: ${symptoms}.`
     });
+
+    if (attachedImg) {
+        customUploadedImg = attachedImg;
+        // Trigger live analysis in background if possible
+        try {
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = attachedImg.naturalWidth || 512;
+            tempCanvas.height = attachedImg.naturalHeight || 512;
+            const tctx = tempCanvas.getContext('2d');
+            tctx.drawImage(attachedImg, 0, 0);
+            const b64 = tempCanvas.toDataURL('image/png');
+            processRealEyeVerificationAndAnalysis(attachedImg, (chosenPreset ? chosenPreset.filename : 'enrolled_patient.png'), b64);
+        } catch(e) {
+            console.warn("Analysis trigger fallback:", e);
+        }
+    }
 
     if (hba1c > 8.5 && newPatient.grade >= 2) {
         newPatient.priority = 1;
@@ -2828,7 +3377,7 @@ function submitPatientInputForm() {
 
     speakGuidance(`Patient ${name} successfully enrolled. AI screening complete.`);
     logAudit(`<b>Patient Clinical Data Enrolled:</b> ${targetId} (${name}, ${age}y, HbA1c: ${hba1c}%, BP: ${bpSys}/${bpDia}, Eye: ${eye}). Status: ${newPatient.gradeName}`);
-    alert(`✅ PATIENT INTAKE & AI SCREENING COMPLETED!
+    alert(` PATIENT INTAKE & AI SCREENING COMPLETED!
 
 Patient: ${name} (${targetId})
 Age: ${age} | Gender: ${gender} | Eye: ${eye}
@@ -2850,28 +3399,28 @@ let currentGradcamMode = 'pp'; // 'pp' = Grad-CAM++, 'std' = Standard Grad-CAM, 
 const I18N = {
     en: {
         brandSubtitle: "Real-Time Functional Clinical & Telemedicine Portal | MathWorks SIH26038",
-        roleField: "📱 Field Mode (ASHA)",
-        roleClinical: "👨‍⚕️ Clinical Mode (Ophthalmologist)",
-        roleAdmin: "🗺️ District Admin & Simulink",
-        btnInputPatient: "➕ Input Patient Data",
-        btnRegisterPatient: "➕ REGISTER NEW PATIENT",
-        btnReport: "📄 Report",
+        roleField: " Field Mode (ASHA)",
+        roleClinical: " Clinical Mode (Ophthalmologist)",
+        roleAdmin: " District Admin & Simulink",
+        btnInputPatient: " Input Patient Data",
+        btnRegisterPatient: " Register New Patient",
+        btnReport: " Report",
         triageQueueTitle: "Priority Triage Queue",
         triageSortedBy: "Sorted by Risk",
         analyzeCustomTitle: "Analyze Custom Retina",
         dropFundusText: "Drop Any Fundus Image",
         dropFundusSub: "or click to browse local files (JPG/PNG)",
-        voiceOn: "🔊 Voice: ON",
-        voiceOff: "🔇 Voice: OFF",
-        contrastText: "🌓 Contrast",
-        hotkeysText: "⌨️ Hotkeys",
-        qQualityTitle: "● IMAGE QUALITY:",
-        refNoNeeded: "🟢 NO REFERRAL REQUIRED",
-        refRoutineFollowup: "🟢 ROUTINE FOLLOW-UP",
-        refToOpht: "🔴 REFER TO OPHTHALMOLOGIST",
-        refUrgentSpecialist: "🔴 URGENT SPECIALIST REFERRAL",
-        refEmergencySpecialist: "🚨 EMERGENCY SPECIALIST REFERRAL",
-        refRecapture: "⚠️ RECAPTURE REQUIRED (NOT DIAGNOSTIC)",
+        voiceOn: " Voice: ON",
+        voiceOff: " Voice: OFF",
+        contrastText: " Contrast",
+        hotkeysText: " Hotkeys",
+        qQualityTitle: " IMAGE QUALITY:",
+        refNoNeeded: " NO REFERRAL REQUIRED",
+        refRoutineFollowup: " ROUTINE FOLLOW-UP",
+        refToOpht: " REFER TO OPHTHALMOLOGIST",
+        refUrgentSpecialist: " URGENT SPECIALIST REFERRAL",
+        refEmergencySpecialist: " EMERGENCY SPECIALIST REFERRAL",
+        refRecapture: " RECAPTURE REQUIRED (NOT DIAGNOSTIC)",
         grade0: "LEVEL 0 — NO APPARENT RETINOPATHY",
         grade1: "LEVEL 1 — MILD NPDR",
         grade2: "LEVEL 2 — MODERATE NPDR",
@@ -2891,28 +3440,28 @@ const I18N = {
     },
     hi: {
         brandSubtitle: "रीयल-टाइम रेटिनल स्क्रीनिंग व टेलीमेडिसिन पोर्टल | MathWorks SIH26038",
-        roleField: "📱 फील्ड मोड (आशा कार्यकर्ता)",
-        roleClinical: "👨‍⚕️ क्लिनिकल मोड (नेत्र रोग विशेषज्ञ)",
-        roleAdmin: "🗺️ जिला प्रशासन व सिम्युलिंक",
-        btnInputPatient: "➕ मरीज का विवरण जोड़ें",
-        btnRegisterPatient: "➕ नया मरीज पंजीकृत करें",
-        btnReport: "📄 नैदानिक रिपोर्ट",
+        roleField: " फील्ड मोड (आशा कार्यकर्ता)",
+        roleClinical: " क्लिनिकल मोड (नेत्र रोग विशेषज्ञ)",
+        roleAdmin: " जिला प्रशासन व सिम्युलिंक",
+        btnInputPatient: " मरीज का विवरण जोड़ें",
+        btnRegisterPatient: " नया मरीज पंजीकृत करें",
+        btnReport: " नैदानिक रिपोर्ट",
         triageQueueTitle: "प्राथमिकता ट्राइएज कतार",
         triageSortedBy: "जोखिम अनुसार क्रमबद्ध",
         analyzeCustomTitle: "कस्टम रेटिना जांचें",
         dropFundusText: "फंडस छवि यहां खींचें",
         dropFundusSub: "या स्थानीय फाइलें ब्राउज़ करने के लिए क्लिक करें",
-        voiceOn: "🔊 आवाज: चालू",
-        voiceOff: "🔇 आवाज: बंद",
-        contrastText: "🌓 कंट्रास्ट",
-        hotkeysText: "⌨️ शॉर्टकट",
-        qQualityTitle: "● छवि गुणवत्ता:",
-        refNoNeeded: "🟢 रेफरल की आवश्यकता नहीं",
-        refRoutineFollowup: "🟢 नियमित अनुवर्ती जांच",
-        refToOpht: "🔴 नेत्र रोग विशेषज्ञ को रेफर करें",
-        refUrgentSpecialist: "🔴 अति आवश्यक विशेषज्ञ रेफरल",
-        refEmergencySpecialist: "🚨 आपातकालीन विशेषज्ञ रेफरल (<48 घंटे)",
-        refRecapture: "⚠️ पुनः छवि लेना आवश्यक (अनैदानिक)",
+        voiceOn: " आवाज: चालू",
+        voiceOff: " आवाज: बंद",
+        contrastText: " कंट्रास्ट",
+        hotkeysText: " शॉर्टकट",
+        qQualityTitle: " छवि गुणवत्ता:",
+        refNoNeeded: " रेफरल की आवश्यकता नहीं",
+        refRoutineFollowup: " नियमित अनुवर्ती जांच",
+        refToOpht: " नेत्र रोग विशेषज्ञ को रेफर करें",
+        refUrgentSpecialist: " अति आवश्यक विशेषज्ञ रेफरल",
+        refEmergencySpecialist: " आपातकालीन विशेषज्ञ रेफरल (<48 घंटे)",
+        refRecapture: " पुनः छवि लेना आवश्यक (अनैदानिक)",
         grade0: "स्तर 0 — कोई रेटिनोपैथी नहीं",
         grade1: "स्तर 1 — हल्का एनपीडीआर (Mild NPDR)",
         grade2: "स्तर 2 — मध्यम एनपीडीआर (Moderate NPDR)",
@@ -2932,28 +3481,28 @@ const I18N = {
     },
     ta: {
         brandSubtitle: "நிகழ்நேர விழித்திரை திரையிடல் மற்றும் டெலிமெடிசின் போர்டல் | MathWorks SIH26038",
-        roleField: "📱 கள முறை (ஆஷா)",
-        roleClinical: "👨‍⚕️ மருத்துவ முறை (கண் மருத்துவர்)",
-        roleAdmin: "🗺️ மாவட்ட நிர்வாகம் & சிமுலிங்க்",
-        btnInputPatient: "➕ நோயாளி தரவை உள்ளிடுக",
-        btnRegisterPatient: "➕ புதிய நோயாளியை பதிவு செய்க",
-        btnReport: "📄 அறிக்கை",
+        roleField: " கள முறை (ஆஷா)",
+        roleClinical: " மருத்துவ முறை (கண் மருத்துவர்)",
+        roleAdmin: " மாவட்ட நிர்வாகம் & சிமுலிங்க்",
+        btnInputPatient: " நோயாளி தரவை உள்ளிடுக",
+        btnRegisterPatient: " புதிய நோயாளியை பதிவு செய்க",
+        btnReport: " அறிக்கை",
         triageQueueTitle: "முன்னுரிமை வரிசை",
         triageSortedBy: "ஆபத்து அடிப்படையில்",
         analyzeCustomTitle: "தனிப்பயன் விழித்திரையை ஆராய்க",
         dropFundusText: "பண்டஸ் படத்தை இங்கே விடவும்",
         dropFundusSub: "அல்லது கோப்புகளைத் தேர்ந்தெடுக்க கிளிக் செய்க",
-        voiceOn: "🔊 குரல்: ஆன்",
-        voiceOff: "🔇 குரல்: ஆஃப்",
-        contrastText: "🌓 மாறுபாடு",
-        hotkeysText: "⌨️ குறுக்குவழிகள்",
-        qQualityTitle: "● படத்தின் தரம்:",
-        refNoNeeded: "🟢 பரிந்துரை தேவையில்லை",
-        refRoutineFollowup: "🟢 வழக்கமான பின்தொடர்தல்",
-        refToOpht: "🔴 கண் மருத்துவரிடம் பரிந்துரைக்கவும்",
-        refUrgentSpecialist: "🔴 அவசர நிபுணர் பரிந்துரை",
-        refEmergencySpecialist: "🚨 தீவிர அவசர பரிந்துரை (<48 மணி)",
-        refRecapture: "⚠️ மீண்டும் படம் எடுக்க வேண்டும்",
+        voiceOn: " குரல்: ஆன்",
+        voiceOff: " குரல்: ஆஃப்",
+        contrastText: " மாறுபாடு",
+        hotkeysText: " குறுக்குவழிகள்",
+        qQualityTitle: " படத்தின் தரம்:",
+        refNoNeeded: " பரிந்துரை தேவையில்லை",
+        refRoutineFollowup: " வழக்கமான பின்தொடர்தல்",
+        refToOpht: " கண் மருத்துவரிடம் பரிந்துரைக்கவும்",
+        refUrgentSpecialist: " அவசர நிபுணர் பரிந்துரை",
+        refEmergencySpecialist: " தீவிர அவசர பரிந்துரை (<48 மணி)",
+        refRecapture: " மீண்டும் படம் எடுக்க வேண்டும்",
         grade0: "நிலை 0 — விழித்திரை நோய் இல்லை",
         grade1: "நிலை 1 — லேசான NPDR",
         grade2: "நிலை 2 — மிதமான NPDR",
@@ -2973,28 +3522,28 @@ const I18N = {
     },
     te: {
         brandSubtitle: "రియల్ టైమ్ రెటీనా స్క్రీనింగ్ & టెలిమెడిసిన్ పోర్టల్ | MathWorks SIH26038",
-        roleField: "📱 ఫీల్డ్ మోడ్ (ఆశా)",
-        roleClinical: "👨‍⚕️ క్లినికల్ మోడ్ (నేత్ర వైద్యుడు)",
-        roleAdmin: "🗺️ జిల్లా అడ్మిన్ & సిమ్యులింక్",
-        btnInputPatient: "➕ రోగి వివరాలను జోడించండి",
-        btnRegisterPatient: "➕ కొత్త రోగిని నమోదు చేయండి",
-        btnReport: "📄 నివేదిక",
+        roleField: " ఫీల్డ్ మోడ్ (ఆశా)",
+        roleClinical: " క్లినికల్ మోడ్ (నేత్ర వైద్యుడు)",
+        roleAdmin: " జిల్లా అడ్మిన్ & సిమ్యులింక్",
+        btnInputPatient: " రోగి వివరాలను జోడించండి",
+        btnRegisterPatient: " కొత్త రోగిని నమోదు చేయండి",
+        btnReport: " నివేదిక",
         triageQueueTitle: "ప్రాధాన్యత క్యూ",
         triageSortedBy: "ప్రమాద తీవ్రత ప్రకారం",
         analyzeCustomTitle: "కస్టమ్ రెటీనా విశ్లేషణ",
         dropFundusText: "ఫండస్ ఇమేజ్‌ని ఇక్కడ డ్రాప్ చేయండి",
         dropFundusSub: "లేదా ఫైల్‌లను బ్రౌజ్ చేయడానికి క్లిక్ చేయండి",
-        voiceOn: "🔊 వాయిస్: ఆన్",
-        voiceOff: "🔇 వాయిస్: ఆఫ్",
-        contrastText: "🌓 కాంట్రాస్ట్",
-        hotkeysText: "⌨️ షార్ట్‌కట్‌లు",
-        qQualityTitle: "● చిత్ర నాణ్యత:",
-        refNoNeeded: "🟢 రిఫెరల్ అవసరం లేదు",
-        refRoutineFollowup: "🟢 సాధారణ ఫాలో-అప్",
-        refToOpht: "🔴 నేత్ర వైద్యుడిని సంప్రదించండి",
-        refUrgentSpecialist: "🔴 అత్యవసర నిపుణుల రిఫెరల్",
-        refEmergencySpecialist: "🚨 తక్షణ అత్యవసర రిఫెరల్ (<48 గంటలు)",
-        refRecapture: "⚠️ తిరిగి ఫోటో తీయాలి (లోపభూయిష్ట చిత్రం)",
+        voiceOn: " వాయిస్: ఆన్",
+        voiceOff: " వాయిస్: ఆఫ్",
+        contrastText: " కాంట్రాస్ట్",
+        hotkeysText: " షార్ట్‌కట్‌లు",
+        qQualityTitle: " చిత్ర నాణ్యత:",
+        refNoNeeded: " రిఫెరల్ అవసరం లేదు",
+        refRoutineFollowup: " సాధారణ ఫాలో-అప్",
+        refToOpht: " నేత్ర వైద్యుడిని సంప్రదించండి",
+        refUrgentSpecialist: " అత్యవసర నిపుణుల రిఫెరల్",
+        refEmergencySpecialist: " తక్షణ అత్యవసర రిఫెరల్ (<48 గంటలు)",
+        refRecapture: " తిరిగి ఫోటో తీయాలి (లోపభూయిష్ట చిత్రం)",
         grade0: "స్థాయి 0 — రెటినోపతి లేదు",
         grade1: "స్థాయి 1 — తేలికపాటి NPDR",
         grade2: "స్థాయి 2 — మోస్తరు NPDR",
@@ -3077,15 +3626,15 @@ function toggleGradcamMode() {
     const dict = I18N[currentLanguage] || I18N.en;
     if (btn) {
         if (currentGradcamMode === 'pp') {
-            btn.innerText = `🔥 ${dict.gradcamPpLabel}`;
+            btn.innerText = ` ${dict.gradcamPpLabel}`;
             btn.style.borderColor = '#06b6d4';
             btn.style.color = '#38bdf8';
         } else if (currentGradcamMode === 'std') {
-            btn.innerText = `🔍 ${dict.gradcamStdLabel}`;
+            btn.innerText = ` ${dict.gradcamStdLabel}`;
             btn.style.borderColor = '#3b82f6';
             btn.style.color = '#60a5fa';
         } else {
-            btn.innerText = `⚪ ${dict.gradcamOffLabel}`;
+            btn.innerText = ` ${dict.gradcamOffLabel}`;
             btn.style.borderColor = '#64748b';
             btn.style.color = '#94a3b8';
         }
@@ -3184,20 +3733,857 @@ window.addEventListener('keydown', function(e) {
         selectPatient('PAT_006_BLURRED');
     }
 });
+
+
+// ==========================================
+// REGISTRATION RETINAL PRESET ENGINE
+// ==========================================
+const REGISTRATION_PRESETS = [
+  {
+    "id": "user_preset_1",
+    "filename": "user_preset_fundus_pat003.png",
+    "path": "sample_images/user_preset_fundus_pat003.png",
+    "title": "User Fundus: Moderate NPDR (PAT_003)",
+    "grade": 2,
+    "grade_label": "Grade 2 - Moderate NPDR",
+    "badge_color": "#F97316",
+    "category": "grade2",
+    "referable": true,
+    "width": 512,
+    "height": 512,
+    "dimensions": "512 x 512 px",
+    "size_kb": 365,
+    "format": "PNG Image",
+    "description": "User uploaded clinical case demonstrating moderate non-proliferative retinopathy with blot hemorrhages, multiple microaneurysms, and macular hard exudates.",
+    "patient": {
+      "name": "Ganesh Kulkarni",
+      "age": 58,
+      "gender": "Male",
+      "dm_duration": "11 Yrs",
+      "hba1c": "8.4%",
+      "bp": "142/88",
+      "eye": "OD (Right)"
+    }
+  },
+  {
+    "id": "user_preset_2",
+    "filename": "user_preset_retinal_diagram.png",
+    "path": "sample_images/user_preset_retinal_diagram.png",
+    "title": "User Fundus: Retinal Lesions & Vascular Map",
+    "grade": 3,
+    "grade_label": "Grade 3 - Severe NPDR",
+    "badge_color": "#DC2626",
+    "category": "grade3",
+    "referable": true,
+    "width": 512,
+    "height": 512,
+    "dimensions": "512 x 512 px",
+    "size_kb": 380,
+    "format": "PNG Image",
+    "description": "User uploaded diagnostic lesion distribution depicting widespread intraretinal hemorrhages, venous loops, and extensive lipid exudate plaques.",
+    "patient": {
+      "name": "Kavita Rao",
+      "age": 63,
+      "gender": "Female",
+      "dm_duration": "14 Yrs",
+      "hba1c": "9.2%",
+      "bp": "150/92",
+      "eye": "OS (Left)"
+    }
+  },
+  {
+    "id": "user_preset_3",
+    "filename": "user_preset_exudates_fundus.png",
+    "path": "sample_images/user_preset_exudates_fundus.png",
+    "title": "User Fundus: Circinate Hard Exudates",
+    "grade": 2,
+    "grade_label": "Grade 2 - Moderate NPDR",
+    "badge_color": "#F97316",
+    "category": "grade2",
+    "referable": true,
+    "width": 400,
+    "height": 400,
+    "dimensions": "400 x 400 px",
+    "size_kb": 197,
+    "format": "PNG Image",
+    "description": "User uploaded fundus showing dense circinate rings of hard lipid exudates encroaching upon the macula, indicative of clinically significant macular edema risk.",
+    "patient": {
+      "name": "Harish Mehta",
+      "age": 54,
+      "gender": "Male",
+      "dm_duration": "8 Yrs",
+      "hba1c": "8.1%",
+      "bp": "138/86",
+      "eye": "OD (Right)"
+    }
+  },
+  {
+    "id": "sample_grade0",
+    "filename": "01_normal_retina_grade0.png",
+    "path": "sample_images/01_normal_retina_grade0.png",
+    "title": "Normal Healthy Retina",
+    "grade": 0,
+    "grade_label": "Grade 0 - Normal",
+    "badge_color": "#16A34A",
+    "category": "grade0",
+    "referable": false,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 51,
+    "format": "PNG Image",
+    "description": "Clear optic disc margin, healthy macula without foveal thickening. Absence of microaneurysms, hemorrhages, or exudates. Routine annual screening recommended.",
+    "patient": {
+      "name": "Rajesh Patil",
+      "age": 48,
+      "gender": "Male",
+      "dm_duration": "3 Yrs",
+      "hba1c": "6.2%",
+      "bp": "120/80",
+      "eye": "OD (Right)"
+    }
+  },
+  {
+    "id": "sample_grade1",
+    "filename": "02_mild_npdr_grade1.png",
+    "path": "sample_images/02_mild_npdr_grade1.png",
+    "title": "Mild NPDR Fundus",
+    "grade": 1,
+    "grade_label": "Grade 1 - Mild NPDR",
+    "badge_color": "#EAB308",
+    "category": "grade1",
+    "referable": false,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 51,
+    "format": "PNG Image",
+    "description": "Isolated microaneurysms detected in temporal macular arcade. No retinal hemorrhages or hard exudates present. Non-referable early stage; 6-12 month follow-up advised.",
+    "patient": {
+      "name": "Sunita Deshmukh",
+      "age": 55,
+      "gender": "Female",
+      "dm_duration": "6 Yrs",
+      "hba1c": "7.4%",
+      "bp": "130/85",
+      "eye": "OS (Left)"
+    }
+  },
+  {
+    "id": "sample_grade2",
+    "filename": "03_moderate_npdr_grade2.png",
+    "path": "sample_images/03_moderate_npdr_grade2.png",
+    "title": "Moderate NPDR & CSME Risk",
+    "grade": 2,
+    "grade_label": "Grade 2 - Moderate NPDR",
+    "badge_color": "#F97316",
+    "category": "grade2",
+    "referable": true,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 46,
+    "format": "PNG Image",
+    "description": "Multiple intraretinal microaneurysms (>15) and blot hemorrhages across 2 quadrants. Hard exudates localized near foveal zone (CSME risk). Refer to specialist within 2-4 weeks.",
+    "patient": {
+      "name": "Ganesh Kulkarni",
+      "age": 58,
+      "gender": "Male",
+      "dm_duration": "11 Yrs",
+      "hba1c": "8.4%",
+      "bp": "142/88",
+      "eye": "OD (Right)"
+    }
+  },
+  {
+    "id": "sample_grade3",
+    "filename": "04_severe_npdr_grade3.png",
+    "path": "sample_images/04_severe_npdr_grade3.png",
+    "title": "Severe NPDR 4-Quadrant",
+    "grade": 3,
+    "grade_label": "Grade 3 - Severe NPDR",
+    "badge_color": "#DC2626",
+    "category": "grade3",
+    "referable": true,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 51,
+    "format": "PNG Image",
+    "description": "Meets 4:2:1 international criteria: extensive intraretinal hemorrhages in all 4 quadrants with venous beading in 2+ quadrants. High risk of progression to proliferative stage. Urgent referral.",
+    "patient": {
+      "name": "Ananya Sen",
+      "age": 62,
+      "gender": "Female",
+      "dm_duration": "15 Yrs",
+      "hba1c": "9.8%",
+      "bp": "158/94",
+      "eye": "OD (Right)"
+    }
+  },
+  {
+    "id": "sample_grade4",
+    "filename": "05_pdr_grade4.png",
+    "path": "sample_images/05_pdr_grade4.png",
+    "title": "Proliferative DR (PDR)",
+    "grade": 4,
+    "grade_label": "Grade 4 - PDR",
+    "badge_color": "#991B1B",
+    "category": "grade4",
+    "referable": true,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 39,
+    "format": "PNG Image",
+    "description": "Active neovascularization of the optic disc (NVD) and retina (NVE) with fibrous proliferation. Immediate vitreoretinal surgical / panretinal photocoagulation (PRP) referral.",
+    "patient": {
+      "name": "Mohammed Farooq",
+      "age": 66,
+      "gender": "Male",
+      "dm_duration": "19 Yrs",
+      "hba1c": "11.1%",
+      "bp": "165/100",
+      "eye": "OS (Left)"
+    }
+  },
+  {
+    "id": "sample_rejection_face",
+    "filename": "06_rejection_face.png",
+    "path": "sample_images/06_rejection_face.png",
+    "title": "Non-Retina / Face Rejection",
+    "grade": -1,
+    "grade_label": "Rejection - Non-Retina",
+    "badge_color": "#64748B",
+    "category": "rejection",
+    "referable": false,
+    "width": 512,
+    "height": 512,
+    "dimensions": "512 x 512 px",
+    "size_kb": 283,
+    "format": "PNG Image",
+    "description": "Test case demonstrating the Smart Quality Gate rejecting non-retinal imagery (face selfie / portrait). Quality Gate triggers automatic rejection and instructs user to acquire a valid fundus image.",
+    "patient": {
+      "name": "Test Subject (Non-Fundus)",
+      "age": 22,
+      "gender": "Male",
+      "dm_duration": "N/A",
+      "hba1c": "N/A",
+      "bp": "N/A",
+      "eye": "N/A"
+    }
+  },
+  {
+    "id": "sample_rejection_diagram",
+    "filename": "07_rejection_diagram.png",
+    "path": "sample_images/07_rejection_diagram.png",
+    "title": "Diagram / Text Rejection",
+    "grade": -1,
+    "grade_label": "Rejection - Graphic/Text",
+    "badge_color": "#64748B",
+    "category": "rejection",
+    "referable": false,
+    "width": 512,
+    "height": 512,
+    "dimensions": "512 x 512 px",
+    "size_kb": 320,
+    "format": "PNG Image",
+    "description": "Test case demonstrating edge verification rejecting schematic diagrams and medical charts. Confirms system cannot be fooled by medical illustrations or screenshots.",
+    "patient": {
+      "name": "Test Subject (Infographic)",
+      "age": "N/A",
+      "gender": "N/A",
+      "dm_duration": "N/A",
+      "hba1c": "N/A",
+      "bp": "N/A",
+      "eye": "N/A"
+    }
+  }
+];
+let activeRegistrationPreset = REGISTRATION_PRESETS[0];
+let activeRegistrationPresetImg = null;
+
+function initRegistrationPresetGrid() {
+    const grid = document.getElementById('modalPresetGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    REGISTRATION_PRESETS.forEach((preset, idx) => {
+        const isSelected = activeRegistrationPreset ? (activeRegistrationPreset.id === preset.id) : (idx === 0);
+        if (isSelected && !activeRegistrationPreset) {
+            activeRegistrationPreset = preset;
+        }
+
+        const card = document.createElement('div');
+        card.className = `preset-card ${isSelected ? 'active' : ''}`;
+        card.id = `preset_card_${preset.id}`;
+        card.onclick = () => selectRegistrationPreset(preset);
+        card.innerHTML = `
+            <div class="preset-card-check">&#10003;</div>
+            <img class="preset-card-img" src="${preset.path}" alt="${preset.title}" onerror="this.onerror=null; this.src='sample_real_fundus.png'">
+            <div class="preset-card-title">${preset.title}</div>
+            <span class="preset-card-tag" style="background:${preset.badge_color};">${preset.grade_label}</span>
+        `;
+        grid.appendChild(card);
+    });
+
+    // Preload default preset image
+    if (activeRegistrationPreset) {
+        const pImg = new Image();
+        pImg.crossOrigin = 'anonymous';
+        pImg.onload = function() {
+            activeRegistrationPresetImg = pImg;
+        };
+        pImg.src = activeRegistrationPreset.path;
+        updateRegistrationPresetDetails(activeRegistrationPreset);
+    }
+}
+
+function selectRegistrationPreset(preset) {
+    activeRegistrationPreset = preset;
+    document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('active'));
+    const activeEl = document.getElementById(`preset_card_${preset.id}`);
+    if (activeEl) activeEl.classList.add('active');
+
+    const inputId = document.getElementById('inpSelectedPresetId');
+    if (inputId) inputId.value = preset.id;
+
+    updateRegistrationPresetDetails(preset);
+
+    // Pre-load image into Image() object
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = function() {
+        activeRegistrationPresetImg = img;
+    };
+    img.src = preset.path;
+
+    // Autofill clinical patient profile for this preset
+    if (preset.patient) {
+        if (document.getElementById('inpName')) document.getElementById('inpName').value = preset.patient.name;
+        if (document.getElementById('inpAge')) document.getElementById('inpAge').value = preset.patient.age;
+        if (document.getElementById('inpGender')) document.getElementById('inpGender').value = preset.patient.gender;
+        if (document.getElementById('inpHbA1c')) document.getElementById('inpHbA1c').value = parseFloat(preset.patient.hba1c) || 7.5;
+        if (document.getElementById('inpDuration')) document.getElementById('inpDuration').value = parseInt(preset.patient.dm_duration) || 5;
+        updateRiskPreview();
+    }
+}
+
+function updateRegistrationPresetDetails(preset) {
+    if (!preset) return;
+    const thumb = document.getElementById('presetAttachedThumb');
+    if (thumb) thumb.src = preset.path;
+
+    const title = document.getElementById('presetAttachedTitle');
+    if (title) title.innerText = preset.title;
+
+    const badge = document.getElementById('presetAttachedBadge');
+    if (badge) {
+        badge.innerText = preset.grade_label;
+        badge.style.background = preset.badge_color;
+    }
+
+    const fileEl = document.getElementById('presetAttachedFile');
+    if (fileEl) fileEl.innerText = preset.path;
+
+    const descEl = document.getElementById('presetAttachedDesc');
+    if (descEl) descEl.innerText = `Attached: ${preset.description}`;
+}
+
+
+// ==========================================
+// VIRTUAL RETINAL IMAGE EXPLORER ENGINE
+// ==========================================
+let SAMPLE_IMAGES = [
+  {
+    "id": "user_preset_1",
+    "filename": "user_preset_fundus_pat003.png",
+    "path": "sample_images/user_preset_fundus_pat003.png",
+    "title": "User Fundus: Moderate NPDR (PAT_003)",
+    "grade": 2,
+    "grade_label": "Grade 2 - Moderate NPDR",
+    "badge_color": "#F97316",
+    "category": "grade2",
+    "referable": true,
+    "width": 512,
+    "height": 512,
+    "dimensions": "512 x 512 px",
+    "size_kb": 365,
+    "format": "PNG Image",
+    "description": "User uploaded clinical case demonstrating moderate non-proliferative retinopathy with blot hemorrhages, multiple microaneurysms, and macular hard exudates.",
+    "patient": {
+      "name": "Ganesh Kulkarni",
+      "age": 58,
+      "gender": "Male",
+      "dm_duration": "11 Yrs",
+      "hba1c": "8.4%",
+      "bp": "142/88",
+      "eye": "OD (Right)"
+    }
+  },
+  {
+    "id": "user_preset_2",
+    "filename": "user_preset_retinal_diagram.png",
+    "path": "sample_images/user_preset_retinal_diagram.png",
+    "title": "User Fundus: Retinal Lesions & Vascular Map",
+    "grade": 3,
+    "grade_label": "Grade 3 - Severe NPDR",
+    "badge_color": "#DC2626",
+    "category": "grade3",
+    "referable": true,
+    "width": 512,
+    "height": 512,
+    "dimensions": "512 x 512 px",
+    "size_kb": 380,
+    "format": "PNG Image",
+    "description": "User uploaded diagnostic lesion distribution depicting widespread intraretinal hemorrhages, venous loops, and extensive lipid exudate plaques.",
+    "patient": {
+      "name": "Kavita Rao",
+      "age": 63,
+      "gender": "Female",
+      "dm_duration": "14 Yrs",
+      "hba1c": "9.2%",
+      "bp": "150/92",
+      "eye": "OS (Left)"
+    }
+  },
+  {
+    "id": "user_preset_3",
+    "filename": "user_preset_exudates_fundus.png",
+    "path": "sample_images/user_preset_exudates_fundus.png",
+    "title": "User Fundus: Circinate Hard Exudates",
+    "grade": 2,
+    "grade_label": "Grade 2 - Moderate NPDR",
+    "badge_color": "#F97316",
+    "category": "grade2",
+    "referable": true,
+    "width": 400,
+    "height": 400,
+    "dimensions": "400 x 400 px",
+    "size_kb": 197,
+    "format": "PNG Image",
+    "description": "User uploaded fundus showing dense circinate rings of hard lipid exudates encroaching upon the macula, indicative of clinically significant macular edema risk.",
+    "patient": {
+      "name": "Harish Mehta",
+      "age": 54,
+      "gender": "Male",
+      "dm_duration": "8 Yrs",
+      "hba1c": "8.1%",
+      "bp": "138/86",
+      "eye": "OD (Right)"
+    }
+  },
+  {
+    "id": "sample_grade0",
+    "filename": "01_normal_retina_grade0.png",
+    "path": "sample_images/01_normal_retina_grade0.png",
+    "title": "Normal Healthy Retina",
+    "grade": 0,
+    "grade_label": "Grade 0 - Normal",
+    "badge_color": "#16A34A",
+    "category": "grade0",
+    "referable": false,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 51,
+    "format": "PNG Image",
+    "description": "Clear optic disc margin, healthy macula without foveal thickening. Absence of microaneurysms, hemorrhages, or exudates. Routine annual screening recommended.",
+    "patient": {
+      "name": "Rajesh Patil",
+      "age": 48,
+      "gender": "Male",
+      "dm_duration": "3 Yrs",
+      "hba1c": "6.2%",
+      "bp": "120/80",
+      "eye": "OD (Right)"
+    }
+  },
+  {
+    "id": "sample_grade1",
+    "filename": "02_mild_npdr_grade1.png",
+    "path": "sample_images/02_mild_npdr_grade1.png",
+    "title": "Mild NPDR Fundus",
+    "grade": 1,
+    "grade_label": "Grade 1 - Mild NPDR",
+    "badge_color": "#EAB308",
+    "category": "grade1",
+    "referable": false,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 51,
+    "format": "PNG Image",
+    "description": "Isolated microaneurysms detected in temporal macular arcade. No retinal hemorrhages or hard exudates present. Non-referable early stage; 6-12 month follow-up advised.",
+    "patient": {
+      "name": "Sunita Deshmukh",
+      "age": 55,
+      "gender": "Female",
+      "dm_duration": "6 Yrs",
+      "hba1c": "7.4%",
+      "bp": "130/85",
+      "eye": "OS (Left)"
+    }
+  },
+  {
+    "id": "sample_grade2",
+    "filename": "03_moderate_npdr_grade2.png",
+    "path": "sample_images/03_moderate_npdr_grade2.png",
+    "title": "Moderate NPDR & CSME Risk",
+    "grade": 2,
+    "grade_label": "Grade 2 - Moderate NPDR",
+    "badge_color": "#F97316",
+    "category": "grade2",
+    "referable": true,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 46,
+    "format": "PNG Image",
+    "description": "Multiple intraretinal microaneurysms (>15) and blot hemorrhages across 2 quadrants. Hard exudates localized near foveal zone (CSME risk). Refer to specialist within 2-4 weeks.",
+    "patient": {
+      "name": "Ganesh Kulkarni",
+      "age": 58,
+      "gender": "Male",
+      "dm_duration": "11 Yrs",
+      "hba1c": "8.4%",
+      "bp": "142/88",
+      "eye": "OD (Right)"
+    }
+  },
+  {
+    "id": "sample_grade3",
+    "filename": "04_severe_npdr_grade3.png",
+    "path": "sample_images/04_severe_npdr_grade3.png",
+    "title": "Severe NPDR 4-Quadrant",
+    "grade": 3,
+    "grade_label": "Grade 3 - Severe NPDR",
+    "badge_color": "#DC2626",
+    "category": "grade3",
+    "referable": true,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 51,
+    "format": "PNG Image",
+    "description": "Meets 4:2:1 international criteria: extensive intraretinal hemorrhages in all 4 quadrants with venous beading in 2+ quadrants. High risk of progression to proliferative stage. Urgent referral.",
+    "patient": {
+      "name": "Ananya Sen",
+      "age": 62,
+      "gender": "Female",
+      "dm_duration": "15 Yrs",
+      "hba1c": "9.8%",
+      "bp": "158/94",
+      "eye": "OD (Right)"
+    }
+  },
+  {
+    "id": "sample_grade4",
+    "filename": "05_pdr_grade4.png",
+    "path": "sample_images/05_pdr_grade4.png",
+    "title": "Proliferative DR (PDR)",
+    "grade": 4,
+    "grade_label": "Grade 4 - PDR",
+    "badge_color": "#991B1B",
+    "category": "grade4",
+    "referable": true,
+    "width": 224,
+    "height": 224,
+    "dimensions": "224 x 224 px",
+    "size_kb": 39,
+    "format": "PNG Image",
+    "description": "Active neovascularization of the optic disc (NVD) and retina (NVE) with fibrous proliferation. Immediate vitreoretinal surgical / panretinal photocoagulation (PRP) referral.",
+    "patient": {
+      "name": "Mohammed Farooq",
+      "age": 66,
+      "gender": "Male",
+      "dm_duration": "19 Yrs",
+      "hba1c": "11.1%",
+      "bp": "165/100",
+      "eye": "OS (Left)"
+    }
+  },
+  {
+    "id": "sample_rejection_face",
+    "filename": "06_rejection_face.png",
+    "path": "sample_images/06_rejection_face.png",
+    "title": "Non-Retina / Face Rejection",
+    "grade": -1,
+    "grade_label": "Rejection - Non-Retina",
+    "badge_color": "#64748B",
+    "category": "rejection",
+    "referable": false,
+    "width": 512,
+    "height": 512,
+    "dimensions": "512 x 512 px",
+    "size_kb": 283,
+    "format": "PNG Image",
+    "description": "Test case demonstrating the Smart Quality Gate rejecting non-retinal imagery (face selfie / portrait). Quality Gate triggers automatic rejection and instructs user to acquire a valid fundus image.",
+    "patient": {
+      "name": "Test Subject (Non-Fundus)",
+      "age": 22,
+      "gender": "Male",
+      "dm_duration": "N/A",
+      "hba1c": "N/A",
+      "bp": "N/A",
+      "eye": "N/A"
+    }
+  },
+  {
+    "id": "sample_rejection_diagram",
+    "filename": "07_rejection_diagram.png",
+    "path": "sample_images/07_rejection_diagram.png",
+    "title": "Diagram / Text Rejection",
+    "grade": -1,
+    "grade_label": "Rejection - Graphic/Text",
+    "badge_color": "#64748B",
+    "category": "rejection",
+    "referable": false,
+    "width": 512,
+    "height": 512,
+    "dimensions": "512 x 512 px",
+    "size_kb": 320,
+    "format": "PNG Image",
+    "description": "Test case demonstrating edge verification rejecting schematic diagrams and medical charts. Confirms system cannot be fooled by medical illustrations or screenshots.",
+    "patient": {
+      "name": "Test Subject (Infographic)",
+      "age": "N/A",
+      "gender": "N/A",
+      "dm_duration": "N/A",
+      "hba1c": "N/A",
+      "bp": "N/A",
+      "eye": "N/A"
+    }
+  }
+];
+let currentSelectedSample = null;
+let currentSampleFilter = 'all';
+
+async function initVirtualExplorer() {
+    try {
+        const res = await fetch('/api/sample-images');
+        if (res.ok) {
+            const data = await res.json();
+            if (data && data.length > 0) {
+                SAMPLE_IMAGES = data;
+            }
+        }
+    } catch (e) {
+        console.warn('Using embedded sample images fallback:', e);
+    }
+    renderSampleGrid();
+}
+
+function openVirtualExplorerModal() {
+    initVirtualExplorer();
+    const m = document.getElementById('virtualExplorerModal');
+    if (m) {
+        m.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeVirtualExplorerModal(e) {
+    if (e && e.target !== document.getElementById('virtualExplorerModal') && !e.target.classList.contains('explorer-close-btn')) return;
+    const m = document.getElementById('virtualExplorerModal');
+    if (m) {
+        m.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function setSampleFilter(cat, btn) {
+    currentSampleFilter = cat;
+    document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    renderSampleGrid();
+}
+
+function filterSampleImages() {
+    renderSampleGrid();
+}
+
+function renderSampleGrid() {
+    const grid = document.getElementById('explorerGrid');
+    if (!grid) return;
+    const searchInput = document.getElementById('explorerSearchInput');
+    const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+
+    const filtered = SAMPLE_IMAGES.filter(s => {
+        const matchesCat = (currentSampleFilter === 'all') || (s.category === currentSampleFilter);
+        const matchesQuery = !query || 
+            s.title.toLowerCase().includes(query) || 
+            s.filename.toLowerCase().includes(query) || 
+            s.grade_label.toLowerCase().includes(query);
+        return matchesCat && matchesQuery;
+    });
+
+    const countEl = document.getElementById('explorerFileCount');
+    if (countEl) countEl.innerText = `${filtered.length} files in sample_images/`;
+
+    grid.innerHTML = '';
+    if (filtered.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; padding: 40px; text-align: center; color: #64748B;">No sample retinal images match this search or filter.</div>';
+        return;
+    }
+
+    filtered.forEach((sample, idx) => {
+        const isSelected = currentSelectedSample ? (currentSelectedSample.id === sample.id) : (idx === 0);
+        if (isSelected && !currentSelectedSample) {
+            currentSelectedSample = sample;
+        }
+
+        const card = document.createElement('div');
+        card.className = `sample-card ${isSelected ? 'selected' : ''}`;
+        card.onclick = () => selectSampleCard(sample, card);
+        card.innerHTML = `
+            <div class="sample-card-thumb">
+                <img src="${sample.path}" alt="${sample.title}" onerror="this.onerror=null; this.src='sample_real_fundus.png'">
+                <span class="sample-card-badge" style="background:${sample.badge_color};">${sample.grade_label}</span>
+            </div>
+            <div class="sample-card-info">
+                <div class="sample-card-title">${sample.title}</div>
+                <div class="sample-card-path">${sample.path}</div>
+                <div class="sample-card-meta">${sample.dimensions} &bull; ${sample.size_kb} KB</div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+
+    if (currentSelectedSample) {
+        updateInspectionPanel(currentSelectedSample);
+    }
+}
+
+function selectSampleCard(sample, cardEl) {
+    currentSelectedSample = sample;
+    document.querySelectorAll('.sample-card').forEach(c => c.classList.remove('selected'));
+    if (cardEl) cardEl.classList.add('selected');
+    updateInspectionPanel(sample);
+}
+
+function updateInspectionPanel(s) {
+    if (!s) return;
+    const imgEl = document.getElementById('inspImg');
+    if (imgEl) imgEl.src = s.path;
+
+    const titleEl = document.getElementById('inspTitle');
+    if (titleEl) titleEl.innerText = s.title;
+
+    const pathEl = document.getElementById('inspPath');
+    if (pathEl) pathEl.innerText = s.path;
+
+    const badgeEl = document.getElementById('inspBadge');
+    if (badgeEl) {
+        badgeEl.innerText = s.grade_label;
+        badgeEl.style.background = s.badge_color;
+    }
+
+    const dimEl = document.getElementById('inspDim');
+    if (dimEl) dimEl.innerText = s.dimensions;
+
+    const sizeEl = document.getElementById('inspSize');
+    if (sizeEl) sizeEl.innerText = `${s.size_kb} KB`;
+
+    const formatEl = document.getElementById('inspFormat');
+    if (formatEl) formatEl.innerText = s.format;
+
+    const refEl = document.getElementById('inspReferable');
+    if (refEl) {
+        refEl.innerText = s.referable ? 'YES (REFER TO SPECIALIST)' : 'NO (ROUTINE)';
+        refEl.style.color = s.referable ? '#DC2626' : '#16A34A';
+    }
+
+    const descEl = document.getElementById('inspDesc');
+    if (descEl) descEl.innerText = s.description;
+
+    const pBox = document.getElementById('inspPatientBox');
+    if (pBox && s.patient) {
+        pBox.style.display = 'block';
+        document.getElementById('inspPatientName').innerText = `${s.patient.name} (${s.patient.age}y, ${s.patient.gender})`;
+        document.getElementById('inspPatientMeta').innerText = `DM: ${s.patient.dm_duration} | HbA1c: ${s.patient.hba1c} | BP: ${s.patient.bp} | Eye: ${s.patient.eye}`;
+    } else if (pBox) {
+        pBox.style.display = 'none';
+    }
+}
+
+function executeLoadSelectedSample() {
+    if (!currentSelectedSample) return;
+    loadSampleImageForAnalysis(currentSelectedSample);
+}
+
+function loadSampleImageForAnalysis(sample) {
+    const modal = document.getElementById('virtualExplorerModal');
+    if (modal) modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+
+    logAudit(`Virtual Explorer: Loading <b>${sample.title}</b> (${sample.filename})...`);
+
+    // Switch to clinical mode
+    if (typeof setRole === 'function') {
+        setRole('clinical');
+    }
+
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = function() {
+        // Generate base64 representation
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = img.naturalWidth || 512;
+        tempCanvas.height = img.naturalHeight || 512;
+        const ctx = tempCanvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const base64Data = tempCanvas.toDataURL('image/png');
+
+        // Update demographics
+        if (sample.patient) {
+            if (document.getElementById('hdrPatName')) document.getElementById('hdrPatName').innerText = sample.patient.name;
+            if (document.getElementById('hdrPatMeta')) {
+                document.getElementById('hdrPatMeta').innerText = `Age: ${sample.patient.age} | ${sample.patient.gender} | DM: ${sample.patient.dm_duration} | HbA1c: ${sample.patient.hba1c} | BP: ${sample.patient.bp} | Eye: ${sample.patient.eye}`;
+            }
+            if (document.getElementById('hdrPatId')) {
+                document.getElementById('hdrPatId').innerText = `SAMPLE_${sample.category.toUpperCase()}`;
+            }
+            if (document.getElementById('inpName')) document.getElementById('inpName').value = sample.patient.name;
+            if (document.getElementById('inpAge')) document.getElementById('inpAge').value = sample.patient.age;
+            if (document.getElementById('inpGender')) document.getElementById('inpGender').value = sample.patient.gender;
+            if (document.getElementById('inpHbA1c')) document.getElementById('inpHbA1c').value = parseFloat(sample.patient.hba1c) || 7.5;
+            if (document.getElementById('inpDuration')) document.getElementById('inpDuration').value = parseInt(sample.patient.dm_duration) || 5;
+        }
+
+        customUploadedImg = img;
+        processRealEyeVerificationAndAnalysis(img, sample.filename, base64Data);
+    };
+    img.src = sample.path;
+}
+
+// Keyboard shortcut 'E' for Explorer
+window.addEventListener('keydown', function(e) {
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) return;
+    if (e.key === 'e' || e.key === 'E') {
+        const m = document.getElementById('virtualExplorerModal');
+        if (m && m.style.display === 'flex') {
+            closeVirtualExplorerModal();
+        } else {
+            openVirtualExplorerModal();
+        }
+    }
+});
+
 </script>
 
     <!-- RAPID SCREENING HOTKEYS MODAL -->
     <div class="modal" id="hotkeysModal" onclick="closeHotkeysModal(event)" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); backdrop-filter:blur(4px); z-index:9999; align-items:center; justify-content:center;">
-        <div class="modal-content" style="background:#0f172a; border:1px solid #334155; border-radius:14px; width:90%; max-width:620px; padding:22px; box-shadow:0 10px 40px rgba(0,0,0,0.6);">
-            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1e293b; padding-bottom:12px;">
+        <div class="modal-content" style="background:#F8FAFC; border:1px solid var(--card-border); border-radius:14px; width:90%; max-width:620px; padding:22px; box-shadow:0 10px 40px rgba(0,0,0,0.6);">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--card-border); padding-bottom:12px;">
                 <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:20px;">⌨️</span>
-                    <h3 style="font-size:16px; font-weight:800; color:#f8fafc;">Rapid Screening Keyboard Shortcuts</h3>
+                    <span style="font-size:20px;"></span>
+                    <h3 style="font-size:16px; font-weight:800; color:#0F172A;">Rapid Screening Keyboard Shortcuts</h3>
                 </div>
-                <button class="close-btn" onclick="closeHotkeysModal()" style="background:none; border:none; color:#94a3b8; font-size:22px; cursor:pointer;">&times;</button>
+                <button class="close-btn" onclick="closeHotkeysModal()" style="background:none; border:none; color:#64748B; font-size:22px; cursor:pointer;">&times;</button>
             </div>
             <div style="margin-top:14px;">
-                <p style="font-size:12px; color:#94a3b8; margin-bottom:12px;">Use these clinical hotkeys during rapid screening camps to accelerate patient intake, grading, and referral workflows without reaching for the mouse.</p>
+                <p style="font-size:12px; color:#64748B; margin-bottom:12px;">Use these clinical hotkeys during rapid screening camps to accelerate patient intake, grading, and referral workflows without reaching for the mouse.</p>
                 <table class="hotkeys-table">
                     <thead>
                         <tr>
@@ -3256,7 +4642,99 @@ window.addEventListener('keydown', function(e) {
                 </table>
             </div>
             <div style="display:flex; justify-content:flex-end; margin-top:18px;">
-                <button class="btn-act" onclick="closeHotkeysModal()" style="background:#0284c7; color:white; padding:8px 18px; font-weight:700;">Got It (Esc)</button>
+                <button class="btn-act" onclick="closeHotkeysModal()" style="background:var(--primary-blue); color:#FFFFFF; padding:8px 18px; font-weight:700;">Got It (Esc)</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- VIRTUAL RETINAL IMAGE EXPLORER MODAL -->
+    <div class="modal" id="virtualExplorerModal" onclick="closeVirtualExplorerModal(event)" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); backdrop-filter:blur(5px); z-index:9999; align-items:center; justify-content:center;">
+        <div class="explorer-window" onclick="event.stopPropagation()">
+            <!-- Explorer Title Bar -->
+            <div class="explorer-header">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:18px;">&#128193;</span>
+                    <h3 style="font-size:16px; font-weight:800; color:#FFFFFF; margin:0;">Virtual Retinal Image Explorer</h3>
+                    <span class="explorer-path-chip">sample_images/</span>
+                </div>
+                <button class="explorer-close-btn" onclick="closeVirtualExplorerModal()">&times;</button>
+            </div>
+
+            <!-- Breadcrumb & Search Bar -->
+            <div class="explorer-toolbar">
+                <div class="explorer-breadcrumbs">
+                    <span>&#128421; System Root</span>
+                    <span class="crumb-sep">&gt;</span>
+                    <span>&#128193; project</span>
+                    <span class="crumb-sep">&gt;</span>
+                    <b style="color:#38BDF8;">sample_images/</b>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px; flex:1; justify-content:flex-end;">
+                    <div class="explorer-search-box">
+                        <span style="color:#64748B;">&#128269;</span>
+                        <input type="text" id="explorerSearchInput" placeholder="Search sample files..." oninput="filterSampleImages()">
+                    </div>
+                    <div style="font-size:11px; color:#94A3B8; font-family:'JetBrains Mono',monospace;" id="explorerFileCount">10 files in sample_images/</div>
+                </div>
+            </div>
+
+            <!-- Filter Category Tabs -->
+            <div class="explorer-filter-pills">
+                <button class="filter-pill active" onclick="setSampleFilter('all', this)">All Files (10)</button>
+                <button class="filter-pill" onclick="setSampleFilter('grade0', this)"><span class="dot" style="background:#16A34A;"></span> Grade 0 Normal</button>
+                <button class="filter-pill" onclick="setSampleFilter('grade1', this)"><span class="dot" style="background:#EAB308;"></span> Grade 1 Mild</button>
+                <button class="filter-pill" onclick="setSampleFilter('grade2', this)"><span class="dot" style="background:#F97316;"></span> Grade 2 Moderate</button>
+                <button class="filter-pill" onclick="setSampleFilter('grade3', this)"><span class="dot" style="background:#DC2626;"></span> Grade 3 Severe</button>
+                <button class="filter-pill" onclick="setSampleFilter('grade4', this)"><span class="dot" style="background:#991B1B;"></span> Grade 4 PDR</button>
+                <button class="filter-pill" onclick="setSampleFilter('rejection', this)"><span style="color:#EF4444; font-weight:bold;">&times;</span> Rejection Test</button>
+            </div>
+
+            <!-- Explorer Content Body: Left Grid + Right Inspection Panel -->
+            <div class="explorer-body">
+                <!-- Left Scrollable Grid -->
+                <div class="explorer-grid-container" id="explorerGrid">
+                    <!-- Sample cards dynamically injected here -->
+                </div>
+
+                <!-- Right File Inspection Panel -->
+                <div class="explorer-inspector">
+                    <div class="inspector-title">FILE INSPECTION PANEL</div>
+                    
+                    <div class="inspector-preview-box">
+                        <img id="inspImg" src="sample_images/01_normal_retina_grade0.png" alt="Selected sample fundus" onerror="this.onerror=null; this.src='sample_real_fundus.png'">
+                    </div>
+
+                    <div class="inspector-details">
+                        <div style="font-size:14px; font-weight:800; color:#FFFFFF;" id="inspTitle">Normal Healthy Retina</div>
+                        <div style="font-size:10.5px; color:#38BDF8; font-family:'JetBrains Mono',monospace; word-break:break-all; margin-top:2px;" id="inspPath">sample_images/01_normal_retina_grade0.png</div>
+                        
+                        <div style="margin-top:6px;">
+                            <span class="insp-badge" id="inspBadge" style="background:#16A34A; color:#FFFFFF;">Grade 0 - Normal</span>
+                        </div>
+
+                        <div class="insp-meta-grid">
+                            <div class="insp-meta-item"><span>Dimensions:</span> <b id="inspDim">224 ? 224 px</b></div>
+                            <div class="insp-meta-item"><span>File Size:</span> <b id="inspSize">51 KB</b></div>
+                            <div class="insp-meta-item"><span>Format:</span> <b id="inspFormat">PNG Image</b></div>
+                            <div class="insp-meta-item"><span>Referable:</span> <b id="inspReferable" style="color:#16A34A;">NO</b></div>
+                        </div>
+
+                        <div class="insp-patient-box" id="inspPatientBox">
+                            <div style="font-size:9.5px; font-weight:700; color:#94A3B8; text-transform:uppercase;">Associated Patient Profile:</div>
+                            <div style="font-size:11.5px; font-weight:700; color:#F8FAFC; margin-top:2px;" id="inspPatientName">Rajesh Patil (48y, Male)</div>
+                            <div style="font-size:10px; color:#CBD5E1;" id="inspPatientMeta">DM: 3 Yrs | HbA1c: 6.2% | BP: 120/80 | OD</div>
+                        </div>
+
+                        <div class="insp-desc" id="inspDesc">
+                            Clear optic disc margin, healthy macula without foveal thickening. Absence of microaneurysms, hemorrhages, or exudates. Routine annual screening recommended.
+                        </div>
+                    </div>
+
+                    <button class="insp-load-btn" onclick="executeLoadSelectedSample()">
+                        <span>? SELECT & LOAD FILE FOR ANALYSIS</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
