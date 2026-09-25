@@ -1,26 +1,72 @@
 import os
+import shutil
 import subprocess
 import sys
 import re
+import urllib.request
 
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-exe_path = os.path.join(BASE_DIR, 'cloudflared.exe')
 
-# Fallbacks if not in project folder
-if not os.path.exists(exe_path):
-    alt_path = r'C:\Program Files (x86)\cloudflared\cloudflared.exe'
-    if os.path.exists(alt_path):
-        exe_path = alt_path
-    else:
-        exe_path = 'cloudflared'
+def get_cloudflared_path():
+    candidates = [
+        os.path.join(BASE_DIR, 'cloudflared.exe'),
+        os.path.join(BASE_DIR, 'cloudflare.exe'),
+        r'C:\Program Files (x86)\cloudflared\cloudflared.exe',
+        r'C:\Program Files\cloudflared\cloudflared.exe',
+        os.path.expandvars(r'%LOCALAPPDATA%\Programs\Python\Python314\Scripts\cloudflared.exe'),
+        os.path.expandvars(r'%LOCALAPPDATA%\Programs\Python\Python314\Scripts\cloudflare.exe'),
+        os.path.expandvars(r'%LOCALAPPDATA%\Microsoft\WindowsApps\cloudflared.exe'),
+        os.path.expandvars(r'%LOCALAPPDATA%\Microsoft\WindowsApps\cloudflare.exe'),
+    ]
+    for c in candidates:
+        if os.path.isfile(c):
+            return os.path.abspath(c)
+
+    # Check PATH using shutil.which
+    for name in ['cloudflared', 'cloudflare']:
+        w = shutil.which(name)
+        if w and w.lower().endswith('.exe') and os.path.isfile(w):
+            return os.path.abspath(w)
+
+    # If not found anywhere, auto-download official Cloudflare executable
+    target_path = os.path.join(BASE_DIR, 'cloudflared.exe')
+    print("=" * 65)
+    print("  cloudflared.exe not found locally.")
+    print("  Downloading official Cloudflare tunnel binary (~50MB)...")
+    print("  This is a one-time automatic setup for your PC.")
+    print("=" * 65)
+    url = "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe"
+    try:
+        def reporthook(count, block_size, total_size):
+            if total_size > 0:
+                percent = int(count * block_size * 100 / total_size)
+                sys.stdout.write(f"\r  Downloading: {min(percent, 100)}% complete...")
+                sys.stdout.flush()
+        urllib.request.urlretrieve(url, target_path, reporthook=reporthook)
+        print("\n  [SUCCESS] cloudflared.exe downloaded successfully!\n")
+        return target_path
+    except Exception as err:
+        print(f"\n  [ERROR] Failed to download cloudflared.exe: {err}")
+        return None
 
 port = sys.argv[1] if len(sys.argv) > 1 else '8081'
 
+exe_path = get_cloudflared_path()
+if not exe_path or not os.path.isfile(exe_path):
+    print("=" * 65)
+    print("  [ERROR] Could not locate or download cloudflared.exe")
+    print("  Please manually download cloudflared-windows-amd64.exe from:")
+    print("  https://github.com/cloudflare/cloudflared/releases/latest")
+    print("  and save it as 'cloudflared.exe' in this project folder.")
+    print("=" * 65)
+    sys.exit(1)
+
 print("=" * 65)
 print(f"  Starting DRISHTI-AI Public Cloudflare Tunnel for Port {port}...")
+print(f"  Binary: {exe_path}")
 print("=" * 65)
 print("\nConnecting to Cloudflare network, please wait a moment...\n")
 
