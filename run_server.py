@@ -19,5 +19,5 @@ if os.name == 'nt':
 from server import run_server
 
 if __name__ == '__main__':
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else 8081
+    port = int(os.environ.get('PORT', sys.argv[1] if len(sys.argv) > 1 else 8081))
     run_server(port)

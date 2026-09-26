@@ -60,5 +60,5 @@ EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
     CMD curl -f http://localhost:7860/api/health || curl -f http://localhost:8080/api/health || exit 1
 
-CMD ["python", "app.py"]
+CMD ["python", "run_server.py", "7860"]
 
