@@ -1729,7 +1729,7 @@ const PATIENTS = {
         id: 'PAT_001_NORMAL',
         name: 'Rajesh Patil', age: 52, sex: 'M', duration: '4 Yrs',
         grade: 0, gradeName: 'LEVEL 0 — NO APPARENT RETINOPATHY',
-        referable: false, refTitle: ' NO REFERRAL REQUIRED',
+        referable: false, refTitle: '🟢 NO REFERRAL REQUIRED',
         refReason: 'Routine annual diabetic eye screening in 12 months at local PHC.',
         priority: 4, priorityText: 'Routine (12 Mo)',
         quality: 'ACCEPTABLE', qClass: 'q-good',
@@ -1744,7 +1744,7 @@ const PATIENTS = {
         id: 'PAT_002_MILD',
         name: 'Sunita Deshmukh', age: 61, sex: 'F', duration: '7 Yrs',
         grade: 1, gradeName: 'LEVEL 1 — MILD NPDR',
-        referable: false, refTitle: ' ROUTINE FOLLOW-UP',
+        referable: false, refTitle: '🟢 ROUTINE FOLLOW-UP',
         refReason: 'Microaneurysms only. Schedule follow-up dilated exam in 6-12 months.',
         priority: 3, priorityText: 'Mild (6-12 Mo)',
         quality: 'ACCEPTABLE', qClass: 'q-good',
@@ -1759,7 +1759,7 @@ const PATIENTS = {
         id: 'PAT_003_MODERATE',
         name: 'Ganesh Kulkarni', age: 58, sex: 'M', duration: '11 Yrs',
         grade: 2, gradeName: 'LEVEL 2 — MODERATE NPDR',
-        referable: true, refTitle: ' REFER TO OPHTHALMOLOGIST',
+        referable: true, refTitle: '🔴 REFER TO OPHTHALMOLOGIST',
         refReason: 'Priority: HIGH | Reason: Level 2 Moderate NPDR + High DME Risk near foveal zone',
         priority: 1, priorityText: 'Priority 1 (Urgent)',
         quality: 'ACCEPTABLE', qClass: 'q-good',
@@ -1778,7 +1778,7 @@ Object.assign(PATIENTS, {
         id: 'PAT_004_SEVERE',
         name: 'Meena Shinde', age: 64, sex: 'F', duration: '16 Yrs',
         grade: 3, gradeName: 'LEVEL 3 — SEVERE NPDR',
-        referable: true, refTitle: ' URGENT SPECIALIST REFERRAL',
+        referable: true, refTitle: '🔴 URGENT SPECIALIST REFERRAL',
         refReason: 'Priority: URGENT | Reason: Meets ICDR 4-2-1 rule (>20 intraretinal hemorrhages in all 4 quadrants)',
         priority: 1, priorityText: 'Urgent (1-2 Wks)',
         quality: 'ACCEPTABLE', qClass: 'q-good',
@@ -1793,7 +1793,7 @@ Object.assign(PATIENTS, {
         id: 'PAT_005_PDR',
         name: 'Anand Rao', age: 67, sex: 'M', duration: '22 Yrs',
         grade: 4, gradeName: 'LEVEL 4 — PROLIFERATIVE DR',
-        referable: true, refTitle: ' EMERGENCY SPECIALIST REFERRAL',
+        referable: true, refTitle: '🚨 EMERGENCY SPECIALIST REFERRAL',
         refReason: 'Priority: EMERGENCY | Reason: Neovascularization on disc (NVD/NVE) and preretinal hemorrhage risk',
         priority: 1, priorityText: 'Emergency (<48h)',
         quality: 'ACCEPTABLE', qClass: 'q-good',
@@ -1808,7 +1808,7 @@ Object.assign(PATIENTS, {
         id: 'PAT_006_BLURRED',
         name: 'Kavita Joshi', age: 49, sex: 'F', duration: '5 Yrs',
         grade: -1, gradeName: 'UNGRADEABLE — DEFECTIVE IMAGE',
-        referable: true, refTitle: ' RECAPTURE REQUIRED (NOT DIAGNOSTIC)',
+        referable: true, refTitle: '⚠ RECAPTURE REQUIRED (NOT DIAGNOSTIC)',
         refReason: 'Image failed quality gate: Focus 8.2 (<15.0) & Corneal Glare 24.1% (>15%). Recapture required.',
         priority: 2, priorityText: 'Recapture Needed',
         quality: 'UNGRADEABLE', qClass: 'q-bad',
@@ -1853,7 +1853,7 @@ function toggleVoice() {
     voiceEnabled = !voiceEnabled;
     const btn = document.getElementById('btnVoiceToggle');
     if (btn) {
-        btn.innerHTML = voiceEnabled ? ' Voice: ON' : ' Voice: OFF';
+        btn.innerHTML = voiceEnabled ? '🔊 Voice: ON' : '🔇 Voice: OFF';
         btn.style.color = voiceEnabled ? '#34d399' : '#94a3b8';
     }
     if (voiceEnabled) speakGuidance("Voice assistance enabled for rural screening.");
@@ -1886,10 +1886,10 @@ function populateQueue() {
 
         item.innerHTML = `
             <div style="display:flex; justify-content:space-between; align-items:center;">
-                <b style="font-size:12px; color:#0F172A;">${p.name}</b>
+                <b style="font-size:12px; color:#f8fafc;">${p.name}</b>
                 <span class="p-badge ${pBadgeClass}">${p.priorityText}</span>
             </div>
-            <div style="display:flex; justify-content:space-between; font-size:10px; color:#64748B; margin-top:2px;">
+            <div style="display:flex; justify-content:space-between; font-size:10px; color:#94a3b8; margin-top:2px;">
                 <span>${p.id}</span>
                 <span style="font-weight:700; color:${p.referable ? '#fb7185' : '#34d399'};">${p.grade >= 0 ? 'Grade ' + p.grade : 'Ungradeable'}</span>
             </div>
@@ -1910,7 +1910,7 @@ function selectPatient(patId) {
     const qBadge = document.getElementById('qBadge');
     if (qBadge) {
         qBadge.className = 'q-status-badge ' + p.qClass;
-        qBadge.innerText = ' IMAGE QUALITY: ' + p.quality;
+        qBadge.innerText = '● IMAGE QUALITY: ' + p.quality;
     }
     document.getElementById('mBlur').innerText = p.focus + ' (>15.0)';
     document.getElementById('mIllum').innerText = p.illum;
@@ -1960,8 +1960,8 @@ function selectPatient(patId) {
     if (liveDens) liveDens.innerText = p.density;
     document.getElementById('liveCSME').innerText = p.csme;
     document.getElementById('evidenceNarrative').innerHTML = `
-         ${p.rationale}<br>
-         Feature attribution aligned with clinical microvascular biomarkers.
+        ✓ ${p.rationale}<br>
+        ✓ Feature attribution aligned with clinical microvascular biomarkers.
     `;
 
     // 4. Reliability Meter
@@ -1975,25 +1975,25 @@ function selectPatient(patId) {
     const relBadge = document.getElementById('relStatusBadge');
     if (relBadge) {
         relBadge.className = 'q-status-badge ' + (p.reliability === 'HIGH' ? 'q-good' : 'q-bad');
-        relBadge.innerText = p.reliability === 'HIGH' ? ' HIGH RELIABILITY' : ' UNRELIABLE (RECAPTURE)';
+        relBadge.innerText = p.reliability === 'HIGH' ? '🟢 HIGH RELIABILITY' : '🔴 UNRELIABLE (RECAPTURE)';
     }
 
     // 5. Field Mode Sync
     const fQ = document.getElementById('fieldQStatus');
-    if (fQ) fQ.innerText = (p.quality === 'ACCEPTABLE' ? ' IMAGE QUALITY: GOOD' : ' IMAGE QUALITY: UNGRADEABLE');
+    if (fQ) fQ.innerText = (p.quality === 'ACCEPTABLE' ? '🟢 IMAGE QUALITY: GOOD' : '🔴 IMAGE QUALITY: UNGRADEABLE');
     const fR = document.getElementById('fieldResultBox');
     if (fR) {
         if (p.grade === -1) {
             fR.style.color = '#ef4444';
-            fR.innerText = ' RECAPTURE REQUIRED: ' + p.guidance;
+            fR.innerText = '⚠ RECAPTURE REQUIRED: ' + p.guidance;
         } else if (p.referable) {
             fR.style.color = '#fbbf24';
             const gShort = (p.gradeName && p.gradeName.includes('—')) ? p.gradeName.split('—')[1].trim() : (p.gradeName || 'Referral');
-            fR.innerText = ' SPECIALIST REFERRAL REQUIRED (' + gShort + ')';
+            fR.innerText = '⚠ SPECIALIST REFERRAL REQUIRED (' + gShort + ')';
         } else {
             fR.style.color = '#34d399';
             const gShort = (p.gradeName && p.gradeName.includes('—')) ? p.gradeName.split('—')[1].trim() : (p.gradeName || 'Routine');
-            fR.innerText = ' ROUTINE SCREENING PASS (' + gShort + ')';
+            fR.innerText = '✓ ROUTINE SCREENING PASS (' + gShort + ')';
         }
     }
 
@@ -2200,7 +2200,7 @@ function updateRealtimeCanvas() {
         ctx.fillStyle = '#fef2f2';
         ctx.font = 'bold 24px Inter, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(' NOT AN EYE / RETINAL IMAGE', w / 2, 195);
+        ctx.fillText('❌ NOT AN EYE / RETINAL IMAGE', w / 2, 195);
         
         ctx.font = 'bold 14px Inter, sans-serif';
         ctx.fillStyle = '#fca5a5';
@@ -2214,7 +2214,7 @@ function updateRealtimeCanvas() {
         
         ctx.fillStyle = '#fbbf24';
         ctx.font = 'bold 12px Inter, sans-serif';
-        ctx.fillText(' Analysis suspended to prevent fake diagnostic reading.', w / 2, 350);
+        ctx.fillText('⚠ Analysis suspended to prevent fake diagnostic reading.', w / 2, 350);
         ctx.restore();
         return; // ABSOLUTELY NO FAKE LESIONS OR HEATMAPS DRAWN
     }
@@ -2563,13 +2563,25 @@ function extractClientSideRealLesions(img) {
     };
 }
 
+function getDrishtiApiBase() {
+    if (window.DRISHTI_API_BASE) return window.DRISHTI_API_BASE.replace(/\/$/, '');
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('api')) return urlParams.get('api').replace(/\/$/, '');
+        const stored = localStorage.getItem('DRISHTI_API_BASE');
+        if (stored) return stored.replace(/\/$/, '');
+    } catch(e) {}
+    return '';
+}
+
 // MAIN REAL-TIME ORCHESTRATOR FOR CUSTOM IMAGES
 function processRealEyeVerificationAndAnalysis(img, filename, base64Data) {
     const riskTitle = document.getElementById('riskPreviewTitle');
     const riskUrg = document.getElementById('riskPreviewUrgency');
 
     // 1. Try PyTorch Deep Neural Network Backend via /api/analyze-retina
-    fetch('/api/analyze-retina', {
+    const apiBase = getDrishtiApiBase();
+    fetch(`${apiBase}/api/analyze-retina`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ image: base64Data })
@@ -2583,7 +2595,7 @@ function processRealEyeVerificationAndAnalysis(img, filename, base64Data) {
             handleRejectedNonEyeImage(filename, apiRes.message);
             if (riskTitle) {
                 riskTitle.style.color = '#ef4444';
-                riskTitle.innerText = ` VERIFICATION FAILED: NON-RETINAL IMAGE (${filename})`;
+                riskTitle.innerText = `❌ VERIFICATION FAILED: NON-RETINAL IMAGE (${filename})`;
             }
             if (riskUrg) {
                 riskUrg.style.color = '#ef4444';
@@ -2596,7 +2608,7 @@ function processRealEyeVerificationAndAnalysis(img, filename, base64Data) {
             handleVerifiedEyeImage(img, filename, apiRes);
             if (riskTitle) {
                 riskTitle.style.color = '#10b981';
-                riskTitle.innerText = ` VERIFIED RETINAL FUNDUS: ${apiRes.grade_name} (DR Damage: ${apiRes.dr_damage_percentage}%)`;
+                riskTitle.innerText = `✅ VERIFIED RETINAL FUNDUS: ${apiRes.grade_name} (DR Damage: ${apiRes.dr_damage_percentage}%)`;
             }
             if (riskUrg) {
                 riskUrg.style.color = apiRes.referable ? '#ef4444' : '#10b981';
@@ -2623,7 +2635,7 @@ function fallbackClientSideVerification(img, filename) {
         handleRejectedNonEyeImage(filename, currentModalRejectionMsg);
         if (riskTitle) {
             riskTitle.style.color = '#ef4444';
-            riskTitle.innerText = ` VERIFICATION FAILED: NON-RETINAL IMAGE (${filename})`;
+            riskTitle.innerText = `❌ VERIFICATION FAILED: NON-RETINAL IMAGE (${filename})`;
         }
         if (riskUrg) {
             riskUrg.style.color = '#ef4444';
@@ -2637,17 +2649,17 @@ function fallbackClientSideVerification(img, filename) {
         const hCount = lesions.hemo.length;
         const eCount = lesions.exudates.length;
 
-        let grade = 0, gradeName = "LEVEL 0 — NO APPARENT RETINOPATHY", referable = false, refTitle = " NO REFERRAL REQUIRED";
+        let grade = 0, gradeName = "LEVEL 0 — NO APPARENT RETINOPATHY", referable = false, refTitle = "🟢 NO REFERRAL REQUIRED";
         let refReason = "No microaneurysms, blot hemorrhages, or hard exudates detected on genuine retinal scan.";
 
         if (mCount > 0 && mCount <= 5 && hCount === 0 && eCount === 0) {
-            grade = 1; gradeName = "LEVEL 1 — MILD NPDR"; referable = false; refTitle = " ROUTINE FOLLOW-UP";
+            grade = 1; gradeName = "LEVEL 1 — MILD NPDR"; referable = false; refTitle = "🟢 ROUTINE FOLLOW-UP";
             refReason = `Isolated microaneurysms detected (${mCount} MAs). No hemorrhages or lipid exudates.`;
         } else if (hCount >= 15 || mCount >= 20) {
-            grade = 3; gradeName = "LEVEL 3 — SEVERE NPDR"; referable = true; refTitle = " URGENT SPECIALIST REFERRAL";
+            grade = 3; gradeName = "LEVEL 3 — SEVERE NPDR"; referable = true; refTitle = "🔴 URGENT SPECIALIST REFERRAL";
             refReason = `Extensive retinal lesion burden (${hCount} blot hemorrhages, ${mCount} MAs). ICDR 4-2-1 criteria met.`;
         } else if (mCount > 5 || hCount > 0 || eCount > 0) {
-            grade = 2; gradeName = "LEVEL 2 — MODERATE NPDR"; referable = true; refTitle = " REFER TO OPHTHALMOLOGIST";
+            grade = 2; gradeName = "LEVEL 2 — MODERATE NPDR"; referable = true; refTitle = "🔴 REFER TO OPHTHALMOLOGIST";
             refReason = `Significant lesions detected: ${mCount} MAs, ${hCount} hemorrhages, ${eCount} exudates. CSME: ${lesions.csme_positive ? 'Positive' : 'Negative'}.`;
         }
 
@@ -2684,7 +2696,7 @@ function handleRejectedNonEyeImage(filename, reasonMsg) {
         grade: -99,
         gradeName: 'REJECTED — NOT AN EYE / RETINAL IMAGE',
         referable: false,
-        refTitle: ' REJECTED: NON-RETINAL IMAGE DETECTED',
+        refTitle: '❌ REJECTED: NON-RETINAL IMAGE DETECTED',
         refReason: reasonMsg || 'Anatomical eye recognition failed: Uploaded photograph does not match human ocular fundus criteria (Missing optic disc, retinal vasculature, or fundus chromatic profile).',
         priority: 4,
         priorityText: 'REJECTED',
@@ -2696,7 +2708,7 @@ function handleRejectedNonEyeImage(filename, reasonMsg) {
         glare: 'N/A',
         guidance: 'The uploaded image was examined by the trained AI verifier and confirmed as a non-retinal image. Please upload an authentic ocular fundus photograph. Diagnosis aborted to prevent false readings.',
         guidanceClass: 'guidance-recapture',
-        guidanceTitle: ' Anatomical Verification Failed:',
+        guidanceTitle: '❌ Anatomical Verification Failed:',
         mas: 'None (Invalid)',
         hemo: 'None (Invalid)',
         exudates: 'None (Invalid)',
@@ -2713,10 +2725,10 @@ function handleRejectedNonEyeImage(filename, reasonMsg) {
     PATIENTS['PAT_REJECTED'] = customCase;
     selectPatient('PAT_REJECTED');
 
-    logAudit(`<b> IMAGE REJECTED:</b> Uploaded file <b>${filename}</b> failed anatomical retinal verification tests. Diagnostic analysis aborted.`);
+    logAudit(`<b>❌ IMAGE REJECTED:</b> Uploaded file <b>${filename}</b> failed anatomical retinal verification tests. Diagnostic analysis aborted.`);
     speakGuidance("Uploaded image is not a retinal photograph. Anatomical verification failed. Please upload an authentic eye fundus image.");
 
-    alert(` NOT AN EYE / RETINAL IMAGE DETECTED!
+    alert(`❌ NOT AN EYE / RETINAL IMAGE DETECTED!
 
 The AI system examined "${filename}" and confirmed it is NOT an authentic retinal fundus photograph.
 
@@ -2800,7 +2812,7 @@ function handleVerifiedEyeImage(img, filename, res) {
     logAudit(`<b>Authentic Retinal Fundus Verified:</b> <b>${filename}</b> (Confidence: ${confVal}%). Grade: ${res.grade_name} | DR Damage: ${drPct}%. MAs: ${res.mas_count}, Hemorrhages: ${res.hemo_count}, Exudates: ${res.exudates_count}. Grad-CAM: Ready.`);
     speakGuidance("Authentic retinal photograph verified. Real-time diagnostic evaluation completed: " + res.grade_name + ". Retinopathy damage " + drPct + " percent.");
 
-    alert(` AUTHENTIC RETINAL SCAN VERIFIED!
+    alert(`✅ AUTHENTIC RETINAL SCAN VERIFIED!
 
 Patient Image: ${filename}
 AI Authenticity Confidence: ${confVal}%
@@ -2850,13 +2862,13 @@ function runSimulinkEngine() {
     if (adviceBox) {
         if (annualCapacity >= 100000 && waitHours < 1.0) {
             adviceBox.style.borderLeftColor = '#34d399';
-            adviceBox.innerHTML = `<b> AI Resource Planning Advisory:</b> Target of 100,000+ patients ACHIEVED! Current configuration of <b>${docs} Specialists</b> and <b>${bw} Mbps</b> link accommodates <b>${annualCapacity.toLocaleString()} patients/year</b> with negligible review delay (${(waitHours*60).toFixed(0)}m).`;
+            adviceBox.innerHTML = `<b>🤖 AI Resource Planning Advisory:</b> Target of 100,000+ patients ACHIEVED! Current configuration of <b>${docs} Specialists</b> and <b>${bw} Mbps</b> link accommodates <b>${annualCapacity.toLocaleString()} patients/year</b> with negligible review delay (${(waitHours*60).toFixed(0)}m).`;
         } else if (bw < 1.0) {
             adviceBox.style.borderLeftColor = '#f59e0b';
-            adviceBox.innerHTML = `<b> Uplink Congestion Warning:</b> At <b>${bw} Mbps</b>, remote PHC image transmission causes localized queue delays. Recommendation: Enable ultra-compact progressive JPEG-2000 encoding.`;
+            adviceBox.innerHTML = `<b>⚠️ Uplink Congestion Warning:</b> At <b>${bw} Mbps</b>, remote PHC image transmission causes localized queue delays. Recommendation: Enable ultra-compact progressive JPEG-2000 encoding.`;
         } else {
             adviceBox.style.borderLeftColor = '#ef4444';
-            adviceBox.innerHTML = `<b> Specialist Bottleneck:</b> With <b>${docs} Specialist</b> for ${patients} patients/day, the review queue exceeds target SLA (Wait: ${waitHours.toFixed(1)} hrs). Recommend adding 1 additional reading specialist.`;
+            adviceBox.innerHTML = `<b>⚠️ Specialist Bottleneck:</b> With <b>${docs} Specialist</b> for ${patients} patients/day, the review queue exceeds target SLA (Wait: ${waitHours.toFixed(1)} hrs). Recommend adding 1 additional reading specialist.`;
         }
     }
 
@@ -2937,7 +2949,7 @@ function confirmDiagnosis() {
     if (stopwatchRunning) toggleStopwatch();
     const p = PATIENTS[currentPatientId];
     logAudit(`Clinical Diagnosis <b>CONFIRMED</b> by Dr. R. Sharma, MS (Ophth) in <b>${stopwatchSeconds.toFixed(1)}s</b>. Patient: ${p.id} (${p.gradeName}). Digitally cryptographically signed.`);
-    alert(` CASE DIGITALLY SIGNED & VALIDATED!\n\nPatient: ${p.id} (${p.name})\nConfirmed Grade: ${p.gradeName}\nReview Duration: ${stopwatchSeconds.toFixed(1)} seconds (<30s Target Met)\nAudit entry timestamped to secure district log.`);
+    alert(`✅ CASE DIGITALLY SIGNED & VALIDATED!\n\nPatient: ${p.id} (${p.name})\nConfirmed Grade: ${p.gradeName}\nReview Duration: ${stopwatchSeconds.toFixed(1)} seconds (<30s Target Met)\nAudit entry timestamped to secure district log.`);
 }
 
 function modifyGradePrompt() {
@@ -2955,13 +2967,13 @@ function triggerRecapture() {
     const p = PATIENTS[currentPatientId];
     logAudit(`Recapture Requested by Clinician for <b>${p.id}</b>. Notification dispatched to Nanded PHC operator.`);
     speakGuidance("Recapture requested. Please re-acquire image with improved pupil alignment.");
-    alert(` RECAPTURE REQUESTED\n\nASHA operator at PHC notified to recapture retinal image for ${p.name}. Quality reason dispatched.`);
+    alert(`⚠ RECAPTURE REQUESTED\n\nASHA operator at PHC notified to recapture retinal image for ${p.name}. Quality reason dispatched.`);
 }
 
 function referSpecialist() {
     const p = PATIENTS[currentPatientId];
     logAudit(`Priority Referral Slip Issued for <b>${p.id}</b> (${p.name}) to District Eye Hospital.`);
-    alert(` SPECIALIST REFERRAL CONFIRMED\n\nPatient ${p.name} routed to Nanded District Eye Hospital.\nAutomated SMS sent to patient & PHC ANM.`);
+    alert(`🏥 SPECIALIST REFERRAL CONFIRMED\n\nPatient ${p.name} routed to Nanded District Eye Hospital.\nAutomated SMS sent to patient & PHC ANM.`);
 }
 
 function simulateFieldCapture() {
@@ -2983,7 +2995,7 @@ function runFieldAI() {
 function sendToHub() {
     const p = PATIENTS[currentPatientId];
     logAudit(`Telemetry bundle for <b>${p.id}</b> queued for District Hub Priority Triage.`);
-    alert(` SENT TO DISTRICT TELE-HUB\n\nPatient ${p.id} bundle sent via secure 2.4 Mbps cellular uplink.\nPriority Triage Queue Position: HIGH.`);
+    alert(`📤 SENT TO DISTRICT TELE-HUB\n\nPatient ${p.id} bundle sent via secure 2.4 Mbps cellular uplink.\nPriority Triage Queue Position: HIGH.`);
 }
 
 function toggleNetwork() {
@@ -3002,7 +3014,7 @@ function toggleNetwork() {
         if (netText) { netText.innerText = 'OFFLINE (Autonomous PHC)'; netText.style.color = '#fbbf24'; }
         if (pulse) pulse.style.background = '#f59e0b';
         logAudit(`Telemedicine Network state: <b>OFFLINE</b>. Edge storage mode active.`);
-        alert(` RURAL OFFLINE MODE ACTIVE\n\nSystem is fully operational offline.\nImages and AI assessments are securely stored locally at PHC and will auto-sync when cellular signal returns.`);
+        alert(`📡 RURAL OFFLINE MODE ACTIVE\n\nSystem is fully operational offline.\nImages and AI assessments are securely stored locally at PHC and will auto-sync when cellular signal returns.`);
     }
 }
 
@@ -3016,7 +3028,7 @@ function syncOfflineQueue() {
         const counter = document.getElementById('pendingSyncCount');
         if (counter) counter.innerText = '0 Cases';
         logAudit(`Manual Sync: <b>3 pending cases</b> synchronized to District Cloud.`);
-        alert(` SYNCHRONIZATION COMPLETE!\n\nAll local PHC screening records have been uploaded and encrypted.`);
+        alert(`🔄 SYNCHRONIZATION COMPLETE!\n\nAll local PHC screening records have been uploaded and encrypted.`);
     }, 1200);
 }
 
@@ -3210,19 +3222,19 @@ function updateRiskPreview() {
 
     if (hba1c >= 8.5 || sys >= 145 || dur >= 15) {
         title.style.color = '#ef4444';
-        title.innerText = ` HIGH MICROVASCULAR PROGRESSION RISK (HbA1c: ${hba1c}%, BP: ${sys} mmHg)`;
+        title.innerText = `🚨 HIGH MICROVASCULAR PROGRESSION RISK (HbA1c: ${hba1c}%, BP: ${sys} mmHg)`;
         urg.style.color = '#ef4444';
         urg.innerText = 'HIGH PRIORITY (Accelerated Retinal Damage Risk)';
         if (box) box.style.borderColor = '#ef4444';
     } else if (hba1c >= 7.5 || sys >= 135 || dur >= 8) {
         title.style.color = '#fbbf24';
-        title.innerText = ` ELEVATED SYSTEMIC RISK (HbA1c: ${hba1c}%, Duration: ${dur} Yrs)`;
+        title.innerText = `⚠️ ELEVATED SYSTEMIC RISK (HbA1c: ${hba1c}%, Duration: ${dur} Yrs)`;
         urg.style.color = '#fbbf24';
         urg.innerText = 'PRIORITY 2 (Moderate DME Risk)';
         if (box) box.style.borderColor = '#fbbf24';
     } else {
         title.style.color = '#34d399';
-        title.innerText = ` CONTROLLED SYSTEMIC PROFILE (HbA1c: ${hba1c}%, BP: ${sys} mmHg)`;
+        title.innerText = `✓ CONTROLLED SYSTEMIC PROFILE (HbA1c: ${hba1c}%, BP: ${sys} mmHg)`;
         urg.style.color = '#34d399';
         urg.innerText = 'ROUTINE SURVEILLANCE';
         if (box) box.style.borderColor = '#34d399';
@@ -3249,7 +3261,7 @@ function handleModalCustomUpload(event) {
     const riskUrg = document.getElementById('riskPreviewUrgency');
     if (riskTitle) {
         riskTitle.style.color = '#38bdf8';
-        riskTitle.innerText = ` ANALYZING & VERIFYING RETINAL FUNDUS (${file.name})...`;
+        riskTitle.innerText = `⏳ ANALYZING & VERIFYING RETINAL FUNDUS (${file.name})...`;
     }
     if (riskUrg) {
         riskUrg.style.color = '#38bdf8';
@@ -3288,21 +3300,19 @@ function submitPatientInputForm() {
     const va = document.getElementById('inpVA')?.value || '6/12 (Moderate)';
     const symptoms = document.getElementById('inpSymptoms')?.value || 'Routine examination';
     const priorTreat = document.getElementById('inpPriorTreat')?.value || 'None';
-    const selectedPresetId = document.getElementById('inpSelectedPresetId')?.value || 'user_preset_1';
-    const chosenPreset = REGISTRATION_PRESETS.find(p => p.id === selectedPresetId) || REGISTRATION_PRESETS[0];
-    const presetKey = chosenPreset ? chosenPreset.id : 'PAT_003_MODERATE';
+    const presetKey = document.getElementById('inpPreset')?.value || 'PAT_003_MODERATE';
 
     if (presetKey === 'CUSTOM') {
         if (!modalCustomImg && !customUploadedImg) {
-            alert(" Please choose an authentic retinal fundus image file first using 'Choose File'.");
+            alert("⚠️ Please choose an authentic retinal fundus image file first using 'Choose File'.");
             return;
         }
         if (currentModalUploadStatus === 'verifying') {
-            alert(" Retinal AI verification is currently running on the uploaded image. Please wait 2 seconds and click again.");
+            alert("⏳ Retinal AI verification is currently running on the uploaded image. Please wait 2 seconds and click again.");
             return;
         }
         if (currentModalUploadStatus === 'rejected') {
-            alert(" CANNOT ENROLL PATIENT WITH NON-RETINAL IMAGE!\n\n" + (currentModalRejectionMsg || "The uploaded file failed anatomical eye verification. Please provide an authentic ocular fundus camera photograph."));
+            alert("❌ CANNOT ENROLL PATIENT WITH NON-RETINAL IMAGE!\n\n" + (currentModalRejectionMsg || "The uploaded file failed anatomical eye verification. Please provide an authentic ocular fundus camera photograph."));
             return;
         }
     }
@@ -3313,13 +3323,6 @@ function submitPatientInputForm() {
     if (!targetId) {
         const cleanName = name.split(' ')[0].toUpperCase().replace(/[^A-Z]/g, '');
         targetId = 'PAT_' + cleanName + '_' + Math.floor(Math.random() * 899 + 100);
-    }
-
-    let attachedImg = (presetKey === 'CUSTOM' ? (modalCustomImg || customUploadedImg) : activeRegistrationPresetImg);
-    if (!attachedImg && chosenPreset) {
-        attachedImg = new Image();
-        attachedImg.crossOrigin = 'anonymous';
-        attachedImg.src = chosenPreset.path;
     }
 
     const newPatient = Object.assign({}, basePatient, {
@@ -3338,31 +3341,9 @@ function submitPatientInputForm() {
         phc: phc,
         symptoms: symptoms,
         priorTreat: priorTreat,
-        grade: chosenPreset ? chosenPreset.grade : basePatient.grade,
-        gradeName: chosenPreset ? (chosenPreset.grade_label.toUpperCase()) : basePatient.gradeName,
-        referable: chosenPreset ? chosenPreset.referable : basePatient.referable,
-        refTitle: chosenPreset ? (chosenPreset.referable ? 'REFER TO OPHTHALMOLOGIST' : 'NO REFERRAL REQUIRED') : basePatient.refTitle,
-        refReason: chosenPreset ? chosenPreset.description : basePatient.refReason,
-        customImg: attachedImg,
-        imgPath: chosenPreset ? chosenPreset.path : null,
-        rationale: `Clinical Biomarkers: ${chosenPreset ? chosenPreset.description : basePatient.rationale} Systemic Control: HbA1c ${hba1c}%, BP ${bpSys}/${bpDia} mmHg, Duration ${duration} yrs. Eye Examined: ${eye} (BCVA ${va}). Complaints: ${symptoms}.`
+        customImg: (presetKey === 'CUSTOM' ? (modalCustomImg || customUploadedImg) : null),
+        rationale: `Clinical Biomarkers: ${basePatient.rationale} Systemic Control: HbA1c ${hba1c}%, BP ${bpSys}/${bpDia} mmHg, Duration ${duration} yrs. Eye Examined: ${eye} (BCVA ${va}). Complaints: ${symptoms}.`
     });
-
-    if (attachedImg) {
-        customUploadedImg = attachedImg;
-        // Trigger live analysis in background if possible
-        try {
-            const tempCanvas = document.createElement('canvas');
-            tempCanvas.width = attachedImg.naturalWidth || 512;
-            tempCanvas.height = attachedImg.naturalHeight || 512;
-            const tctx = tempCanvas.getContext('2d');
-            tctx.drawImage(attachedImg, 0, 0);
-            const b64 = tempCanvas.toDataURL('image/png');
-            processRealEyeVerificationAndAnalysis(attachedImg, (chosenPreset ? chosenPreset.filename : 'enrolled_patient.png'), b64);
-        } catch(e) {
-            console.warn("Analysis trigger fallback:", e);
-        }
-    }
 
     if (hba1c > 8.5 && newPatient.grade >= 2) {
         newPatient.priority = 1;
@@ -3377,7 +3358,7 @@ function submitPatientInputForm() {
 
     speakGuidance(`Patient ${name} successfully enrolled. AI screening complete.`);
     logAudit(`<b>Patient Clinical Data Enrolled:</b> ${targetId} (${name}, ${age}y, HbA1c: ${hba1c}%, BP: ${bpSys}/${bpDia}, Eye: ${eye}). Status: ${newPatient.gradeName}`);
-    alert(` PATIENT INTAKE & AI SCREENING COMPLETED!
+    alert(`✅ PATIENT INTAKE & AI SCREENING COMPLETED!
 
 Patient: ${name} (${targetId})
 Age: ${age} | Gender: ${gender} | Eye: ${eye}
@@ -3399,28 +3380,28 @@ let currentGradcamMode = 'pp'; // 'pp' = Grad-CAM++, 'std' = Standard Grad-CAM, 
 const I18N = {
     en: {
         brandSubtitle: "Real-Time Functional Clinical & Telemedicine Portal | MathWorks SIH26038",
-        roleField: " Field Mode (ASHA)",
-        roleClinical: " Clinical Mode (Ophthalmologist)",
-        roleAdmin: " District Admin & Simulink",
-        btnInputPatient: " Input Patient Data",
-        btnRegisterPatient: " Register New Patient",
-        btnReport: " Report",
+        roleField: "📱 Field Mode (ASHA)",
+        roleClinical: "👨‍⚕️ Clinical Mode (Ophthalmologist)",
+        roleAdmin: "🗺️ District Admin & Simulink",
+        btnInputPatient: "➕ Input Patient Data",
+        btnRegisterPatient: "➕ REGISTER NEW PATIENT",
+        btnReport: "📄 Report",
         triageQueueTitle: "Priority Triage Queue",
         triageSortedBy: "Sorted by Risk",
         analyzeCustomTitle: "Analyze Custom Retina",
         dropFundusText: "Drop Any Fundus Image",
         dropFundusSub: "or click to browse local files (JPG/PNG)",
-        voiceOn: " Voice: ON",
-        voiceOff: " Voice: OFF",
-        contrastText: " Contrast",
-        hotkeysText: " Hotkeys",
-        qQualityTitle: " IMAGE QUALITY:",
-        refNoNeeded: " NO REFERRAL REQUIRED",
-        refRoutineFollowup: " ROUTINE FOLLOW-UP",
-        refToOpht: " REFER TO OPHTHALMOLOGIST",
-        refUrgentSpecialist: " URGENT SPECIALIST REFERRAL",
-        refEmergencySpecialist: " EMERGENCY SPECIALIST REFERRAL",
-        refRecapture: " RECAPTURE REQUIRED (NOT DIAGNOSTIC)",
+        voiceOn: "🔊 Voice: ON",
+        voiceOff: "🔇 Voice: OFF",
+        contrastText: "🌓 Contrast",
+        hotkeysText: "⌨️ Hotkeys",
+        qQualityTitle: "● IMAGE QUALITY:",
+        refNoNeeded: "🟢 NO REFERRAL REQUIRED",
+        refRoutineFollowup: "🟢 ROUTINE FOLLOW-UP",
+        refToOpht: "🔴 REFER TO OPHTHALMOLOGIST",
+        refUrgentSpecialist: "🔴 URGENT SPECIALIST REFERRAL",
+        refEmergencySpecialist: "🚨 EMERGENCY SPECIALIST REFERRAL",
+        refRecapture: "⚠️ RECAPTURE REQUIRED (NOT DIAGNOSTIC)",
         grade0: "LEVEL 0 — NO APPARENT RETINOPATHY",
         grade1: "LEVEL 1 — MILD NPDR",
         grade2: "LEVEL 2 — MODERATE NPDR",
@@ -3440,28 +3421,28 @@ const I18N = {
     },
     hi: {
         brandSubtitle: "रीयल-टाइम रेटिनल स्क्रीनिंग व टेलीमेडिसिन पोर्टल | MathWorks SIH26038",
-        roleField: " फील्ड मोड (आशा कार्यकर्ता)",
-        roleClinical: " क्लिनिकल मोड (नेत्र रोग विशेषज्ञ)",
-        roleAdmin: " जिला प्रशासन व सिम्युलिंक",
-        btnInputPatient: " मरीज का विवरण जोड़ें",
-        btnRegisterPatient: " नया मरीज पंजीकृत करें",
-        btnReport: " नैदानिक रिपोर्ट",
+        roleField: "📱 फील्ड मोड (आशा कार्यकर्ता)",
+        roleClinical: "👨‍⚕️ क्लिनिकल मोड (नेत्र रोग विशेषज्ञ)",
+        roleAdmin: "🗺️ जिला प्रशासन व सिम्युलिंक",
+        btnInputPatient: "➕ मरीज का विवरण जोड़ें",
+        btnRegisterPatient: "➕ नया मरीज पंजीकृत करें",
+        btnReport: "📄 नैदानिक रिपोर्ट",
         triageQueueTitle: "प्राथमिकता ट्राइएज कतार",
         triageSortedBy: "जोखिम अनुसार क्रमबद्ध",
         analyzeCustomTitle: "कस्टम रेटिना जांचें",
         dropFundusText: "फंडस छवि यहां खींचें",
         dropFundusSub: "या स्थानीय फाइलें ब्राउज़ करने के लिए क्लिक करें",
-        voiceOn: " आवाज: चालू",
-        voiceOff: " आवाज: बंद",
-        contrastText: " कंट्रास्ट",
-        hotkeysText: " शॉर्टकट",
-        qQualityTitle: " छवि गुणवत्ता:",
-        refNoNeeded: " रेफरल की आवश्यकता नहीं",
-        refRoutineFollowup: " नियमित अनुवर्ती जांच",
-        refToOpht: " नेत्र रोग विशेषज्ञ को रेफर करें",
-        refUrgentSpecialist: " अति आवश्यक विशेषज्ञ रेफरल",
-        refEmergencySpecialist: " आपातकालीन विशेषज्ञ रेफरल (<48 घंटे)",
-        refRecapture: " पुनः छवि लेना आवश्यक (अनैदानिक)",
+        voiceOn: "🔊 आवाज: चालू",
+        voiceOff: "🔇 आवाज: बंद",
+        contrastText: "🌓 कंट्रास्ट",
+        hotkeysText: "⌨️ शॉर्टकट",
+        qQualityTitle: "● छवि गुणवत्ता:",
+        refNoNeeded: "🟢 रेफरल की आवश्यकता नहीं",
+        refRoutineFollowup: "🟢 नियमित अनुवर्ती जांच",
+        refToOpht: "🔴 नेत्र रोग विशेषज्ञ को रेफर करें",
+        refUrgentSpecialist: "🔴 अति आवश्यक विशेषज्ञ रेफरल",
+        refEmergencySpecialist: "🚨 आपातकालीन विशेषज्ञ रेफरल (<48 घंटे)",
+        refRecapture: "⚠️ पुनः छवि लेना आवश्यक (अनैदानिक)",
         grade0: "स्तर 0 — कोई रेटिनोपैथी नहीं",
         grade1: "स्तर 1 — हल्का एनपीडीआर (Mild NPDR)",
         grade2: "स्तर 2 — मध्यम एनपीडीआर (Moderate NPDR)",
@@ -3481,28 +3462,28 @@ const I18N = {
     },
     ta: {
         brandSubtitle: "நிகழ்நேர விழித்திரை திரையிடல் மற்றும் டெலிமெடிசின் போர்டல் | MathWorks SIH26038",
-        roleField: " கள முறை (ஆஷா)",
-        roleClinical: " மருத்துவ முறை (கண் மருத்துவர்)",
-        roleAdmin: " மாவட்ட நிர்வாகம் & சிமுலிங்க்",
-        btnInputPatient: " நோயாளி தரவை உள்ளிடுக",
-        btnRegisterPatient: " புதிய நோயாளியை பதிவு செய்க",
-        btnReport: " அறிக்கை",
+        roleField: "📱 கள முறை (ஆஷா)",
+        roleClinical: "👨‍⚕️ மருத்துவ முறை (கண் மருத்துவர்)",
+        roleAdmin: "🗺️ மாவட்ட நிர்வாகம் & சிமுலிங்க்",
+        btnInputPatient: "➕ நோயாளி தரவை உள்ளிடுக",
+        btnRegisterPatient: "➕ புதிய நோயாளியை பதிவு செய்க",
+        btnReport: "📄 அறிக்கை",
         triageQueueTitle: "முன்னுரிமை வரிசை",
         triageSortedBy: "ஆபத்து அடிப்படையில்",
         analyzeCustomTitle: "தனிப்பயன் விழித்திரையை ஆராய்க",
         dropFundusText: "பண்டஸ் படத்தை இங்கே விடவும்",
         dropFundusSub: "அல்லது கோப்புகளைத் தேர்ந்தெடுக்க கிளிக் செய்க",
-        voiceOn: " குரல்: ஆன்",
-        voiceOff: " குரல்: ஆஃப்",
-        contrastText: " மாறுபாடு",
-        hotkeysText: " குறுக்குவழிகள்",
-        qQualityTitle: " படத்தின் தரம்:",
-        refNoNeeded: " பரிந்துரை தேவையில்லை",
-        refRoutineFollowup: " வழக்கமான பின்தொடர்தல்",
-        refToOpht: " கண் மருத்துவரிடம் பரிந்துரைக்கவும்",
-        refUrgentSpecialist: " அவசர நிபுணர் பரிந்துரை",
-        refEmergencySpecialist: " தீவிர அவசர பரிந்துரை (<48 மணி)",
-        refRecapture: " மீண்டும் படம் எடுக்க வேண்டும்",
+        voiceOn: "🔊 குரல்: ஆன்",
+        voiceOff: "🔇 குரல்: ஆஃப்",
+        contrastText: "🌓 மாறுபாடு",
+        hotkeysText: "⌨️ குறுக்குவழிகள்",
+        qQualityTitle: "● படத்தின் தரம்:",
+        refNoNeeded: "🟢 பரிந்துரை தேவையில்லை",
+        refRoutineFollowup: "🟢 வழக்கமான பின்தொடர்தல்",
+        refToOpht: "🔴 கண் மருத்துவரிடம் பரிந்துரைக்கவும்",
+        refUrgentSpecialist: "🔴 அவசர நிபுணர் பரிந்துரை",
+        refEmergencySpecialist: "🚨 தீவிர அவசர பரிந்துரை (<48 மணி)",
+        refRecapture: "⚠️ மீண்டும் படம் எடுக்க வேண்டும்",
         grade0: "நிலை 0 — விழித்திரை நோய் இல்லை",
         grade1: "நிலை 1 — லேசான NPDR",
         grade2: "நிலை 2 — மிதமான NPDR",
@@ -3522,28 +3503,28 @@ const I18N = {
     },
     te: {
         brandSubtitle: "రియల్ టైమ్ రెటీనా స్క్రీనింగ్ & టెలిమెడిసిన్ పోర్టల్ | MathWorks SIH26038",
-        roleField: " ఫీల్డ్ మోడ్ (ఆశా)",
-        roleClinical: " క్లినికల్ మోడ్ (నేత్ర వైద్యుడు)",
-        roleAdmin: " జిల్లా అడ్మిన్ & సిమ్యులింక్",
-        btnInputPatient: " రోగి వివరాలను జోడించండి",
-        btnRegisterPatient: " కొత్త రోగిని నమోదు చేయండి",
-        btnReport: " నివేదిక",
+        roleField: "📱 ఫీల్డ్ మోడ్ (ఆశా)",
+        roleClinical: "👨‍⚕️ క్లినికల్ మోడ్ (నేత్ర వైద్యుడు)",
+        roleAdmin: "🗺️ జిల్లా అడ్మిన్ & సిమ్యులింక్",
+        btnInputPatient: "➕ రోగి వివరాలను జోడించండి",
+        btnRegisterPatient: "➕ కొత్త రోగిని నమోదు చేయండి",
+        btnReport: "📄 నివేదిక",
         triageQueueTitle: "ప్రాధాన్యత క్యూ",
         triageSortedBy: "ప్రమాద తీవ్రత ప్రకారం",
         analyzeCustomTitle: "కస్టమ్ రెటీనా విశ్లేషణ",
         dropFundusText: "ఫండస్ ఇమేజ్‌ని ఇక్కడ డ్రాప్ చేయండి",
         dropFundusSub: "లేదా ఫైల్‌లను బ్రౌజ్ చేయడానికి క్లిక్ చేయండి",
-        voiceOn: " వాయిస్: ఆన్",
-        voiceOff: " వాయిస్: ఆఫ్",
-        contrastText: " కాంట్రాస్ట్",
-        hotkeysText: " షార్ట్‌కట్‌లు",
-        qQualityTitle: " చిత్ర నాణ్యత:",
-        refNoNeeded: " రిఫెరల్ అవసరం లేదు",
-        refRoutineFollowup: " సాధారణ ఫాలో-అప్",
-        refToOpht: " నేత్ర వైద్యుడిని సంప్రదించండి",
-        refUrgentSpecialist: " అత్యవసర నిపుణుల రిఫెరల్",
-        refEmergencySpecialist: " తక్షణ అత్యవసర రిఫెరల్ (<48 గంటలు)",
-        refRecapture: " తిరిగి ఫోటో తీయాలి (లోపభూయిష్ట చిత్రం)",
+        voiceOn: "🔊 వాయిస్: ఆన్",
+        voiceOff: "🔇 వాయిస్: ఆఫ్",
+        contrastText: "🌓 కాంట్రాస్ట్",
+        hotkeysText: "⌨️ షార్ట్‌కట్‌లు",
+        qQualityTitle: "● చిత్ర నాణ్యత:",
+        refNoNeeded: "🟢 రిఫెరల్ అవసరం లేదు",
+        refRoutineFollowup: "🟢 సాధారణ ఫాలో-అప్",
+        refToOpht: "🔴 నేత్ర వైద్యుడిని సంప్రదించండి",
+        refUrgentSpecialist: "🔴 అత్యవసర నిపుణుల రిఫెరల్",
+        refEmergencySpecialist: "🚨 తక్షణ అత్యవసర రిఫెరల్ (<48 గంటలు)",
+        refRecapture: "⚠️ తిరిగి ఫోటో తీయాలి (లోపభూయిష్ట చిత్రం)",
         grade0: "స్థాయి 0 — రెటినోపతి లేదు",
         grade1: "స్థాయి 1 — తేలికపాటి NPDR",
         grade2: "స్థాయి 2 — మోస్తరు NPDR",
@@ -3626,15 +3607,15 @@ function toggleGradcamMode() {
     const dict = I18N[currentLanguage] || I18N.en;
     if (btn) {
         if (currentGradcamMode === 'pp') {
-            btn.innerText = ` ${dict.gradcamPpLabel}`;
+            btn.innerText = `🔥 ${dict.gradcamPpLabel}`;
             btn.style.borderColor = '#06b6d4';
             btn.style.color = '#38bdf8';
         } else if (currentGradcamMode === 'std') {
-            btn.innerText = ` ${dict.gradcamStdLabel}`;
+            btn.innerText = `🔍 ${dict.gradcamStdLabel}`;
             btn.style.borderColor = '#3b82f6';
             btn.style.color = '#60a5fa';
         } else {
-            btn.innerText = ` ${dict.gradcamOffLabel}`;
+            btn.innerText = `⚪ ${dict.gradcamOffLabel}`;
             btn.style.borderColor = '#64748b';
             btn.style.color = '#94a3b8';
         }
@@ -3734,843 +3715,7 @@ window.addEventListener('keydown', function(e) {
     }
 });
 
-
-// ==========================================
-// REGISTRATION RETINAL PRESET ENGINE
-// ==========================================
-const REGISTRATION_PRESETS = [
-  {
-    "id": "user_preset_1",
-    "filename": "user_preset_fundus_pat003.png",
-    "path": "sample_images/user_preset_fundus_pat003.png",
-    "title": "User Fundus: Moderate NPDR (PAT_003)",
-    "grade": 2,
-    "grade_label": "Grade 2 - Moderate NPDR",
-    "badge_color": "#F97316",
-    "category": "grade2",
-    "referable": true,
-    "width": 512,
-    "height": 512,
-    "dimensions": "512 x 512 px",
-    "size_kb": 365,
-    "format": "PNG Image",
-    "description": "User uploaded clinical case demonstrating moderate non-proliferative retinopathy with blot hemorrhages, multiple microaneurysms, and macular hard exudates.",
-    "patient": {
-      "name": "Ganesh Kulkarni",
-      "age": 58,
-      "gender": "Male",
-      "dm_duration": "11 Yrs",
-      "hba1c": "8.4%",
-      "bp": "142/88",
-      "eye": "OD (Right)"
-    }
-  },
-  {
-    "id": "user_preset_2",
-    "filename": "user_preset_retinal_diagram.png",
-    "path": "sample_images/user_preset_retinal_diagram.png",
-    "title": "User Fundus: Retinal Lesions & Vascular Map",
-    "grade": 3,
-    "grade_label": "Grade 3 - Severe NPDR",
-    "badge_color": "#DC2626",
-    "category": "grade3",
-    "referable": true,
-    "width": 512,
-    "height": 512,
-    "dimensions": "512 x 512 px",
-    "size_kb": 380,
-    "format": "PNG Image",
-    "description": "User uploaded diagnostic lesion distribution depicting widespread intraretinal hemorrhages, venous loops, and extensive lipid exudate plaques.",
-    "patient": {
-      "name": "Kavita Rao",
-      "age": 63,
-      "gender": "Female",
-      "dm_duration": "14 Yrs",
-      "hba1c": "9.2%",
-      "bp": "150/92",
-      "eye": "OS (Left)"
-    }
-  },
-  {
-    "id": "user_preset_3",
-    "filename": "user_preset_exudates_fundus.png",
-    "path": "sample_images/user_preset_exudates_fundus.png",
-    "title": "User Fundus: Circinate Hard Exudates",
-    "grade": 2,
-    "grade_label": "Grade 2 - Moderate NPDR",
-    "badge_color": "#F97316",
-    "category": "grade2",
-    "referable": true,
-    "width": 400,
-    "height": 400,
-    "dimensions": "400 x 400 px",
-    "size_kb": 197,
-    "format": "PNG Image",
-    "description": "User uploaded fundus showing dense circinate rings of hard lipid exudates encroaching upon the macula, indicative of clinically significant macular edema risk.",
-    "patient": {
-      "name": "Harish Mehta",
-      "age": 54,
-      "gender": "Male",
-      "dm_duration": "8 Yrs",
-      "hba1c": "8.1%",
-      "bp": "138/86",
-      "eye": "OD (Right)"
-    }
-  },
-  {
-    "id": "sample_grade0",
-    "filename": "01_normal_retina_grade0.png",
-    "path": "sample_images/01_normal_retina_grade0.png",
-    "title": "Normal Healthy Retina",
-    "grade": 0,
-    "grade_label": "Grade 0 - Normal",
-    "badge_color": "#16A34A",
-    "category": "grade0",
-    "referable": false,
-    "width": 224,
-    "height": 224,
-    "dimensions": "224 x 224 px",
-    "size_kb": 51,
-    "format": "PNG Image",
-    "description": "Clear optic disc margin, healthy macula without foveal thickening. Absence of microaneurysms, hemorrhages, or exudates. Routine annual screening recommended.",
-    "patient": {
-      "name": "Rajesh Patil",
-      "age": 48,
-      "gender": "Male",
-      "dm_duration": "3 Yrs",
-      "hba1c": "6.2%",
-      "bp": "120/80",
-      "eye": "OD (Right)"
-    }
-  },
-  {
-    "id": "sample_grade1",
-    "filename": "02_mild_npdr_grade1.png",
-    "path": "sample_images/02_mild_npdr_grade1.png",
-    "title": "Mild NPDR Fundus",
-    "grade": 1,
-    "grade_label": "Grade 1 - Mild NPDR",
-    "badge_color": "#EAB308",
-    "category": "grade1",
-    "referable": false,
-    "width": 224,
-    "height": 224,
-    "dimensions": "224 x 224 px",
-    "size_kb": 51,
-    "format": "PNG Image",
-    "description": "Isolated microaneurysms detected in temporal macular arcade. No retinal hemorrhages or hard exudates present. Non-referable early stage; 6-12 month follow-up advised.",
-    "patient": {
-      "name": "Sunita Deshmukh",
-      "age": 55,
-      "gender": "Female",
-      "dm_duration": "6 Yrs",
-      "hba1c": "7.4%",
-      "bp": "130/85",
-      "eye": "OS (Left)"
-    }
-  },
-  {
-    "id": "sample_grade2",
-    "filename": "03_moderate_npdr_grade2.png",
-    "path": "sample_images/03_moderate_npdr_grade2.png",
-    "title": "Moderate NPDR & CSME Risk",
-    "grade": 2,
-    "grade_label": "Grade 2 - Moderate NPDR",
-    "badge_color": "#F97316",
-    "category": "grade2",
-    "referable": true,
-    "width": 224,
-    "height": 224,
-    "dimensions": "224 x 224 px",
-    "size_kb": 46,
-    "format": "PNG Image",
-    "description": "Multiple intraretinal microaneurysms (>15) and blot hemorrhages across 2 quadrants. Hard exudates localized near foveal zone (CSME risk). Refer to specialist within 2-4 weeks.",
-    "patient": {
-      "name": "Ganesh Kulkarni",
-      "age": 58,
-      "gender": "Male",
-      "dm_duration": "11 Yrs",
-      "hba1c": "8.4%",
-      "bp": "142/88",
-      "eye": "OD (Right)"
-    }
-  },
-  {
-    "id": "sample_grade3",
-    "filename": "04_severe_npdr_grade3.png",
-    "path": "sample_images/04_severe_npdr_grade3.png",
-    "title": "Severe NPDR 4-Quadrant",
-    "grade": 3,
-    "grade_label": "Grade 3 - Severe NPDR",
-    "badge_color": "#DC2626",
-    "category": "grade3",
-    "referable": true,
-    "width": 224,
-    "height": 224,
-    "dimensions": "224 x 224 px",
-    "size_kb": 51,
-    "format": "PNG Image",
-    "description": "Meets 4:2:1 international criteria: extensive intraretinal hemorrhages in all 4 quadrants with venous beading in 2+ quadrants. High risk of progression to proliferative stage. Urgent referral.",
-    "patient": {
-      "name": "Ananya Sen",
-      "age": 62,
-      "gender": "Female",
-      "dm_duration": "15 Yrs",
-      "hba1c": "9.8%",
-      "bp": "158/94",
-      "eye": "OD (Right)"
-    }
-  },
-  {
-    "id": "sample_grade4",
-    "filename": "05_pdr_grade4.png",
-    "path": "sample_images/05_pdr_grade4.png",
-    "title": "Proliferative DR (PDR)",
-    "grade": 4,
-    "grade_label": "Grade 4 - PDR",
-    "badge_color": "#991B1B",
-    "category": "grade4",
-    "referable": true,
-    "width": 224,
-    "height": 224,
-    "dimensions": "224 x 224 px",
-    "size_kb": 39,
-    "format": "PNG Image",
-    "description": "Active neovascularization of the optic disc (NVD) and retina (NVE) with fibrous proliferation. Immediate vitreoretinal surgical / panretinal photocoagulation (PRP) referral.",
-    "patient": {
-      "name": "Mohammed Farooq",
-      "age": 66,
-      "gender": "Male",
-      "dm_duration": "19 Yrs",
-      "hba1c": "11.1%",
-      "bp": "165/100",
-      "eye": "OS (Left)"
-    }
-  },
-  {
-    "id": "sample_rejection_face",
-    "filename": "06_rejection_face.png",
-    "path": "sample_images/06_rejection_face.png",
-    "title": "Non-Retina / Face Rejection",
-    "grade": -1,
-    "grade_label": "Rejection - Non-Retina",
-    "badge_color": "#64748B",
-    "category": "rejection",
-    "referable": false,
-    "width": 512,
-    "height": 512,
-    "dimensions": "512 x 512 px",
-    "size_kb": 283,
-    "format": "PNG Image",
-    "description": "Test case demonstrating the Smart Quality Gate rejecting non-retinal imagery (face selfie / portrait). Quality Gate triggers automatic rejection and instructs user to acquire a valid fundus image.",
-    "patient": {
-      "name": "Test Subject (Non-Fundus)",
-      "age": 22,
-      "gender": "Male",
-      "dm_duration": "N/A",
-      "hba1c": "N/A",
-      "bp": "N/A",
-      "eye": "N/A"
-    }
-  },
-  {
-    "id": "sample_rejection_diagram",
-    "filename": "07_rejection_diagram.png",
-    "path": "sample_images/07_rejection_diagram.png",
-    "title": "Diagram / Text Rejection",
-    "grade": -1,
-    "grade_label": "Rejection - Graphic/Text",
-    "badge_color": "#64748B",
-    "category": "rejection",
-    "referable": false,
-    "width": 512,
-    "height": 512,
-    "dimensions": "512 x 512 px",
-    "size_kb": 320,
-    "format": "PNG Image",
-    "description": "Test case demonstrating edge verification rejecting schematic diagrams and medical charts. Confirms system cannot be fooled by medical illustrations or screenshots.",
-    "patient": {
-      "name": "Test Subject (Infographic)",
-      "age": "N/A",
-      "gender": "N/A",
-      "dm_duration": "N/A",
-      "hba1c": "N/A",
-      "bp": "N/A",
-      "eye": "N/A"
-    }
-  }
-];
-let activeRegistrationPreset = REGISTRATION_PRESETS[0];
-let activeRegistrationPresetImg = null;
-
-function initRegistrationPresetGrid() {
-    const grid = document.getElementById('modalPresetGrid');
-    if (!grid) return;
-    grid.innerHTML = '';
-
-    REGISTRATION_PRESETS.forEach((preset, idx) => {
-        const isSelected = activeRegistrationPreset ? (activeRegistrationPreset.id === preset.id) : (idx === 0);
-        if (isSelected && !activeRegistrationPreset) {
-            activeRegistrationPreset = preset;
-        }
-
-        const card = document.createElement('div');
-        card.className = `preset-card ${isSelected ? 'active' : ''}`;
-        card.id = `preset_card_${preset.id}`;
-        card.onclick = () => selectRegistrationPreset(preset);
-        card.innerHTML = `
-            <div class="preset-card-check">&#10003;</div>
-            <img class="preset-card-img" src="${preset.path}" alt="${preset.title}" onerror="this.onerror=null; this.src='sample_real_fundus.png'">
-            <div class="preset-card-title">${preset.title}</div>
-            <span class="preset-card-tag" style="background:${preset.badge_color};">${preset.grade_label}</span>
-        `;
-        grid.appendChild(card);
-    });
-
-    // Preload default preset image
-    if (activeRegistrationPreset) {
-        const pImg = new Image();
-        pImg.crossOrigin = 'anonymous';
-        pImg.onload = function() {
-            activeRegistrationPresetImg = pImg;
-        };
-        pImg.src = activeRegistrationPreset.path;
-        updateRegistrationPresetDetails(activeRegistrationPreset);
-    }
-}
-
-function selectRegistrationPreset(preset) {
-    activeRegistrationPreset = preset;
-    document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('active'));
-    const activeEl = document.getElementById(`preset_card_${preset.id}`);
-    if (activeEl) activeEl.classList.add('active');
-
-    const inputId = document.getElementById('inpSelectedPresetId');
-    if (inputId) inputId.value = preset.id;
-
-    updateRegistrationPresetDetails(preset);
-
-    // Pre-load image into Image() object
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = function() {
-        activeRegistrationPresetImg = img;
-    };
-    img.src = preset.path;
-
-    // Autofill clinical patient profile for this preset
-    if (preset.patient) {
-        if (document.getElementById('inpName')) document.getElementById('inpName').value = preset.patient.name;
-        if (document.getElementById('inpAge')) document.getElementById('inpAge').value = preset.patient.age;
-        if (document.getElementById('inpGender')) document.getElementById('inpGender').value = preset.patient.gender;
-        if (document.getElementById('inpHbA1c')) document.getElementById('inpHbA1c').value = parseFloat(preset.patient.hba1c) || 7.5;
-        if (document.getElementById('inpDuration')) document.getElementById('inpDuration').value = parseInt(preset.patient.dm_duration) || 5;
-        updateRiskPreview();
-    }
-}
-
-function updateRegistrationPresetDetails(preset) {
-    if (!preset) return;
-    const thumb = document.getElementById('presetAttachedThumb');
-    if (thumb) thumb.src = preset.path;
-
-    const title = document.getElementById('presetAttachedTitle');
-    if (title) title.innerText = preset.title;
-
-    const badge = document.getElementById('presetAttachedBadge');
-    if (badge) {
-        badge.innerText = preset.grade_label;
-        badge.style.background = preset.badge_color;
-    }
-
-    const fileEl = document.getElementById('presetAttachedFile');
-    if (fileEl) fileEl.innerText = preset.path;
-
-    const descEl = document.getElementById('presetAttachedDesc');
-    if (descEl) descEl.innerText = `Attached: ${preset.description}`;
-}
-
-
-// ==========================================
-// VIRTUAL RETINAL IMAGE EXPLORER ENGINE
-// ==========================================
-let SAMPLE_IMAGES = [
-  {
-    "id": "user_preset_1",
-    "filename": "user_preset_fundus_pat003.png",
-    "path": "sample_images/user_preset_fundus_pat003.png",
-    "title": "User Fundus: Moderate NPDR (PAT_003)",
-    "grade": 2,
-    "grade_label": "Grade 2 - Moderate NPDR",
-    "badge_color": "#F97316",
-    "category": "grade2",
-    "referable": true,
-    "width": 512,
-    "height": 512,
-    "dimensions": "512 x 512 px",
-    "size_kb": 365,
-    "format": "PNG Image",
-    "description": "User uploaded clinical case demonstrating moderate non-proliferative retinopathy with blot hemorrhages, multiple microaneurysms, and macular hard exudates.",
-    "patient": {
-      "name": "Ganesh Kulkarni",
-      "age": 58,
-      "gender": "Male",
-      "dm_duration": "11 Yrs",
-      "hba1c": "8.4%",
-      "bp": "142/88",
-      "eye": "OD (Right)"
-    }
-  },
-  {
-    "id": "user_preset_2",
-    "filename": "user_preset_retinal_diagram.png",
-    "path": "sample_images/user_preset_retinal_diagram.png",
-    "title": "User Fundus: Retinal Lesions & Vascular Map",
-    "grade": 3,
-    "grade_label": "Grade 3 - Severe NPDR",
-    "badge_color": "#DC2626",
-    "category": "grade3",
-    "referable": true,
-    "width": 512,
-    "height": 512,
-    "dimensions": "512 x 512 px",
-    "size_kb": 380,
-    "format": "PNG Image",
-    "description": "User uploaded diagnostic lesion distribution depicting widespread intraretinal hemorrhages, venous loops, and extensive lipid exudate plaques.",
-    "patient": {
-      "name": "Kavita Rao",
-      "age": 63,
-      "gender": "Female",
-      "dm_duration": "14 Yrs",
-      "hba1c": "9.2%",
-      "bp": "150/92",
-      "eye": "OS (Left)"
-    }
-  },
-  {
-    "id": "user_preset_3",
-    "filename": "user_preset_exudates_fundus.png",
-    "path": "sample_images/user_preset_exudates_fundus.png",
-    "title": "User Fundus: Circinate Hard Exudates",
-    "grade": 2,
-    "grade_label": "Grade 2 - Moderate NPDR",
-    "badge_color": "#F97316",
-    "category": "grade2",
-    "referable": true,
-    "width": 400,
-    "height": 400,
-    "dimensions": "400 x 400 px",
-    "size_kb": 197,
-    "format": "PNG Image",
-    "description": "User uploaded fundus showing dense circinate rings of hard lipid exudates encroaching upon the macula, indicative of clinically significant macular edema risk.",
-    "patient": {
-      "name": "Harish Mehta",
-      "age": 54,
-      "gender": "Male",
-      "dm_duration": "8 Yrs",
-      "hba1c": "8.1%",
-      "bp": "138/86",
-      "eye": "OD (Right)"
-    }
-  },
-  {
-    "id": "sample_grade0",
-    "filename": "01_normal_retina_grade0.png",
-    "path": "sample_images/01_normal_retina_grade0.png",
-    "title": "Normal Healthy Retina",
-    "grade": 0,
-    "grade_label": "Grade 0 - Normal",
-    "badge_color": "#16A34A",
-    "category": "grade0",
-    "referable": false,
-    "width": 224,
-    "height": 224,
-    "dimensions": "224 x 224 px",
-    "size_kb": 51,
-    "format": "PNG Image",
-    "description": "Clear optic disc margin, healthy macula without foveal thickening. Absence of microaneurysms, hemorrhages, or exudates. Routine annual screening recommended.",
-    "patient": {
-      "name": "Rajesh Patil",
-      "age": 48,
-      "gender": "Male",
-      "dm_duration": "3 Yrs",
-      "hba1c": "6.2%",
-      "bp": "120/80",
-      "eye": "OD (Right)"
-    }
-  },
-  {
-    "id": "sample_grade1",
-    "filename": "02_mild_npdr_grade1.png",
-    "path": "sample_images/02_mild_npdr_grade1.png",
-    "title": "Mild NPDR Fundus",
-    "grade": 1,
-    "grade_label": "Grade 1 - Mild NPDR",
-    "badge_color": "#EAB308",
-    "category": "grade1",
-    "referable": false,
-    "width": 224,
-    "height": 224,
-    "dimensions": "224 x 224 px",
-    "size_kb": 51,
-    "format": "PNG Image",
-    "description": "Isolated microaneurysms detected in temporal macular arcade. No retinal hemorrhages or hard exudates present. Non-referable early stage; 6-12 month follow-up advised.",
-    "patient": {
-      "name": "Sunita Deshmukh",
-      "age": 55,
-      "gender": "Female",
-      "dm_duration": "6 Yrs",
-      "hba1c": "7.4%",
-      "bp": "130/85",
-      "eye": "OS (Left)"
-    }
-  },
-  {
-    "id": "sample_grade2",
-    "filename": "03_moderate_npdr_grade2.png",
-    "path": "sample_images/03_moderate_npdr_grade2.png",
-    "title": "Moderate NPDR & CSME Risk",
-    "grade": 2,
-    "grade_label": "Grade 2 - Moderate NPDR",
-    "badge_color": "#F97316",
-    "category": "grade2",
-    "referable": true,
-    "width": 224,
-    "height": 224,
-    "dimensions": "224 x 224 px",
-    "size_kb": 46,
-    "format": "PNG Image",
-    "description": "Multiple intraretinal microaneurysms (>15) and blot hemorrhages across 2 quadrants. Hard exudates localized near foveal zone (CSME risk). Refer to specialist within 2-4 weeks.",
-    "patient": {
-      "name": "Ganesh Kulkarni",
-      "age": 58,
-      "gender": "Male",
-      "dm_duration": "11 Yrs",
-      "hba1c": "8.4%",
-      "bp": "142/88",
-      "eye": "OD (Right)"
-    }
-  },
-  {
-    "id": "sample_grade3",
-    "filename": "04_severe_npdr_grade3.png",
-    "path": "sample_images/04_severe_npdr_grade3.png",
-    "title": "Severe NPDR 4-Quadrant",
-    "grade": 3,
-    "grade_label": "Grade 3 - Severe NPDR",
-    "badge_color": "#DC2626",
-    "category": "grade3",
-    "referable": true,
-    "width": 224,
-    "height": 224,
-    "dimensions": "224 x 224 px",
-    "size_kb": 51,
-    "format": "PNG Image",
-    "description": "Meets 4:2:1 international criteria: extensive intraretinal hemorrhages in all 4 quadrants with venous beading in 2+ quadrants. High risk of progression to proliferative stage. Urgent referral.",
-    "patient": {
-      "name": "Ananya Sen",
-      "age": 62,
-      "gender": "Female",
-      "dm_duration": "15 Yrs",
-      "hba1c": "9.8%",
-      "bp": "158/94",
-      "eye": "OD (Right)"
-    }
-  },
-  {
-    "id": "sample_grade4",
-    "filename": "05_pdr_grade4.png",
-    "path": "sample_images/05_pdr_grade4.png",
-    "title": "Proliferative DR (PDR)",
-    "grade": 4,
-    "grade_label": "Grade 4 - PDR",
-    "badge_color": "#991B1B",
-    "category": "grade4",
-    "referable": true,
-    "width": 224,
-    "height": 224,
-    "dimensions": "224 x 224 px",
-    "size_kb": 39,
-    "format": "PNG Image",
-    "description": "Active neovascularization of the optic disc (NVD) and retina (NVE) with fibrous proliferation. Immediate vitreoretinal surgical / panretinal photocoagulation (PRP) referral.",
-    "patient": {
-      "name": "Mohammed Farooq",
-      "age": 66,
-      "gender": "Male",
-      "dm_duration": "19 Yrs",
-      "hba1c": "11.1%",
-      "bp": "165/100",
-      "eye": "OS (Left)"
-    }
-  },
-  {
-    "id": "sample_rejection_face",
-    "filename": "06_rejection_face.png",
-    "path": "sample_images/06_rejection_face.png",
-    "title": "Non-Retina / Face Rejection",
-    "grade": -1,
-    "grade_label": "Rejection - Non-Retina",
-    "badge_color": "#64748B",
-    "category": "rejection",
-    "referable": false,
-    "width": 512,
-    "height": 512,
-    "dimensions": "512 x 512 px",
-    "size_kb": 283,
-    "format": "PNG Image",
-    "description": "Test case demonstrating the Smart Quality Gate rejecting non-retinal imagery (face selfie / portrait). Quality Gate triggers automatic rejection and instructs user to acquire a valid fundus image.",
-    "patient": {
-      "name": "Test Subject (Non-Fundus)",
-      "age": 22,
-      "gender": "Male",
-      "dm_duration": "N/A",
-      "hba1c": "N/A",
-      "bp": "N/A",
-      "eye": "N/A"
-    }
-  },
-  {
-    "id": "sample_rejection_diagram",
-    "filename": "07_rejection_diagram.png",
-    "path": "sample_images/07_rejection_diagram.png",
-    "title": "Diagram / Text Rejection",
-    "grade": -1,
-    "grade_label": "Rejection - Graphic/Text",
-    "badge_color": "#64748B",
-    "category": "rejection",
-    "referable": false,
-    "width": 512,
-    "height": 512,
-    "dimensions": "512 x 512 px",
-    "size_kb": 320,
-    "format": "PNG Image",
-    "description": "Test case demonstrating edge verification rejecting schematic diagrams and medical charts. Confirms system cannot be fooled by medical illustrations or screenshots.",
-    "patient": {
-      "name": "Test Subject (Infographic)",
-      "age": "N/A",
-      "gender": "N/A",
-      "dm_duration": "N/A",
-      "hba1c": "N/A",
-      "bp": "N/A",
-      "eye": "N/A"
-    }
-  }
-];
-let currentSelectedSample = null;
-let currentSampleFilter = 'all';
-
-async function initVirtualExplorer() {
-    try {
-        const res = await fetch('/api/sample-images');
-        if (res.ok) {
-            const data = await res.json();
-            if (data && data.length > 0) {
-                SAMPLE_IMAGES = data;
-            }
-        }
-    } catch (e) {
-        console.warn('Using embedded sample images fallback:', e);
-    }
-    renderSampleGrid();
-}
-
-function openVirtualExplorerModal() {
-    initVirtualExplorer();
-    const m = document.getElementById('virtualExplorerModal');
-    if (m) {
-        m.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function closeVirtualExplorerModal(e) {
-    if (e && e.target !== document.getElementById('virtualExplorerModal') && !e.target.classList.contains('explorer-close-btn')) return;
-    const m = document.getElementById('virtualExplorerModal');
-    if (m) {
-        m.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-}
-
-function setSampleFilter(cat, btn) {
-    currentSampleFilter = cat;
-    document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
-    if (btn) btn.classList.add('active');
-    renderSampleGrid();
-}
-
-function filterSampleImages() {
-    renderSampleGrid();
-}
-
-function renderSampleGrid() {
-    const grid = document.getElementById('explorerGrid');
-    if (!grid) return;
-    const searchInput = document.getElementById('explorerSearchInput');
-    const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
-
-    const filtered = SAMPLE_IMAGES.filter(s => {
-        const matchesCat = (currentSampleFilter === 'all') || (s.category === currentSampleFilter);
-        const matchesQuery = !query || 
-            s.title.toLowerCase().includes(query) || 
-            s.filename.toLowerCase().includes(query) || 
-            s.grade_label.toLowerCase().includes(query);
-        return matchesCat && matchesQuery;
-    });
-
-    const countEl = document.getElementById('explorerFileCount');
-    if (countEl) countEl.innerText = `${filtered.length} files in sample_images/`;
-
-    grid.innerHTML = '';
-    if (filtered.length === 0) {
-        grid.innerHTML = '<div style="grid-column: 1/-1; padding: 40px; text-align: center; color: #64748B;">No sample retinal images match this search or filter.</div>';
-        return;
-    }
-
-    filtered.forEach((sample, idx) => {
-        const isSelected = currentSelectedSample ? (currentSelectedSample.id === sample.id) : (idx === 0);
-        if (isSelected && !currentSelectedSample) {
-            currentSelectedSample = sample;
-        }
-
-        const card = document.createElement('div');
-        card.className = `sample-card ${isSelected ? 'selected' : ''}`;
-        card.onclick = () => selectSampleCard(sample, card);
-        card.innerHTML = `
-            <div class="sample-card-thumb">
-                <img src="${sample.path}" alt="${sample.title}" onerror="this.onerror=null; this.src='sample_real_fundus.png'">
-                <span class="sample-card-badge" style="background:${sample.badge_color};">${sample.grade_label}</span>
-            </div>
-            <div class="sample-card-info">
-                <div class="sample-card-title">${sample.title}</div>
-                <div class="sample-card-path">${sample.path}</div>
-                <div class="sample-card-meta">${sample.dimensions} &bull; ${sample.size_kb} KB</div>
-            </div>
-        `;
-        grid.appendChild(card);
-    });
-
-    if (currentSelectedSample) {
-        updateInspectionPanel(currentSelectedSample);
-    }
-}
-
-function selectSampleCard(sample, cardEl) {
-    currentSelectedSample = sample;
-    document.querySelectorAll('.sample-card').forEach(c => c.classList.remove('selected'));
-    if (cardEl) cardEl.classList.add('selected');
-    updateInspectionPanel(sample);
-}
-
-function updateInspectionPanel(s) {
-    if (!s) return;
-    const imgEl = document.getElementById('inspImg');
-    if (imgEl) imgEl.src = s.path;
-
-    const titleEl = document.getElementById('inspTitle');
-    if (titleEl) titleEl.innerText = s.title;
-
-    const pathEl = document.getElementById('inspPath');
-    if (pathEl) pathEl.innerText = s.path;
-
-    const badgeEl = document.getElementById('inspBadge');
-    if (badgeEl) {
-        badgeEl.innerText = s.grade_label;
-        badgeEl.style.background = s.badge_color;
-    }
-
-    const dimEl = document.getElementById('inspDim');
-    if (dimEl) dimEl.innerText = s.dimensions;
-
-    const sizeEl = document.getElementById('inspSize');
-    if (sizeEl) sizeEl.innerText = `${s.size_kb} KB`;
-
-    const formatEl = document.getElementById('inspFormat');
-    if (formatEl) formatEl.innerText = s.format;
-
-    const refEl = document.getElementById('inspReferable');
-    if (refEl) {
-        refEl.innerText = s.referable ? 'YES (REFER TO SPECIALIST)' : 'NO (ROUTINE)';
-        refEl.style.color = s.referable ? '#DC2626' : '#16A34A';
-    }
-
-    const descEl = document.getElementById('inspDesc');
-    if (descEl) descEl.innerText = s.description;
-
-    const pBox = document.getElementById('inspPatientBox');
-    if (pBox && s.patient) {
-        pBox.style.display = 'block';
-        document.getElementById('inspPatientName').innerText = `${s.patient.name} (${s.patient.age}y, ${s.patient.gender})`;
-        document.getElementById('inspPatientMeta').innerText = `DM: ${s.patient.dm_duration} | HbA1c: ${s.patient.hba1c} | BP: ${s.patient.bp} | Eye: ${s.patient.eye}`;
-    } else if (pBox) {
-        pBox.style.display = 'none';
-    }
-}
-
-function executeLoadSelectedSample() {
-    if (!currentSelectedSample) return;
-    loadSampleImageForAnalysis(currentSelectedSample);
-}
-
-function loadSampleImageForAnalysis(sample) {
-    const modal = document.getElementById('virtualExplorerModal');
-    if (modal) modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-
-    logAudit(`Virtual Explorer: Loading <b>${sample.title}</b> (${sample.filename})...`);
-
-    // Switch to clinical mode
-    if (typeof setRole === 'function') {
-        setRole('clinical');
-    }
-
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = function() {
-        // Generate base64 representation
-        const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = img.naturalWidth || 512;
-        tempCanvas.height = img.naturalHeight || 512;
-        const ctx = tempCanvas.getContext('2d');
-        ctx.drawImage(img, 0, 0);
-        const base64Data = tempCanvas.toDataURL('image/png');
-
-        // Update demographics
-        if (sample.patient) {
-            if (document.getElementById('hdrPatName')) document.getElementById('hdrPatName').innerText = sample.patient.name;
-            if (document.getElementById('hdrPatMeta')) {
-                document.getElementById('hdrPatMeta').innerText = `Age: ${sample.patient.age} | ${sample.patient.gender} | DM: ${sample.patient.dm_duration} | HbA1c: ${sample.patient.hba1c} | BP: ${sample.patient.bp} | Eye: ${sample.patient.eye}`;
-            }
-            if (document.getElementById('hdrPatId')) {
-                document.getElementById('hdrPatId').innerText = `SAMPLE_${sample.category.toUpperCase()}`;
-            }
-            if (document.getElementById('inpName')) document.getElementById('inpName').value = sample.patient.name;
-            if (document.getElementById('inpAge')) document.getElementById('inpAge').value = sample.patient.age;
-            if (document.getElementById('inpGender')) document.getElementById('inpGender').value = sample.patient.gender;
-            if (document.getElementById('inpHbA1c')) document.getElementById('inpHbA1c').value = parseFloat(sample.patient.hba1c) || 7.5;
-            if (document.getElementById('inpDuration')) document.getElementById('inpDuration').value = parseInt(sample.patient.dm_duration) || 5;
-        }
-
-        customUploadedImg = img;
-        processRealEyeVerificationAndAnalysis(img, sample.filename, base64Data);
-    };
-    img.src = sample.path;
-}
-
-// Keyboard shortcut 'E' for Explorer
-window.addEventListener('keydown', function(e) {
-    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) return;
-    if (e.key === 'e' || e.key === 'E') {
-        const m = document.getElementById('virtualExplorerModal');
-        if (m && m.style.display === 'flex') {
-            closeVirtualExplorerModal();
-        } else {
-            openVirtualExplorerModal();
-        }
-    }
-});
-
-</script>
+    </script>
 
     <!-- RAPID SCREENING HOTKEYS MODAL -->
     <div class="modal" id="hotkeysModal" onclick="closeHotkeysModal(event)" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); backdrop-filter:blur(4px); z-index:9999; align-items:center; justify-content:center;">
