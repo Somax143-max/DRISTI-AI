@@ -4,9 +4,15 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     plan: free
+    region: oregon
     healthCheckPath: /api/health
-    ports:
-      - port: 8080
+    autoDeploy: true
     envVars:
       - key: PORT
         value: 8080
+      - key: DRISHTI_ENV
+        value: production
+      - key: RURAL_EDGE_MODE
+        value: "true"
+      - key: DRISHTI_SECRET_KEY
+        generateValue: true

@@ -1,0 +1,99 @@
+name: DRISHTI AI CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: 🧪 Automated Test & Clinical Safety Suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch==2.1.2+cpu --extra-index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements.txt
+
+      - name: 🔬 Run Unit Tests
+        run: python -m unittest tests/test_unit.py
+
+      - name: 🔄 Run End-to-End Integration Tests
+        run: python -m unittest tests/test_integration.py
+
+      - name: 🛡️ Run Clinical Safety & Invariant Tests
+        run: python -m unittest tests/test_regression.py
+
+  docker-build:
+    name: 🐳 Docker Container Build & Verification
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🏗️ Build Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: drishti-ai:latest
+          load: true
+
+      - name: 🩺 Test Container Health Check
+        run: |
+          docker run -d --name drishti-service -p 8080:8080 -e DRISHTI_ENV=production drishti-ai:latest
+          sleep 10
+          curl --fail --retry 5 --retry-delay 3 http://localhost:8080/api/health || exit 1
+          docker stop drishti-service
+
+  deploy-render:
+    name: 🚀 Deploy Backend to Render (Free Tier)
+    needs: [test, docker-build]
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📡 Trigger Render Deploy Hook
+        if: env.RENDER_DEPLOY_HOOK != ''
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          curl -X POST "$RENDER_DEPLOY_HOOK"
+          echo "Render deploy hook triggered successfully."
+
+  deploy-vercel:
+    name: ⚡ Deploy Frontend to Vercel (Edge CDN)
+    needs: [test]
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🚀 Deploy to Vercel
+        if: env.VERCEL_TOKEN != ''
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          npm install -g vercel
+          vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+          vercel build --prod --token=$VERCEL_TOKEN
+          vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN

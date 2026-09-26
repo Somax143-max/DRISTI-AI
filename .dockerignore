@@ -1,0 +1,35 @@
+# Git & VCS
+.git
+.gitignore
+.github
+
+# Virtual Environments & Python cache
+.venv
+venv
+ENV
+env
+__pycache__
+*.py[cod]
+*$py.class
+.pytest_cache
+
+# Binaries & Executables
+*.exe
+*.bat
+cloudflared.exe
+test_pwsh.exe
+
+# Non-production directories & large local datasets
+archive/
+temp_academic_pulse/
+simulink/
+scratch/
+docs/
+results/
+tests/
+*.m
+latest_public_url.txt
+
+# Local DB / log files
+*.log
+logs/*.jsonl

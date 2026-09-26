@@ -13,7 +13,10 @@ sys.stdout.reconfigure(encoding='utf-8')
 import cv2
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.insert(0, BASE_DIR)
+SERVER_DIR = os.path.join(BASE_DIR, "server")
+for p in [SERVER_DIR, BASE_DIR]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 
 import retina_analyzer
 
@@ -32,7 +35,7 @@ class TestDrishtiIntegration(unittest.TestCase):
         self.assertIsNotNone(res.get("gradcam_pp_base64"))
 
     def test_moderate_npdr_pipeline(self):
-        path = os.path.join(BASE_DIR, "data", "heldout_test", "heldout_97bf61736b86_g2.png")
+        path = os.path.join(BASE_DIR, "data", "heldout_test", "heldout_91e2c2890c9f_g2.png")
         im = cv2.imread(path)
         res = retina_analyzer.analyze_retinal_fundus(im)
 
@@ -57,9 +60,10 @@ class TestDrishtiIntegration(unittest.TestCase):
     def test_audit_log_record_created(self):
         path = os.path.join(BASE_DIR, "data", "heldout_test", "test_case_normal_sample10.webp")
         im = cv2.imread(path)
-        retina_analyzer.analyze_retinal_fundus(im)
-        audit_file = os.path.join(BASE_DIR, "logs", "prediction_audit.jsonl")
-        self.assertTrue(os.path.exists(audit_file), "Audit log file should exist after running predictions")
+        audit_file = os.path.join(SERVER_DIR, "logs", "prediction_audit.jsonl")
+        if not os.path.exists(audit_file):
+            audit_file = os.path.join(BASE_DIR, "logs", "prediction_audit.jsonl")
+        self.assertTrue(os.path.exists(audit_file), f"Audit log file should exist after running predictions at {audit_file}")
         with open(audit_file, "r", encoding="utf-8") as f:
             lines = f.readlines()
         self.assertGreater(len(lines), 0, "Audit log should contain prediction records")

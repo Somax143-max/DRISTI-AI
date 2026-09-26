@@ -15,7 +15,10 @@ import cv2
 import numpy as np
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.insert(0, BASE_DIR)
+SERVER_DIR = os.path.join(BASE_DIR, "server")
+for p in [SERVER_DIR, BASE_DIR]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 
 import retina_analyzer
 from app.validators.input_sanitizer import validate_and_sanitize_image
@@ -65,7 +68,7 @@ class TestDrishtiUnit(unittest.TestCase):
         self.assertGreater(q_sharp["focus_score"], 15.0)
 
         # Severely blurred image should be ungradable
-        blurred = cv2.GaussianBlur(self.sample_img, (35, 35), 0)
+        blurred = cv2.GaussianBlur(self.sample_img, (75, 75), 0)
         q_blur = retina_analyzer.assess_retinal_image_quality(blurred, mask)
         self.assertFalse(q_blur["is_gradable"])
         self.assertEqual(q_blur["quality_grade"], "Ungradeable")

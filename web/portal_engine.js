@@ -838,13 +838,25 @@ function extractClientSideRealLesions(img) {
     };
 }
 
+function getDrishtiApiBase() {
+    if (window.DRISHTI_API_BASE) return window.DRISHTI_API_BASE.replace(/\/$/, '');
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('api')) return urlParams.get('api').replace(/\/$/, '');
+        const stored = localStorage.getItem('DRISHTI_API_BASE');
+        if (stored) return stored.replace(/\/$/, '');
+    } catch(e) {}
+    return '';
+}
+
 // MAIN REAL-TIME ORCHESTRATOR FOR CUSTOM IMAGES
 function processRealEyeVerificationAndAnalysis(img, filename, base64Data) {
     const riskTitle = document.getElementById('riskPreviewTitle');
     const riskUrg = document.getElementById('riskPreviewUrgency');
 
     // 1. Try PyTorch Deep Neural Network Backend via /api/analyze-retina
-    fetch('/api/analyze-retina', {
+    const apiBase = getDrishtiApiBase();
+    fetch(`${apiBase}/api/analyze-retina`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ image: base64Data })

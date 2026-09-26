@@ -156,11 +156,13 @@ def assess_retinal_image_quality(img_bgr, fov_mask=None):
     gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
     green = img_bgr[:, :, 1]
     
-    # 1. Tenengrad Gradient Sharpness strictly within retinal FOV
+    # 1. Tenengrad Gradient Sharpness strictly within retinal parenchyma (eroded to avoid mask boundary artifacts)
+    inner_fov = cv2.erode(fov_mask, np.ones((15, 15), np.uint8))
+    inner_pixels = max(1, int(np.sum(inner_fov > 0)))
     gx = cv2.Sobel(green, cv2.CV_64F, 1, 0, ksize=3)
     gy = cv2.Sobel(green, cv2.CV_64F, 0, 1, ksize=3)
-    grad_sq = (gx**2 + gy**2) * (fov_mask / 255.0)
-    focus_score = round(float(np.sum(grad_sq)) / float(max(1, fov_pixels)) / 100.0, 1)
+    grad_sq = (gx**2 + gy**2) * (inner_fov / 255.0)
+    focus_score = round(float(np.sum(grad_sq)) / float(inner_pixels) / 100.0, 1)
     
     # 2. Exposure & Luminance Metrics
     retina_lum = gray[fov_mask > 0]
@@ -388,7 +390,7 @@ def locate_and_extract_retina(img_bgr):
         hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV)
         sat = hsv[:, :, 1][retina_cand]
         mean_sat = np.mean(sat) if len(sat) > 0 else 0
-        if mean_sat < 115.0:
+        if mean_sat < 50.0:
             return None, None, None
             
         Y, X = np.ogrid[:h, :w]
@@ -398,7 +400,7 @@ def locate_and_extract_retina(img_bgr):
             outer_pixels = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)[outer_ring]
             outer_mean = np.mean(outer_pixels)
             outer_std = np.std(outer_pixels)
-            is_valid_surroundings = (outer_mean > 215) or (outer_mean < 40) or (outer_std < 25)
+            is_valid_surroundings = (outer_mean > 190) or (outer_mean < 60) or (outer_std < 45)
             if not is_valid_surroundings:
                 return None, None, None
     
@@ -900,7 +902,13 @@ def analyze_retinal_fundus(img_bgr):
         csme_positive = False
         lesion_burden_score = 0.0
     else:
-        grade = dl_grade
+        p_referable = sum(dl_probs[2:]) if len(dl_probs) >= 5 else 0.0
+        p_non_referable = sum(dl_probs[:2]) if len(dl_probs) >= 5 else 1.0
+        if p_referable > p_non_referable and dl_grade < 2:
+            ref_sub_idx = int(np.argmax(dl_probs[2:]))
+            grade = 2 + ref_sub_idx
+        else:
+            grade = dl_grade
         referable = (grade >= 2)
         dr_damage_percentage = round(float(dl_pct), 1)
         grade_names = [
@@ -915,14 +923,14 @@ def analyze_retinal_fundus(img_bgr):
         ref_reason = f'Clinical staging based on fused deep residual network evaluation ({dl_conf*100:.1f}% confidence).'
 
     # CLINICAL FALSE-NEGATIVE / REFERRAL SAFETY INVARIANT (Item 21)
-    if grade == 0 and (num_hemo > 0 or num_ex >= 2 or massive_hemo_found):
+    if grade == 0 and (num_hemo > 0 or num_ex >= 2 or massive_hemo_found or num_cws >= 2 or num_mas >= 4):
         safety_override = True
-        grade = 2 if (num_hemo >= 2 or num_ex >= 3) else 1
+        grade = 2 if (num_hemo >= 2 or num_ex >= 3 or num_cws >= 2 or (num_mas >= 4 and num_cws >= 1)) else 1
         referable = (grade >= 2)
         dr_damage_percentage = float(max(dr_damage_percentage, 40.0 if referable else 18.0))
         grade_name = 'LEVEL 2 — MODERATE NPDR (SAFETY OVERRIDE)' if referable else 'LEVEL 1 — MILD NPDR (SAFETY OVERRIDE)'
         ref_title = '🔴 REFER TO OPHTHALMOLOGIST' if referable else '🟡 CLINICAL FOLLOW-UP'
-        ref_reason = f'Safety invariant triggered: Confirmed {num_hemo} intraretinal hemorrhages and {num_ex} hard exudates. Zero-tolerance safety policy prevented non-referral false negative.'
+        ref_reason = f'Safety invariant triggered: Confirmed lesions detected ({num_hemo} hemorrhages, {num_ex} exudates, {num_cws} CWS, {num_mas} MAs). Zero-tolerance safety policy prevented non-referral false negative.'
 
     icdr_criteria = {
         'rule_4_vitreous_hemo_or_quadrants': bool(rule_4_met),
