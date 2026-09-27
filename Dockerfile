@@ -20,7 +20,9 @@ RUN pip install --no-cache-dir --prefix=/install/root \
     scikit-learn==1.3.2 \
     matplotlib==3.8.2 \
     pydicom==2.4.4 \
-    Pillow==10.1.0
+    Pillow==10.1.0 \
+    Flask==3.0.0 \
+    flask-cors==4.0.0
 
 # ==============================================================================
 # Final Production Runtime Stage
