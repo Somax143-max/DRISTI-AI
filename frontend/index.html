@@ -3089,6 +3089,7 @@ window.addEventListener('DOMContentLoaded', () => {
     initSplitDragging();
     selectPatient(currentPatientId);
     runSimulinkEngine();
+    renderModalPresetGrid();
 
     const dropzone = document.getElementById('fileDropzone');
     if (dropzone) {
@@ -3700,6 +3701,11 @@ window.addEventListener('keydown', function(e) {
         }
         const hot = document.getElementById('hotkeysModal');
         if (hot) hot.style.display = 'none';
+        const exp = document.getElementById('virtualExplorerModal');
+        if (exp) {
+            exp.style.display = 'none';
+            exp.classList.remove('open');
+        }
     } else if (key === '1') {
         selectPatient('PAT_001_NORMAL');
     } else if (key === '2') {
@@ -3714,6 +3720,594 @@ window.addEventListener('keydown', function(e) {
         selectPatient('PAT_006_BLURRED');
     }
 });
+
+// =========================================================================
+// VIRTUAL RETINAL IMAGE EXPLORER & SAMPLE MANIFEST ENGINE
+// =========================================================================
+const SAMPLE_IMAGES_MANIFEST = [
+    {
+        id: "user_preset_1",
+        filename: "user_preset_fundus_pat003.png",
+        path: "sample_images/user_preset_fundus_pat003.png",
+        title: "User Fundus: Moderate NPDR (PAT_003)",
+        grade: 2,
+        grade_label: "Grade 2 - Moderate NPDR",
+        badge_color: "#F97316",
+        category: "grade2",
+        referable: true,
+        patient_id: "PAT_003_MODERATE",
+        dimensions: "512 x 512 px",
+        size_kb: 365,
+        format: "PNG Image",
+        description: "Clinical fundus showing intraretinal blot hemorrhages, multiple microaneurysms, and macular hard exudates (CSME Risk).",
+        patient: {
+            name: "Ganesh Kulkarni",
+            age: 58,
+            gender: "Male",
+            dm_duration: "11 Yrs",
+            hba1c: "8.4%",
+            bp: "142/88",
+            eye: "OD (Right)"
+        }
+    },
+    {
+        id: "user_preset_2",
+        filename: "user_preset_retinal_diagram.png",
+        path: "sample_images/user_preset_retinal_diagram.png",
+        title: "User Fundus: Retinal Lesions & Vascular Map",
+        grade: 3,
+        grade_label: "Grade 3 - Severe NPDR",
+        badge_color: "#DC2626",
+        category: "grade3",
+        referable: true,
+        patient_id: "PAT_004_SEVERE",
+        dimensions: "512 x 512 px",
+        size_kb: 380,
+        format: "PNG Image",
+        description: "Widespread intraretinal blot hemorrhages in 4 quadrants, venous loops, and extensive lipid exudate clusters.",
+        patient: {
+            name: "Kavita Rao",
+            age: 63,
+            gender: "Female",
+            dm_duration: "14 Yrs",
+            hba1c: "9.2%",
+            bp: "150/92",
+            eye: "OS (Left)"
+        }
+    },
+    {
+        id: "user_preset_3",
+        filename: "user_preset_exudates_fundus.png",
+        path: "sample_images/user_preset_exudates_fundus.png",
+        title: "User Fundus: Circinate Hard Exudates",
+        grade: 2,
+        grade_label: "Grade 2 - Moderate NPDR",
+        badge_color: "#F97316",
+        category: "grade2",
+        referable: true,
+        patient_id: "PAT_003_MODERATE",
+        dimensions: "400 x 400 px",
+        size_kb: 197,
+        format: "PNG Image",
+        description: "Dense circinate rings of lipid exudates encroaching upon the macula with significant risk of diabetic macular edema.",
+        patient: {
+            name: "Mohan Lal",
+            age: 54,
+            gender: "Male",
+            dm_duration: "8 Yrs",
+            hba1c: "7.9%",
+            bp: "135/85",
+            eye: "OS (Left)"
+        }
+    },
+    {
+        id: "sample_grade0",
+        filename: "01_normal_retina_grade0.png",
+        path: "sample_images/01_normal_retina_grade0.png",
+        title: "Normal Healthy Retina",
+        grade: 0,
+        grade_label: "Grade 0 - Normal",
+        badge_color: "#16A34A",
+        category: "grade0",
+        referable: false,
+        patient_id: "PAT_001_NORMAL",
+        dimensions: "224 x 224 px",
+        size_kb: 51,
+        format: "PNG Image",
+        description: "Clear optic disc margin, healthy macula without foveal thickening. Absence of microaneurysms, hemorrhages, or exudates. Routine annual screening recommended.",
+        patient: {
+            name: "Rajesh Patil",
+            age: 48,
+            gender: "Male",
+            dm_duration: "3 Yrs",
+            hba1c: "6.2%",
+            bp: "120/80",
+            eye: "OD (Right)"
+        }
+    },
+    {
+        id: "sample_grade1",
+        filename: "02_mild_npdr_grade1.png",
+        path: "sample_images/02_mild_npdr_grade1.png",
+        title: "Mild Non-Proliferative DR",
+        grade: 1,
+        grade_label: "Grade 1 - Mild NPDR",
+        badge_color: "#EAB308",
+        category: "grade1",
+        referable: false,
+        patient_id: "PAT_002_MILD",
+        dimensions: "224 x 224 px",
+        size_kb: 42,
+        format: "PNG Image",
+        description: "Early microvascular outpouches (microaneurysms only) isolated in the temporal parafoveal quadrant. Annual follow-up.",
+        patient: {
+            name: "Sunita Deshmukh",
+            age: 52,
+            gender: "Female",
+            dm_duration: "6 Yrs",
+            hba1c: "7.1%",
+            bp: "130/84",
+            eye: "OS (Left)"
+        }
+    },
+    {
+        id: "sample_grade2",
+        filename: "03_moderate_npdr_grade2.png",
+        path: "sample_images/03_moderate_npdr_grade2.png",
+        title: "Moderate Non-Proliferative DR",
+        grade: 2,
+        grade_label: "Grade 2 - Moderate NPDR",
+        badge_color: "#F97316",
+        category: "grade2",
+        referable: true,
+        patient_id: "PAT_003_MODERATE",
+        dimensions: "224 x 224 px",
+        size_kb: 45,
+        format: "PNG Image",
+        description: "Multiple microaneurysms, blot hemorrhages, and early hard exudate deposits. Specialist referral recommended.",
+        patient: {
+            name: "Ramesh Sharma",
+            age: 59,
+            gender: "Male",
+            dm_duration: "10 Yrs",
+            hba1c: "8.2%",
+            bp: "140/90",
+            eye: "OD (Right)"
+        }
+    },
+    {
+        id: "sample_grade3",
+        filename: "04_severe_npdr_grade3.png",
+        path: "sample_images/04_severe_npdr_grade3.png",
+        title: "Severe Non-Proliferative DR",
+        grade: 3,
+        grade_label: "Grade 3 - Severe NPDR",
+        badge_color: "#DC2626",
+        category: "grade3",
+        referable: true,
+        patient_id: "PAT_004_SEVERE",
+        dimensions: "224 x 224 px",
+        size_kb: 48,
+        format: "PNG Image",
+        description: "Meets 4-2-1 rule with >20 hemorrhages in 4 quadrants and venous beading. Urgent specialist evaluation required.",
+        patient: {
+            name: "Anjali Verma",
+            age: 61,
+            gender: "Female",
+            dm_duration: "15 Yrs",
+            hba1c: "9.5%",
+            bp: "155/95",
+            eye: "OS (Left)"
+        }
+    },
+    {
+        id: "sample_grade4",
+        filename: "05_pdr_grade4.png",
+        path: "sample_images/05_pdr_grade4.png",
+        title: "Proliferative Diabetic Retinopathy",
+        grade: 4,
+        grade_label: "Grade 4 - PDR",
+        badge_color: "#991B1B",
+        category: "grade4",
+        referable: true,
+        patient_id: "PAT_005_PDR",
+        dimensions: "224 x 224 px",
+        size_kb: 55,
+        format: "PNG Image",
+        description: "Active neovascularization of the disc (NVD) and preretinal vitreous hemorrhage risk. Emergency referral.",
+        patient: {
+            name: "Harish Chandra",
+            age: 67,
+            gender: "Male",
+            dm_duration: "20 Yrs",
+            hba1c: "10.4%",
+            bp: "165/100",
+            eye: "OD (Right)"
+        }
+    },
+    {
+        id: "sample_rejection_face",
+        filename: "06_rejection_face.png",
+        path: "sample_images/06_rejection_face.png",
+        title: "Non-Retinal Rejection (Portrait Photo)",
+        grade: -99,
+        grade_label: "Non-Fundus Rejected",
+        badge_color: "#64748B",
+        category: "rejection",
+        referable: true,
+        is_rejection: true,
+        dimensions: "224 x 224 px",
+        size_kb: 283,
+        format: "PNG Image",
+        description: "Adversarial test input: Standard facial portrait. Verified rejection by DRISHTI Anatomical Eye Quality Gate.",
+        patient: {
+            name: "Control Adversarial (Face)",
+            age: 30,
+            gender: "N/A",
+            dm_duration: "N/A",
+            hba1c: "N/A",
+            bp: "N/A",
+            eye: "Control Photo"
+        }
+    },
+    {
+        id: "sample_rejection_diagram",
+        filename: "07_rejection_diagram.png",
+        path: "sample_images/07_rejection_diagram.png",
+        title: "Non-Retinal Rejection (Infographic / Text)",
+        grade: -99,
+        grade_label: "Non-Fundus Rejected",
+        badge_color: "#64748B",
+        category: "rejection",
+        referable: true,
+        is_rejection: true,
+        dimensions: "224 x 224 px",
+        size_kb: 320,
+        format: "PNG Image",
+        description: "Adversarial test input: Medical infographic document. Triggers automatic non-fundus rejection and safety alert.",
+        patient: {
+            name: "Control Adversarial (Diagram)",
+            age: "N/A",
+            gender: "N/A",
+            dm_duration: "N/A",
+            hba1c: "N/A",
+            bp: "N/A",
+            eye: "Infographic"
+        }
+    }
+];
+
+let currentSampleFilter = 'all';
+let currentSearchQuery = '';
+let selectedSampleCardId = 'user_preset_1';
+
+function createSyntheticFundusDataUrl(grade) {
+    const c = document.createElement('canvas');
+    c.width = 224;
+    c.height = 224;
+    const ctx = c.getContext('2d');
+    
+    if (grade === -99) {
+        ctx.fillStyle = '#1E293B';
+        ctx.fillRect(0, 0, 224, 224);
+        ctx.fillStyle = '#64748B';
+        ctx.font = 'bold 12px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('NON-RETINAL TEST IMAGE', 112, 112);
+        return c.toDataURL('image/png');
+    }
+    
+    const grad = ctx.createRadialGradient(112, 112, 10, 112, 112, 110);
+    grad.addColorStop(0, '#B84514');
+    grad.addColorStop(0.7, '#8A2B06');
+    grad.addColorStop(1, '#050202');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(112, 112, 105, 0, Math.PI * 2);
+    ctx.fill();
+    
+    ctx.fillStyle = '#FFE0A3';
+    ctx.beginPath();
+    ctx.arc(60, 112, 18, 0, Math.PI * 2);
+    ctx.fill();
+    
+    ctx.strokeStyle = '#520B02';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(60, 112); ctx.bezierCurveTo(90, 80, 140, 60, 190, 70);
+    ctx.moveTo(60, 112); ctx.bezierCurveTo(90, 140, 140, 160, 190, 150);
+    ctx.stroke();
+    
+    if (grade >= 1) {
+        ctx.fillStyle = '#680000';
+        for (let i = 0; i < 5; i++) {
+            ctx.beginPath(); ctx.arc(120 + i*10, 100 + (i%3)*10, 2, 0, Math.PI*2); ctx.fill();
+        }
+    }
+    if (grade >= 2) {
+        ctx.fillStyle = '#FFF8C4';
+        for (let i = 0; i < 6; i++) {
+            ctx.beginPath(); ctx.arc(140 + (i%3)*8, 120 + i*6, 3, 0, Math.PI*2); ctx.fill();
+        }
+    }
+    if (grade >= 3) {
+        ctx.fillStyle = '#7A0000';
+        for (let i = 0; i < 12; i++) {
+            ctx.beginPath(); ctx.arc(100 + (i*11)%80, 80 + (i*13)%80, 4, 0, Math.PI*2); ctx.fill();
+        }
+    }
+    return c.toDataURL('image/png');
+}
+
+function openVirtualExplorerModal() {
+    const modal = document.getElementById('virtualExplorerModal');
+    if (!modal) return;
+    currentSampleFilter = 'all';
+    currentSearchQuery = '';
+    const searchInp = document.getElementById('explorerSearchInput');
+    if (searchInp) searchInp.value = '';
+    
+    document.querySelectorAll('.explorer-filter-pills .filter-pill').forEach((btn, idx) => {
+        if (idx === 0) btn.classList.add('active');
+        else btn.classList.remove('active');
+    });
+
+    renderSampleExplorerGrid();
+    selectSampleCard(selectedSampleCardId || 'user_preset_1');
+    
+    modal.style.display = 'flex';
+    modal.classList.add('open');
+    if (typeof logAudit === 'function') {
+        logAudit('Virtual Retinal Explorer opened. Browsing standard reference cases.');
+    }
+}
+
+function closeVirtualExplorerModal(event) {
+    if (event && event.target !== document.getElementById('virtualExplorerModal') && !event.target.classList.contains('explorer-close-btn')) return;
+    const modal = document.getElementById('virtualExplorerModal');
+    if (modal) {
+        modal.style.display = 'none';
+        modal.classList.remove('open');
+    }
+}
+
+function setSampleFilter(filterId, btnEl) {
+    currentSampleFilter = filterId;
+    if (btnEl) {
+        document.querySelectorAll('.explorer-filter-pills .filter-pill').forEach(b => b.classList.remove('active'));
+        btnEl.classList.add('active');
+    }
+    renderSampleExplorerGrid();
+}
+
+function filterSampleImages(query) {
+    if (query === undefined) {
+        const inp = document.getElementById('explorerSearchInput');
+        currentSearchQuery = inp ? inp.value.toLowerCase().trim() : '';
+    } else {
+        currentSearchQuery = (query || '').toLowerCase().trim();
+    }
+    renderSampleExplorerGrid();
+}
+
+function renderSampleExplorerGrid() {
+    const grid = document.getElementById('explorerGrid');
+    if (!grid) return;
+    
+    let filtered = SAMPLE_IMAGES_MANIFEST.filter(item => {
+        if (currentSampleFilter !== 'all') {
+            if (currentSampleFilter === 'grade0' && item.category !== 'grade0') return false;
+            if (currentSampleFilter === 'grade1' && item.category !== 'grade1') return false;
+            if (currentSampleFilter === 'grade2' && item.category !== 'grade2') return false;
+            if (currentSampleFilter === 'grade3' && item.category !== 'grade3') return false;
+            if (currentSampleFilter === 'grade4' && item.category !== 'grade4') return false;
+            if (currentSampleFilter === 'rejection' && item.category !== 'rejection') return false;
+        }
+        if (currentSearchQuery) {
+            const matchText = (item.title + ' ' + item.description + ' ' + item.grade_label + ' ' + item.filename).toLowerCase();
+            return matchText.includes(currentSearchQuery);
+        }
+        return true;
+    });
+
+    const countEl = document.getElementById('explorerFileCount');
+    if (countEl) {
+        countEl.innerText = `${filtered.length} files in sample_images/`;
+    }
+
+    if (filtered.length === 0) {
+        grid.innerHTML = '<div style="grid-column:1/-1; padding:40px 20px; text-align:center; color:#64748B;">No sample images match the current filter or search criteria.</div>';
+        return;
+    }
+
+    grid.innerHTML = filtered.map(item => `
+        <div class="sample-card ${item.id === selectedSampleCardId ? 'active' : ''}" id="card_${item.id}" onclick="selectSampleCard('${item.id}')" ondblclick="executeLoadSelectedSample('${item.id}')">
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+                <img src="${item.path}" onerror="this.onerror=null; this.src=createSyntheticFundusDataUrl(${item.grade});" style="width:64px; height:64px; border-radius:6px; object-fit:contain; border:1px solid #DCE6F0; background:#0B1324; flex-shrink:0;">
+                <div style="flex:1; min-width:0;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; gap:4px;">
+                        <b style="font-size:12px; color:#FFFFFF; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${item.title}</b>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:6px; margin-top:3px;">
+                        <span style="font-size:9.5px; font-weight:800; padding:1px 6px; border-radius:4px; background:${item.badge_color}; color:#FFF;">${item.grade_label}</span>
+                        <span style="font-size:9px; color:#94A3B8;">${item.dimensions}</span>
+                    </div>
+                    <div style="font-size:10.5px; color:#94A3B8; margin-top:4px; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">
+                        ${item.description}
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:6px; border-top:1px solid #1E293B; padding-top:6px; margin-top:auto;">
+                <button type="button" class="btn-act" style="background:#1E293B; color:#38BDF8; font-size:10.5px; padding:4px 8px; border:1px solid #334155;" onclick="event.stopPropagation(); selectSampleCard('${item.id}');">Inspect</button>
+                <button type="button" class="btn-act" style="background:#0284C7; color:#FFFFFF; font-size:10.5px; padding:4px 10px; font-weight:700; border:none;" onclick="event.stopPropagation(); executeLoadSelectedSample('${item.id}');">⚡ Load</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function selectSampleCard(sampleId) {
+    selectedSampleCardId = sampleId;
+    const item = SAMPLE_IMAGES_MANIFEST.find(s => s.id === sampleId) || SAMPLE_IMAGES_MANIFEST[0];
+    if (!item) return;
+
+    // Update active classes on cards
+    document.querySelectorAll('.sample-card').forEach(c => c.classList.remove('active'));
+    const activeEl = document.getElementById('card_' + sampleId);
+    if (activeEl) activeEl.classList.add('active');
+
+    // Update inspector elements
+    const inspImg = document.getElementById('inspImg');
+    const inspTitle = document.getElementById('inspTitle');
+    const inspPath = document.getElementById('inspPath');
+    const inspBadge = document.getElementById('inspBadge');
+    const inspDim = document.getElementById('inspDim');
+    const inspSize = document.getElementById('inspSize');
+    const inspFormat = document.getElementById('inspFormat');
+    const inspReferable = document.getElementById('inspReferable');
+    const inspPatientBox = document.getElementById('inspPatientBox');
+    const inspPatientName = document.getElementById('inspPatientName');
+    const inspPatientMeta = document.getElementById('inspPatientMeta');
+    const inspDesc = document.getElementById('inspDesc');
+
+    if (inspImg) {
+        inspImg.src = item.path;
+        inspImg.onerror = () => { inspImg.onerror = null; inspImg.src = createSyntheticFundusDataUrl(item.grade); };
+    }
+    if (inspTitle) inspTitle.innerText = item.title;
+    if (inspPath) inspPath.innerText = item.path;
+    if (inspBadge) {
+        inspBadge.innerText = item.grade_label;
+        inspBadge.style.background = item.badge_color;
+    }
+    if (inspDim) inspDim.innerText = item.dimensions;
+    if (inspSize) inspSize.innerText = (item.size_kb || 50) + ' KB';
+    if (inspFormat) inspFormat.innerText = item.format || 'PNG Image';
+    if (inspReferable) {
+        inspReferable.innerText = item.referable ? 'YES' : 'NO';
+        inspReferable.style.color = item.referable ? '#EF4444' : '#16A34A';
+    }
+    if (inspPatientBox) {
+        if (item.patient) {
+            inspPatientBox.style.display = 'block';
+            if (inspPatientName) inspPatientName.innerText = `${item.patient.name} (${item.patient.age}y, ${item.patient.gender})`;
+            if (inspPatientMeta) inspPatientMeta.innerText = `DM: ${item.patient.dm_duration} | HbA1c: ${item.patient.hba1c} | BP: ${item.patient.bp} | ${item.patient.eye}`;
+        } else {
+            inspPatientBox.style.display = 'none';
+        }
+    }
+    if (inspDesc) inspDesc.innerText = item.description;
+}
+
+function executeLoadSelectedSample(sampleId) {
+    const idToLoad = sampleId || selectedSampleCardId;
+    const item = SAMPLE_IMAGES_MANIFEST.find(s => s.id === idToLoad);
+    if (!item) return;
+
+    closeVirtualExplorerModal();
+
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = function() {
+        modalCustomImg = img;
+        customUploadedImg = img;
+
+        if (item.is_rejection) {
+            if (typeof logAudit === 'function') {
+                logAudit(`Virtual Explorer: Selected non-fundus control test <b>${item.title}</b>. Running eye verification...`);
+            }
+            if (typeof processRealEyeVerificationAndAnalysis === 'function') {
+                processRealEyeVerificationAndAnalysis(img, item.filename, img.src);
+            }
+        } else if (item.patient_id && PATIENTS && PATIENTS[item.patient_id]) {
+            PATIENTS[item.patient_id].customImg = img;
+            if (typeof selectPatient === 'function') selectPatient(item.patient_id);
+            if (typeof updateRealtimeCanvas === 'function') updateRealtimeCanvas();
+            if (typeof logAudit === 'function') {
+                logAudit(`Virtual Explorer: Loaded standard reference case <b>${item.title}</b> into screening workspace.`);
+            }
+        } else {
+            if (PATIENTS && PATIENTS['PAT_003_MODERATE']) {
+                PATIENTS['PAT_003_MODERATE'].customImg = img;
+                if (typeof selectPatient === 'function') selectPatient('PAT_003_MODERATE');
+            }
+            if (typeof updateRealtimeCanvas === 'function') updateRealtimeCanvas();
+            if (typeof logAudit === 'function') {
+                logAudit(`Virtual Explorer: Loaded fundus sample <b>${item.title}</b> into screening workspace.`);
+            }
+        }
+
+        if (typeof voiceEnabled !== 'undefined' && voiceEnabled && typeof speakGuidance === 'function') {
+            speakGuidance(`Loaded sample case: ${item.title}`);
+        }
+    };
+    img.onerror = function() {
+        const syntheticData = createSyntheticFundusDataUrl(item.grade);
+        const fallbackImg = new Image();
+        fallbackImg.onload = function() {
+            modalCustomImg = fallbackImg;
+            customUploadedImg = fallbackImg;
+            if (item.patient_id && PATIENTS && PATIENTS[item.patient_id]) {
+                PATIENTS[item.patient_id].customImg = fallbackImg;
+                if (typeof selectPatient === 'function') selectPatient(item.patient_id);
+            }
+            if (typeof updateRealtimeCanvas === 'function') updateRealtimeCanvas();
+            if (typeof logAudit === 'function') {
+                logAudit(`Virtual Explorer: Loaded synthesized reference case <b>${item.title}</b>.`);
+            }
+        };
+        fallbackImg.src = syntheticData;
+    };
+    img.src = item.path;
+}
+
+function renderModalPresetGrid() {
+    const grid = document.getElementById('modalPresetGrid');
+    if (!grid) return;
+    grid.innerHTML = SAMPLE_IMAGES_MANIFEST.slice(0, 6).map((item, idx) => `
+        <div class="preset-card ${idx === 0 ? 'active' : ''}" id="modal_pcard_${item.id}" onclick="selectModalPreset('${item.id}')">
+            <img src="${item.path}" onerror="this.onerror=null; this.src=createSyntheticFundusDataUrl(${item.grade});" style="width:42px; height:42px; border-radius:4px; object-fit:contain; border:1px solid #DCE6F0; background:#0B1324;">
+            <div style="flex:1; min-width:0;">
+                <div style="font-size:11px; font-weight:700; color:#0F172A; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${item.title}</div>
+                <div style="display:flex; align-items:center; gap:4px; margin-top:2px;">
+                    <span style="font-size:9px; font-weight:700; padding:1px 4px; border-radius:3px; background:${item.badge_color}; color:#FFF;">${item.grade_label}</span>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function selectModalPreset(sampleId) {
+    const item = SAMPLE_IMAGES_MANIFEST.find(s => s.id === sampleId);
+    if (!item) return;
+    
+    document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('active'));
+    const activeEl = document.getElementById('modal_pcard_' + sampleId);
+    if (activeEl) activeEl.classList.add('active');
+
+    const thumb = document.getElementById('presetAttachedThumb');
+    const title = document.getElementById('presetAttachedTitle');
+    const badge = document.getElementById('presetAttachedBadge');
+    const file = document.getElementById('presetAttachedFile');
+    const desc = document.getElementById('presetAttachedDesc');
+    const hiddenInp = document.getElementById('inpSelectedPresetId');
+
+    if (thumb) {
+        thumb.src = item.path;
+        thumb.onerror = () => { thumb.onerror = null; thumb.src = createSyntheticFundusDataUrl(item.grade); };
+    }
+    if (title) title.innerText = item.title;
+    if (badge) {
+        badge.innerText = item.grade_label;
+        badge.style.background = item.badge_color;
+    }
+    if (file) file.innerText = item.path;
+    if (desc) desc.innerText = 'Attached: ' + item.description;
+    if (hiddenInp) hiddenInp.value = item.id;
+
+    const img = new Image();
+    img.onload = () => { modalCustomImg = img; };
+    img.src = item.path;
+}
 
     </script>
 
