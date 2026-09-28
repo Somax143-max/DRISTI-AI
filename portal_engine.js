@@ -1799,12 +1799,11 @@ function selectModalPreset(sampleId) {
     img.onload = () => { modalCustomImg = img; };
     img.src = item.path;
 }
-window.addEventListener('DOMContentLoaded', () => {
+\n\nwindow.addEventListener('DOMContentLoaded'(() => {\n    renderModalPresetGrid();\n    , () => {
     populateQueue();
     initSplitDragging();
     selectPatient(currentPatientId);
     runSimulinkEngine();
-    renderModalPresetGrid();
 
     const dropzone = document.getElementById('fileDropzone');
     if (dropzone) {
