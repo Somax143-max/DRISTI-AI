@@ -1,0 +1,47 @@
+﻿const PATIENTS = {
+    'PAT_001_NORMAL': {
+        id: 'PAT_001_NORMAL',
+        name: 'Rajesh Patil', age: 52, sex: 'M', duration: '4 Yrs',
+        grade: 0, gradeName: 'LEVEL 0 — NO APPARENT RETINOPATHY',
+        referable: false, refTitle: '🟢 NO REFERRAL REQUIRED',
+        refReason: 'Routine annual diabetic eye screening in 12 months at local PHC.',
+        priority: 4, priorityText: 'Routine (12 Mo)',
+        quality: 'ACCEPTABLE', qClass: 'q-good',
+        focus: 44.2, fov: '89.2%', illum: 'Optimal (0.48)', glare: '1.2%',
+        guidance: 'Image passes all ISO/IEC quality metrics with excellent optic disc and foveal clarity.',
+        guidanceClass: 'guidance-ok', guidanceTitle: 'Optimal Retinal Image:',
+        mas: 0, hemo: 0, exudates: 0, density: '8.9%', csme: 'Negative (>2.0 DD)',
+        conf: 98.2, qualScore: 94.0, agrScore: 96.5, reliability: 'HIGH',
+        rationale: 'Absence of microaneurysms, hemorrhages, hard/soft exudates, or neovascularization. Retinal vascular caliber is normal without focal narrowing.'
+    },
+    'PAT_002_MILD': {
+        id: 'PAT_002_MILD',
+        name: 'Sunita Deshmukh', age: 61, sex: 'F', duration: '7 Yrs',
+        grade: 1, gradeName: 'LEVEL 1 — MILD NPDR',
+        referable: false, refTitle: '🟢 ROUTINE FOLLOW-UP',
+        refReason: 'Microaneurysms only. Schedule follow-up dilated exam in 6-12 months.',
+        priority: 3, priorityText: 'Mild (6-12 Mo)',
+        quality: 'ACCEPTABLE', qClass: 'q-good',
+        focus: 38.5, fov: '84.1%', illum: 'Good (0.45)', glare: '2.8%',
+        guidance: 'Mild peripheral illumination falloff automatically compensated by CLAHE pipeline.',
+        guidanceClass: 'guidance-enhance', guidanceTitle: 'Minor Illumination Falloff Corrected:',
+        mas: 5, hemo: 0, exudates: 0, density: '9.1%', csme: 'Negative (>2.0 DD)',
+        conf: 94.6, qualScore: 89.5, agrScore: 93.0, reliability: 'HIGH',
+        rationale: 'Isolated microaneurysms detected in temporal parafoveal region. No definite hemorrhages or lipid exudates detected.'
+    },
+    'PAT_003_MODERATE': {
+        id: 'PAT_003_MODERATE',
+        name: 'Ganesh Kulkarni', age: 58, sex: 'M', duration: '11 Yrs',
+        grade: 2, gradeName: 'LEVEL 2 — MODERATE NPDR',
+        referable: true, refTitle: '🔴 REFER TO OPHTHALMOLOGIST',
+        refReason: 'Priority: HIGH | Reason: Level 2 Moderate NPDR + High DME Risk near foveal zone',
+        priority: 1, priorityText: 'Priority 1 (Urgent)',
+        quality: 'ACCEPTABLE', qClass: 'q-good',
+        focus: 41.8, fov: '86.4%', illum: 'Optimal (0.46)', glare: '1.8%',
+        guidance: 'Borderline illumination normalized via CLAHE in CIE L*a*b* space. Proceeding to clinical classification.',
+        guidanceClass: 'guidance-enhance', guidanceTitle: 'Adaptive Auto-Enhancement Active:',
+        mas: 19, hemo: 18, exudates: 12, density: '9.4%', csme: '0.12 DD (Positive)',
+        conf: 91.5, qualScore: 88.0, agrScore: 92.0, reliability: 'HIGH',
+        rationale: 'Multiple microaneurysms and blot hemorrhages across >1 quadrant. Hard exudate circinate cluster within 500 microns of foveal center indicates clinically significant macular edema (CSME).'
+    }
+};

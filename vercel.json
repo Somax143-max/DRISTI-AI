@@ -24,12 +24,8 @@
       "destination": "https://drishti-ai-backend.onrender.com/api/:path*"
     },
     {
-      "source": "/sample_images/:path*",
-      "destination": "/web/sample_images/:path*"
-    },
-    {
-      "source": "/:file((?!web).+\\.png)",
-      "destination": "/web/:file"
+      "source": "/(.*)",
+      "destination": "/frontend/$1"
     }
   ]
 }

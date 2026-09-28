@@ -1,0 +1,198 @@
+﻿// Chunk 4: updateRealtimeCanvas & Multi-Layer Drawing
+function updateRealtimeCanvas() {
+    const canvas = document.getElementById('mainCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width, h = canvas.height;
+    const p = PATIENTS[currentPatientId] || PATIENTS['PAT_003_MODERATE'];
+
+    const clipLimit = parseFloat(document.getElementById('sliderClip')?.value || 0.02);
+    const flattenPct = parseInt(document.getElementById('sliderFlatten')?.value || 75);
+    const heatmapPct = parseInt(document.getElementById('sliderHeatmap')?.value || 50);
+
+    if (document.getElementById('valClip')) document.getElementById('valClip').innerText = clipLimit.toFixed(3);
+    if (document.getElementById('valFlatten')) document.getElementById('valFlatten').innerText = flattenPct + '%';
+    if (document.getElementById('valHeatmap')) document.getElementById('valHeatmap').innerText = heatmapPct + '%';
+
+    const showVessels = document.getElementById('chkVessels')?.checked ?? true;
+    const showMAs = document.getElementById('chkMAs')?.checked ?? true;
+    const showExudates = document.getElementById('chkExudates')?.checked ?? true;
+    const showHemo = document.getElementById('chkHemo')?.checked ?? true;
+
+    const splitX = Math.round((splitPercent / 100) * w);
+
+    function drawRetinalBase(targetCtx, isEnhanced) {
+        targetCtx.save();
+        targetCtx.beginPath();
+        targetCtx.arc(w / 2, h / 2, 240, 0, Math.PI * 2);
+        targetCtx.clip();
+
+        if (customUploadedImg) {
+            targetCtx.drawImage(customUploadedImg, 0, 0, w, h);
+            if (isEnhanced) {
+                targetCtx.filter = `contrast(${1 + clipLimit * 25}) brightness(${1 + (flattenPct - 50) / 200})`;
+                targetCtx.drawImage(customUploadedImg, 0, 0, w, h);
+            }
+            targetCtx.restore();
+            return;
+        }
+
+        const grad = targetCtx.createRadialGradient(w / 2, h / 2, 30, w / 2, h / 2, 245);
+        if (!isEnhanced) {
+            grad.addColorStop(0, '#a23e19');
+            grad.addColorStop(0.65, '#852b0d');
+            grad.addColorStop(1, '#3b1004');
+        } else {
+            const boost = (flattenPct / 100);
+            grad.addColorStop(0, `rgb(${Math.round(185 + boost * 25)}, ${Math.round(75 + boost * 30)}, 30)`);
+            grad.addColorStop(0.7, `rgb(${Math.round(165 + boost * 20)}, ${Math.round(60 + boost * 20)}, 20)`);
+            grad.addColorStop(1, `rgb(${Math.round(110 + boost * 30)}, 35, 12)`);
+        }
+        targetCtx.fillStyle = grad;
+        targetCtx.fillRect(0, 0, w, h);
+
+        if (p.id === 'PAT_006_BLURRED') {
+            targetCtx.filter = 'blur(6px)';
+            const glareGrad = targetCtx.createRadialGradient(200, 180, 10, 200, 180, 140);
+            glareGrad.addColorStop(0, 'rgba(255, 255, 255, 0.88)');
+            glareGrad.addColorStop(0.5, 'rgba(255, 245, 220, 0.45)');
+            glareGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            targetCtx.fillStyle = glareGrad;
+            targetCtx.beginPath();
+            targetCtx.arc(200, 180, 140, 0, Math.PI * 2);
+            targetCtx.fill();
+        }
+
+        const discGrad = targetCtx.createRadialGradient(140, 256, 4, 140, 256, 36);
+        discGrad.addColorStop(0, '#fef08a');
+        discGrad.addColorStop(0.7, '#fed7aa');
+        discGrad.addColorStop(1, '#fb923c');
+        targetCtx.fillStyle = discGrad;
+        targetCtx.beginPath();
+        targetCtx.ellipse(140, 256, 32, 38, 0, 0, Math.PI * 2);
+        targetCtx.fill();
+
+        const foveaGrad = targetCtx.createRadialGradient(315, 256, 2, 315, 256, 48);
+        foveaGrad.addColorStop(0, '#4a1707');
+        foveaGrad.addColorStop(0.6, '#6b200a');
+        foveaGrad.addColorStop(1, 'rgba(120, 36, 12, 0)');
+        targetCtx.fillStyle = foveaGrad;
+        targetCtx.beginPath();
+        targetCtx.arc(315, 256, 48, 0, Math.PI * 2);
+        targetCtx.fill();
+
+        targetCtx.lineWidth = isEnhanced ? (2.8 + clipLimit * 20) : 2.5;
+        targetCtx.strokeStyle = isEnhanced ? '#4c0d02' : '#3d0a02';
+        targetCtx.lineCap = 'round';
+
+        targetCtx.beginPath();
+        targetCtx.moveTo(140, 240);
+        targetCtx.bezierCurveTo(170, 160, 250, 130, 340, 150);
+        targetCtx.bezierCurveTo(390, 165, 430, 200, 460, 230);
+        targetCtx.stroke();
+
+        targetCtx.beginPath();
+        targetCtx.moveTo(140, 272);
+        targetCtx.bezierCurveTo(170, 350, 250, 380, 340, 360);
+        targetCtx.bezierCurveTo(390, 345, 430, 310, 460, 280);
+        targetCtx.stroke();
+
+        targetCtx.beginPath();
+        targetCtx.moveTo(130, 245); targetCtx.quadraticCurveTo(80, 200, 45, 180);
+        targetCtx.moveTo(130, 267); targetCtx.quadraticCurveTo(80, 310, 45, 330);
+        targetCtx.stroke();
+        targetCtx.restore();
+    }
+
+    const offRaw = document.createElement('canvas'); offRaw.width = w; offRaw.height = h;
+    const offEnh = document.createElement('canvas'); offEnh.width = w; offEnh.height = h;
+    drawRetinalBase(offRaw.getContext('2d'), false);
+    drawRetinalBase(offEnh.getContext('2d'), true);
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Left (Raw)
+    ctx.save();
+    ctx.beginPath(); ctx.rect(0, 0, splitX, h); ctx.clip();
+    ctx.drawImage(offRaw, 0, 0);
+    ctx.restore();
+
+    // Right (Enhanced)
+    ctx.save();
+    ctx.beginPath(); ctx.rect(splitX, 0, w - splitX, h); ctx.clip();
+    ctx.drawImage(offEnh, 0, 0);
+    ctx.restore();
+
+    // Divider Line
+    ctx.save();
+    ctx.strokeStyle = '#06b6d4'; ctx.lineWidth = 2.5;
+    ctx.shadowColor = '#06b6d4'; ctx.shadowBlur = 8;
+    ctx.beginPath(); ctx.moveTo(splitX, 0); ctx.lineTo(splitX, h); ctx.stroke();
+    ctx.restore();
+
+    // Overlays
+    if (heatmapPct > 0 && p.grade >= 0) {
+        ctx.save();
+        ctx.globalAlpha = (heatmapPct / 100) * 0.75;
+        const spots = [];
+        if (p.grade >= 2) spots.push({x: 320, y: 260, r: 65, color: 'rgba(239, 68, 68, 0.9)'});
+        if (p.grade >= 1) spots.push({x: 280, y: 220, r: 45, color: 'rgba(249, 115, 22, 0.85)'});
+        if (p.grade >= 3) spots.push({x: 380, y: 310, r: 70, color: 'rgba(234, 179, 8, 0.8)'});
+        if (p.grade === 4) spots.push({x: 145, y: 250, r: 50, color: 'rgba(239, 68, 68, 0.95)'});
+        spots.forEach(s => {
+            const g = ctx.createRadialGradient(s.x, s.y, 5, s.x, s.y, s.r);
+            g.addColorStop(0, s.color);
+            g.addColorStop(0.6, 'rgba(59, 130, 246, 0.4)');
+            g.addColorStop(1, 'rgba(6, 182, 212, 0)');
+            ctx.fillStyle = g;
+            ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2); ctx.fill();
+        });
+        ctx.restore();
+    }
+
+    if (showVessels && p.grade >= 0) {
+        ctx.save();
+        ctx.globalAlpha = 0.65; ctx.strokeStyle = '#10b981'; ctx.lineWidth = 1.8;
+        ctx.beginPath(); ctx.arc(w/2, h/2, 238, 0, Math.PI*2); ctx.clip();
+        ctx.beginPath();
+        ctx.moveTo(140, 240); ctx.bezierCurveTo(170, 160, 250, 130, 340, 150);
+        ctx.moveTo(140, 272); ctx.bezierCurveTo(170, 350, 250, 380, 340, 360);
+        ctx.stroke(); ctx.restore();
+    }
+
+    if (showMAs && typeof p.mas === 'number' && p.mas > 0) {
+        ctx.save(); ctx.fillStyle = '#ec4899'; ctx.strokeStyle = '#f43f5e'; ctx.lineWidth = 1.2;
+        const pts = [{x:295,y:235},{x:335,y:245},{x:275,y:270},{x:350,y:275},{x:260,y:220},{x:370,y:230},{x:310,y:210},{x:285,y:295}];
+        for (let i = 0; i < Math.min(p.mas, pts.length); i++) {
+            ctx.beginPath(); ctx.arc(pts[i].x, pts[i].y, 3, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        }
+        ctx.restore();
+    }
+
+    if (showExudates && typeof p.exudates === 'number' && p.exudates > 0) {
+        ctx.save(); ctx.fillStyle = '#facc15'; ctx.strokeStyle = '#ca8a04'; ctx.lineWidth = 1.0;
+        const ex = [{x:345,y:248,r:5},{x:355,y:255,r:6},{x:348,y:265,r:4},{x:338,y:275,r:5},{x:362,y:242,r:4}];
+        for (let i = 0; i < Math.min(p.exudates, ex.length); i++) {
+            ctx.beginPath(); ctx.arc(ex[i].x, ex[i].y, ex[i].r, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        }
+        if (p.csme.includes('Positive') || p.csme.includes('Severe') || p.csme.includes('Active')) {
+            ctx.strokeStyle = '#eab308'; ctx.setLineDash([4, 4]); ctx.lineWidth = 1.5;
+            ctx.beginPath(); ctx.arc(315, 256, 36, 0, Math.PI * 2); ctx.stroke();
+        }
+        ctx.restore();
+    }
+
+    if (showHemo && typeof p.hemo === 'number' && p.hemo > 0) {
+        ctx.save(); ctx.fillStyle = 'rgba(220, 38, 38, 0.85)'; ctx.strokeStyle = '#991b1b';
+        const hem = [{x:260,y:250,r:7},{x:380,y:280,r:9},{x:300,y:320,r:8},{x:230,y:300,r:6}];
+        for (let i = 0; i < Math.min(p.hemo, hem.length); i++) {
+            ctx.beginPath(); ctx.arc(hem[i].x, hem[i].y, hem[i].r, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        }
+        if (p.grade === 4) {
+            ctx.strokeStyle = '#dc2626'; ctx.lineWidth = 1.8;
+            ctx.beginPath(); ctx.moveTo(140, 240); ctx.quadraticCurveTo(155, 225, 160, 215);
+            ctx.moveTo(145, 250); ctx.quadraticCurveTo(165, 255, 175, 245); ctx.stroke();
+        }
+        ctx.restore();
+    }
+}

@@ -1,0 +1,119 @@
+﻿// Chunk 3: selectPatient & Split Dragging
+function selectPatient(patId) {
+    currentPatientId = patId;
+    const p = PATIENTS[patId];
+    if (!p) return;
+
+    populateQueue();
+
+    // 1. Quality Gate
+    const qBadge = document.getElementById('qBadge');
+    if (qBadge) {
+        qBadge.className = 'q-status-badge ' + p.qClass;
+        qBadge.innerText = '● IMAGE QUALITY: ' + p.quality;
+    }
+    document.getElementById('mBlur').innerText = p.focus + ' (>15.0)';
+    document.getElementById('mIllum').innerText = p.illum;
+    document.getElementById('mFoV').innerText = p.fov;
+    document.getElementById('mGlare').innerText = p.glare;
+
+    const qGuidance = document.getElementById('qGuidance');
+    if (qGuidance) {
+        qGuidance.className = 'guidance-box ' + p.guidanceClass;
+        document.getElementById('guidanceTitle').innerText = p.guidanceTitle;
+        document.getElementById('guidanceText').innerText = p.guidance;
+    }
+
+    // 2. Referable DR Banner
+    const refBanner = document.getElementById('refBanner');
+    if (refBanner) {
+        refBanner.className = 'referable-banner ' + (p.referable ? (p.grade >= 3 ? 'ref-urgent' : 'ref-mod') : 'ref-routine');
+        document.getElementById('refTitle').innerText = p.refTitle;
+        document.getElementById('refReason').innerText = p.refReason;
+        document.getElementById('icdrGrade').innerText = p.gradeName;
+    }
+
+    // 3. Evidence Markers
+    document.getElementById('liveMAs').innerText = p.mas;
+    document.getElementById('liveHemo').innerText = p.hemo;
+    document.getElementById('liveDensity').innerText = p.density;
+    document.getElementById('liveCSME').innerText = p.csme;
+    document.getElementById('evidenceNarrative').innerHTML = `
+        ✓ ${p.rationale}<br>
+        ✓ Feature attribution aligned with clinical microvascular biomarkers.
+    `;
+
+    // 4. Reliability Meter
+    document.getElementById('lblRelConf').innerText = p.conf + '%';
+    document.getElementById('barRelConf').style.width = p.conf + '%';
+    document.getElementById('lblRelQual').innerText = p.qualScore + '%';
+    document.getElementById('barRelQual').style.width = p.qualScore + '%';
+    document.getElementById('lblRelAgr').innerText = p.agrScore + '%';
+    document.getElementById('barRelAgr').style.width = p.agrScore + '%';
+
+    const relBadge = document.getElementById('relStatusBadge');
+    if (relBadge) {
+        relBadge.className = 'q-status-badge ' + (p.reliability === 'HIGH' ? 'q-good' : 'q-bad');
+        relBadge.innerText = p.reliability === 'HIGH' ? '🟢 HIGH RELIABILITY' : '🔴 UNRELIABLE (RECAPTURE)';
+    }
+
+    // 5. Field Mode Sync
+    const fQ = document.getElementById('fieldQStatus');
+    if (fQ) fQ.innerText = (p.quality === 'ACCEPTABLE' ? '🟢 IMAGE QUALITY: GOOD' : '🔴 IMAGE QUALITY: UNGRADEABLE');
+    const fR = document.getElementById('fieldResultBox');
+    if (fR) {
+        if (p.grade === -1) {
+            fR.style.color = '#ef4444';
+            fR.innerText = '⚠ RECAPTURE REQUIRED: ' + p.guidance;
+        } else if (p.referable) {
+            fR.style.color = '#fbbf24';
+            fR.innerText = '⚠ SPECIALIST REFERRAL REQUIRED (' + p.gradeName.split('—')[1].trim() + ')';
+        } else {
+            fR.style.color = '#34d399';
+            fR.innerText = '✓ ROUTINE SCREENING PASS (' + p.gradeName.split('—')[1].trim() + ')';
+        }
+    }
+
+    // 6. Reset Stopwatch
+    stopwatchSeconds = 0.0;
+    updateStopwatchDisplay();
+
+    // 7. Render Canvas
+    updateRealtimeCanvas();
+
+    // 8. Log & Voice
+    logAudit(`Screening Case Loaded: <b>${p.id}</b> (${p.name}) — ${p.gradeName}`);
+    if (p.grade === -1) {
+        speakGuidance("Attention: Image ungradeable. " + p.guidance);
+    } else if (p.referable) {
+        speakGuidance("Referable diabetic retinopathy detected. " + p.gradeName.split('—')[1]);
+    }
+}
+
+function initSplitDragging() {
+    const box = document.getElementById('viewportBox');
+    const curtain = document.getElementById('splitCurtain');
+    if (!box || !curtain) return;
+
+    function updateSplitFromEvent(e) {
+        const rect = box.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const offsetX = clientX - rect.left;
+        let pct = (offsetX / rect.width) * 100;
+        pct = Math.max(2, Math.min(98, pct));
+        splitPercent = pct;
+        curtain.style.left = pct + '%';
+        updateRealtimeCanvas();
+    }
+
+    curtain.addEventListener('mousedown', (e) => { e.preventDefault(); isDraggingSplit = true; });
+    box.addEventListener('mousedown', (e) => { isDraggingSplit = true; updateSplitFromEvent(e); });
+    window.addEventListener('mousemove', (e) => {
+        if (isDraggingSplit) { e.preventDefault(); updateSplitFromEvent(e); }
+    });
+    window.addEventListener('mouseup', () => { isDraggingSplit = false; });
+
+    curtain.addEventListener('touchstart', (e) => { isDraggingSplit = true; });
+    window.addEventListener('touchmove', (e) => { if (isDraggingSplit) updateSplitFromEvent(e); });
+    window.addEventListener('touchend', () => { isDraggingSplit = false; });
+}

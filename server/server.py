@@ -8,7 +8,17 @@ import numpy as np
 
 SERVER_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(SERVER_DIR)
-WEB_DIR = os.path.join(BASE_DIR, 'web')
+
+# Priority: frontend directory, fallback to web, fallback to local directory
+candidate_frontend_dirs = [
+    os.path.join(BASE_DIR, 'frontend'),
+    os.path.join(BASE_DIR, 'web'),
+    os.path.join(SERVER_DIR, 'frontend'),
+    os.path.join(SERVER_DIR, 'web'),
+    SERVER_DIR
+]
+WEB_DIR = next((d for d in candidate_frontend_dirs if os.path.isdir(d)), SERVER_DIR)
+
 
 if SERVER_DIR not in sys.path:
     sys.path.insert(0, SERVER_DIR)

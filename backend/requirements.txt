@@ -1,0 +1,10 @@
+numpy
+Pillow
+opencv-python-headless
+Flask
+flask-cors
+scipy
+scikit-learn
+matplotlib
+pydicom
+torch

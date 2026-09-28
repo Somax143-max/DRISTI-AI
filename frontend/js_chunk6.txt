@@ -1,0 +1,174 @@
+﻿// Chunk 6: Stopwatch, Review Actions, Field Actions, Sync, Roles, Modal, Init
+function updateStopwatchDisplay() {
+    const el = document.getElementById('reviewStopwatch');
+    if (el) el.innerText = stopwatchSeconds.toFixed(1) + 's';
+}
+
+function toggleStopwatch() {
+    stopwatchRunning = !stopwatchRunning;
+    if (stopwatchRunning) {
+        stopwatchInterval = setInterval(() => {
+            stopwatchSeconds += 0.1;
+            updateStopwatchDisplay();
+        }, 100);
+    } else {
+        clearInterval(stopwatchInterval);
+    }
+}
+
+function confirmDiagnosis() {
+    if (stopwatchRunning) toggleStopwatch();
+    const p = PATIENTS[currentPatientId];
+    logAudit(`Clinical Diagnosis <b>CONFIRMED</b> by Dr. R. Sharma, MS (Ophth) in <b>${stopwatchSeconds.toFixed(1)}s</b>. Patient: ${p.id} (${p.gradeName}). Digitally cryptographically signed.`);
+    alert(`✅ CASE DIGITALLY SIGNED & VALIDATED!\n\nPatient: ${p.id} (${p.name})\nConfirmed Grade: ${p.gradeName}\nReview Duration: ${stopwatchSeconds.toFixed(1)} seconds (<30s Target Met)\nAudit entry timestamped to secure district log.`);
+}
+
+function modifyGradePrompt() {
+    const newGrade = prompt("Enter Clinician Overridden ICDR Grade (0: Normal, 1: Mild, 2: Moderate, 3: Severe, 4: PDR):", "2");
+    if (newGrade !== null && !isNaN(newGrade) && newGrade >= 0 && newGrade <= 4) {
+        const grades = ['LEVEL 0 — NORMAL', 'LEVEL 1 — MILD NPDR', 'LEVEL 2 — MODERATE NPDR', 'LEVEL 3 — SEVERE NPDR', 'LEVEL 4 — PDR'];
+        PATIENTS[currentPatientId].grade = parseInt(newGrade);
+        PATIENTS[currentPatientId].gradeName = grades[newGrade];
+        selectPatient(currentPatientId);
+        logAudit(`Grade Overridden by Ophthalmologist: <b>${grades[newGrade]}</b> for ${currentPatientId}. Reason: Clinical discordance resolved.`);
+    }
+}
+
+function triggerRecapture() {
+    const p = PATIENTS[currentPatientId];
+    logAudit(`Recapture Requested by Clinician for <b>${p.id}</b>. Notification dispatched to Nanded PHC operator.`);
+    speakGuidance("Recapture requested. Please re-acquire image with improved pupil alignment.");
+    alert(`⚠ RECAPTURE REQUESTED\n\nASHA operator at PHC notified to recapture retinal image for ${p.name}. Quality reason dispatched.`);
+}
+
+function referSpecialist() {
+    const p = PATIENTS[currentPatientId];
+    logAudit(`Priority Referral Slip Issued for <b>${p.id}</b> (${p.name}) to District Eye Hospital.`);
+    alert(`🏥 SPECIALIST REFERRAL CONFIRMED\n\nPatient ${p.name} routed to Nanded District Eye Hospital.\nAutomated SMS sent to patient & PHC ANM.`);
+}
+
+function simulateFieldCapture() {
+    speakGuidance("Acquiring fundus image from portable camera.");
+    setTimeout(() => {
+        const keys = ['PAT_001_NORMAL', 'PAT_002_MILD', 'PAT_003_MODERATE', 'PAT_004_SEVERE', 'PAT_005_PDR', 'PAT_006_BLURRED'];
+        const randomKey = keys[Math.floor(Math.random() * keys.length)];
+        selectPatient(randomKey);
+        logAudit(`Portable camera acquisition completed at Nanded PHC #4.`);
+    }, 600);
+}
+
+function runFieldAI() {
+    const p = PATIENTS[currentPatientId];
+    speakGuidance(`Screening complete. ${p.referable ? 'Referral recommended.' : 'Routine follow-up.'}`);
+    logAudit(`Field Edge AI evaluated ${p.id}: ${p.gradeName}`);
+}
+
+function sendToHub() {
+    const p = PATIENTS[currentPatientId];
+    logAudit(`Telemetry bundle for <b>${p.id}</b> queued for District Hub Priority Triage.`);
+    alert(`📤 SENT TO DISTRICT TELE-HUB\n\nPatient ${p.id} bundle sent via secure 2.4 Mbps cellular uplink.\nPriority Triage Queue Position: HIGH.`);
+}
+
+function toggleNetwork() {
+    isOnline = !isOnline;
+    const netBadge = document.getElementById('netBadge');
+    const netText = document.getElementById('netText');
+    const pulse = document.getElementById('pulseDot');
+
+    if (isOnline) {
+        if (netBadge) netBadge.style.borderColor = '#10b981';
+        if (netText) { netText.innerText = 'ONLINE (Hub Connected)'; netText.style.color = '#34d399'; }
+        if (pulse) pulse.style.background = '#10b981';
+        logAudit(`Telemedicine Network state: <b>ONLINE</b>. Connected to District Central Repository.`);
+    } else {
+        if (netBadge) netBadge.style.borderColor = '#f59e0b';
+        if (netText) { netText.innerText = 'OFFLINE (Autonomous PHC)'; netText.style.color = '#fbbf24'; }
+        if (pulse) pulse.style.background = '#f59e0b';
+        logAudit(`Telemedicine Network state: <b>OFFLINE</b>. Edge storage mode active.`);
+        alert(`📡 RURAL OFFLINE MODE ACTIVE\n\nSystem is fully operational offline.\nImages and AI assessments are securely stored locally at PHC and will auto-sync when cellular signal returns.`);
+    }
+}
+
+function syncOfflineQueue() {
+    const prog = document.getElementById('syncProg');
+    if (prog) prog.style.display = 'block';
+
+    setTimeout(() => {
+        if (prog) prog.style.display = 'none';
+        pendingSyncCount = 0;
+        const counter = document.getElementById('pendingSyncCount');
+        if (counter) counter.innerText = '0 Cases';
+        logAudit(`Manual Sync: <b>3 pending cases</b> synchronized to District Cloud.`);
+        alert(`🔄 SYNCHRONIZATION COMPLETE!\n\nAll local PHC screening records have been uploaded and encrypted.`);
+    }, 1200);
+}
+
+function setRole(role) {
+    currentRole = role;
+    const btnField = document.getElementById('roleField');
+    const btnClinical = document.getElementById('roleClinical');
+    const btnAdmin = document.getElementById('roleAdmin');
+
+    const vField = document.getElementById('view-field');
+    const vClinical = document.getElementById('view-clinical');
+    const vAdmin = document.getElementById('view-admin');
+
+    btnField.classList.toggle('active', role === 'field');
+    btnClinical.classList.toggle('active', role === 'clinical');
+    btnAdmin.classList.toggle('active', role === 'admin');
+
+    vField.style.display = (role === 'field' ? 'flex' : 'none');
+    vClinical.style.display = (role === 'clinical' ? 'flex' : 'none');
+    vAdmin.style.display = (role === 'admin' ? 'flex' : 'none');
+
+    logAudit(`User Role switched to: <b>${role.toUpperCase()} MODE</b>`);
+    if (role === 'admin') setTimeout(runSimulinkEngine, 100);
+    else if (role === 'clinical') setTimeout(updateRealtimeCanvas, 100);
+}
+
+function openReportModal() {
+    const p = PATIENTS[currentPatientId];
+    document.getElementById('repCaseId').innerText = 'CASE ID: DR-2026-0' + Math.floor(Math.random() * 800 + 100);
+    document.getElementById('repPatId').innerText = p.id + ' (' + p.name + ')';
+    document.getElementById('repQuality').innerText = p.quality + ' (Focus: ' + p.focus + ', Glare: ' + p.glare + ')';
+    document.getElementById('repGrade').innerText = p.gradeName;
+    document.getElementById('repReferable').innerText = p.refTitle;
+    document.getElementById('repConf').innerText = p.conf + '%';
+    document.getElementById('repAction').innerText = p.refReason;
+    document.getElementById('repRationale').innerText = p.rationale;
+    document.getElementById('repMAs').innerText = p.mas;
+    document.getElementById('repHemo').innerText = p.hemo;
+    document.getElementById('repCSME').innerText = p.csme;
+
+    const card = document.getElementById('repResultCard');
+    if (card) {
+        card.style.background = p.referable ? '#fef2f2' : '#f0fdf4';
+        card.style.borderColor = p.referable ? '#ef4444' : '#10b981';
+    }
+
+    document.getElementById('reportModal').style.display = 'flex';
+    logAudit(`Clinical Report Preview opened for <b>${p.id}</b>.`);
+}
+
+function closeReportModal(event) {
+    if (event && event.target !== document.getElementById('reportModal') && !event.target.classList.contains('btn-act')) return;
+    document.getElementById('reportModal').style.display = 'none';
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    populateQueue();
+    initSplitDragging();
+    selectPatient(currentPatientId);
+    runSimulinkEngine();
+
+    const dropzone = document.getElementById('fileDropzone');
+    if (dropzone) {
+        dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.style.borderColor = '#38bdf8'; });
+        dropzone.addEventListener('dragleave', () => { dropzone.style.borderColor = '#1e293b'; });
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.style.borderColor = '#1e293b';
+            handleFileUpload(e);
+        });
+    }
+});
