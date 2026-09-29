@@ -587,6 +587,16 @@ def log_prediction_audit(img_bgr, result):
 
 # --- 3. FULL RETINAL FUNDUS ANALYSIS ---
 def analyze_retinal_fundus(img_bgr):
+    # Safety resolution cap: Prevent high-res camera memory thrashing on low-memory servers
+    if img_bgr is not None and len(img_bgr.shape) >= 2:
+        h_in, w_in = img_bgr.shape[:2]
+        max_dim = max(h_in, w_in)
+        if max_dim > 1024:
+            scale = 1024.0 / max_dim
+            new_w = max(64, int(w_in * scale))
+            new_h = max(64, int(h_in * scale))
+            img_bgr = cv2.resize(img_bgr, (new_w, new_h), interpolation=cv2.INTER_AREA)
+
     verification = verify_eye_authenticity(img_bgr)
     if not verification['is_eye']:
         res_non = {

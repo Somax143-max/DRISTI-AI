@@ -132,6 +132,12 @@ def validate_and_sanitize_image(image_input):
     if aspect_ratio < 0.25 or aspect_ratio > 4.0:
         return False, None, {}, f"Abnormal aspect ratio ({aspect_ratio:.2f}); retinal fundus cameras provide ~1:1 to 4:3 FOVs."
 
+    # Efficient RAM & CPU scaling: Cap maximum dimension at 1024 to prevent memory thrashing
+    if max(h, w) > 1024:
+        scale = 1024.0 / max(h, w)
+        img_bgr = cv2.resize(img_bgr, (max(64, int(w * scale)), max(64, int(h * scale))), interpolation=cv2.INTER_AREA)
+        h, w = img_bgr.shape[:2]
+
     metadata["width"] = w
     metadata["height"] = h
     metadata["aspect_ratio"] = round(aspect_ratio, 3)

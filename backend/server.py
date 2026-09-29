@@ -115,6 +115,16 @@ class DrishtiAIHandler(SimpleHTTPRequestHandler):
             self.end_headers()
 
 def run_server(port=8080):
+    # Pre-warm deep learning models and monitoring caches on container startup
+    try:
+        print("[Startup] Pre-warming PyTorch neural networks & drift monitors...")
+        retina_analyzer.get_dl_classifier()
+        retina_analyzer.get_dr_grader()
+        get_drift_monitor()
+        print("[Startup] Pre-warming completed. Ready for immediate inference.")
+    except Exception as e:
+        print("[Startup] Pre-warming notice:", e)
+
     server_address = ('', port)
     httpd = ThreadingHTTPServer(server_address, DrishtiAIHandler)
     print(f"DRISHTI AI Real Retinal Verification & Diagnostic Server running on port {port}...")
